@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel, Button, Typography } from 'antd';
 import './css/Hero.css';
 
-const { Title, Paragraph } = Typography;
+const { Title } = Typography;
 
 const Hero = ({ onOpenForm }) => {
   const slides = [

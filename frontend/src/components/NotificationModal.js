@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Modal, Typography, Button } from 'antd';
+import { Modal, Typography } from 'antd';
 import './css/NotificationModal.css';
 
 const { Title, Paragraph, Text } = Typography;
