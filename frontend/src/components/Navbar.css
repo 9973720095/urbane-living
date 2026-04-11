@@ -55,3 +55,13 @@
     padding: 0 20px !important;
   }
 }
+@media (max-width: 768px) {
+  .custom-header .logo img{
+    width: 30%; height: auto;
+  }
+}
+@media (max-width: 380px) {
+  .custom-header .logo img{
+    width: 50%; height: auto;
+  }
+}

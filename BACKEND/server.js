@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' }); // Root folder ki .env file load karne ke liye
+require('dotenv').config({ path: '../.env' }); 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -9,11 +9,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// MongoDB Connection (Using Environment Variable for Security)
+// MongoDB Connection
 const mongoURI = process.env.MONGO_URI; 
 
 if (!mongoURI) {
-    console.error("Error: MONGO_URI is not defined in .env file. Check your Root folder.");
+    console.error("Error: MONGO_URI is not defined in .env file.");
     process.exit(1);
 }
 
@@ -21,17 +21,24 @@ mongoose.connect(mongoURI)
     .then(() => console.log("Atlas Connected: InteriorLeadsDB setup complete!"))
     .catch(err => console.error("Database Connection Error:", err.message));
 
-// Schema Definition
+// Schema Definition - Sare fields add kiye hain jo frontend bhej raha hai
 const leadSchema = new mongoose.Schema({
     name: String,
     phone: String,
     email: String,
+    state: String,
+    propertyType: String,
     date: { type: Date, default: Date.now }
 });
 
 const Lead = mongoose.model('Lead', leadSchema);
 
-// API Route to save leads from Frontend
+// GET route for testing in browser
+app.get('/api/save-lead', (req, res) => {
+    res.send("Backend is working and ready to receive POST requests!");
+});
+
+// API Route to save leads
 app.post('/api/save-lead', async (req, res) => {
     try {
         const newLead = new Lead(req.body);
@@ -43,6 +50,5 @@ app.post('/api/save-lead', async (req, res) => {
     }
 });
 
-// Port setting from .env or default to 5000
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server successfully running on port ${PORT}`));

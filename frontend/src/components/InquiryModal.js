@@ -1,11 +1,37 @@
 import React from 'react';
-import { Modal, Form, Input, Button, Typography, Row, Col, Select } from 'antd';
+import { Modal, Form, Input, Button, Typography, Row, Col, Select, message } from 'antd';
 import './css/InquiryModal.css';
 
 const { Title } = Typography;
 const { Option } = Select;
 
-const InquiryModal = ({ isOpen, onClose, onFinish }) => {
+const InquiryModal = ({ isOpen, onClose }) => {
+  const [form] = Form.useForm();
+
+  const onFinish = async (values) => {
+    try {
+      // Live Render URL
+      const response = await fetch('https://urbane-living.onrender.com/api/save-lead', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        message.success("Design request sent successfully!");
+        form.resetFields();
+        onClose(); 
+      } else {
+        message.error("Server error. Please try again.");
+      }
+    } catch (error) {
+      console.error("Connection Error:", error);
+      message.error("Backend connection failed!");
+    }
+  };
+
   return (
     <Modal 
       className='quick-inquiry' 
@@ -14,94 +40,49 @@ const InquiryModal = ({ isOpen, onClose, onFinish }) => {
       onCancel={onClose} 
       footer={null} 
       centered
-      width={700} // Width thodi badha di hai dropdowns ke liye
+      width={700}
     >
-      <Form layout="vertical" onFinish={onFinish} style={{ marginTop: '20px' }}>
-        
-        {/* Row 1: First Name & Email */}
+      <Form form={form} layout="vertical" onFinish={onFinish} style={{ marginTop: '20px' }}>
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item 
-              label="First Name" 
-              name="name" 
-              rules={[
-                { required: true, message: 'First Name is required!' },
-                { pattern: /^[a-zA-Z\s]*$/, message: 'Numbers are not allowed!' }
-              ]}
-            >
-              <Input placeholder="Enter name here" size="large" />
+            <Form.Item label="First Name" name="name" rules={[{ required: true, message: 'Required!' }]}>
+              <Input placeholder="Enter name" size="large" />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item 
-              label="Email" 
-              name="email" 
-              rules={[
-                { required: true, message: 'Email ID is required!' },
-                { type: 'email', message: 'Enter a valid email ID!' }
-              ]}
-            >
-              <Input placeholder="Enter email ID here" size="large" />
+            <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email' }]}>
+              <Input placeholder="Enter email" size="large" />
             </Form.Item>
           </Col>
         </Row>
 
-        {/* Row 2: Mobile No & State */}
         <Row gutter={16}>
           <Col span={12}>
-            <Form.Item 
-              label="Mobile no" 
-              name="phone" 
-              rules={[
-                { required: true, message: 'Mobile number is required!' },
-                { pattern: /^[0-9]{10}$/, message: 'Must be exactly 10 digits!' }
-              ]}
-            >
-              <Input placeholder="Enter mobile no here" size="large" />
+            <Form.Item label="Mobile no" name="phone" rules={[{ required: true, pattern: /^[0-9]{10}$/ }]}>
+              <Input placeholder="10 digit number" size="large" />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item 
-              label="State" 
-              name="state" 
-              rules={[{ required: true, message: 'Please select a state!' }]}
-            >
+            <Form.Item label="State" name="state" rules={[{ required: true }]}>
               <Select placeholder="Select State" size="large">
-                <Option value="delhi">Delhi</Option>
-                <Option value="bihar">Bihar</Option>
-                <Option value="up">Uttar Pradesh</Option>
-                <Option value="haryana">Haryana</Option>
+                <Option value="Delhi">Delhi</Option>
+                <Option value="Bihar">Bihar</Option>
+                <Option value="UP">Uttar Pradesh</Option>
+                <Option value="Haryana">Haryana</Option>
               </Select>
             </Form.Item>
           </Col>
         </Row>
 
-        {/* Row 3: Type of Property */}
-        <Form.Item 
-          label="Type of Property" 
-          name="propertyType" 
-          rules={[{ required: true, message: 'Please select property type!' }]}
-        >
+        <Form.Item label="Type of Property" name="propertyType" rules={[{ required: true }]}>
           <Select placeholder="Select property type" size="large">
-            <Option value="residential">Residential</Option>
-            <Option value="commercial">Commercial</Option>
-            <Option value="office">Office</Option>
+            <Option value="Residential">Residential</Option>
+            <Option value="Commercial">Commercial</Option>
+            <Option value="Office">Office</Option>
           </Select>
         </Form.Item>
 
-        <Button 
-          type="primary" 
-          htmlType="submit" 
-          block 
-          size="large" 
-          style={{ 
-            background: '#7b42f5', 
-            height: '50px', 
-            fontSize: '18px', 
-            fontWeight: '600',
-            marginTop: '20px' 
-          }}
-        >
+        <Button type="primary" htmlType="submit" block size="large" style={{ background: '#7b42f5', height: '50px', fontWeight: 'bold' }}>
           SUBMIT
         </Button>
       </Form>
