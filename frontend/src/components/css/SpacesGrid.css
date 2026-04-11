@@ -1,0 +1,73 @@
+/* Container reset */
+.spaces-section {
+    padding: 0px 10%;
+    background: #ffffff;
+    overflow: hidden; /* Niche ka scroller khatam karne ke liye */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.purple-text {
+    color: #7b42f5;
+}
+
+/* Carousel Fixes */
+.custom-carousel {
+    margin: 0 -15px; /* Negative margin to counteract slide padding */
+}
+
+/* Card Wrapper - Yahi shadow ko cutne se bachata hai */
+.card-outer-wrapper {
+    padding: 20px 15px 60px 15px !important; /* Bottom 60px padding shadow ke liye */
+    outline: none;
+}
+
+.dream-home-card {
+    border-radius: 16px !important;
+    overflow: hidden;
+    border: 1px solid #f0f0f0 !important;
+    background: #fff;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
+}
+
+.card-img-top {
+    height: 250px !important;
+    object-fit: cover !important;
+    width: 100%;
+}
+
+/* Hover State */
+.dream-home-card:hover {
+    transform: translateY(-12px) !important;
+    /* Soft premium shadow */
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12) !important;
+    border-color: #7b42f533 !important;
+}
+
+.card-inner-body {
+    padding: 10px 5px;
+}
+
+.quote-button {
+    background: #1890ff !important;
+    height: 45px !important;
+    border-radius: 8px !important;
+    font-weight: 600 !important;
+    margin-top: 15px !important;
+    border: none !important;
+}
+
+/* Dots styling */
+.ant-carousel .slick-dots li button {
+    background: #7b42f5 !important;
+    opacity: 0.3;
+}
+
+.ant-carousel .slick-dots li.slick-active button {
+    background: #7b42f5 !important;
+    opacity: 1;
+}

@@ -1,0 +1,24 @@
+.hero_carousel .slick-arrow {
+    position: absolute;width: 40px;
+    background: #ffffff !important;height: 40px;opacity: 0.5;
+}
+.hero_carousel .slick-arrow{opacity: 0.5;}
+.hero_carousel .slick-prev::after{
+    position: relative;color: #000;
+}
+.hero_carousel .slick-next::after{
+    position: relative;color: #000;margin-right: 7px;
+}
+.hero-content{background: #fff; opacity: 0.6; padding: 0px 30px 50px;}
+.hero-content p{color: #000;}
+.hero-content .explore-btn{
+    color: #fff !important;
+    font-size: 18px;
+    font-weight: 600 !important;
+    border: none;
+    padding: 20px 20px;
+    margin-left: 15px;
+    border-radius: 16px;
+    background: linear-gradient(90deg, #4D5DFB 0%, #A234F5 100%) !important;
+}
+.hero-content .explore-btn:hover{color: #fff;border: none !important;}

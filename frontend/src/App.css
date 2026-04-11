@@ -1,0 +1,23 @@
+/* General Colors */
+:root {
+  --primary-purple: #7b42f5;
+  --secondary-blue: #1890ff;
+}
+
+/* Hero Section */
+.hero-banner {
+  height: 500px;
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://your-image-url.com'); /* Image niche upload folder se use karein */
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* Card Styling */
+.section-container { padding: 60px 50px; }
+.purple-text { color: var(--primary-purple); }
+.card-img-placeholder { height: 250px; background: #eee; display: flex; align-items: flex-start; padding: 10px; color: #fff; font-weight: bold; }
+.space-card { border-radius: 12px; overflow: hidden; }
+.quote-btn { background: var(--secondary-blue) !important; border: none !important; }

@@ -1,0 +1,57 @@
+.custom-header {
+  width: 100%;
+  background: #ffffff !important;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px !important;
+  height: 80px !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+.custom-header .logo{display: contents !important;}
+.custom-header .logo img{width: 20%; height: auto;}
+.custom-header :where(.css-dev-only-do-not-override-ch9ese).ant-menu .ant-menu-title-content{
+    font-size: 18px; font-weight: 600; letter-spacing: 0.5px;
+}
+.custom-header ul li::after{
+    bottom: 15px !important;
+}
+.custom-header .nav-right button{padding: 20px;}
+.custom-header .nav-right span{font-size: 18px;font-weight: 600;letter-spacing: 0.5px;}
+.custom-header .nav-right .mobile-menu-icon span{position: relative;bottom: 10px;}
+.desktop-menu {
+  flex: 1;
+  justify-content: center;
+  border-bottom: none !important;
+  background: transparent !important;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+/* By default mobile icon hide rahega */
+.mobile-menu-icon {
+  display: none !important;
+  font-size: 24px;
+  color: #7b42f5;
+}
+
+/* --- Responsive Breakpoint (768px se niche mobile) --- */
+@media (max-width: 992px) {
+  .desktop-menu, .hide-mobile {
+    display: none !important; /* Saare links aur button hide ho jayenge */
+  }
+
+  .mobile-menu-icon {
+    display: block !important; /* Sirf menu icon dikhega */
+  }
+
+  .custom-header {
+    padding: 0 20px !important;
+  }
+}

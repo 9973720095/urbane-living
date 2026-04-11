@@ -1,0 +1,60 @@
+.gallery-wrapper {
+    padding: 80px 10%;
+    background: #ffffff;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.gallery-title {
+    font-weight: 800 !important;
+    letter-spacing: 2px;
+    color: #333;
+}
+
+.gallery-subtitle {
+    color: #888;
+    font-size: 16px;
+}
+
+.gallery-img-container {
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    cursor: pointer;
+}
+
+/* Zoom effect on hover */
+.gallery-img-container:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(123, 66, 245, 0.15);
+}
+
+.gallery-item {
+    width: 100%;
+    height: 300px !important;
+    object-fit: cover; /* Images ko frame mein fit karne ke liye */
+    transition: transform 0.6s ease !important;
+}
+
+.gallery-img-container:hover .gallery-item {
+    transform: scale(1.1);
+}
+
+/* Image click karne par background blur */
+.ant-image-preview-mask {
+    background: rgba(123, 66, 245, 0.4) !important;
+}
+
+/* Mobile responsive fixes */
+@media (max-width: 576px) {
+    .gallery-wrapper {
+        padding: 50px 20px;
+    }
+    .gallery-item {
+        height: 250px !important;
+    }
+}
