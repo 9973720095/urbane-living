@@ -12,19 +12,25 @@ app.use(cors());
 app.use(express.json());
 
 /* =========================
-   MONGODB CONNECTION (Environment Based)
+   MONGODB CONNECTION (Professional Way)
 ========================= */
-// NODE_ENV check karega ki production hai ya development
 const isProduction = process.env.NODE_ENV === 'production';
-const mongoURI = isProduction ? process.env.PROD_MONGO_URI : process.env.LOCAL_MONGO_URI;
+let mongoURI = isProduction ? process.env.PROD_MONGO_URI : process.env.LOCAL_MONGO_URI;
 
 if (!mongoURI) {
-    console.error("❌ MONGO_URI missing for current environment!");
+    console.error("❌ MONGO_URI missing!");
     process.exit(1);
 }
 
+// Saban, ye line ensure karegi ki data hamesha 'UrbaneLiving' mein jaye
+// Hum connection string ke end mein database name force kar rahe hain
+if (!mongoURI.includes('UrbaneLiving')) {
+    // Agar URI ke end mein / hai toh hata kar UrbaneLiving add karein
+    mongoURI = mongoURI.replace(/\/?(\?.*)?$/, '/UrbaneLiving$1');
+}
+
 mongoose.connect(mongoURI)
-    .then(() => console.log(`✅ MongoDB Connected to: ${isProduction ? 'UrbaneLiving (PROD)' : 'InteriorLeadsDB (LOCAL)'}`))
+    .then(() => console.log(`✅ MongoDB Connected to: UrbaneLiving (Environment: ${process.env.NODE_ENV})`))
     .catch(err => console.error("❌ DB Error:", err.message));
 
 /* =========================
@@ -56,27 +62,20 @@ const Design = mongoose.model("Design", designSchema);
 ========================= */
 
 app.get('/', (req, res) => {
-    res.send(`🚀 Backend is running in ${process.env.NODE_ENV} mode...`);
+    res.send(`🚀 Urbane Living Backend is active [${process.env.NODE_ENV}]`);
 });
 
 /* ---------- LEAD APIs ---------- */
 
-// POST (save lead) - Optimized & Single Route
 app.post('/api/save-lead', async (req, res) => {
-    console.log("📥 Received Lead Data:", req.body);
     try {
         const newLead = new Lead(req.body);
         const savedLead = await newLead.save();
-        console.log("✅ Lead Saved:", savedLead._id);
-        res.status(200).json({ message: "✅ Lead saved successfully" });
+        res.status(200).json({ success: true, message: "✅ Lead saved to UrbaneLiving", id: savedLead._id });
     } catch (err) {
         console.error("❌ Lead Save Error:", err);
-        res.status(500).json({ error: "Save failed" });
+        res.status(500).json({ success: false, error: "Database save failed" });
     }
-});
-
-app.get('/api/save-lead', (req, res) => {
-    res.send("✅ Lead API Ready");
 });
 
 /* ---------- DESIGN APIs ---------- */
@@ -90,19 +89,16 @@ app.get('/api/designs', async (req, res) => {
         const designs = await Design.find(filter).sort({ createdAt: -1 });
         res.json(designs);
     } catch (err) {
-        console.error("❌ Fetch Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
 
 app.post('/api/designs/add', async (req, res) => {
-    console.log("📥 Adding New Design:", req.body.title);
     try {
         const newDesign = new Design(req.body);
         await newDesign.save();
-        res.status(200).json({ message: "✅ Design added successfully", data: newDesign });
+        res.status(200).json({ message: "✅ Design added to UrbaneLiving", data: newDesign });
     } catch (err) {
-        console.error("❌ Add Error:", err);
         res.status(500).json({ error: err.message });
     }
 });
@@ -110,7 +106,7 @@ app.post('/api/designs/add', async (req, res) => {
 app.delete('/api/designs/:id', async (req, res) => {
     try {
         await Design.findByIdAndDelete(req.params.id);
-        res.json({ message: "🗑️ Design deleted" });
+        res.json({ message: "🗑️ Design deleted from UrbaneLiving" });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
@@ -121,5 +117,5 @@ app.delete('/api/designs/:id', async (req, res) => {
 ========================= */
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT} [${process.env.NODE_ENV}]`);
+    console.log(`🚀 Professional Server running on port ${PORT}`);
 });
