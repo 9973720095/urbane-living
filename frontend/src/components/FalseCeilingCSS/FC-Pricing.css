@@ -1,0 +1,64 @@
+.pricing-section {
+    padding: 80px 5%;
+    background-color: #f9fbff;
+    text-align: center;
+}
+
+.pricing-title {
+    margin-bottom: 10px !important;
+}
+
+.pricing-row {
+    margin-top: 40px !important;
+}
+
+.calc-card {
+    border-radius: 16px !important;
+    text-align: left;
+    padding: 20px;
+    border: none !important;
+}
+
+.input-flex {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.rate-info {
+    margin-top: 25px;
+    color: #888;
+}
+
+.result-card {
+    background: linear-gradient(135deg, #1890ff 0%, #0050b3 100%) !important;
+    border-radius: 16px !important;
+    color: white !important;
+    padding: 40px 20px !important;
+    border: none !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+
+.result-card span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.total-price {
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 15px 0;
+}
+
+.price-tagline {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+@media (max-width: 768px) {
+    .total-price {
+        font-size: 2.2rem;
+    }
+}

@@ -21,3 +21,12 @@
 .card-img-placeholder { height: 250px; background: #eee; display: flex; align-items: flex-start; padding: 10px; color: #fff; font-weight: bold; }
 .space-card { border-radius: 12px; overflow: hidden; }
 .quote-btn { background: var(--secondary-blue) !important; border: none !important; }
+/* Image par smooth effect ke liye */
+.hover-zoom {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.hover-zoom:hover {
+  transform: translateY(-10px); /* Image thodi upar uthegi */
+  box-shadow: 0 30px 60px -12px rgba(0,0,0,0.25) !important; /* Shadow thodi gehri ho jayegi */
+}

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Layout, message } from 'antd';
 import axios from 'axios';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SpacesGrid from './components/SpacesGrid';
@@ -14,6 +14,7 @@ import InquiryModal from './components/InquiryModal';
 import NotificationModal from './components/NotificationModal';
 import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
+import FalseCeilingPage from './pages/FalseCeilingPage'; 
 
 const { Content } = Layout;
 
@@ -35,24 +36,45 @@ function App() {
     }
   };
 
+  const HomePage = () => (
+    <>
+      <Hero onOpenForm={handleOpen} />
+      <div style={{ padding: '40px 0' }}>
+        <SpacesGrid onOpenForm={handleOpen} />
+      </div>
+      <CeilingSection />
+      <MarketOfferings />
+      <GallerySection />
+      <ProcessSection />
+      <FaqSection />
+    </>
+  );
+
   return (
-    <Layout style={{ background: '#fff' }}>
-      <NotificationModal />
-      <Navbar onOpenForm={handleOpen} />
-      <Content>
-        <Hero onOpenForm={handleOpen} />
-        <div style={{ padding: '40px 0' }}>
-           <SpacesGrid onOpenForm={handleOpen} />
-        </div>
-        <CeilingSection />
-        <MarketOfferings />
-        <GallerySection />
-        <ProcessSection />
-        <FaqSection />
-        <FooterContact />
-      </Content>
-      <InquiryModal isOpen={isModalOpen} onClose={handleClose} onFinish={onFinish} />
-    </Layout>
+    <Router>
+      <Layout style={{ background: '#fff' }}>
+        <NotificationModal />
+        
+        
+        <Navbar onOpenForm={handleOpen} />
+
+        <Content>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+
+            <Route path="/false-ceiling" element={<FalseCeilingPage onOpenForm={handleOpen} />} />
+          </Routes>
+          
+          <FooterContact />
+        </Content>
+
+        <InquiryModal 
+          isOpen={isModalOpen} 
+          onClose={handleClose} 
+          onFinish={onFinish} 
+        />
+      </Layout>
+    </Router>
   );
 }
 

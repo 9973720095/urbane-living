@@ -1,41 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Layout, Button, Menu, Drawer } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const { Header } = Layout;
 
 const Navbar = ({ onOpenForm }) => {
   const [visible, setVisible] = useState(false);
-  // Default active key '1' (Home) set ki gayi hai
+  const location = useLocation(); // URL track karne ke liye
   const [current, setCurrent] = useState('1');
+
+  // Logic: Jab page refresh ho, toh URL dekh kar sahi menu highlight kare
+  useEffect(() => {
+    if (location.pathname === '/false-ceiling') {
+      setCurrent('2');
+    } else {
+      setCurrent('1');
+    }
+  }, [location.pathname]);
 
   const showDrawer = () => setVisible(true);
   const onClose = () => setVisible(false);
 
-  // Click handler jo active state update karega
   const onClickMenu = (e) => {
     setCurrent(e.key);
   };
 
   const menuItems = [
-    { key: '1', label: 'Home' },
-    { key: '2', label: 'False Ceiling' },
+    { 
+      key: '1', 
+      label: <Link to="/">Home</Link> 
+    },
+    { 
+      key: '2', 
+      label: <Link to="/false-ceiling">False Ceiling</Link> 
+    },
   ];
 
   return (
     <Header className="custom-header">
-      <a href="/" className='logo'>
+      <Link to="/" className='logo'>
         <img 
           src="https://urbaneliving.in/wp-content/uploads/2024/07/cropped-Untitled-design-87-png.webp"
           alt="Urbane Living Logo" 
           className="navbar-logo-img" 
         />
-      </a>
+      </Link>
 
       <Menu 
         mode="horizontal" 
-        selectedKeys={[current]} // Active state highlight ke liye
+        selectedKeys={[current]} 
         items={menuItems} 
         onClick={onClickMenu} 
         className="desktop-menu"
