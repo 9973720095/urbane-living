@@ -24,14 +24,20 @@ function App() {
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
+  // Saban, ye logic live connection fix karega
+  const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:5000' 
+    : 'https://urbane-living.onrender.com';
+
   const onFinish = async (values) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/save-lead', values);
+      const res = await axios.post(`${API_BASE_URL}/api/save-lead`, values);
       if (res.status === 200) {
-        message.success('Lead Saved! Saban, check your MongoDB Atlas.');
+        message.success('Lead Saved Successfully!');
         handleClose();
       }
     } catch (err) {
+      console.error("API Error:", err);
       message.error('Backend connection failed!');
     }
   };
@@ -54,14 +60,12 @@ function App() {
     <Router>
       <Layout style={{ background: '#fff' }}>
         <NotificationModal />
-        
-        
         <Navbar onOpenForm={handleOpen} />
 
         <Content>
           <Routes>
             <Route path="/" element={<HomePage />} />
-
+            {/* False Ceiling Route Fixed */}
             <Route path="/false-ceiling" element={<FalseCeilingPage onOpenForm={handleOpen} />} />
           </Routes>
           
