@@ -11,10 +11,12 @@ const Navbar = ({ onOpenForm }) => {
   const location = useLocation(); // URL track karne ke liye
   const [current, setCurrent] = useState('1');
 
-  // Logic: Jab page refresh ho, toh URL dekh kar sahi menu highlight kare
+  // Logic: Jab page refresh ho ya URL badle, toh sahi menu highlight kare
   useEffect(() => {
     if (location.pathname === '/false-ceiling') {
       setCurrent('2');
+    } else if (location.pathname === '/about') {
+      setCurrent('3'); // About Us page highlight karne ke liye
     } else {
       setCurrent('1');
     }
@@ -27,6 +29,7 @@ const Navbar = ({ onOpenForm }) => {
     setCurrent(e.key);
   };
 
+  // Centralized Menu Items
   const menuItems = [
     { 
       key: '1', 
@@ -35,6 +38,10 @@ const Navbar = ({ onOpenForm }) => {
     { 
       key: '2', 
       label: <Link to="/false-ceiling">False Ceiling</Link> 
+    },
+    { 
+      key: '3', 
+      label: <Link to="/about">About Us</Link> 
     },
   ];
 
@@ -48,6 +55,7 @@ const Navbar = ({ onOpenForm }) => {
         />
       </Link>
 
+      {/* Desktop Menu */}
       <Menu 
         mode="horizontal" 
         selectedKeys={[current]} 
@@ -69,6 +77,7 @@ const Navbar = ({ onOpenForm }) => {
         />
       </div>
 
+      {/* Mobile Drawer */}
       <Drawer
         title="Menu"
         placement="right"
@@ -87,7 +96,7 @@ const Navbar = ({ onOpenForm }) => {
           style={{ marginTop: '20px', background: '#1890ff'}} 
           onClick={() => { onOpenForm(); onClose(); }}
         >
-          Book Now
+          Enquery Now
         </Button>
       </Drawer>
     </Header>

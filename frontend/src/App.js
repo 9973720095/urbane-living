@@ -3,6 +3,8 @@ import { Layout, message } from 'antd';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
+
+// Components
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SpacesGrid from './components/SpacesGrid';
@@ -14,17 +16,18 @@ import InquiryModal from './components/InquiryModal';
 import NotificationModal from './components/NotificationModal';
 import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
+
+// Pages
 import FalseCeilingPage from './pages/FalseCeilingPage'; 
+import AboutUsPage from './pages/AboutUs'; 
 
 const { Content } = Layout;
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
-  // Saban, ye logic live connection fix karega
   const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:5000' 
     : 'https://urbane-living.onrender.com';
@@ -37,7 +40,6 @@ function App() {
         handleClose();
       }
     } catch (err) {
-      console.error("API Error:", err);
       message.error('Backend connection failed!');
     }
   };
@@ -45,14 +47,8 @@ function App() {
   const HomePage = () => (
     <>
       <Hero onOpenForm={handleOpen} />
-      <div style={{ padding: '40px 0' }}>
-        <SpacesGrid onOpenForm={handleOpen} />
-      </div>
-      <CeilingSection />
-      <MarketOfferings />
-      <GallerySection />
-      <ProcessSection />
-      <FaqSection />
+      <div style={{ padding: '40px 0' }}><SpacesGrid onOpenForm={handleOpen} /></div>
+      <CeilingSection /><MarketOfferings /><GallerySection /><ProcessSection /><FaqSection />
     </>
   );
 
@@ -61,22 +57,15 @@ function App() {
       <Layout style={{ background: '#fff' }}>
         <NotificationModal />
         <Navbar onOpenForm={handleOpen} />
-
         <Content>
           <Routes>
             <Route path="/" element={<HomePage />} />
-            {/* False Ceiling Route Fixed */}
             <Route path="/false-ceiling" element={<FalseCeilingPage onOpenForm={handleOpen} />} />
+            <Route path="/about" element={<AboutUsPage onOpenForm={handleOpen} />} /> 
           </Routes>
-          
           <FooterContact />
         </Content>
-
-        <InquiryModal 
-          isOpen={isModalOpen} 
-          onClose={handleClose} 
-          onFinish={onFinish} 
-        />
+        <InquiryModal isOpen={isModalOpen} onClose={handleClose} onFinish={onFinish} />
       </Layout>
     </Router>
   );

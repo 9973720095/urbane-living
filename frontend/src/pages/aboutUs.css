@@ -1,0 +1,44 @@
+.container-custom { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* Hero */
+.about-hero { height: 70vh; min-height: 450px; background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; position: relative; }
+.hero-overlay-refined { background: rgba(0, 0, 0, 0.4); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.hero-content-center { text-align: center; color: white; padding: 40px; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 800px; }
+.brand-headline { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: white !important; text-transform: uppercase; line-height: 1; margin: 0; }
+.brand-subtitle { letter-spacing: 5px; font-size: 14px; margin-bottom: 10px; display: block; }
+.hero-divider { width: 80px; height: 4px; background: #1890ff; margin: 20px auto; }
+
+/* USP Cards */
+.usp-section-cards { padding: 40px 0; margin-top: -60px; position: relative; z-index: 10; }
+.modern-usp-card { border-radius: 20px !important; text-align: center; height: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.1) !important; transition: 0.3s; }
+.modern-usp-card:hover { transform: translateY(-5px); }
+.icon-wrapper { font-size: 40px; color: #1890ff; margin-bottom: 15px; }
+
+/* Content Sections */
+.story-section, .quality-standards, .testimonials { padding: 80px 0; }
+.story-img { width: 100%; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.modern-list { margin: 25px 0; }
+.list-item { display: flex; align-items: center; margin-bottom: 15px; font-size: 1.1rem; font-weight: 500; }
+.check-icon { color: #52c41a; margin-right: 12px; font-size: 20px; }
+.section-title-center { text-align: center; margin-bottom: 50px; }
+
+/* Quality & Testi Items */
+.quality-item { display: flex; gap: 20px; background: white; padding: 30px; border-radius: 15px; height: 100%; transition: 0.3s; border: 1px solid #f0f0f0; }
+.shadow-hover:hover { box-shadow: 0 15px 35px rgba(0,0,0,0.08); border-color: transparent; }
+.q-icon { font-size: 35px; color: #1890ff; }
+.testi-card { border-radius: 15px !important; height: 100%; background: #fff; }
+.user-info { display: flex; align-items: center; margin-top: 20px; }
+.prime-btn { height: 50px; padding: 0 35px; border-radius: 8px; font-weight: 600; margin-top: 15px; }
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .story-section .ant-col:first-child { order: 2; margin-top: 40px; }
+  .story-section .ant-col:last-child { order: 1; }
+}
+
+@media (max-width: 768px) {
+  .brand-headline { font-size: 2.8rem; }
+  .usp-section-cards { margin-top: 20px; }
+  .story-section, .quality-standards, .testimonials { padding: 40px 0; }
+  .hero-content-center { padding: 25px 15px; }
+}
