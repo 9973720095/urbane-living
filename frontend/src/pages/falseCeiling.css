@@ -89,3 +89,9 @@
 .filters .ant-select-selector:active {
   transform: scale(0.98);
 }
+@media (max-width: 767px) {
+  .filters{flex-direction: column;gap:0px;}
+}
+@media (max-width: 420px) {
+  .filter-content .ant-row .ant-col{flex: 0 0 100%;max-width: 100%;}
+}

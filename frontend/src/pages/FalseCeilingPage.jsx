@@ -60,7 +60,8 @@ export default function FalseCeilingPage({ onOpenForm }) {
       <CostEstimator />
 
       {/* FILTERS SECTION */}
-      <div className="filters" style={{ padding: '40px 20px', textAlign: 'center', background: '#f9f9f9' }}>
+      <div className="filters" style={{ padding: '40px 20px', textAlign: 'center',
+        marginBottom: '0', background: '#f9f9f9' }}>
         <h2 style={{ marginBottom: 20 }}>Explore Our Designs</h2>
         <Row gutter={[16, 16]} justify="center">
           <Col>
@@ -99,10 +100,10 @@ export default function FalseCeilingPage({ onOpenForm }) {
       </div>
 
       {/* DESIGN CARDS GRID */}
-      <div className="container" style={{ padding: '40px 20px' }}>
+      <div className="container filter-content" style={{ padding: '20px' }}>
         <Row gutter={[24, 24]}>
           {designs.map((item) => (
-            <Col xs={24} md={12} lg={6} key={item._id || item.id}>
+            <Col xs={12} md={12} lg={6} key={item._id || item.id}>
               <Card 
                 hoverable
                 cover={<img src={item.image} alt={item.title} style={{ height: 200, objectFit: 'cover' }} />}
@@ -110,7 +111,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
                 <div style={{ marginBottom: 10 }}>
                   <h3 style={{ margin: 0 }}>{item.title}</h3>
                   <div style={{ marginTop: 5 }}>
-                    <Tag color="blue">{item.style}</Tag>
+                    <Tag style={{ color: 'blue', marginRight: 5}}>{item.style}</Tag>
                     <Tag color="purple">{item.category}</Tag>
                   </div>
                 </div>

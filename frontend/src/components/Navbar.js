@@ -66,7 +66,7 @@ const Navbar = ({ onOpenForm }) => {
 
       <div className="nav-right">
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>
-          Book Now
+          Get Free Quote
         </Button>
 
         <Button 
