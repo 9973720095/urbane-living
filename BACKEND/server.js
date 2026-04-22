@@ -65,6 +65,7 @@ app.get('/', (req, res) => {
 
 /* ---------- LEAD APIs ---------- */
 
+// Save Lead
 app.post('/api/save-lead', async (req, res) => {
     try {
         const newLead = new Lead(req.body);
@@ -76,22 +77,28 @@ app.post('/api/save-lead', async (req, res) => {
     }
 });
 
-/* ---------- DESIGN APIs (Updated Filtering Logic) ---------- */
+// Get All Leads (Saban, isse aap Dashboard par inquiries dekh payenge)
+app.get('/api/leads', async (req, res) => {
+    try {
+        const leads = await Lead.find().sort({ date: -1 });
+        res.json(leads);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+/* ---------- DESIGN APIs ---------- */
 
 app.get('/api/designs', async (req, res) => {
     try {
         const { category, style, platform } = req.query;
         let filter = {};
 
-        // Saban, ye logic ensure karega ki agar 'platform=app' nahi bheja gaya, 
-        // toh 'AppGallery' wali photos hamesha filter out rahegi.
         if (platform !== 'app') {
             filter.category = { $ne: 'AppGallery' };
         }
 
-        // Agar specific category requested hai
         if (category) {
-            // Security Check: Agar website manually AppGallery maang rahi hai
             if (platform !== 'app' && category === 'AppGallery') {
                 return res.json([]); 
             }
@@ -117,10 +124,36 @@ app.post('/api/designs/add', async (req, res) => {
     }
 });
 
+// Update Design (Price ya Title change karne ke liye)
+app.put('/api/designs/:id', async (req, res) => {
+    try {
+        const updatedDesign = await Design.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        res.json({ message: "✅ Design updated", data: updatedDesign });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
 app.delete('/api/designs/:id', async (req, res) => {
     try {
         await Design.findByIdAndDelete(req.params.id);
         res.json({ message: "🗑️ Design deleted" });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+/* ---------- DASHBOARD STATS API ---------- */
+
+// Dashboard ke home par numbers dikhane ke liye
+app.get('/api/admin/stats', async (req, res) => {
+    try {
+        const designCount = await Design.countDocuments();
+        const leadCount = await Lead.countDocuments();
+        res.json({
+            totalDesigns: designCount,
+            totalLeads: leadCount
+        });
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
