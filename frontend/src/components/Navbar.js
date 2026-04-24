@@ -8,15 +8,17 @@ const { Header } = Layout;
 
 const Navbar = ({ onOpenForm }) => {
   const [visible, setVisible] = useState(false);
-  const location = useLocation(); // URL track karne ke liye
+  const location = useLocation(); 
   const [current, setCurrent] = useState('1');
 
-  // Logic: Jab page refresh ho ya URL badle, toh sahi menu highlight kare
+  // Logic: URL ke basis par active menu item highlight karna
   useEffect(() => {
     if (location.pathname === '/false-ceiling') {
       setCurrent('2');
     } else if (location.pathname === '/about') {
-      setCurrent('3'); // About Us page highlight karne ke liye
+      setCurrent('3');
+    } else if (location.pathname === '/contact') {
+      setCurrent('4'); // Contact page handle karne ke liye
     } else {
       setCurrent('1');
     }
@@ -43,6 +45,10 @@ const Navbar = ({ onOpenForm }) => {
       key: '3', 
       label: <Link to="/about">About Us</Link> 
     },
+    { 
+      key: '4', 
+      label: <Link to="/contact">Contact</Link> 
+    },
   ];
 
   return (
@@ -65,6 +71,7 @@ const Navbar = ({ onOpenForm }) => {
       />
 
       <div className="nav-right">
+        {/* Saban, ye raha aapka 'Get Free Quote' button jo form open karega */}
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>
           Get Free Quote
         </Button>
@@ -90,6 +97,7 @@ const Navbar = ({ onOpenForm }) => {
           items={menuItems} 
           onClick={(e) => { onClickMenu(e); onClose(); }}
         />
+        {/* Mobile ke liye 'Enquery Now' button jo form open karega */}
         <Button 
           type="primary" 
           block 

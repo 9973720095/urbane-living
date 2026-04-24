@@ -21,6 +21,7 @@ import MarketOfferings from './components/MarketOfferings';
 // Pages
 import FalseCeilingPage from './pages/FalseCeilingPage'; 
 import AboutUsPage from './pages/AboutUs'; 
+import ContactPage from './pages/ContactPage'; // Naya page import kiya
 import Login from './pages/Login';
 
 const { Content } = Layout;
@@ -57,7 +58,6 @@ function App() {
   // Smart onFinish: Saban, ye leads aur designs dono handle karega
   const onFinish = async (values, type = 'lead') => {
     try {
-      // Logic: Agar type 'design' hai toh designs wale API pe bhejega
       const endpoint = type === 'design' ? '/api/designs/add' : '/api/save-lead';
       const res = await axios.post(`${API_BASE_URL}${endpoint}`, values);
       
@@ -90,11 +90,11 @@ function App() {
         onFinish={onFinish}
       >
         <Routes>
-          {/* Saban, yahan hum onFinish pass kar rahe hain taaki dashboard use use kar sake */}
           <Route path="/admin-dashboard" element={<AdminDashboard onFinish={onFinish} />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/false-ceiling" element={<FalseCeilingPage onOpenForm={handleOpen} />} />
           <Route path="/about" element={<AboutUsPage onOpenForm={handleOpen} />} />
+          <Route path="/contact" element={<ContactPage onOpenForm={handleOpen} />} />
           <Route path="/admin-login" element={<Login />} />
         </Routes>
       </LayoutContent>
