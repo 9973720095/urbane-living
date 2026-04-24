@@ -17,25 +17,25 @@ export default function ContactPage({ onOpenForm }) {
   const whatsappNumber = "919560555103";
   const emailAddress = "contact@urbaneliving.in";
 
-  // City-wise Data with Search-based Maps for Multiple Pins
+  // Creative Location Data
   const locations = [
     { 
       name: "DELHI", 
-      // Mandawali aur aas-paas ke areas mein multiple points highlight honge
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.2800!3d28.6200!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Mandawali%20Delhi!5e0!3m2!1sen!2sin!4v1713950000000!5m2!1sen!2sin",
-      desc: "Mandawali, Laxmi Nagar & Preet Vihar"
+      mapUrl: "https://maps.google.com/maps?q=Interior%20Designers%20in%20Mandawali%20Delhi&t=&z=13&ie=UTF8&iwloc=&output=embed",
+      tags: ["Mandawali", "Laxmi Nagar", "Preet Vihar", "Mayur Vihar"],
+      stats: "15+ Active Sites"
     },
     { 
       name: "NOIDA", 
-      // Noida ke major sectors mein pins dikhenge
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.3200!3d28.5800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Sector%2018%20Noida!5e0!3m2!1sen!2sin!4v1713950000001!5m2!1sen!2sin",
-      desc: "Sectors 15, 18, 62 & Greater Noida"
+      mapUrl: "https://maps.google.com/maps?q=Interior%20Designers%20in%20Noida%20Sector%2018&t=&z=13&ie=UTF8&iwloc=&output=embed",
+      tags: ["Sector 15", "Sector 18", "Sector 62", "Greater Noida"],
+      stats: "12+ Live Projects"
     },
     { 
       name: "GURUGRAM", 
-      // Cyber City aur DLF area ke markers
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.0800!3d28.4700!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Cyber%20City%20Gurugram!5e0!3m2!1sen!2sin!4v1713950000002!5m2!1sen!2sin",
-      desc: "Cyber City, DLF Phase 3 & Sohna Road"
+      mapUrl: "https://maps.google.com/maps?q=Interior%20Designers%20in%20Gurugram%20Cyber%20City&t=&z=13&ie=UTF8&iwloc=&output=embed",
+      tags: ["Cyber City", "Golf Course Rd", "Sohna Road", "DLF Ph-3"],
+      stats: "10+ Ongoing Works"
     }
   ];
 
@@ -156,10 +156,24 @@ export default function ContactPage({ onOpenForm }) {
                     </div>
                   }
                 >
-                  <div style={{ textAlign: 'center' }}>
+                  <div style={{ textAlign: 'center', padding: '10px' }}>
                     <Title level={4} className="city-name">{loc.name}</Title>
-                    <EnvironmentOutlined style={{ color: '#1890ff', marginRight: 8 }} />
-                    <Text type="secondary">{loc.desc}</Text>
+                    
+                    {/* Modern Tags Layout */}
+                    <div style={{ marginBottom: '12px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '5px' }}>
+                      {loc.tags.map(tag => (
+                        <span key={tag} className="location-tag">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    {/* Live Status Badge */}
+                    <div className="live-status-badge">
+                      <Text strong className="live-status-text">
+                        <span className="dot-blink"></span> {loc.stats}
+                      </Text>
+                    </div>
                   </div>
                 </Card>
               </Col>
