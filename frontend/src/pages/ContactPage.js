@@ -17,22 +17,25 @@ export default function ContactPage({ onOpenForm }) {
   const whatsappNumber = "919560555103";
   const emailAddress = "contact@urbaneliving.in";
 
-  // City-wise Map Data (Optimized for 2026 Premium Look)
+  // City-wise Data with Search-based Maps for Multiple Pins
   const locations = [
     { 
       name: "DELHI", 
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d112081.77353916964!2d77.165100!3d28.613939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x37205b7187896444!2sDelhi!5e0!3m2!1sen!2sin!4v1712345678901!5m2!1sen!2sin",
-      desc: "Mandawali, West Vinod Nagar"
+      // Mandawali aur aas-paas ke areas mein multiple points highlight honge
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.2800!3d28.6200!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Mandawali%20Delhi!5e0!3m2!1sen!2sin!4v1713950000000!5m2!1sen!2sin",
+      desc: "Mandawali, Laxmi Nagar & Preet Vihar"
     },
     { 
       name: "NOIDA", 
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56066.38950548174!2d77.311749!3d28.535516!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390ce5a43173357b%3A0x37ffce30cdd7fdc4!2sNoida%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1712345678902!5m2!1sen!2sin",
-      desc: "Sectors 15, 18 & 62"
+      // Noida ke major sectors mein pins dikhenge
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.3200!3d28.5800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Sector%2018%20Noida!5e0!3m2!1sen!2sin!4v1713950000001!5m2!1sen!2sin",
+      desc: "Sectors 15, 18, 62 & Greater Noida"
     },
     { 
       name: "GURUGRAM", 
-      mapUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d56122.999566373!2d77.010375!3d28.459497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19d582e38859%3A0x2cf5e815c328e3!2sGurugram%2C%20Haryana!5e0!3m2!1sen!2sin!4v1712345678903!5m2!1sen!2sin",
-      desc: "Cyber City & Golf Course Rd"
+      // Cyber City aur DLF area ke markers
+      mapUrl: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m2d77.0800!3d28.4700!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sinterior%20design%20near%20Cyber%20City%20Gurugram!5e0!3m2!1sen!2sin!4v1713950000002!5m2!1sen!2sin",
+      desc: "Cyber City, DLF Phase 3 & Sohna Road"
     }
   ];
 
@@ -41,7 +44,7 @@ export default function ContactPage({ onOpenForm }) {
       {/* HERO SECTION */}
       <div className="contact-hero">
         <Title level={1} className="hero-title">Get in Touch</Title>
-        <Text className="hero-subtitle">Modern Designs, Professional Execution.</Text>
+        <Text className="hero-subtitle">Modern Designs, Professional Execution Across NCR.</Text>
       </div>
 
       <div className="container contact-container">
@@ -114,7 +117,7 @@ export default function ContactPage({ onOpenForm }) {
                   size="large" 
                   icon={<MessageOutlined />} 
                   className="contact-submit-btn"
-                  onClick={() => window.location.href = `sms:${phoneNumber}?body=Hello Urbane Living, I need a consultation.`}
+                  onClick={() => window.location.href = `sms:${phoneNumber}?body=Hello Urbane Living, I am interested in your services.`}
                 >
                   Send SMS Message
                 </Button>
@@ -144,10 +147,11 @@ export default function ContactPage({ onOpenForm }) {
                         title={loc.name}
                         src={loc.mapUrl}
                         width="100%"
-                        height="250"
+                        height="280"
                         style={{ border: 0 }}
                         allowFullScreen=""
                         loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
                       ></iframe>
                     </div>
                   }
