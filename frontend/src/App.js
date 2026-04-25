@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import './App.css';
 import AdminDashboard from './pages/AdminDashboard';
+import Login from './pages/Login';
 
 // Components
 import Navbar from './components/Navbar';
@@ -21,8 +22,9 @@ import MarketOfferings from './components/MarketOfferings';
 // Pages
 import FalseCeilingPage from './pages/FalseCeilingPage'; 
 import AboutUsPage from './pages/AboutUs'; 
-import ContactPage from './pages/ContactPage'; 
-import Login from './pages/Login';
+import ContactPage from './pages/ContactPage';
+import BlogPage from './pages/BlogPage';
+import BlogDetails from './pages/BlogDetails';
 
 const { Content } = Layout;
 
@@ -107,11 +109,13 @@ function App() {
       >
         <Routes>
           <Route path="/admin-dashboard" element={<AdminDashboard onFinish={onFinish} />} />
+          <Route path="/admin-login" element={<Login />} />
           <Route path="/" element={<HomePage />} />
           <Route path="/false-ceiling" element={<FalseCeilingPage onOpenForm={handleOpen} />} />
           <Route path="/about" element={<AboutUsPage onOpenForm={handleOpen} />} />
           <Route path="/contact" element={<ContactPage onOpenForm={handleOpen} />} />
-          <Route path="/admin-login" element={<Login />} />
+          <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/blog/:id" element={<BlogDetails />} />
         </Routes>
       </LayoutContent>
     </Router>

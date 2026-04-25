@@ -11,16 +11,22 @@ const Navbar = ({ onOpenForm }) => {
   const location = useLocation(); 
   const [current, setCurrent] = useState('1');
 
-  // Logic: URL ke basis par active menu item highlight karna
+  // Logic: Updated to handle dynamic blog sub-pages
   useEffect(() => {
-    if (location.pathname === '/false-ceiling') {
+    const path = location.pathname;
+
+    if (path === '/false-ceiling') {
       setCurrent('2');
-    } else if (location.pathname === '/about') {
+    } else if (path === '/about') {
       setCurrent('3');
-    } else if (location.pathname === '/contact') {
-      setCurrent('4'); // Contact page handle karne ke liye
-    } else {
+    } else if (path === '/contact') {
+      setCurrent('4'); 
+    } else if (path.startsWith('/blog')) { // Fix: /blogs aur /blog/:id dono ke liye key '5' active rahegi
+      setCurrent('5'); 
+    } else if (path === '/') {
       setCurrent('1');
+    } else {
+      setCurrent(''); // Kisi aur unknown page par koi bhi highlight nahi hoga
     }
   }, [location.pathname]);
 
@@ -31,24 +37,12 @@ const Navbar = ({ onOpenForm }) => {
     setCurrent(e.key);
   };
 
-  // Centralized Menu Items
   const menuItems = [
-    { 
-      key: '1', 
-      label: <Link to="/">Home</Link> 
-    },
-    { 
-      key: '2', 
-      label: <Link to="/false-ceiling">False Ceiling</Link> 
-    },
-    { 
-      key: '3', 
-      label: <Link to="/about">About Us</Link> 
-    },
-    { 
-      key: '4', 
-      label: <Link to="/contact">Contact</Link> 
-    },
+    { key: '1', label: <Link to="/">Home</Link> },
+    { key: '2', label: <Link to="/false-ceiling">False Ceiling</Link> },
+    { key: '3', label: <Link to="/about">About Us</Link> },
+    { key: '4', label: <Link to="/contact">Contact</Link> },
+    { key: '5', label: <Link to="/blogs">Blog</Link> },
   ];
 
   return (
@@ -61,7 +55,6 @@ const Navbar = ({ onOpenForm }) => {
         />
       </Link>
 
-      {/* Desktop Menu */}
       <Menu 
         mode="horizontal" 
         selectedKeys={[current]} 
@@ -71,7 +64,6 @@ const Navbar = ({ onOpenForm }) => {
       />
 
       <div className="nav-right">
-        {/* Saban, ye raha aapka 'Get Free Quote' button jo form open karega */}
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>
           Get Free Quote
         </Button>
@@ -84,7 +76,6 @@ const Navbar = ({ onOpenForm }) => {
         />
       </div>
 
-      {/* Mobile Drawer */}
       <Drawer
         title="Menu"
         placement="right"
@@ -97,7 +88,6 @@ const Navbar = ({ onOpenForm }) => {
           items={menuItems} 
           onClick={(e) => { onClickMenu(e); onClose(); }}
         />
-        {/* Mobile ke liye 'Enquery Now' button jo form open karega */}
         <Button 
           type="primary" 
           block 
