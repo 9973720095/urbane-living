@@ -15,6 +15,11 @@ export default function FalseCeilingPage({ onOpenForm }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(8); 
 
+  // WhatsApp Handler Function
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/919560555103", "_blank");
+  };
+
   // Dynamic API URL for Local/Mobile connectivity
   const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:5000' 
@@ -57,11 +62,18 @@ export default function FalseCeilingPage({ onOpenForm }) {
       {/* HERO SECTION */}
       <div className="hero">
         <div className="overlay">
-          <h1>Turn Your Home Into Luxury in 7 Days</h1>
-          <p>Premium False Ceiling Designs Starting ₹79/sqft</p>
+          <h1>Turn Your Home Luxury in 7 Days</h1>
+          <p>Premium False Ceiling Designs Starting ₹95/sqft</p>
           <div className="btn-group">
             <Button type="primary" size="large" onClick={onOpenForm}>Get Free Design</Button>
-            <Button icon={<WhatsAppOutlined />} size="large">WhatsApp Now</Button>
+            {/* Updated WhatsApp Button with Click Handler */}
+            <Button 
+              icon={<WhatsAppOutlined />} 
+              size="large" 
+              onClick={handleWhatsAppClick}
+            >
+              WhatsApp Now
+            </Button>
           </div>
         </div>
       </div>
@@ -69,7 +81,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
       <ThreeViews />
       <CostEstimator />
 
-      {/* FILTERS SECTION - All Original Options Restored */}
+      {/* FILTERS SECTION */}
       <div className="filters" style={{ padding: '40px 20px', textAlign: 'center', background: '#f9f9f9' }}>
         <h2 style={{ marginBottom: 20 }}>Explore Our Designs</h2>
         <Row gutter={[12, 12]} justify="center">
@@ -104,7 +116,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
         </Row>
       </div>
 
-      {/* DESIGN CARDS GRID - Fixed for 2 cards on mobile */}
+      {/* DESIGN CARDS GRID */}
       <div className="container filter-content" style={{ padding: '20px' }}>
         <Row gutter={[16, 16]}>
           {currentItems.map((item) => (
@@ -129,7 +141,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
             pageSize={pageSize} 
             total={designs.length} 
             onChange={(page) => setCurrentPage(page)}
-            simple={window.innerWidth < 576} // Clean UI for mobile
+            simple={window.innerWidth < 576} 
           />
         </div>
       </div>

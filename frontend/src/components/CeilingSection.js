@@ -27,7 +27,7 @@ const CeilingSection = () => {
               <span style={{ color: '#7b42f5' }}>Signature Ceilings</span>
             </Title>
             <Paragraph style={{ fontSize: '18px', color: '#555', lineHeight: '1.8' }}>
-              Transform your overhead space into a captivating masterpiece. Our Gyproc-certified 
+              Transform your overhead space into a captivating masterpiece. Our UrbaneLiving-certified 
               installations offer sculpted architectural depth and intimate, premium ambiance 
               that lasts a lifetime.
             </Paragraph>

@@ -2,7 +2,7 @@
 .spaces-section {
     padding: 0px 10%;
     background: #ffffff;
-    overflow: hidden; /* Niche ka scroller khatam karne ke liye */
+    overflow: hidden; 
 }
 
 .section-header {
@@ -14,18 +14,38 @@
     color: #7b42f5;
 }
 
-/* Carousel Fixes */
-.custom-carousel {
-    margin: 0 -15px; /* Negative margin to counteract slide padding */
+/* --- CAROUSEL EQUAL HEIGHT FIX START --- */
+
+/* 1. Slick track ko flex banayein taaki saari slides barabar ho jayein */
+.custom-carousel .slick-track {
+    display: flex !important;
+    align-items: stretch !important;
 }
 
-/* Card Wrapper - Yahi shadow ko cutne se bachata hai */
+/* 2. Har slide ke inner divs ko 100% height dein */
+.custom-carousel .slick-slide {
+    height: auto !important;
+    display: flex !important;
+}
+
+.custom-carousel .slick-slide > div {
+    display: flex !important;
+    width: 100%;
+}
+
+/* 3. Card Wrapper aur Card ko stretch karein */
 .card-outer-wrapper {
-    padding: 20px 15px 60px 15px !important; /* Bottom 60px padding shadow ke liye */
+    padding: 20px 15px 60px 15px !important;
     outline: none;
+    display: flex !important;
+    flex: 1;
 }
 
-.dream-home-card {
+.dream-home-card.ant-card {
+    height: 100% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
     border-radius: 16px !important;
     overflow: hidden;
     border: 1px solid #f0f0f0 !important;
@@ -34,31 +54,56 @@
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05) !important;
 }
 
+/* 4. Card Body ko flex-grow dein taaki button niche push ho jaye */
+.dream-home-card .ant-card-body {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 20px !important;
+}
+
+.card-inner-body {
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important; /* Content top par, Button bottom par */
+}
+
+/* --- CAROUSEL EQUAL HEIGHT FIX END --- */
+
 .card-img-top {
     height: 250px !important;
     object-fit: cover !important;
     width: 100%;
 }
 
+/* Subtitle lines control */
+.spaces-section .card-inner-body .card-subtitle {
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    margin-bottom: 15px;
+    color: #666;
+}
+
 /* Hover State */
 .dream-home-card:hover {
     transform: translateY(-12px) !important;
-    /* Soft premium shadow */
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12) !important;
     border-color: #7b42f533 !important;
 }
 
-.card-inner-body {
-    padding: 10px 5px;
-}
-
+/* Button hamesha bottom par rahega margin-top: auto ki wajah se */
 .quote-button {
     background: #1890ff !important;
     height: 45px !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
-    margin-top: 15px !important;
+    margin-top: auto !important; 
     border: none !important;
+    width: 100%;
+    color: white;
 }
 
 /* Dots styling */

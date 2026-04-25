@@ -10,19 +10,19 @@ const ProcessSection = () => {
       stage: '01',
       heading: 'Framing & Channels',
       duration: 'Duration: 2 days',
-      img: 'https://urbaneliving.in/wp-content/uploads/2024/11/Functional-Comfort-Kitchen-2-300x300.webp'
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'
     },
     {
       stage: '02',
-      heading: 'Board Installation & Plastering',
+      heading: 'Board Installation',
       duration: 'Duration: 2 days',
-      img: 'https://urbaneliving.in/wp-content/uploads/2024/11/Untitled-design-2025-10-02T120251.508-300x300.webp'
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092389/WhatsApp_Image_2026-04-24_at_15.43.20_l17xdz.jpg'
     },
     {
       stage: '03',
       heading: 'Finishing',
       duration: 'Duration: 3 days',
-      img: 'https://urbaneliving.in/wp-content/uploads/2024/11/Functional-Comfort-Kitchen-300x300.webp'
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092660/WhatsApp_Image_2026-04-24_at_15.40.28_1_xucjet.jpg'
     },      
     {
       stage: '04',
@@ -35,7 +35,7 @@ const ProcessSection = () => {
   return (
     <div className="process-container">
       <div className="process-header">
-        <Title level={1}>Urbane Living False Ceiling in 7* days</Title>
+        <Title level={1}>Gypsum False Ceiling in 7* days</Title>
       </div>
 
       <Row gutter={[32, 40]} justify="center">

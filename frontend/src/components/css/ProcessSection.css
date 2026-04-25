@@ -13,6 +13,11 @@
     font-size: clamp(24px, 5vw, 42px) !important; /* Responsive font size */
     font-weight: 800 !important;
 }
+.process-container .step-card .stage-circle span:nth-of-type(2){
+    font-size: 12px;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
 
 .step-card {
     text-align: center;
@@ -21,7 +26,7 @@
     align-items: center; /* Saara content center karne ke liye */
 }
 
-.step-card .step-content h4{margin-bottom: 0px !important;}
+.step-card .step-content h4{margin: 0px !important;min-height: 0px;}
 .stage-wrapper {
     position: relative;
     width: 100%;

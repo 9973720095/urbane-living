@@ -18,7 +18,7 @@ const FooterContact = () => {
           icon={<PhoneFilled />} 
           size="large" 
           style={{ background: '#006699', borderColor: '#006699' }}
-          href="tel:+919973720095" 
+          href="tel:+919560555103" 
         >
           CALL NOW
         </Button>
@@ -29,7 +29,7 @@ const FooterContact = () => {
           icon={<WhatsAppOutlined />} 
           size="large" 
           style={{ background: '#25D366', borderColor: '#25D366' }}
-          href="https://wa.me/919973720095?text=Hi Urbane Living, I'm interested in your design services."
+          href="https://wa.me/919560555103?text=Hi Urbane Living, I'm interested in your design services."
           target="_blank"
         >
           WHATSAPP

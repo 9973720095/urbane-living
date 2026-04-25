@@ -31,10 +31,23 @@ const SpacesGrid = ({ onOpenForm }) => {
   }, []);
 
   const items = [
-    { title: 'New York Loft', img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1775823384/ChatGPT_Image_Apr_10_2026_05_45_07_PM_kwsvlf.png' },
-    { title: 'Sydney Opera House', img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1775826207/IMG_5562_n2vu5j.jpg' },
-    { title: 'Melbourne City', img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1775826251/IMG_5560_jncyvh.jpg' },
-    { title: 'Great Barrier Reef', img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1775826281/IMG_5565_ksoelf.jpg' }
+    { 
+      title: 'Elegant Living Spaces', 
+      subtitle: 'Create a lasting first impression with designer ceilings that radiate warmth and luxury',
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1776425448/Capture_0A2_turzho.jpg' 
+    },
+    { 
+      title: 'Dreamy Bedroom Retrears', 
+      subtitle: 'Experience ultimate comfort with ambient lighting and acoustic-friendly ceiling designs.',
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1776425442/WhatsApp_Image_2020-09-22_at_1.16.34_PM_wosi2t.jpg' },
+    { 
+      title: 'Gourmet Style Kitchens', 
+      subtitle:'Bright, moisture-resistant, and modern ceilings designed to make your cooking space feel spacious.',
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777033122/unnamed_thrqhe.jpg' },
+    { 
+      title: 'Scenic Balcony Views', 
+      subtitle: 'Weather-resistant and stylish finishes that turn your balcony into a perfect relaxation spot.',
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777033698/unnamed_1_hnspbk.jpg' }
   ];
 
   if (!isClient) return null;
@@ -43,7 +56,7 @@ const SpacesGrid = ({ onOpenForm }) => {
     <div className="spaces-section">
       <div className="section-header">
         <Title level={2}>
-          A Click Today Brings Your <span className="purple-text">Dream Home Closer.</span>
+          Click today, move into your <span className="purple-text">Dream Home Tomorrow.</span>
         </Title>
       </div>
       
@@ -64,8 +77,8 @@ const SpacesGrid = ({ onOpenForm }) => {
             >
               <div className="card-inner-body">
                 <Title level={4}>{item.title}</Title>
-                <Paragraph type="secondary">
-                  Because only the finest designs will satisfy your desire for perfection.
+                <Paragraph type="secondary" className="card-subtitle">
+                  {item.subtitle}
                 </Paragraph>
                 <Button type="primary" block onClick={onOpenForm} className="quote-button">
                   GET FREE QUOTE

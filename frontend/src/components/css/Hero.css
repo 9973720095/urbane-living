@@ -10,6 +10,7 @@
     position: relative;color: #000;margin-right: 7px;
 }
 .hero-content{background: #fff; opacity: 0.6; padding: 0px 30px 50px;}
+.hero-content h1{font-size: 35px !important;letter-spacing: 0.5px;font-weight: 800;}
 .hero-content p{color: #000;}
 .hero-content .explore-btn{
     color: #fff !important;
@@ -22,3 +23,11 @@
     background: linear-gradient(90deg, #4D5DFB 0%, #A234F5 100%) !important;
 }
 .hero-content .explore-btn:hover{color: #fff;border: none !important;}
+@media (max-width: 767px) {
+    .hero-content{width: 80%;}
+    .hero-content h1{font-size: 28px !important;}
+
+}
+@media (max-width: 560px){
+    .hero-content h1{font-size: 22px !important;}
+}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react'; // Added useEffect
 import { Layout, message } from 'antd';
 import axios from 'axios';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
@@ -21,19 +21,22 @@ import MarketOfferings from './components/MarketOfferings';
 // Pages
 import FalseCeilingPage from './pages/FalseCeilingPage'; 
 import AboutUsPage from './pages/AboutUs'; 
-import ContactPage from './pages/ContactPage'; // Naya page import kiya
+import ContactPage from './pages/ContactPage'; 
 import Login from './pages/Login';
 
 const { Content } = Layout;
 
 // Layout content component
-const LayoutContent = ({ children, handleOpen, isModalOpen, handleClose, onFinish }) => {
+const LayoutContent = ({ children, handleOpen, isModalOpen, handleClose, onFinish, showNotification, setShowNotification }) => {
   const location = useLocation();
   const isAdminPage = location.pathname.startsWith('/admin');
 
   return (
     <Layout style={{ background: '#fff' }}>
-      {!isAdminPage && <NotificationModal />}
+      {/* Ab ye conditional check logic se handle hoga */}
+      {!isAdminPage && showNotification && (
+        <NotificationModal onClose={() => setShowNotification(false)} />
+      )}
       {!isAdminPage && <Navbar onOpenForm={handleOpen} />}
       
       <Content>
@@ -48,6 +51,18 @@ const LayoutContent = ({ children, handleOpen, isModalOpen, handleClose, onFinis
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  // Notification modal ke liye state
+  const [showNotification, setShowNotification] = useState(false);
+
+  // Persistence Logic: Sirf 1st bar dikhane ke liye
+  useEffect(() => {
+    const hasSeenModal = localStorage.getItem('urbane_notification_seen');
+    if (!hasSeenModal) {
+      setShowNotification(true);
+      localStorage.setItem('urbane_notification_seen', 'true');
+    }
+  }, []);
+
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
 
@@ -55,7 +70,6 @@ function App() {
     ? 'http://localhost:5000' 
     : 'https://urbane-living.onrender.com';
 
-  // Smart onFinish: Saban, ye leads aur designs dono handle karega
   const onFinish = async (values, type = 'lead') => {
     try {
       const endpoint = type === 'design' ? '/api/designs/add' : '/api/save-lead';
@@ -88,6 +102,8 @@ function App() {
         isModalOpen={isModalOpen} 
         handleClose={handleClose} 
         onFinish={onFinish}
+        showNotification={showNotification}
+        setShowNotification={setShowNotification}
       >
         <Routes>
           <Route path="/admin-dashboard" element={<AdminDashboard onFinish={onFinish} />} />
