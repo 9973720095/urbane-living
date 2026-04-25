@@ -3,6 +3,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 
+// Yahan Blog Routes ko import kiya
+const blogRoutes = require('./routes/blogRoutes'); 
+
 const app = express();
 
 /* =========================
@@ -59,6 +62,9 @@ const Design = mongoose.model("Design", designSchema);
    ROUTES
 ========================= */
 
+// Yahan Blog API ko register kiya
+app.use('/api/blogs', blogRoutes);
+
 app.get('/', (req, res) => {
     res.send(`🚀 Urbane Living Backend is active [${process.env.NODE_ENV}]`);
 });
@@ -77,7 +83,7 @@ app.post('/api/save-lead', async (req, res) => {
     }
 });
 
-// Get All Leads (Saban, isse aap Dashboard par inquiries dekh payenge)
+// Get All Leads
 app.get('/api/leads', async (req, res) => {
     try {
         const leads = await Lead.find().sort({ date: -1 });
@@ -124,7 +130,7 @@ app.post('/api/designs/add', async (req, res) => {
     }
 });
 
-// Update Design (Price ya Title change karne ke liye)
+// Update Design
 app.put('/api/designs/:id', async (req, res) => {
     try {
         const updatedDesign = await Design.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -145,7 +151,6 @@ app.delete('/api/designs/:id', async (req, res) => {
 
 /* ---------- DASHBOARD STATS API ---------- */
 
-// Dashboard ke home par numbers dikhane ke liye
 app.get('/api/admin/stats', async (req, res) => {
     try {
         const designCount = await Design.countDocuments();
