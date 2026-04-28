@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Breadcrumb, Typography, Spin } from 'antd';
+import { Breadcrumb, Typography, Spin, Avatar, Divider } from 'antd';
 import axios from 'axios';
 
-const { Title } = Typography;
+const { Title, Paragraph, Text } = Typography;
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -29,39 +29,75 @@ const BlogDetails = () => {
     fetchBlog();
   }, [id, API_BASE_URL]);
 
-  if (loading) return <div style={{ textAlign: 'center', padding: '100px' }}><Spin size="large" /></div>;
-  if (!blog) return <div style={{ textAlign: 'center', padding: '100px' }}>Blog not found</div>;
+  if (loading) return <div style={{ display: 'flex', height: '80vh', justifyContent: 'center', alignItems: 'center' }}><Spin size="large" description="Opening Design Details..." /></div>;
+  if (!blog) return <div style={{ textAlign: 'center', padding: '100px' }}><Title level={3}>Blog Not Found</Title></div>;
+
+  const breadcrumbItems = [
+    { title: <Link to="/">Home</Link> },
+    { title: <Link to="/blogs">Blog</Link> },
+    { title: blog.title }
+  ];
+
+  // Default Image if blog.image is empty
+  const displayImage = blog.image || "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
 
   return (
-    <div style={{ background: '#fff', minHeight: '100vh' }}>
-      {/* 1. Hero Banner with Image URL background */}
+    <div style={{ background: '#fff', minHeight: '100vh', paddingBottom: '60px' }}>
+      
+      {/* --- 1. BANNER SECTION (FIXED) --- */}
       <div style={{ 
-        height: '450px', 
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${blog.image})`,
+        height: '550px', 
+        backgroundImage: `linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url(${displayImage})`,
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         color: '#fff',
-        textAlign: 'center'
+        textAlign: 'center',
+        padding: '0 20px',
+        width: '100%'
       }}>
-        <Title level={1} style={{ color: '#fff', fontSize: '38px', padding: '0 20px' }}>{blog.title}</Title>
+        <Title level={1} style={{ color: '#fff', fontSize: '48px', maxWidth: '900px', marginBottom: '10px', textTransform: 'uppercase', fontWeight: '800' }}>
+          {blog.title}
+        </Title>
+        <Paragraph style={{ color: '#f0f0f0', fontSize: '20px', maxWidth: '750px', marginBottom: '25px', lineHeight: '1.6' }}>
+          {blog.description}
+        </Paragraph>
       </div>
 
-      <div style={{ padding: '30px 10%' }}>
-        <Breadcrumb style={{ marginBottom: '30px' }}>
-          <Breadcrumb.Item><Link to="/">Home</Link></Breadcrumb.Item>
-          <Breadcrumb.Item><Link to="/blogs">Blog</Link></Breadcrumb.Item>
-          <Breadcrumb.Item>{blog.title}</Breadcrumb.Item>
-        </Breadcrumb>
+      {/* --- 2. BREADCRUMB & CONTENT SECTION --- */}
+      <div style={{ padding: '50px 12%', maxWidth: '1400px', margin: '0 auto' }}>
+        <Breadcrumb items={breadcrumbItems} style={{ marginBottom: '50px', fontSize: '15px' }} />
 
-        {/* 3. Rendering HTML Code from Admin */}
+        {/* --- 3. PREMIUM ZIG-ZAG BODY DESIGN --- */}
         <div 
-          className="blog-main-body" 
-          style={{ fontSize: '18px', lineHeight: '1.8' }} 
+          className="blog-content-container" 
+          style={{ 
+            fontSize: '18px', 
+            lineHeight: '2.1', 
+            color: '#444',
+            fontFamily: "'Poppins', sans-serif"
+          }} 
           dangerouslySetInnerHTML={{ __html: blog.content }} 
         />
+        
+        <Divider style={{ margin: '80px 0' }} />
+        
+        {/* Footer CTA */}
+        <div style={{ textAlign: 'center', background: '#f9f9f9', padding: '50px', borderRadius: '20px' }}>
+          <Title level={3} style={{ marginBottom: '10px' }}>Want a similar design for your home?</Title>
+          <Paragraph style={{ color: '#777', fontSize: '16px', marginBottom: '30px' }}>Our experts at Urbane Living are just a call away from making your dream home a reality.</Paragraph>
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '20px' }}>
+            <Link to="/contact" style={{ background: '#ff3b30', color: '#fff', padding: '15px 35px', borderRadius: '8px', fontWeight: '700', boxShadow: '0 10px 20px rgba(255,59,48,0.3)' }}>
+              GET FREE QUOTE
+            </Link>
+            <Link to="/blogs" style={{ border: '2px solid #333', color: '#333', padding: '13px 35px', borderRadius: '8px', fontWeight: '700' }}>
+              BACK TO BLOGS
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
