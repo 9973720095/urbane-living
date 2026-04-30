@@ -26,6 +26,12 @@ import ContactPage from './pages/ContactPage';
 import BlogPage from './pages/BlogPage';
 import BlogDetails from './pages/BlogDetails';
 
+// --- NEW CATEGORY PAGES IMPORTED HERE ---
+import BedroomPage from './pages/BedroomPage';
+import LivingHallPage from './pages/LivingHallPage';
+import KitchenPage from './pages/KitchenPage';
+import WardrobePage from './pages/WardrobePage';
+
 const { Content } = Layout;
 
 // Layout content component
@@ -35,7 +41,6 @@ const LayoutContent = ({ children, handleOpen, isModalOpen, handleClose, onFinis
 
   return (
     <Layout style={{ background: '#fff' }}>
-      {/* Ab ye conditional check logic se handle hoga */}
       {!isAdminPage && showNotification && (
         <NotificationModal onClose={() => setShowNotification(false)} />
       )}
@@ -53,10 +58,8 @@ const LayoutContent = ({ children, handleOpen, isModalOpen, handleClose, onFinis
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // Notification modal ke liye state
   const [showNotification, setShowNotification] = useState(false);
 
-  // Persistence Logic: Sirf 1st bar dikhane ke liye
   useEffect(() => {
     const hasSeenModal = localStorage.getItem('urbane_notification_seen');
     if (!hasSeenModal) {
@@ -116,6 +119,13 @@ function App() {
           <Route path="/contact" element={<ContactPage onOpenForm={handleOpen} />} />
           <Route path="/blogs" element={<BlogPage />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
+
+          {/* --- NEW CATEGORY ROUTES ADDED HERE --- */}
+          <Route path="/bedroom" element={<BedroomPage />} />
+          <Route path="/living-hall" element={<LivingHallPage />} />
+          <Route path="/kitchen" element={<KitchenPage />} />
+          <Route path="/wardrobe" element={<WardrobePage />} />
+
         </Routes>
       </LayoutContent>
     </Router>

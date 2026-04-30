@@ -1,6 +1,6 @@
 import React from 'react';
 import { auth, provider } from '../firebase';
-import { signInWithPopup, signOut } from 'firebase/auth'; // signOut add kiya hai safety ke liye
+import { signInWithPopup, signOut } from 'firebase/auth'; 
 import { Button, Card, Typography, message } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -10,26 +10,22 @@ const { Title, Text } = Typography;
 const Login = () => {
   const navigate = useNavigate();
 
-  // Saban, ye hai aapka main Login function
   const handleGoogleLogin = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
 
-      // --- SECURITY CHECK START ---
-      // Yahan "your-email@gmail.com" ki jagah apna asli Gmail likhein
-      const adminEmail = "jhas08387@gmail.com"; 
+      // --- UPDATED SECURITY CHECK ---
+      // Ab yahan dono emails allowed hain
+      const allowedAdmins = ["jhas08387@gmail.com", "askabhi139@gmail.com"]; 
 
-      if (user.email === adminEmail) {
+      if (allowedAdmins.includes(user.email)) {
         message.success(`Welcome back, ${user.displayName}!`);
         navigate('/admin-dashboard'); 
       } else {
-        // Agar koi aur login karega, toh system use bahaar nikaal dega
         message.error("Access Denied! You are not an authorized admin.");
         await signOut(auth); 
       }
-      // --- SECURITY CHECK END ---
-
     } catch (error) {
       console.error(error);
       message.error("Login failed! Please check your connection.");
@@ -46,7 +42,6 @@ const Login = () => {
       position: 'relative',
       overflow: 'hidden'
     }}>
-      {/* Dark Blur Overlay for Modern Look */}
       <div style={{ 
         position: 'absolute', 
         width: '100%', 
@@ -56,11 +51,11 @@ const Login = () => {
       }}></div>
 
       <Card style={{ 
-        width: 420, 
+        width: '90%',
+        maxWidth: 420, 
         textAlign: 'center', 
         borderRadius: '28px', 
         background: 'rgba(255, 255, 255, 0.95)', 
-        border: '1px solid rgba(255, 255, 255, 0.3)',
         boxShadow: '0 25px 50px rgba(0,0,0,0.4)',
         position: 'relative',
         zIndex: 1
@@ -71,9 +66,7 @@ const Login = () => {
           style={{ width: 140, marginBottom: 20 }} 
         />
         <Title level={2} style={{ marginBottom: 5, color: '#001529' }}>Admin Portal</Title>
-        <Text type="secondary" style={{ fontSize: '15px' }}>
-          Secure access for Urbane Living management
-        </Text>
+        <Text type="secondary" style={{ fontSize: '15px' }}>Secure access for Urbane Living</Text>
         
         <div style={{ marginTop: 40, marginBottom: 25 }}>
           <Button 
@@ -86,22 +79,16 @@ const Login = () => {
                 height: 55, 
                 borderRadius: 14, 
                 background: '#000', 
-                border: 'none', 
                 fontSize: '17px', 
                 fontWeight: '600',
                 display: 'flex', 
                 alignItems: 'center', 
-                justifyContent: 'center',
-                boxShadow: '0 4px 15px rgba(0,0,0,0.2)'
+                justifyContent: 'center'
             }}
           >
             Continue with Google
           </Button>
         </div>
-        
-        <Text style={{ fontSize: '12px', color: '#999', letterSpacing: '0.5px' }}>
-          OFFICIAL USE ONLY • PROTECTED BY FIREBASE
-        </Text>
       </Card>
     </div>
   );

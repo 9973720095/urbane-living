@@ -9,12 +9,12 @@ const Hero = ({ onOpenForm }) => {
     { 
       id: 1, 
       title: "Trasform Your Home with Designer Ceiling by Urbane Living", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/v1775817803/Gemini_Generated_Image_e760mue760mue760_hs7raz.png" 
+      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364386/Gemini_Generated_Image_e760mue760mue760_hs7raz_kyrchr.webp" 
     },
     { 
       id: 2, 
       title: "Make a wow Statement with your ceiling", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1775818743/Gemini_Generated_Image_e760mue760mue760_1_aprjnf.png" 
+      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364630/UrbaneLivingHeroBanner_faocax.webp" 
     }
   ];
 

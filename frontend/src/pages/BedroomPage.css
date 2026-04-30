@@ -1,0 +1,56 @@
+/* Slider Styling */
+.hero-slider {
+  height: 550px;
+}
+
+.slider-item {
+  height: 550px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.slider-content h1 {
+  color: #fff !important;
+  font-size: 48px !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px;
+}
+
+.slider-content p {
+  color: #f0f0f0 !important;
+  font-size: 18px;
+}
+
+/* Reusing your Premium Card Logic for Equality */
+.bedroom-wrapper .premium-blog-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.bedroom-wrapper .card-blog-title {
+  min-height: 2.8em; /* Fixed for 2 lines */
+}
+
+.bedroom-wrapper .card-blog-desc {
+  min-height: 4.5em; /* Fixed for 3 lines */
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+  padding-bottom: 40px;
+}
+
+.view-link {
+  color: #ff3b30;
+  font-weight: 600;
+}
