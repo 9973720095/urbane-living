@@ -60,6 +60,11 @@
     width: 30%; height: auto;
   }
 }
+@media (max-width: 540px) {
+  .custom-header .logo img{
+    width: 50%; height: auto;
+  }
+}
 @media (max-width: 380px) {
   .custom-header .logo img{
     width: 50%; height: auto;
