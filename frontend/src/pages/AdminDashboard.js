@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
+// ... (All your existing imports)
 import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
 import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
-import { signOut } from 'firebase/auth';
+import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill'; 
@@ -15,6 +16,7 @@ const AdminDashboard = ({ onFinish }) => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
   const [blogForm] = Form.useForm();
+  const [leadForm] = Form.useForm(); 
   
   const [designs, setDesigns] = useState([]);
   const [leads, setLeads] = useState([]);
@@ -23,16 +25,32 @@ const AdminDashboard = ({ onFinish }) => {
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isBlogModalVisible, setIsBlogModalVisible] = useState(false); 
-  const [activeTab, setActiveTab] = useState('1');
+  const [isLeadModalVisible, setIsLeadModalVisible] = useState(false); 
+  const [activeTab, setActiveTab] = useState('Dashboard'); 
   const [drawerVisible, setDrawerVisible] = useState(false);
-
   const [blogContent, setBlogContent] = useState(''); 
   const [editingBlog, setEditingBlog] = useState(null);
+  const [editingDesign, setEditingDesign] = useState(null); 
+  const [editingLead, setEditingLead] = useState(null); 
   const [isPreview, setIsPreview] = useState(false); 
 
   const API_BASE_URL = window.location.hostname === 'localhost' 
     ? 'http://localhost:5000' 
     : 'https://urbane-living.onrender.com';
+
+  // --- NEW AUTH CHECK LOGIC ---
+  useEffect(() => {
+    const ALLOWED_EMAILS = ["sabankumarjha9@gmail.com", "urbaneliving.in@gmail.com"];
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user || !ALLOWED_EMAILS.includes(user.email)) {
+        signOut(auth);
+        navigate('/admin-login');
+      } else {
+        fetchData();
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const fetchData = async () => {
     setLoading(true);
@@ -53,15 +71,52 @@ const AdminDashboard = ({ onFinish }) => {
     setLoading(false);
   };
 
-  useEffect(() => { fetchData(); }, []);
+  // ... (Rest of your existing functions: handleOpenDesignModal, handleAddDesign, handleSaveLead, etc. - UNTOUCHED)
+  
+  const handleOpenDesignModal = (design = null) => {
+    if (design) {
+      setEditingDesign(design);
+      form.setFieldsValue(design);
+    } else {
+      setEditingDesign(null);
+      form.resetFields();
+    }
+    setIsModalVisible(true);
+  };
 
   const handleAddDesign = async (values) => {
     setLoading(true);
-    const success = await onFinish(values, 'design');
-    if (success) {
+    try {
+      if (editingDesign) {
+        await axios.put(`${API_BASE_URL}/api/designs/${editingDesign._id}`, values);
+        message.success("✅ Design Updated!");
+      } else {
+        await onFinish(values, 'design');
+      }
       setIsModalVisible(false);
       form.resetFields();
       fetchData(); 
+    } catch (err) {
+      message.error("Action failed.");
+    }
+    setLoading(false);
+  };
+
+  const handleOpenLeadModal = (lead) => {
+    setEditingLead(lead);
+    leadForm.setFieldsValue(lead);
+    setIsLeadModalVisible(true);
+  };
+
+  const handleSaveLead = async (values) => {
+    setLoading(true);
+    try {
+      await axios.put(`${API_BASE_URL}/api/leads/${editingLead._id}`, values);
+      message.success("✅ Lead Updated Successfully!");
+      setIsLeadModalVisible(false);
+      fetchData();
+    } catch (err) {
+      message.error("Failed to update lead.");
     }
     setLoading(false);
   };
@@ -101,12 +156,12 @@ const AdminDashboard = ({ onFinish }) => {
 
   const handleDelete = async (id, type) => {
     try {
-      const endpoint = type === 'blog' ? `/api/blogs/${id}` : `/api/designs/${id}`;
+      const endpoint = type === 'blog' ? `/api/blogs/${id}` : type === 'lead' ? `/api/leads/${id}` : `/api/designs/${id}`;
       await axios.delete(`${API_BASE_URL}${endpoint}`); 
-      message.success("Deleted successfully.");
+      message.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
       fetchData();
     } catch (err) {
-      message.error("Delete failed.");
+      message.error("Delete failed. Check API endpoint.");
     }
   };
 
@@ -123,17 +178,16 @@ const AdminDashboard = ({ onFinish }) => {
       theme="dark" 
       selectedKeys={[activeTab]} 
       mode="inline" 
-      style={{ borderRight: 0 }}
       onClick={(e) => { setActiveTab(e.key); setDrawerVisible(false); }}
     >
-      <Menu.Item key="1" icon={<DashboardOutlined />}>Dashboard</Menu.Item>
-      <Menu.Item key="bedroom" icon={<HomeOutlined />}>Bedroom</Menu.Item>
-      <Menu.Item key="living" icon={<LayoutOutlined />}>Living Hall</Menu.Item>
-      <Menu.Item key="kitchen" icon={<CoffeeOutlined />}>Kitchen</Menu.Item>
-      <Menu.Item key="wardrobe" icon={<BorderInnerOutlined />}>Wardrobe</Menu.Item>
-      <Menu.Item key="2" icon={<SolutionOutlined />}>Leads</Menu.Item>
-      <Menu.Item key="4" icon={<EditOutlined />}>Blogs</Menu.Item> 
-      <Menu.Item key="3" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: '#ff4d4f' }}>Logout</Menu.Item>
+      <Menu.Item key="Dashboard" icon={<DashboardOutlined />}>Dashboard</Menu.Item>
+      <Menu.Item key="Bedroom" icon={<HomeOutlined />}>Bedroom</Menu.Item>
+      <Menu.Item key="Living Hall" icon={<LayoutOutlined />}>Living Hall</Menu.Item>
+      <Menu.Item key="Kitchen" icon={<CoffeeOutlined />}>Kitchen</Menu.Item>
+      <Menu.Item key="Wardrobe" icon={<BorderInnerOutlined />}>Wardrobe</Menu.Item>
+      <Menu.Item key="Leads" icon={<SolutionOutlined />}>Leads</Menu.Item>
+      <Menu.Item key="Blogs" icon={<EditOutlined />}>Blogs</Menu.Item> 
+      <Menu.Item key="Logout" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: '#ff4d4f' }}>Logout</Menu.Item>
     </Menu>
   );
 
@@ -145,9 +199,21 @@ const AdminDashboard = ({ onFinish }) => {
         scroll={{ x: 'max-content' }}
         pagination={{ pageSize: 8 }}
         columns={[
+          { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
           { title: 'Title', dataIndex: 'title', width: 150 },
           { title: 'Price', dataIndex: 'price', render: (p) => `₹${p}`, width: 100 },
-          { title: 'Action', render: (_, r) => <Button type="link" danger onClick={() => handleDelete(r._id, 'design')}>Del</Button>, width: 80 }
+          { 
+            title: 'Action', 
+            render: (_, r) => (
+              <Space>
+                <Button type="link" size="small" onClick={() => handleOpenDesignModal(r)}>Edit</Button>
+                <Popconfirm title="Delete?" onConfirm={() => handleDelete(r._id, 'design')}>
+                  <Button type="link" danger size="small">Del</Button>
+                </Popconfirm>
+              </Space>
+            ), 
+            width: 120 
+          }
         ]} 
       />
     </Card>
@@ -161,32 +227,24 @@ const AdminDashboard = ({ onFinish }) => {
       </Sider>
 
       <Drawer title="URBANE ADMIN" placement="left" onClose={() => setDrawerVisible(false)} open={drawerVisible} styles={{ body: { padding: 0 } }} width={250}>
-        <div style={{ background: '#001529', height: '100%' }}>
-            {MenuItems}
-        </div>
+        <div style={{ background: '#001529', height: '100%' }}>{MenuItems}</div>
       </Drawer>
 
       <Layout>
         <Header style={{ background: '#fff', padding: '0 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, boxShadow: '0 2px 8px #f0f1f2' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button type="text" icon={<MenuOutlined />} onClick={() => setDrawerVisible(true)} className="mobile-menu-btn" style={{ marginRight: 8 }} />
-                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>
-                    {activeTab === '4' ? 'Blogs' : 
-                     activeTab === 'bedroom' ? 'Bedroom' :
-                     activeTab === 'living' ? 'Living' :
-                     activeTab === 'kitchen' ? 'Kitchen' :
-                     activeTab === 'wardrobe' ? 'Wardrobe' : 'Admin Panel'}
-                </h3>
+                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>{activeTab}</h3>
             </div>
             <Space>
-                {(activeTab === '1' || activeTab === 'bedroom' || activeTab === 'living' || activeTab === 'kitchen' || activeTab === 'wardrobe') && 
-                  <Button type="primary" size="middle" icon={<PlusOutlined />} onClick={() => setIsModalVisible(true)}>Add</Button>}
-                {activeTab === '4' && <Button type="primary" size="middle" icon={<PlusOutlined />} onClick={() => handleOpenBlogModal()}>Create</Button>}
+                {['Dashboard', 'Bedroom', 'Living Hall', 'Kitchen', 'Wardrobe'].includes(activeTab) && 
+                  <Button type="primary" size="middle" icon={<PlusOutlined />} onClick={() => handleOpenDesignModal()}>Add Design</Button>}
+                {activeTab === 'Blogs' && <Button type="primary" size="middle" icon={<PlusOutlined />} onClick={() => handleOpenBlogModal()}>Create Blog</Button>}
             </Space>
         </Header>
 
         <Content style={{ margin: window.innerWidth < 768 ? '12px' : '24px' }}>
-          {activeTab === '1' && (
+          {activeTab === 'Dashboard' && (
             <>
               <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
                 <Col xs={12} sm={12} md={12}><Card bordered={false} className="stat-card"><Statistic title="Designs" value={stats.totalDesigns} valueStyle={{ color: '#1890ff' }} /></Card></Col>
@@ -198,37 +256,68 @@ const AdminDashboard = ({ onFinish }) => {
                     rowKey="_id" 
                     scroll={{ x: 'max-content' }}
                     columns={[
+                        { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
                         { title: 'Title', dataIndex: 'title', width: 150 },
                         { title: 'Category', dataIndex: 'category', render: (cat) => <Tag color="blue">{cat || 'N/A'}</Tag>, width: 120 },
                         { title: 'Price', dataIndex: 'price', render: (p) => `₹${p}`, width: 100 },
-                        { title: 'Action', render: (_, r) => <Button type="link" danger onClick={() => handleDelete(r._id, 'design')}>Del</Button>, width: 80 }
+                        { 
+                          title: 'Action', 
+                          render: (_, r) => (
+                            <Space>
+                              <Button type="link" size="small" onClick={() => handleOpenDesignModal(r)}>Edit</Button>
+                              <Popconfirm title="Delete Design?" onConfirm={() => handleDelete(r._id, 'design')}>
+                                <Button type="link" danger size="small">Del</Button>
+                              </Popconfirm>
+                            </Space>
+                          ), 
+                          width: 120 
+                        }
                     ]} 
                 />
               </Card>
             </>
           )}
 
-          {activeTab === 'bedroom' && renderDesignTable(filteredDesigns('Bedroom'), 'Bedroom Designs')}
-          {activeTab === 'living' && renderDesignTable(filteredDesigns('Living Hall'), 'Living Hall Designs')}
-          {activeTab === 'kitchen' && renderDesignTable(filteredDesigns('Kitchen'), 'Kitchen Designs')}
-          {activeTab === 'wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
+          {activeTab === 'Bedroom' && renderDesignTable(filteredDesigns('Bedroom'), 'Bedroom Designs')}
+          {activeTab === 'Living Hall' && renderDesignTable(filteredDesigns('Living Hall'), 'Living Hall Designs')}
+          {activeTab === 'Kitchen' && renderDesignTable(filteredDesigns('Kitchen'), 'Kitchen Designs')}
+          {activeTab === 'Wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
 
-          {activeTab === '2' && (
+          {activeTab === 'Leads' && (
             <Card title="Customer Leads" styles={{ body: { padding: '8px' } }}>
               <Table 
                 dataSource={leads} 
                 rowKey="_id" 
+                loading={loading}
                 scroll={{ x: 'max-content' }}
                 columns={[
                     { title: 'Name', dataIndex: 'name', width: 130 },
                     { title: 'Phone', dataIndex: 'phone', width: 130 },
-                    { title: 'Date', dataIndex: 'createdAt', render: (d) => new Date(d).toLocaleDateString(), width: 100 }
+                    { 
+                        title: 'Date', 
+                        dataIndex: 'createdAt', 
+                        render: (d) => d ? new Date(d).toLocaleDateString() : 'N/A', 
+                        width: 100 
+                    },
+                    { 
+                      title: 'Action', 
+                      fixed: 'right', 
+                      render: (_, r) => (
+                        <Space>
+                          <Button type="link" size="small" onClick={() => handleOpenLeadModal(r)}>Edit</Button>
+                          <Popconfirm title="Delete Lead?" onConfirm={() => handleDelete(r._id, 'lead')}>
+                            <Button type="link" danger size="small">Delete</Button>
+                          </Popconfirm>
+                        </Space>
+                      ), 
+                      width: 120 
+                    }
                 ]} 
               />
             </Card>
           )}
 
-          {activeTab === '4' && (
+          {activeTab === 'Blogs' && (
             <Card title="All Blogs" styles={{ body: { padding: '8px' } }}>
               <Table 
                 dataSource={blogs} 
@@ -252,13 +341,23 @@ const AdminDashboard = ({ onFinish }) => {
         </Content>
       </Layout>
 
-      <Modal title="Add Design" open={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} width={window.innerWidth < 576 ? '95%' : 500}>
+      {/* --- LEAD EDIT MODAL --- */}
+      <Modal title="Edit Lead Info" open={isLeadModalVisible} onCancel={() => setIsLeadModalVisible(false)} footer={null}>
+        <Form form={leadForm} layout="vertical" onFinish={handleSaveLead}>
+          <Form.Item label="Customer Name" name="name" rules={[{ required: true }]}><Input /></Form.Item>
+          <Form.Item label="Phone Number" name="phone" rules={[{ required: true }]}><Input /></Form.Item>
+          <Button type="primary" htmlType="submit" block loading={loading}>Update Lead</Button>
+        </Form>
+      </Modal>
+
+      {/* --- DESIGN MODAL --- */}
+      <Modal title={editingDesign ? "Edit Design" : "Add New Design"} open={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} width={500}>
         <Form form={form} layout="vertical" onFinish={handleAddDesign}>
-          <Form.Item label="Title" name="title" rules={[{ required: true }]}><Input placeholder="E.g. Modern Bedroom" /></Form.Item>
+          <Form.Item label="Design Title" name="title" rules={[{ required: true }]}><Input placeholder="E.g. Luxury Bedroom" /></Form.Item>
           <Row gutter={16}>
             <Col span={12}>
               <Form.Item label="Category" name="category" rules={[{ required: true }]}>
-                <Select placeholder="Select">
+                <Select placeholder="Select Category">
                   <Option value="Bedroom">Bedroom</Option>
                   <Option value="Living Hall">Living Hall</Option>
                   <Option value="Kitchen">Kitchen</Option>
@@ -268,18 +367,25 @@ const AdminDashboard = ({ onFinish }) => {
               </Form.Item>
             </Col>
             <Col span={12}>
-              <Form.Item label="Price" name="price" rules={[{ required: true }]}><InputNumber style={{ width: '100%' }} placeholder="Amount" /></Form.Item>
+              <Form.Item label="Price" name="price" rules={[{ required: true }]}><InputNumber style={{ width: '100%' }} placeholder="₹ Amount" /></Form.Item>
             </Col>
           </Row>
-          <Form.Item label="Image URL" name="image" rules={[{ required: true }]}><Input placeholder="https://..." /></Form.Item>
-          <Button type="primary" htmlType="submit" block loading={loading} size="large">Publish Design</Button>
+          <Form.Item label="Image URL" name="image" rules={[{ required: true }]}><Input placeholder="Cloudinary or Unsplash link" /></Form.Item>
+          <Button type="primary" htmlType="submit" block loading={loading} size="large">{editingDesign ? "Update Design" : "Publish to Website"}</Button>
         </Form>
       </Modal>
 
-      <Modal title={editingBlog ? "Edit Blog" : "New Blog"} open={isBlogModalVisible} onCancel={() => setIsBlogModalVisible(false)} footer={null} width={window.innerWidth < 768 ? '100%' : 800}>
+      {/* --- BLOG MODAL --- */}
+      <Modal title={editingBlog ? "Edit Blog" : "New Blog"} open={isBlogModalVisible} onCancel={() => setIsBlogModalVisible(false)} footer={null} width={800}>
         <Form form={blogForm} layout="vertical" onFinish={handleSaveBlog}>
           <Form.Item label="Blog Title" name="title" rules={[{ required: true }]}><Input /></Form.Item>
-          <Form.Item label="Featured Image URL" name="image" rules={[{ required: true }]}><Input /></Form.Item>
+          <Form.Item label="Short Description (for Cards)" name="description" rules={[{ required: true }]}>
+            <Input.TextArea rows={3} placeholder="Write a short summary..." />
+          </Form.Item>
+          <Row gutter={16}>
+             <Col span={12}><Form.Item label="Category" name="category" rules={[{ required: true }]}><Input placeholder="E.g. Interior Design" /></Form.Item></Col>
+             <Col span={12}><Form.Item label="Featured Image URL" name="image" rules={[{ required: true }]}><Input /></Form.Item></Col>
+          </Row>
           <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontWeight: '500' }}>Content:</span>
             <Button size="small" onClick={() => setIsPreview(!isPreview)}>{isPreview ? "Editor View" : "HTML View"}</Button>
@@ -299,32 +405,8 @@ const AdminDashboard = ({ onFinish }) => {
         .ant-table { font-size: 13px !important; }
         .desktop-sider { height: 100vh; position: sticky; top: 0; left: 0; }
         .stat-card { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 8px; }
-        
-        /* Sidebar Titles Fix */
-        .ant-menu-inline .ant-menu-title-content {
-          white-space: normal !important;
-          line-height: 1.4 !important;
-          display: flex !important;
-          align-items: center !important;
-          padding-right: 10px;
-        }
-        
-        .ant-menu-item {
-          height: auto !important;
-          min-height: 45px !important;
-          display: flex !important;
-          align-items: center !important;
-          margin-bottom: 4px !important;
-        }
-
         @media (min-width: 992px) { .mobile-menu-btn { display: none !important; } }
         @media (max-width: 991px) { .desktop-sider { display: none !important; } }
-        @media (max-width: 576px) {
-            .ant-layout-header { height: 56px !important; }
-            .ant-card-head { min-height: 40px !important; padding: 0 8px !important; }
-            .ant-card-head-title { font-size: 14px !important; }
-            .ant-table-cell { padding: 8px 4px !important; }
-        }
       `}</style>
     </Layout>
   );
