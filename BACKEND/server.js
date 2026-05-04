@@ -26,6 +26,7 @@ app.use(cors({
   origin: [
     "https://ncr.urbaneliving.in",
     "http://ncr.urbaneliving.in",
+    "https://urbane-living.vercel.app",
     "http://localhost:3000",
     "http://localhost:5173"
   ],
