@@ -101,8 +101,6 @@ app.get('/api/leads', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-// Added Update Route for Leads
 app.put('/api/leads/:id', async (req, res) => {
     try {
         const updatedLead = await Lead.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -111,8 +109,6 @@ app.put('/api/leads/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-
-// Added Delete Route for Leads
 app.delete('/api/leads/:id', async (req, res) => {
     try {
         await Lead.findByIdAndDelete(req.params.id);
