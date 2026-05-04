@@ -23,9 +23,14 @@ const currentEnv = process.env.NODE_ENV || 'development';
    MIDDLEWARES
 ========================= */
 app.use(cors({
-    origin: ["https://urbaneliving.in", "http://urbaneliving.in", "http://localhost:3000"], 
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: [
+    "https://ncr.urbaneliving.in",
+    "http://ncr.urbaneliving.in",
+    "http://localhost:3000",
+    "http://localhost:5173"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true
 }));
 
 app.use(express.json({ limit: '50mb' }));
