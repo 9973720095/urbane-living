@@ -31,6 +31,10 @@ const CostEstimator = () => {
   const [material, setMaterial] = useState('Premium Gypsum');
   const [complexity, setComplexity] = useState(1.0); // 1.0: Basic, 1.2: Standard, 1.5: Luxury
   const [lightPoints, setLightPoints] = useState(10);
+  // WhatsApp Handler Function
+  const handleWhatsAppClick = () => {
+    window.open("https://wa.me/919560555103", "_blank");
+  };
 
   // Configuration Constants
   const materials = [
@@ -233,7 +237,7 @@ const CostEstimator = () => {
               <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 16, padding: '20px', marginTop: 35 }}>
                 <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
                   <FileProtectOutlined style={{ color: '#1890ff', fontSize: 20 }} />
-                  <Text style={{ color: '#fff', fontSize: 12 }}>Lifetime Anti-Crack Warranty</Text>
+                  <Text style={{ color: '#fff', fontSize: 12 }}>10 Year Anti-Crack Warranty</Text>
                 </div>
                 <div style={{ display: 'flex', gap: 12 }}>
                   <CheckCircleFilled style={{ color: '#52c41a', fontSize: 20 }} />
@@ -262,15 +266,10 @@ const CostEstimator = () => {
               <Button 
                 block 
                 icon={<WhatsAppOutlined />}
-                size="large" 
+                size="large" onClick={handleWhatsAppClick}
                 style={{ 
-                  height: 60, 
-                  borderRadius: 15, 
-                  marginTop: 15, 
-                  fontWeight: 600, 
-                  background: 'transparent',
-                  color: '#25d366',
-                  borderColor: '#25d366'
+                  height: 60, borderRadius: 15, marginTop: 15, fontWeight: 600,
+                   background: 'transparent',color: '#25d366', borderColor: '#25d366'
                 }}
               >
                 Chat with Expert

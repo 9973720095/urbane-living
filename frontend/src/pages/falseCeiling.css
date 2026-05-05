@@ -1,5 +1,5 @@
 .hero {
-  height: 70vh;
+  height: 80vh !important;
   background: url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6") center/cover;
 }
 @media (max-width: 767px) {

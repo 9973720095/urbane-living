@@ -1,52 +1,37 @@
 import React from 'react';
-import { Carousel, Button, Typography } from 'antd';
+import { Button, Typography } from 'antd';
 import './css/Hero.css';
 
 const { Title } = Typography;
 
 const Hero = ({ onOpenForm }) => {
-  const slides = [
-    { 
-      id: 1, 
-      title: "Trasform Your Home with Designer Ceiling by Urbane Living", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364386/Gemini_Generated_Image_e760mue760mue760_hs7raz_kyrchr.webp" 
-    },
-    { 
-      id: 2, 
-      title: "Make a wow Statement with your ceiling", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364630/UrbaneLivingHeroBanner_faocax.webp" 
-    }
-  ];
+  const videoUrl = "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1777887134/686515293530668d582b851e_69eb7d11a9d584fa9e636570_web_mp4_b0fd4u.mp4";
 
   return (
-    <Carousel className='hero_carousel'
-      dots={false} 
-      arrows={true} 
-      autoplay effect="fade">
-      {slides.map(slide => (
-        <div key={slide.id}>
-          <div className="hero-banner" style={{ 
-            backgroundImage: `url('${slide.img}')`,
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            height: '550px',
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center', 
-            textAlign: 'center', 
-            color: '#fff'
-          }}>
-            <div className="hero-content">
-              <Title style={{ color: '#7b42f5', fontSize: '52px' }}>{slide.title}</Title>
-              <p style={{fontSize: '18px', maxWidth: '750px', margin: '0 auto 30px' }}>
-                Elevate your living space with designer ceilings that reflect your signature style.
-              </p>
-              <Button className="explore-btn" onClick={onOpenForm}>Explore Package</Button>
-            </div>
-          </div>
-        </div>
-      ))}
-    </Carousel>
+    <div className="hero-video-wrapper">
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="hero-video-bg"
+        poster="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364630/UrbaneLivingHeroBanner_faocax.webp"
+      >
+        <source src={videoUrl} type="video/mp4" />
+      </video>
+
+      <div className="hero-overlay"></div>
+
+      <div className="hero-content-video">
+        <Title className="hero-title">Make a wow Statement with your ceiling</Title>
+        <p className="hero-subtitle">
+          Elevate your living space with designer ceilings that reflect your signature style.
+        </p>
+        <Button className="explore-btn" onClick={onOpenForm}>Explore Package</Button>
+      </div>
+
+      <div className="hero-gradient"></div>
+    </div>
   );
 };
 
