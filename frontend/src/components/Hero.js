@@ -23,11 +23,11 @@ const Hero = ({ onOpenForm }) => {
       <div className="hero-overlay"></div>
 
       <div className="hero-content-video">
-        <Title className="hero-title">Make a wow Statement with your ceiling</Title>
+        <Title className="hero-title">Get Your False Ceiling in <br /> <span className='homehero_special_txt'>Just 7 Days*</span></Title>
         <p className="hero-subtitle">
-          Elevate your living space with designer ceilings that reflect your signature style.
+          Click today move into your Dream Home Tomorrow.
         </p>
-        <Button className="explore-btn" onClick={onOpenForm}>Explore Package</Button>
+        <Button className="explore-btn" onClick={onOpenForm}>BOOK NOW</Button>
       </div>
 
       <div className="hero-gradient"></div>

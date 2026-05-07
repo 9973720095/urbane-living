@@ -56,7 +56,7 @@ const SpacesGrid = ({ onOpenForm }) => {
     <div className="spaces-section">
       <div className="section-header">
         <Title level={2}>
-          Click today, move into your <span className="purple-text">Dream Home Tomorrow.</span>
+          Make a wow Statement with <span className="purple-text"> Your Ceiling </span> that reflect your signature style.
         </Title>
       </div>
       

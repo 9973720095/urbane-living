@@ -67,7 +67,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
           <div className="btn-group">
             <Button type="primary" size="large" onClick={onOpenForm}>Get Free Design</Button>
             {/* Updated WhatsApp Button with Click Handler */}
-            <Button 
+            <Button className="fc_hero_second_btn"
               icon={<WhatsAppOutlined />} 
               size="large" 
               onClick={handleWhatsAppClick}
@@ -78,7 +78,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
         </div>
       </div>
 
-      <ThreeViews />
+      {/* <ThreeViews /> */}
       <CostEstimator />
 
       {/* FILTERS SECTION */}

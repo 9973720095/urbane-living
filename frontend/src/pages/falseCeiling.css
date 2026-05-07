@@ -95,3 +95,9 @@
 @media (max-width: 420px) {
   .filter-content .ant-row .ant-col{flex: 0 0 100%;max-width: 100%;}
 }
+@media (max-width: 356px) {
+  .fc_hero_second_btn {margin-left: 0px;}
+}
+@media (max-width: 340px) {
+  .fc_hero_second_btn {margin-top: 10px;}
+}

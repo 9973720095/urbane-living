@@ -46,6 +46,7 @@
   margin-bottom: 24px !important;
   text-transform: uppercase;
 }
+.homehero_special_txt{color: #ff9410;}
 
 .hero-subtitle {
   font-size: clamp(15px, 2vw, 18px);
