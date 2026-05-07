@@ -75,7 +75,7 @@ const Navbar = ({ onOpenForm }) => {
   >
     <source src="https://res.cloudinary.com/diosq0s7w/video/upload/v1777902877/12214_zxuypo.mp4" type="video/mp4" />
   </video> */}
-    <div className='logo-bg'></div>
+    {/* <div className='logo-bg'></div> */}
       </Link>
 
       {isPastHero ? (
