@@ -66,16 +66,6 @@ const Navbar = ({ onOpenForm }) => {
           alt="Urbane Living Logo" 
           className="navbar-logo-img relative z-10 w-[188px] h-auto block" 
         />
-       {/* <video 
-    autoPlay 
-    muted 
-    loop 
-    playsInline 
-    className="logo-bg"
-  >
-    <source src="https://res.cloudinary.com/diosq0s7w/video/upload/v1777902877/12214_zxuypo.mp4" type="video/mp4" />
-  </video> */}
-    {/* <div className='logo-bg'></div> */}
       </Link>
 
       {isPastHero ? (

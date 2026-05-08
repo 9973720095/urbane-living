@@ -16,7 +16,7 @@ const BlogPage = () => {
     ? 'http://localhost:5000' 
     : 'https://urbane-living.onrender.com';
 
-  const bannerImg = "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1776425437/WhatsApp_Image_2020-09-23_at_6.09.20_PM_zhqh4p.jpg";
+  const bannerImg = "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg";
 
   useEffect(() => {
     const fetchBlogs = async () => {

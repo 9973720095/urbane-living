@@ -1,6 +1,7 @@
 .hero {
   height: 80vh !important;
-  background: url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6") center/cover;
+  background: 
+  url("https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778242865/image-1114025171792937_zmhhby.jpg") center/cover;
 }
 @media (max-width: 767px) {
     .hero h1{

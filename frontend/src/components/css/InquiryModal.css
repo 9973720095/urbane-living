@@ -1,5 +1,83 @@
-.quick-inquiry h1.ant-typography.css-dev-only-do-not-override-ch9ese.css-var-root{
-    text-align: left;
-    font-size: 22px;
-    padding-bottom: 20px;
+/* Modal Overrides */
+.quick-inquiry-modern .ant-modal-content {
+    padding: 0 !important;
+    overflow: hidden;
+    border-radius: 15px;
+    border: none;
+}
+
+.modal-container {
+    display: flex;
+    min-height: 520px;
+}
+
+/* Background & Design for Left Side */
+.modal-image-side {
+    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
+                url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364630/UrbaneLivingHeroBanner_faocax.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 40px 25px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.side-title { color: #fff !important; font-weight: 800 !important; font-size: 32px !important; line-height: 1.2 !important; }
+.side-subtitle { color: #f0f0f0; font-size: 14px; letter-spacing: 0.5px; }
+
+/* Background & Font for Right Side (Match ref-1) */
+.modal-form-side {
+    background-color: #f9f7f2; /* Light beige/grey background as per reference image */
+    padding: 45px 35px;
+}
+
+.form-header h3 {
+    font-weight: 700 !important;
+    color: #333 !important;
+    margin-bottom: 25px !important;
+    font-family: 'Poppins', sans-serif; /* Clean font reference */
+}
+
+/* Form Item & Border styling */
+.ref-style-form .ant-form-item-label > label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.ref-style-form .ant-input, 
+.ref-style-form .ant-select-selector {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1.5px solid #d9d9d9 !important; /* Bottom border only style for cleaner look */
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    box-shadow: none !important;
+}
+
+.ref-style-form .ant-input:focus, 
+.ref-style-form .ant-select-focused .ant-select-selector {
+    border-bottom-color: #7b42f5 !important;
+}
+
+/* Button style */
+.ref-submit-btn {
+    background: #1a1a1a !important; /* Black/Dark button as per premium reference */
+    border: none !important;
+    height: 48px !important;
+    font-weight: 700 !important;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    border-radius: 4px !important;
+}
+
+.ref-submit-btn:hover {
+    background: #333 !important;
+    transform: translateY(-1px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-form-side { padding: 30px 20px; }
 }
