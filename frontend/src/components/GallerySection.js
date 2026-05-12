@@ -7,12 +7,12 @@ const { Title, Paragraph } = Typography;
 const GallerySection = () => {
   // Advanced Data Array
   const galleryData = [
-    { src: "https://urbaneliving.in/wp-content/uploads/2024/11/Functional-Comfort-Kitchen-12.webp", title: "Modular Kitchen", category: "Modern" },
-    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364898/Capture_0A2_turzho_qpffdo.webp", title: "Luxury Living", category: "Premium" },
-    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777365035/WhatsApp_Image_2020-09-22_at_1.16.34_PM_1_g0xszt_c6flzo.webp", title: "Minimalist Bedroom", category: "Cozy" },
-    { src: "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688", title: "Office Space", category: "Commercial" },
-    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777366021/WhatsApp_Image_2020-09-23_at_6.09.20_PM_zhqh4p_e8h6bn.webp", title: "False Ceiling", category: "Exclusive" },
-    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777366574/WhatsApp_Image_2020-09-22_at_1.06.25_PM_1_u1p5jh_arvloo.webp", title: "Dining Area", category: "Luxury" }
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png", title: "Living Ceiling", category: "Modern" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png", title: "Master Bedroom Ceiling", category: "Premium" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png", title: "Kid's Bedroom", category: "Cozy" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png", title: "Kitchen False Ceiling", category: "Commercial" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png", title: "False Ceiling", category: "Exclusive" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png", title: "Parents Room", category: "Luxury" }
   ];
 
   return (

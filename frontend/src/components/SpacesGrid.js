@@ -34,20 +34,20 @@ const SpacesGrid = ({ onOpenForm }) => {
     { 
       title: 'Elegant Living Spaces', 
       subtitle: 'Create a lasting first impression with designer ceilings that radiate warmth and luxury',
-      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1776425448/Capture_0A2_turzho.jpg' 
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583846/ChatGPT_Image_May_12_2026_11_24_56_AM_pz5pwk.png' 
     },
     { 
       title: 'Dreamy Bedroom Retrears', 
       subtitle: 'Experience ultimate comfort with ambient lighting and acoustic-friendly ceiling designs.',
-      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1776425442/WhatsApp_Image_2020-09-22_at_1.16.34_PM_wosi2t.jpg' },
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583846/ChatGPT_Image_May_12_2026_03_49_15_PM_spmdnr.png' },
     { 
       title: 'Gourmet Style Kitchens', 
       subtitle:'Bright, moisture-resistant, and modern ceilings designed to make your cooking space feel spacious.',
-      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777033122/unnamed_thrqhe.jpg' },
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583834/ChatGPT_Image_May_12_2026_02_59_43_PM_yelyl0.png' },
     { 
       title: 'Scenic Balcony Views', 
       subtitle: 'Weather-resistant and stylish finishes that turn your balcony into a perfect relaxation spot.',
-      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777033698/unnamed_1_hnspbk.jpg' }
+      img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583835/ChatGPT_Image_May_12_2026_03_14_44_PM_yqx31g.png' }
   ];
 
   if (!isClient) return null;

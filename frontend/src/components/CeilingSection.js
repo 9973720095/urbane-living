@@ -50,7 +50,7 @@ const CeilingSection = () => {
           className="hover-zoom"
           >
             <img 
-              src="/images/ceiling-main.png" 
+              src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583844/ChatGPT_Image_May_12_2026_03_41_27_PM_b3k2zz.png" 
               alt="Premium Ceiling Design" 
               style={{ 
                 width: '100%', 

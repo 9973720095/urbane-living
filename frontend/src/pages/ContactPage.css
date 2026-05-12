@@ -1,10 +1,12 @@
 .contact-page { background: #fdfdfd; min-height: 100vh; }
 
 .contact-hero {
-    background: #001529;
+    background: url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583844/ChatGPT_Image_May_12_2026_03_41_27_PM_b3k2zz.png');
     padding: 80px 20px 120px;
     text-align: center;
-    clip-path: ellipse(150% 100% at 50% 0%);
+    clip-path: ellipse(150% 100% at 50% 0%);height: 438px;
+    background-size: cover;
+    background-position: top;
 }
 
 .hero-title { color: white !important; font-size: 42px !important; margin: 0 !important; }
@@ -111,4 +113,7 @@
     .section-title { margin-bottom: 30px !important; }
     /* Aapka naya mobile padding fix */
     .working-locations-section .container { padding: 0px; }
+}
+@media (max-width: 540px) {
+    .contact-hero{height: 350px;}
 }

@@ -40,10 +40,12 @@ const InquiryModal = ({ isOpen, onClose }) => {
     >
       <Row className="modal-container">
         {/* Left Side Image - As per Reference */}
-        <Col xs={0} md={10} className="modal-image-side">
+        <Col xs={24} md={10} className="modal-image-side">
           <div className="image-content">
-             <Title level={2} className="side-title">Urbane<br/>Living</Title>
-             <Text className="side-subtitle">Design your space with experts</Text>
+            <img 
+              src='https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778232393/urbane-logo-transparent-icon-removebg-preview_jepdln.png' 
+              alt="form-img" 
+            />
           </div>
         </Col>
 
@@ -55,12 +57,12 @@ const InquiryModal = ({ isOpen, onClose }) => {
 
           <Form form={form} layout="vertical" onFinish={onFinish} className="ref-style-form">
             <Row gutter={12}>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item label="First Name" name="name" rules={[{ required: true }]}>
                   <Input placeholder="Name" />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email' }]}>
                   <Input placeholder="Email" />
                 </Form.Item>
@@ -68,12 +70,12 @@ const InquiryModal = ({ isOpen, onClose }) => {
             </Row>
 
             <Row gutter={12}>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item label="Mobile no" name="phone" rules={[{ required: true, pattern: /^[0-9]{10}$/ }]}>
                   <Input placeholder="Phone" />
                 </Form.Item>
               </Col>
-              <Col span={12}>
+              <Col span={24}>
                 <Form.Item label="State" name="state" rules={[{ required: true }]}>
                   <Select placeholder="State">
                     <Option value="Delhi">Delhi</Option>

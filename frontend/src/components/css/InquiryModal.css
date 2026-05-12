@@ -10,11 +10,18 @@
     display: flex;
     min-height: 520px;
 }
-
-/* Background & Design for Left Side */
+.ant-modal-container .ant-modal-close{
+    top: 25px;
+    right: 30px;
+    background: #fff;
+    border-radius: 16px;
+    width: 25px;
+    height: 25px;
+    color: #000;
+}
 .modal-image-side {
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777364630/UrbaneLivingHeroBanner_faocax.webp');
+                url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778563293/urbaneLiving_l2vjuj.png');
     background-size: cover;
     background-position: center;
     padding: 40px 25px;
@@ -22,7 +29,7 @@
     align-items: flex-start;
 }
 
-.side-title { color: #fff !important; font-weight: 800 !important; font-size: 32px !important; line-height: 1.2 !important; }
+.side-title { color: #fff !important; font-weight: 800 !important; font-size: 32px !important; line-height: 20px !important; }
 .side-subtitle { color: #f0f0f0; font-size: 14px; letter-spacing: 0.5px; }
 
 /* Background & Font for Right Side (Match ref-1) */

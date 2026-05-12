@@ -1,7 +1,7 @@
 .container-custom { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
 /* Hero */
-.about-hero { height: 70vh; min-height: 450px; background: url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1600&q=80'); background-size: cover; background-position: center; position: relative; }
+.about-hero { height: 70vh; min-height: 450px; background: url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_43_10_PM_nkp7lg.png'); background-size: cover; background-position: center; position: relative; }
 .hero-overlay-refined { background: rgba(0, 0, 0, 0.4); width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .hero-content-center { text-align: center; color: white; padding: 40px; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(10px); border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.2); max-width: 800px; }
 .brand-headline { font-size: clamp(2.5rem, 8vw, 5rem); font-weight: 900; color: white !important; text-transform: uppercase; line-height: 1; margin: 0; }
