@@ -80,7 +80,8 @@
 /* Subtitle lines control */
 .spaces-section .card-inner-body .card-subtitle {
     display: -webkit-box;
-    -webkit-line-clamp: 3; 
+    -webkit-line-clamp: 3;
+    line-clamp: 3; 
     -webkit-box-orient: vertical;  
     overflow: hidden;
     margin-bottom: 15px;
@@ -96,7 +97,7 @@
 
 /* Button hamesha bottom par rahega margin-top: auto ki wajah se */
 .quote-button {
-    background: #1890ff !important;
+    background: #f80000 !important;
     height: 45px !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
@@ -105,14 +106,17 @@
     width: 100%;
     color: white;
 }
-
+quote-button:hover {
+    background: #f80000 !important;
+    color: white !important;
+}
 /* Dots styling */
 .ant-carousel .slick-dots li button {
-    background: #7b42f5 !important;
+    background: #f80000 !important;
     opacity: 0.3;
 }
 
 .ant-carousel .slick-dots li.slick-active button {
-    background: #7b42f5 !important;
+    background: #f80000 !important;
     opacity: 1;
 }

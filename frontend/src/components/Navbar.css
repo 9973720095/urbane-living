@@ -78,9 +78,10 @@
 .custom-header.is-old ul li::after{
     bottom: 12px !important;
 }
-.custom-header.is-old .nav-right button{padding: 0 20px; height: 42px;}
+.custom-header.is-old .nav-right button{padding: 0 20px; height: 42px; background-color: red !important;}
 .custom-header.is-old .nav-right span{font-size: 15px;font-weight: 600;}
 
+.ant-drawer-body .ant-btn{background-color: red !important;}
 .desktop-menu {
   flex: 1;
   justify-content: center;

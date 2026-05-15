@@ -122,14 +122,24 @@ export default function FalseCeilingPage({ onOpenForm }) {
           {currentItems.map((item) => (
             <Col xs={12} sm={12} md={6} key={item._id || item.id}> 
               <Card 
-                hoverable
-                cover={<img src={item.image} alt={item.title} style={{ height: window.innerWidth < 576 ? 130 : 200, objectFit: 'cover' }} />}
-                bodyStyle={{ padding: '10px' }}
-              >
-                <h4 style={{ fontSize: '14px', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
-                <p style={{ fontWeight: "bold", color: '#1890ff', margin: '5px 0' }}>₹{item.price}/sqft</p>
-                <Button type="primary" block size="small" onClick={onOpenForm}>Get Quote</Button>
-              </Card>
+  hoverable
+  cover={<img src={item.image} alt={item.title} style={{ height: window.innerWidth < 576 ? 130 : 200, objectFit: 'cover' }} />}
+  bodyStyle={{ padding: '10px' }}
+>
+  <h4 style={{ fontSize: '14px', margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{item.title}</h4>
+  <p style={{ fontWeight: "bold", color: '#1890ff', margin: '5px 0' }}>₹{item.price}/sqft</p>
+  
+  {/* Button color updated to #FF0000 */}
+  <Button 
+    type="primary" 
+    block 
+    size="small" 
+    onClick={onOpenForm}
+    style={{ backgroundColor: '#FF0000', borderColor: '#FF0000' }}
+  >
+    Get Quote
+  </Button>
+</Card>
             </Col>
           ))}
         </Row>

@@ -117,6 +117,7 @@ export default function ContactPage({ onOpenForm }) {
                   size="large" 
                   icon={<MessageOutlined />} 
                   className="contact-submit-btn"
+                  style={{ backgroundColor: '#FF0000'}}
                   onClick={() => window.location.href = `sms:${phoneNumber}?body=Hello Urbane Living, I am interested in your services.`}
                 >
                   Send SMS Message

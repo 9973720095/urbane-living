@@ -73,10 +73,10 @@ const FooterContact = () => {
       {/* --- SOCIAL - EXACT LIKE REF-1 --- */}
       <div style={{ marginTop: "40px" }}>
         <div className="social-icons">
-          <a href="#">
+          <a href="https://www.facebook.com/urbaneliving.in">
             <FacebookFilled />
           </a>
-          <a href="#">
+          <a href="https://www.youtube.com/@urbaneliving-ncr">
             <YoutubeFilled />
           </a>
           <a href="#">

@@ -62,7 +62,7 @@ export default function AboutUsPage({ onOpenForm }) {
                 <div className="list-item"><CheckCircleFilled className="check-icon" /> Laser-level precision installation</div>
               </div>
               {/* Saban: Click par form open hoga */}
-              <Button type="primary" size="large" className="prime-btn" onClick={onOpenForm}>
+              <Button style={{ backgroundColor: '#FF0000'}} type="primary" size="large" className="prime-btn" onClick={onOpenForm}>
                 Explore Our Work
               </Button>
             </Col>

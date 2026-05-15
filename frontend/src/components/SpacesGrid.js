@@ -80,7 +80,7 @@ const SpacesGrid = ({ onOpenForm }) => {
                 <Paragraph type="secondary" className="card-subtitle">
                   {item.subtitle}
                 </Paragraph>
-                <Button type="primary" block onClick={onOpenForm} className="quote-button">
+                <Button  block onClick={onOpenForm} className="quote-button">
                   GET FREE QUOTE
                 </Button>
               </div>

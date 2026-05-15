@@ -9,10 +9,11 @@ const CeilingSection = () => {
       className="ceiling-section" 
       style={{ 
         padding: '80px 5%', // Mobile friendly padding
-        backgroundImage: "url('/images/marble-bg.png')", // Path updated
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
+        // backgroundImage: "url('/images/marble-bg.png')", // Path updated
+        // backgroundSize: 'cover',
+        // backgroundPosition: 'center',
+        // backgroundAttachment: 'fixed',
+        background: "rgb(235 235 235)",
         overflow: 'hidden'
       }}
     >

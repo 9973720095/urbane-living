@@ -10,9 +10,8 @@
 }
 
 .hero-title { color: white !important; font-size: 42px !important; margin: 0 !important; }
-.hero-subtitle { color: #8c8c8c; font-size: 18px; }
+.hero-subtitle { color: #000000; font-size: 18px; font-weight: 600;}
 
-/* Aapka updated padding change */
 .contact-container { margin-top: -70px; padding: 0 20px 20px; }
 
 .info-card { border-radius: 16px; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.06); transition: 0.3s; }
