@@ -8,28 +8,35 @@ const Hero = ({ onOpenForm }) => {
   const slides = [
     { 
       id: 1, 
-      title: "Get Your False Ceiling in Just 7 Days*", 
-      img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778762373/AQO8hYQEZeJXZRk2dob-Wm8mYUAdz8m0M6DNaQ0cgpOhN6T4KVjd0k_SxPE1iOFzHDdM1EGqrgNX3Z9gebC4mamYO0PBYMhgYMX95i8_eiqdcc.mp4"
+      title: <>Get Your False Ceiling in <span style={{ color: '#FF0000' }}>Just 7 Days*</span></>, 
+      img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4"
     },
-    { 
+    {
       id: 2, 
-      title: "Make a wow Statement with your ceiling", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583840/ChatGPT_Image_May_12_2026_03_30_19_PM_mp1xmh.png" 
+      title: <>Make a <span style={{ color: '#FF0000' }}>wow Statement</span> with your ceiling</>, 
+      img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846966/AQNHzwpwFyeQBl1fShnnPsNy3YfsgzRTAldYRiVOJY_FP4-CUXJvJR_4lwdAhitU4kF17i4k35Wvr2r8CTCrFICqWmV1LIyus9G2NMI_qudu19.mp4" 
     },
     { 
       id: 3, 
-      title: "Make a wow Statement with your ceiling", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583840/ChatGPT_Image_May_12_2026_03_30_11_PM_ksdh8h.png" 
+      title: <>Make a <span style={{ color: '#FF0000' }}>wow Statement</span> with your ceiling</>, 
+      img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846977/AQMIut8uyLZ2ImjMQcND2FjYafA-KGUlgXJrVxy1cC68xgtTed8f1iES_Ljg1kpCHagXZxCjMw9qRTtwHgXxm_BvBuN1behbl1mC8YY_m5e37i.mp4" 
     },
     { 
       id: 4, 
-      title: "Make a wow Statement with your ceiling", 
-      img: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_44_34_PM_pm4iga.png" 
+      title: <>Make a <span style={{ color: '#FF0000' }}>wow Statement</span> with your ceiling</>, 
+      img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846971/AQNqIaCU_-L4b5BOQTJLKgQS--Dum1Q4v5A_VsmLok7fcxrt0B7m8mnjduJVZOBeoKRQV_evQOl-oh-CAhZy26yyijtUaXsydmb4uoM_olmkpr.mp4" 
     }
   ];
 
   return (
-    <Carousel className='hero_carousel' dots={false} arrows={true} autoplay={true} effect="fade">
+    <Carousel 
+      className='hero_carousel' 
+      dots={false} 
+      arrows={true} 
+      autoplay={true} 
+      autoplaySpeed={5000} 
+      effect="fade"
+    >
       {slides.map(slide => {
         const isVideo = slide.img.endsWith('.mp4');
 
@@ -51,7 +58,11 @@ const Hero = ({ onOpenForm }) => {
               
               {isVideo && (
                 <video 
-                  autoPlay muted loop playsInline 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline 
+                  onCanPlayThrough={(e) => e.target.play()} 
                   style={{
                     position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: -1
                   }}

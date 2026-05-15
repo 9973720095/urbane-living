@@ -141,7 +141,7 @@ function App() {
       </div>
 
       <CeilingSection />
-      <MarketOfferings />
+      <MarketOfferings onOpenForm={handleOpen} />
       <GallerySection />
       <ProcessSection />
       <FaqSection />

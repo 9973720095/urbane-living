@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Typography } from 'antd';
+import { Row, Button, Col, Typography } from 'antd';
 import { 
   FormatPainterOutlined, 
   BuildOutlined, 
@@ -51,11 +51,11 @@ const offeringsData = [
   }
 ];
 
-const MarketOfferings = () => {
+const MarketOfferings = ({ onOpenForm }) => {
   return (
     <section className="offerings-section">
       <div className="offerings-header">
-        <Text className="offerings-tagline">Urbane Living Market Offerings</Text>
+        <Text className="offerings-tagline" style={{ color: '#FF0000'}}>Urbane Living Market Offerings</Text>
         <Title level={2} className="offerings-main-title">
           System solutions catering to need
         </Title>
@@ -64,7 +64,12 @@ const MarketOfferings = () => {
       <Row gutter={[24, 24]} className="offerings-grid">
         {offeringsData.map((item, index) => (
           <Col xs={24} sm={12} md={8} key={index}>
-            <div className="offering-modern-card" style={{ '--accent-color': item.color }}>
+            <div 
+              className="offering-modern-card" 
+              // Safe check add kiya hai: agar onOpenForm function hai tabhi call ho
+              onClick={() => typeof onOpenForm === 'function' && onOpenForm()} 
+              style={{ '--accent-color': item.color, cursor: 'pointer' }}
+            >
               <div className="offering-icon-box">
                 {item.icon}
               </div>
