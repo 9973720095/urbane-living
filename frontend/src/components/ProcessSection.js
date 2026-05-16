@@ -40,7 +40,7 @@ const ProcessSection = () => {
   return (
     <div className="process-container">
       <div className="process-header">
-        <Title level={1}>Gypsum False Ceiling in 7* days</Title>
+        <Title  level={1}>Gypsum False Ceiling in <span style={{ color: '#FF0000' }}>7* days</span></Title>
       </div>
 
       <Row gutter={[32, 40]} justify="center">
