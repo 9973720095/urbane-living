@@ -27,7 +27,7 @@ const CeilingSection = () => {
             <Text
               strong
               style={{
-                color: "red",
+                color: "#fecb29",
                 letterSpacing: "2px",
                 textTransform: "uppercase",
               }}
@@ -39,7 +39,7 @@ const CeilingSection = () => {
               style={{ fontSize: "clamp(28px, 4vw, 42px)", lineHeight: "1", marginTop: '0px' }}
             >
               The Art of Silence and Light: <br />
-              <span style={{ color: "red" }}>Signature Ceilings</span>
+              <span style={{ color: "#fecb29" }}>Signature Ceilings</span>
             </Title>
             <Paragraph
               style={{ fontSize: "18px", color: "#555", lineHeight: "1.8" }}

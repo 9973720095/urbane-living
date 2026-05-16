@@ -40,14 +40,13 @@ const ProcessSection = () => {
   return (
     <div className="process-container">
       <div className="process-header">
-        <Title  level={1}>Gypsum False Ceiling in <span style={{ color: '#FF0000' }}>7* days</span></Title>
+        <Title  level={1}>Gypsum False Ceiling in <span style={{ color: '#fecb29' }}>7* days</span></Title>
       </div>
 
       <Row gutter={[32, 40]} justify="center">
         {steps.map((step, index) => (
           <Col xs={24} sm={12} md={6} key={index}>
             <div className="step-card">
-              {/* Stage Circle with line logic in CSS */}
               <div className="stage-wrapper">
                 <div className="stage-circle">
                   <span className="stage-num">{step.stage}</span>

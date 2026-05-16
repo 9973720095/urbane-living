@@ -98,7 +98,7 @@
 
 /* Button hamesha bottom par rahega margin-top: auto ki wajah se */
 .quote-button {
-    background: #f80000 !important;
+    background: #eb595f !important;
     height: 45px !important;
     border-radius: 8px !important;
     font-weight: 600 !important;
@@ -108,16 +108,16 @@
     color: white;
 }
 quote-button:hover {
-    background: #f80000 !important;
+    background: #eb595f !important;
     color: white !important;
 }
 /* Dots styling */
 .ant-carousel .slick-dots li button {
-    background: #f80000 !important;
+    background: #eb595f !important;
     opacity: 0.3;
 }
 
 .ant-carousel .slick-dots li.slick-active button {
-    background: #f80000 !important;
+    background: #eb595f !important;
     opacity: 1;
 }
