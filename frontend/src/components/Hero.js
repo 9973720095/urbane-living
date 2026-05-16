@@ -82,7 +82,7 @@ const Hero = ({ onOpenForm }) => {
                 <p style={{ fontSize: '19px', maxWidth: '750px', margin: '0 auto 32px', color: 'rgba(255,255,255,0.95)', textShadow: '0 2px 10px rgba(0,0,0,0.6)', lineHeight: 1.6 }}>
                   Click today move into your Dream Home Tomorrow.
                 </p>
-                {/* <Button className="explore-btn" onClick={onOpenForm}>Explore Package</Button> */}
+                {<Button className="explore-btn" onClick={onOpenForm}>Explore Package</Button>}
               </div>
             </div>
           </div>

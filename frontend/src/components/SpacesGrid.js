@@ -50,7 +50,7 @@ const SpacesGrid = ({ onOpenForm }) => {
     <div className="spaces-section">
       <div className="section-header">
         <Title level={2}>
-          Make a wow Statement with <span style={{ color: '#fecb29' }}> Your Ceiling </span> that reflect your signature style.
+          Make a wow Statement with <span style={{ color: '#4267b2' }}> Your Ceiling </span> that reflect your signature style.
         </Title>
       </div>
       

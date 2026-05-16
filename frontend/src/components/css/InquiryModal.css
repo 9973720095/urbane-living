@@ -70,7 +70,7 @@
 
 /* Button style */
 .ref-submit-btn {
-    background: #1a1a1a !important; /* Black/Dark button as per premium reference */
+    background: #eb595f !important; /* Black/Dark button as per premium reference */
     border: none !important;
     height: 48px !important;
     font-weight: 700 !important;
@@ -80,8 +80,8 @@
 }
 
 .ref-submit-btn:hover {
-    background: #333 !important;
-    transform: translateY(-1px);
+    background: #eb595f !important;
+    
 }
 
 /* Responsive */

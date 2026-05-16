@@ -55,7 +55,7 @@ const MarketOfferings = ({ onOpenForm }) => {
   return (
     <section className="offerings-section">
       <div className="offerings-header">
-        <Text className="offerings-tagline" style={{ color: '#fecb29'}}>Urbane Living Market Offerings</Text>
+        <Text className="offerings-tagline" style={{ color: '#4267b2'}}>Urbane Living Market Offerings</Text>
         <Title level={2} className="offerings-main-title">
           System solutions catering to need
         </Title>

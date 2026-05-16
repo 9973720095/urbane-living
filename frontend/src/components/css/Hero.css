@@ -33,7 +33,7 @@
 
 /* === Hero Content Box === */
 .hero-content {
-  /* background: rgba(255, 255, 255, 0.12); */
+  background: rgba(255, 255, 255, 0.12);
   /* backdrop-filter: blur(4px); */
   padding: 40px 50px;
   border-radius: 20px;
