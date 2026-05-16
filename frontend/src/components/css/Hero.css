@@ -34,12 +34,12 @@
 /* === Hero Content Box === */
 .hero-content {
   background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(4px);
+  /* backdrop-filter: blur(4px); */
   padding: 40px 50px;
   border-radius: 20px;
   max-width: 900px;
   margin: 0 20px;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+  /* box-shadow: 0 20px 40px rgba(0,0,0,0.12); */
 }
 
 .hero-content h1 {
