@@ -68,12 +68,13 @@ const CostEstimator = () => {
   }, [area, material, complexity, lightPoints]);
 
   return (
-    <div style={{ padding: '60px 20px', background: '#fff' }}>
+    <div style={{ padding: '20px', background: '#fff' }}>
       <div style={{ maxWidth: 1200, margin: '0 auto' }}>
         
         {/* Header Section */}
         <div style={{ textAlign: 'center', marginBottom: 50 }}>
-          <Tag color="blue" icon={<CalculatorOutlined />} style={{ padding: '4px 12px', borderRadius: 4, marginBottom: 16 }}>
+          <Tag color="#FF0000" icon={<CalculatorOutlined />} style={{fontWeight: 700, letterSpacing: '0.5px',
+           padding: '4px 12px', borderRadius: 4, marginBottom: 16 }}>
             SMART PRICING ENGINE
           </Tag>
           <Title level={2} style={{ fontSize: '2.5rem', fontWeight: 800, margin: 0 }}>
@@ -108,8 +109,8 @@ const CostEstimator = () => {
                   step={10} 
                   value={area} 
                   onChange={setArea}
-                  trackStyle={{ background: '#1890ff', height: 6 }}
-                  handleStyle={{ borderColor: '#1890ff', height: 20, width: 20 }}
+                  trackStyle={{ background: '#FF0000', height: 6 }}
+                  handleStyle={{ borderColor: '#FF0000', height: 20, width: 20 }}
                 />
               </div>
 
@@ -125,7 +126,7 @@ const CostEstimator = () => {
                         onClick={() => setMaterial(m.name)}
                         style={{
                           background: material === m.name ? m.color : '#fff',
-                          border: `2px solid ${material === m.name ? '#1890ff' : '#e2e8f0'}`,
+                          border: `2px solid ${material === m.name ? '#FF0000' : '#e2e8f0'}`,
                           padding: '16px 10px',
                           borderRadius: 16,
                           textAlign: 'center',
@@ -134,7 +135,7 @@ const CostEstimator = () => {
                           height: '100%'
                         }}
                       >
-                        <BlockOutlined style={{ fontSize: 24, color: material === m.name ? '#1890ff' : '#94a3b8', marginBottom: 8 }} />
+                        <BlockOutlined style={{ fontSize: 24, color: material === m.name ? '#FF0000' : '#94a3b8', marginBottom: 8 }} />
                         <Text strong style={{ display: 'block', fontSize: 12 }}>{m.name}</Text>
                         <Text type="secondary" style={{ fontSize: 10 }}>₹{m.rate}/sqft</Text>
                       </div>
@@ -156,8 +157,8 @@ const CostEstimator = () => {
                           padding: '12px 20px',
                           borderRadius: 12,
                           border: '1.5px solid',
-                          borderColor: complexity === tier.value ? '#1890ff' : '#e2e8f0',
-                          background: complexity === tier.value ? '#e6f7ff' : '#fff',
+                          borderColor: complexity === tier.value ? '#FF0000' : '#e2e8f0',
+                          background: complexity === tier.value ? '#ffe6e6' : '#fff',
                           cursor: 'pointer',
                           display: 'flex',
                           justifyContent: 'space-between',
@@ -168,7 +169,7 @@ const CostEstimator = () => {
                           <Text strong style={{ display: 'block' }}>{tier.label}</Text>
                           <Text type="secondary" style={{ fontSize: 11 }}>{tier.sub}</Text>
                         </div>
-                        {complexity === tier.value && <CheckCircleFilled style={{ color: '#1890ff' }} />}
+                        {complexity === tier.value && <CheckCircleFilled style={{ color: '#FF0000' }} />}
                       </div>
                     ))}
                   </div>

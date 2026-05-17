@@ -8,6 +8,9 @@ const { Option } = Select;
 const InquiryModal = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();
 
+  // Dynamic States/Cities List
+  const locationOptions = ["Delhi", "Noida", "Ghaziabad", "Gurgaon", "Haryana", "Faridabad"];
+
   const onFinish = async (values) => {
     try {
       const response = await fetch('https://urbane-living.onrender.com/api/save-lead', {
@@ -78,9 +81,12 @@ const InquiryModal = ({ isOpen, onClose }) => {
               <Col span={24}>
                 <Form.Item label="State" name="state" rules={[{ required: true }]}>
                   <Select placeholder="State">
-                    <Option value="Delhi">Delhi</Option>
-                    <Option value="Bihar">Bihar</Option>
-                    <Option value="UP">UP</Option>
+                    {/* Fully Dynamic Option Rendering */}
+                    {locationOptions.map((location) => (
+                      <Option key={location} value={location}>
+                        {location}
+                      </Option>
+                    ))}
                   </Select>
                 </Form.Item>
               </Col>

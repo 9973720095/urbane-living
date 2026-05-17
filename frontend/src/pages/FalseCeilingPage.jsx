@@ -65,9 +65,9 @@ export default function FalseCeilingPage({ onOpenForm }) {
           <h1 style={{marginBottom: '20px'}}>Turn Your Home Luxury in 7 Days</h1>
           {/* <p>Premium False Ceiling Designs Starting ₹95/sqft</p> */}
           <div className="btn-group">
-            <Button type="primary" size="large" onClick={onOpenForm}>Get Free Design</Button>
+            <Button className="fc_hero_btn" type="primary" size="large" onClick={onOpenForm}>Get Free Design</Button>
             {/* Updated WhatsApp Button with Click Handler */}
-            <Button className="fc_hero_second_btn"
+            <Button className="fc_hero_btn"
               icon={<WhatsAppOutlined />} 
               size="large" 
               onClick={handleWhatsAppClick}

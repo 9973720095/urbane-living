@@ -35,7 +35,7 @@ const ProcessSection = () => {
   return (
     <div className="process-container">
       <div className="process-header">
-        <Title level={1}>Gypsum False Ceiling in <span style={{ color: '#4267b2' }}>7 Days*</span></Title>
+        <Title level={1}>Gypsum False Ceiling in <span style={{ color: '#FF0000' }}>7 Days*</span></Title>
       </div>
 
       <Row gutter={[32, 40]} justify="center">
@@ -62,7 +62,7 @@ const ProcessSection = () => {
                 
                 {/* 2. Agar video hai, toh direct bina broken image ke video chalegi */}
                 {step.video && (
-                  <div style={{widows: '100%'}} className="step-video-box">
+                  <div style={{width: '100%'}} className="step-video-box">
                     <video
                       src={step.video}
                       autoPlay

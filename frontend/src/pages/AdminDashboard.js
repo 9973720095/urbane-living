@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-//... (All your existing imports)
 import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
 import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
-import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
+import { signOut, onAuthStateChanged } from 'firebase/auth'; 
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
@@ -35,14 +34,13 @@ const AdminDashboard = ({ onFinish }) => {
   const [isPreview, setIsPreview] = useState(false);
 
   const API_BASE_URL = window.location.hostname === 'localhost'
-   ? 'http://localhost:5000'
+    ? 'http://localhost:5000'
     : 'https://urbane-living.onrender.com';
 
-  // --- NEW AUTH CHECK LOGIC ---
   useEffect(() => {
     const ALLOWED_EMAILS = ["sabankumarjha9@gmail.com", "urbaneliving.in@gmail.com", "jhas08387@gmail.com", "askabhi139@gmail.com"];
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user ||!ALLOWED_EMAILS.includes(user.email)) {
+      if (!user || !ALLOWED_EMAILS.includes(user.email)) {
         signOut(auth);
         navigate('/admin-login');
       } else {
@@ -70,8 +68,6 @@ const AdminDashboard = ({ onFinish }) => {
     }
     setLoading(false);
   };
-
-  //... (Rest of your existing functions: handleOpenDesignModal, handleAddDesign, handleSaveLead, etc. - UNTOUCHED)
 
   const handleOpenDesignModal = (design = null) => {
     if (design) {
@@ -138,7 +134,7 @@ const AdminDashboard = ({ onFinish }) => {
   const handleSaveBlog = async (values) => {
     setLoading(true);
     try {
-      const finalBlogData = {...values, content: blogContent };
+      const finalBlogData = { ...values, content: blogContent };
       if (editingBlog) {
         await axios.put(`${API_BASE_URL}/api/blogs/${editingBlog._id}`, finalBlogData);
         message.success("✅ Blog Updated Successfully!");
@@ -156,7 +152,7 @@ const AdminDashboard = ({ onFinish }) => {
 
   const handleDelete = async (id, type) => {
     try {
-      const endpoint = type === 'blog'? `/api/blogs/${id}` : type === 'lead'? `/api/leads/${id}` : `/api/designs/${id}`;
+      const endpoint = type === 'blog' ? `/api/blogs/${id}` : type === 'lead' ? `/api/leads/${id}` : `/api/designs/${id}`;
       await axios.delete(`${API_BASE_URL}${endpoint}`);
       message.success(`${type.charAt(0).toUpperCase() + type.slice(1)} deleted successfully.`);
       fetchData();
@@ -243,7 +239,7 @@ const AdminDashboard = ({ onFinish }) => {
             </Space>
         </Header>
 
-        <Content style={{ margin: window.innerWidth < 768? '12px' : '24px' }}>
+        <Content style={{ margin: window.innerWidth < 768 ? '8px' : '24px' }}>
           {activeTab === 'Dashboard' && (
             <>
               <Row gutter={[16, 16]} style={{ marginBottom: '24px' }}>
@@ -293,10 +289,13 @@ const AdminDashboard = ({ onFinish }) => {
                 columns={[
                     { title: 'Name', dataIndex: 'name', width: 130 },
                     { title: 'Phone', dataIndex: 'phone', width: 130 },
+                    { title: 'Email', dataIndex: 'email', width: 180 },
+                    { title: 'State/City', dataIndex: 'state', render: (state) => <Tag color="purple">{state || 'N/A'}</Tag>, width: 110 },
+                    { title: 'Property', dataIndex: 'propertyType', render: (prop) => <Tag color="orange">{prop || 'N/A'}</Tag>, width: 120 },
                     {
                         title: 'Date',
                         dataIndex: 'createdAt',
-                        render: (d) => d? new Date(d).toLocaleDateString() : 'N/A',
+                        render: (d) => d ? new Date(d).toLocaleDateString() : 'N/A',
                         width: 100
                     },
                     {
@@ -342,20 +341,34 @@ const AdminDashboard = ({ onFinish }) => {
       </Layout>
 
       {/* --- LEAD EDIT MODAL --- */}
-      <Modal title="Edit Lead Info" open={isLeadModalVisible} onCancel={() => setIsLeadModalVisible(false)} footer={null}>
+      <Modal title="Edit Lead Info" open={isLeadModalVisible} onCancel={() => setIsLeadModalVisible(false)} footer={null} width={window.innerWidth < 768 ? '95%' : 500}>
         <Form form={leadForm} layout="vertical" onFinish={handleSaveLead}>
           <Form.Item label="Customer Name" name="name" rules={[{ required: true }]}><Input /></Form.Item>
+          <Form.Item label="Email" name="email" rules={[{ type: 'email' }]}><Input /></Form.Item>
           <Form.Item label="Phone Number" name="phone" rules={[{ required: true }]}><Input /></Form.Item>
+          <Row gutter={16}>
+            <Col xs={12} sm={12}>
+              <Form.Item label="State/City" name="state"><Input /></Form.Item>
+            </Col>
+            <Col xs={12} sm={12}>
+              <Form.Item label="Property Type" name="propertyType">
+                <Select>
+                  <Option value="Residential">Residential</Option>
+                  <Option value="Commercial">Commercial</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
           <Button type="primary" htmlType="submit" block loading={loading}>Update Lead</Button>
         </Form>
       </Modal>
 
       {/* --- DESIGN MODAL --- */}
-      <Modal title={editingDesign? "Edit Design" : "Add New Design"} open={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} width={500}>
+      <Modal title={editingDesign ? "Edit Design" : "Add New Design"} open={isModalVisible} onCancel={() => setIsModalVisible(false)} footer={null} width={window.innerWidth < 768 ? '95%' : 500}>
         <Form form={form} layout="vertical" onFinish={handleAddDesign}>
           <Form.Item label="Design Title" name="title" rules={[{ required: true }]}><Input placeholder="E.g. Luxury Bedroom" /></Form.Item>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col xs={24} sm={12}>
               <Form.Item label="Category" name="category" rules={[{ required: true }]}>
                 <Select placeholder="Select Category">
                   <Option value="Bedroom">Bedroom</Option>
@@ -366,31 +379,31 @@ const AdminDashboard = ({ onFinish }) => {
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={12}>
+            <Col xs={24} sm={12}>
               <Form.Item label="Price" name="price" rules={[{ required: true }]}><InputNumber style={{ width: '100%' }} placeholder="₹ Amount" /></Form.Item>
             </Col>
           </Row>
           <Form.Item label="Image URL" name="image" rules={[{ required: true }]}><Input placeholder="Cloudinary or Unsplash link" /></Form.Item>
-          <Button type="primary" htmlType="submit" block loading={loading} size="large">{editingDesign? "Update Design" : "Publish to Website"}</Button>
+          <Button type="primary" htmlType="submit" block loading={loading} size="large">{editingDesign ? "Update Design" : "Publish to Website"}</Button>
         </Form>
       </Modal>
 
       {/* --- BLOG MODAL --- */}
-      <Modal title={editingBlog? "Edit Blog" : "New Blog"} open={isBlogModalVisible} onCancel={() => setIsBlogModalVisible(false)} footer={null} width={800}>
+      <Modal title={editingBlog ? "Edit Blog" : "New Blog"} open={isBlogModalVisible} onCancel={() => setIsBlogModalVisible(false)} footer={null} width={window.innerWidth < 768 ? '95%' : 800}>
         <Form form={blogForm} layout="vertical" onFinish={handleSaveBlog}>
           <Form.Item label="Blog Title" name="title" rules={[{ required: true }]}><Input /></Form.Item>
           <Form.Item label="Short Description (for Cards)" name="description" rules={[{ required: true }]}>
             <Input.TextArea rows={3} placeholder="Write a short summary..." />
           </Form.Item>
           <Row gutter={16}>
-             <Col span={12}><Form.Item label="Category" name="category" rules={[{ required: true }]}><Input placeholder="E.g. Interior Design" /></Form.Item></Col>
-             <Col span={12}><Form.Item label="Featured Image URL" name="image" rules={[{ required: true }]}><Input /></Form.Item></Col>
+             <Col xs={24} sm={12}><Form.Item label="Category" name="category" rules={[{ required: true }]}><Input placeholder="E.g. Interior Design" /></Form.Item></Col>
+             <Col xs={24} sm={12}><Form.Item label="Featured Image URL" name="image" rules={[{ required: true }]}><Input /></Form.Item></Col>
           </Row>
           <div style={{ marginBottom: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span style={{ fontWeight: '500' }}>Content:</span>
-            <Button size="small" onClick={() => setIsPreview(!isPreview)}>{isPreview? "Editor View" : "HTML View"}</Button>
+            <Button size="small" onClick={() => setIsPreview(!isPreview)}>{isPreview ? "Editor View" : "HTML View"}</Button>
           </div>
-          {isPreview? (
+          {isPreview ? (
             <Input.TextArea value={blogContent} onChange={(e) => setBlogContent(e.target.value)} style={{ height: '300px', fontFamily: 'monospace' }} />
           ) : (
             <div className="quill-wrapper">
@@ -405,8 +418,12 @@ const AdminDashboard = ({ onFinish }) => {
        .ant-table { font-size: 13px!important; }
        .desktop-sider { height: 100vh; position: sticky; top: 0; left: 0; }
        .stat-card { box-shadow: 0 4px 12px rgba(0,0,0,0.05); border-radius: 8px; }
-        @media (min-width: 992px) {.mobile-menu-btn { display: none!important; } }
-        @media (max-width: 991px) {.desktop-sider { display: none!important; } }
+       @media (min-width: 992px) {.mobile-menu-btn { display: none!important; } }
+       @media (max-width: 991px) {.desktop-sider { display: none!important; } }
+       @media (max-width: 576px) {
+         .ant-modal { max-width: 95vw!important; margin: 10px auto!important; }
+         .ant-form-item { marginBottom: 12px!important; }
+       }
       `}</style>
     </Layout>
   );

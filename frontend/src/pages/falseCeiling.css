@@ -31,14 +31,17 @@
 .overlay p{
   color: #000000;margin-bottom: 35px;font-size: 16px;
 }
-.fc_hero_second_btn{margin-left: 10px; background: #1677ff; color: #fff; border: none; font-weight: 600; border-radius: 8px;}
-.fc_hero_second_btn:hover{background: #0958d9; color: #fff;}
+.fc_hero_btn{margin-left: 10px; background: #FF0000; color: #fff; border: none !important; font-weight: 600; border-radius: 8px;}
+.fc_hero_btn:hover{background: #FF0000 !important; color: #fff !important;}
 .container {
   padding:40px;
 }
 /* 3D PANEL */
 .left-panel{flex-wrap: wrap;}
 
+.ant-slider-handle::after {
+  box-shadow: 0 0 0 var(--ant-slider-handle-line-width) #fe0b0b;
+}
 
 
 /* 🔥 FILTER SECTION (PREMIUM LOOK) */
@@ -105,8 +108,8 @@
   .filter-content .ant-row .ant-col{flex: 0 0 100%;max-width: 100%;}
 }
 @media (max-width: 356px) {
-  .fc_hero_second_btn {margin-left: 0px;}
+  .fc_hero_btn {margin-left: 0px;}
 }
 @media (max-width: 340px) {
-  .fc_hero_second_btn {margin-top: 10px;}
+  .fc_hero_btn {margin-top: 10px;}
 }

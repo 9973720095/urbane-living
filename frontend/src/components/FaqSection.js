@@ -36,7 +36,7 @@ const FaqSection = () => {
   ];
 
   return (
-    <div className="faq-wrapper" style={{ padding: '60px 0', background: '#fff' }}>
+    <div className="faq-wrapper" style={{ padding: '20px 0', background: '#fff' }}>
       <Row justify="center">
         <Col xs={22} md={20} lg={16}>
           <Title level={2} className="faq-main-title">FAQ's</Title>
