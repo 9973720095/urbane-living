@@ -9,8 +9,8 @@
 }
 .offerings-header h2{margin: 0px !important;}
 .offerings-tagline {
-  color: #0066b2;
-  font-weight: 600;
+  color: #0066b2 !important;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
   display: block;

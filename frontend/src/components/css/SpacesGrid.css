@@ -101,11 +101,12 @@
     background: #eb595f !important;
     height: 45px !important;
     border-radius: 8px !important;
-    font-weight: 600 !important;
+    font-weight: 700 !important;
     margin-top: auto !important; 
     border: none !important;
     width: 100%;
     color: white;
+    letter-spacing: 0.5px;
 }
 quote-button:hover {
     background: #eb595f !important;

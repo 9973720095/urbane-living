@@ -6,7 +6,7 @@
 
 .process-header {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .process-header h1 {
@@ -20,6 +20,7 @@
 }
 
 .step-card {
+    width: 100%;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -108,5 +109,11 @@
     }
     .step-img-box {
         max-width: 100%; /* Mobile par image full width ho jaye */
+    }
+       .process-header h1 {
+        font-size: 28px !important;
+    }
+    .step-card .step-content h4 {
+        font-size: 17px !important;
     }
 }

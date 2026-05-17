@@ -16,7 +16,6 @@ const ProcessSection = () => {
       stage: '02',
       heading: 'Board Installation',
       duration: 'Duration: 2 days',
-      // img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg',
       video: 'https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778576361/2c7180a8-ddac-41b8-a7a7-bd591f49e2ca_jiq66s.mp4'
     },
     {
@@ -32,15 +31,11 @@ const ProcessSection = () => {
       img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_42_01_PM_us9ay1.png'
     }
   ];
-      // img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'
-      // img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092389/WhatsApp_Image_2026-04-24_at_15.43.20_l17xdz.jpg'
-      // img: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777092660/WhatsApp_Image_2026-04-24_at_15.40.28_1_xucjet.jpg'
-
 
   return (
     <div className="process-container">
       <div className="process-header">
-        <Title  level={1}>Gypsum False Ceiling in <span style={{ color: '#4267b2' }}>7* days</span></Title>
+        <Title level={1}>Gypsum False Ceiling in <span style={{ color: '#4267b2' }}>7 Days*</span></Title>
       </div>
 
       <Row gutter={[32, 40]} justify="center">
@@ -60,9 +55,14 @@ const ProcessSection = () => {
               </div>
 
               <div className="step-img-box">
-                <img src={step.img} alt={step.heading} />
+                {/* 1. Condition laga di: Jab video na ho aur img ho, tabhi img tag render ho */}
+                {step.img && !step.video && (
+                  <img src={step.img} alt={step.heading} />
+                )}
+                
+                {/* 2. Agar video hai, toh direct bina broken image ke video chalegi */}
                 {step.video && (
-                  <div className="step-video-box mt-2">
+                  <div style={{widows: '100%'}} className="step-video-box">
                     <video
                       src={step.video}
                       autoPlay
@@ -70,6 +70,7 @@ const ProcessSection = () => {
                       muted
                       playsInline
                       className="w-full h-auto rounded-lg shadow-sm"
+                      style={{ objectFit: 'cover', width: '100%', height: '100%', display: 'block' }}
                     >
                       Your browser does not support the video tag.
                     </video>

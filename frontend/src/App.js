@@ -20,6 +20,7 @@ import Hero from './components/Hero';
 import SpacesGrid from './components/SpacesGrid';
 import CeilingSection from './components/CeilingSection';
 import ProcessSection from './components/ProcessSection';
+import CostEstimator from './components/FalseCeiling/CostEstimator';
 import FaqSection from './components/FaqSection';
 import FooterContact from './components/FooterContact';
 import InquiryModal from './components/InquiryModal';
@@ -144,6 +145,7 @@ function App() {
       <MarketOfferings onOpenForm={handleOpen} />
       <GallerySection />
       <ProcessSection />
+      <CostEstimator />
       <FaqSection />
     </>
   );

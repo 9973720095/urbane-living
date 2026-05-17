@@ -31,7 +31,8 @@
 .overlay p{
   color: #000000;margin-bottom: 35px;font-size: 16px;
 }
-.fc_hero_second_btn{margin-left: 10px;}
+.fc_hero_second_btn{margin-left: 10px; background: #1677ff; color: #fff; border: none; font-weight: 600; border-radius: 8px;}
+.fc_hero_second_btn:hover{background: #0958d9; color: #fff;}
 .container {
   padding:40px;
 }

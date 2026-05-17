@@ -117,14 +117,14 @@ export default function ContactPage({ onOpenForm }) {
                   size="large" 
                   icon={<MessageOutlined />} 
                   className="contact-submit-btn"
-                  style={{ backgroundColor: '#FF0000'}}
+                  style={{ backgroundColor: '#eb595f'}}
                   onClick={() => window.location.href = `sms:${phoneNumber}?body=Hello Urbane Living, I am interested in your services.`}
                 >
                   Send SMS Message
                 </Button>
                 
                 <p style={{ textAlign: 'center', marginTop: 15 }}>
-                  <Button type="link" onClick={onOpenForm}>Open Quick Quote Form</Button>
+                  <Button style={{ fontWeight: '700'}} type="link" onClick={onOpenForm}>Open Quick Quote Form</Button>
                 </p>
               </Form>
             </div>
