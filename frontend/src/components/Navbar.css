@@ -79,7 +79,7 @@
     bottom: 12px !important;
 }
 .custom-header.is-old .nav-right button{padding: 0 20px; 
-  height: 42px; background-color: #fff !important; letter-spacing: 0.5px;}
+  height: 42px; background-color: #eb595f !important; letter-spacing: 0.5px;}
 .custom-header.is-old .nav-right span{font-size: 15px;font-weight: 600;}
 
 .ant-drawer-body .ant-btn{background-color: #eb595f !important;}
@@ -204,10 +204,12 @@
   .drawer-menu-list { padding: 20px 24px; }
   .drawer-quote-btn { margin: 20px 24px 24px; width: auto;}
   .custom-drawer { width: 85vw !important; max-width: 340px; }
+   .custom-header.is-old .nav-right button{background-color: #f2e5eb !important;}
 }
 
 @media (max-width: 480px) {
   .custom-header { height: 64px !important; }
   /* .custom-header .logo img{ height: 40px; } */
   .custom-header.is-transparent .menu-trigger { font-size: 14px; padding: 6px 12px; }
+  .custom-header.is-old .nav-right button{background-color: #f2e5eb !important;}
 }
