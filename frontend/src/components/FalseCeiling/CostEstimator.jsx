@@ -246,7 +246,7 @@ const CostEstimator = () => {
                 </div>
               </div>
 
-              <Button 
+              {/* <Button 
                 block 
                 type="primary" 
                 size="large" 
@@ -262,7 +262,7 @@ const CostEstimator = () => {
                 }}
               >
                 Get Full PDF Breakdown
-              </Button>
+              </Button> */}
 
               <Button 
                 block 
