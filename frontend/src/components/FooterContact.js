@@ -76,7 +76,7 @@ const FooterContact = () => {
         </div>
       </div>
 
-      {/* Links Section */}
+      
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
         <Row gutter={[32, 32]}>
           <Col xs={12} sm={6}>
@@ -125,7 +125,6 @@ const FooterContact = () => {
 
       <Divider style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '40px 0 24px' }} />
 
-      {/* Social + Copyright */}
       <div style={{ 
         maxWidth: '1200px', 
         margin: '0 auto',
