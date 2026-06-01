@@ -114,10 +114,10 @@ const FooterContact = () => {
               <a href="tel:+919560555103" style={linkStyle}>
                 <PhoneFilled style={{ marginRight: '8px' }} />+91 95605 55103
               </a>
-              <a href="mailto:urbaneofficial@gmail.com" style={linkStyle}>
-                <MailOutlined style={{ marginRight: '8px' }} />urbaneofficial@gmail.com
+              <a href="mailto:urbanelivingofficial@gmail.com" style={linkStyle}>
+                <MailOutlined style={{ marginRight: '8px' }} />urbanelivingofficial@gmail.com
               </a>
-              <Text style={linkStyle}>Faridabad, Haryana</Text>
+              <Text style={linkStyle}>Express Green Plaza , Sector-1, Vaishali, Ghaziabad</Text>
             </div>
           </Col>
         </Row>
