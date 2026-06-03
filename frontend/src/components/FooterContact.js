@@ -85,6 +85,7 @@ const FooterContact = () => {
               <Link to="/about" style={linkStyle}>About Us</Link>
               <Link to="/contact" style={linkStyle}>Contact</Link>
               <Link to="/blogs" style={linkStyle}>Blogs</Link>
+              <Link to="/estimate" style={linkStyle}>Estimate</Link>
             </div>
           </Col>
 

@@ -37,6 +37,7 @@ import BedroomPage from './pages/BedroomPage';
 import LivingHallPage from './pages/LivingHallPage';
 import KitchenPage from './pages/KitchenPage';
 import WardrobePage from './pages/WardrobePage';
+import Estimate from './pages/Estimate';
 
 const { Content } = Layout;
 
@@ -117,6 +118,7 @@ function App() {
           <Route path="/about" element={<AboutUsPage onOpenForm={handleOpen} />} />
           <Route path="/contact" element={<ContactPage onOpenForm={handleOpen} />} />
           <Route path="/blogs" element={<BlogPage />} />
+          <Route path="/estimate" element={<Estimate />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/bedroom" element={<BedroomPage />} />
           <Route path="/living-hall" element={<LivingHallPage />} />

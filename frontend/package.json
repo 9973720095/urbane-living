@@ -21,6 +21,7 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^7.14.1",
     "react-scripts": "^5.0.1",
+    "react-to-print": "^3.3.0",
     "three": "^0.183.2",
     "web-vitals": "^2.1.4"
   },
