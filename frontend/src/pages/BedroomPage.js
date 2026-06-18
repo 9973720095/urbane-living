@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import '.././pages/BedroomPage.css';
 
 const BedroomPage = () => {
     const [designs, setDesigns] = useState([]);
@@ -11,8 +12,10 @@ const BedroomPage = () => {
     }, []);
 
     return (
-        <div className="container py-5">
-            <h2 className="text-center mb-4">Bedroom Designs</h2>
+        <div className="container bedroom-container py-5">
+            <div className="coming_soon">
+                <h2 className="text-center mb-4">Bedroom Interiors</h2>
+            </div>
             <div className="row">
                 {designs.map((item) => (
                     <div className="col-md-4 mb-4" key={item._id}>

@@ -26,6 +26,11 @@
 }
 
 /* Reusing your Premium Card Logic for Equality */
+.bedroom-container{
+  margin: 20px auto !important;
+}
+.bedroom-container h2{text-align: center;}
+
 .bedroom-wrapper .premium-blog-card {
   display: flex;
   flex-direction: column;
@@ -42,7 +47,7 @@
 .bedroom-wrapper .card-blog-desc {
   min-height: 4.5em; /* Fixed for 3 lines */
 }
-
+.coming_soon {}
 .pagination-container {
   display: flex;
   justify-content: center;

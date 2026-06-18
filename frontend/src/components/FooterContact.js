@@ -112,8 +112,8 @@ const FooterContact = () => {
           <Col xs={12} sm={6}>
             <Title level={5} style={{ color: '#fff', marginBottom: '16px' }}>Connect</Title>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-              <a href="tel:+919560555103" style={linkStyle}>
-                <PhoneFilled style={{ marginRight: '8px' }} />+91 95605 55103
+              <a href="tel:+91-08062987240" style={linkStyle}>
+                <PhoneFilled style={{ marginRight: '8px' }} />+91-08062987240
               </a>
               <a href="mailto:urbanelivingofficial@gmail.com" style={linkStyle}>
                 <MailOutlined style={{ marginRight: '8px' }} />urbanelivingofficial@gmail.com

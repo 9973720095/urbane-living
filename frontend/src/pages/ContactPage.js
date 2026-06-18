@@ -15,7 +15,7 @@ const { Title, Text } = Typography;
 export default function ContactPage({ onOpenForm }) {
   const phoneNumber = "+919560555103";
   const whatsappNumber = "919560555103";
-  const emailAddress = "saban.urbaneliving@gmail.com";
+  const emailAddress = "urbanelivingofficial@gmail.com";
 
   // Creative Location Data
   const locations = [
