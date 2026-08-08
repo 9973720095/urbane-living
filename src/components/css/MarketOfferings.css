@@ -1,0 +1,95 @@
+.offerings-section {
+  padding: 55px 10%;
+  background-color: #f8f9fa;
+  text-align: center;
+}
+
+.offerings-header {
+  margin-bottom: 30px;
+}
+.offerings-header h2{margin: 0px !important;}
+.offerings-tagline {
+  color: #0066b2;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.offerings-main-title {
+  font-size: 36px !important;
+  font-weight: 800 !important;
+  color: #222;
+}
+
+/* Modern Card Layout */
+.offering-modern-card {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 20px;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+
+.offering-modern-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-color);
+}
+
+.offering-icon-box {
+  font-size: 40px;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  background: #f0f4f8;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.offering-modern-card:hover .offering-icon-box {
+  background: var(--accent-color);
+  color: #fff;
+}
+
+.offering-text h4 {
+  margin-bottom: 12px !important;
+  font-weight: 700 !important;
+}
+
+/* Decorative Background element */
+.card-decoration {
+  position: absolute;
+  bottom: -20px;
+  right: -20px;
+  width: 80px;
+  height: 80px;
+  background: var(--accent-color);
+  opacity: 0.05;
+  border-radius: 50%;
+  z-index: -1;
+  transition: all 0.4s ease;
+}
+
+.offering-modern-card:hover .card-decoration {
+  transform: scale(3);
+  opacity: 0.03;
+}
+
+@media (max-width: 768px) {
+  .offerings-section {
+    padding: 60px 20px;
+  }
+}

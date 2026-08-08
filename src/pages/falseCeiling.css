@@ -1,0 +1,111 @@
+.hero {
+  height: 80vh !important;
+  background: 
+  url("https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png") center/cover;
+}
+@media (max-width: 767px) {
+    .hero h1{
+        font-size: 1.8rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    .hero p{
+        font-size: 1.2rem !important;
+    }
+    .btn-group{flex-wrap: wrap;}
+    .hero .overlay{padding: 20px;}
+}
+
+.overlay {
+  height: 100%;
+  color: #000000;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.overlay h1 {
+  font-size: 1.6rem;
+  font-weight: 800;
+  margin-bottom: 0px; color: #000000;
+}
+.overlay p{
+  color: #000000;margin-bottom: 35px;font-size: 16px;
+}
+.fc_hero_second_btn{margin-left: 10px;}
+.container {
+  padding:40px;
+}
+/* 3D PANEL */
+.left-panel{flex-wrap: wrap;}
+
+
+
+/* 🔥 FILTER SECTION (PREMIUM LOOK) */
+.filters {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 30px 20px;
+  background: linear-gradient(to right, #f8f9fa, #eef2f3);
+  border-radius: 12px;
+  margin: 30px;
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.6);
+}
+
+/* ANT SELECT CUSTOM STYLE */
+.filters .ant-select {
+  width: 200px;
+  transition: all 0.3s ease;
+}
+
+/* HOVER EFFECT */
+.filters .ant-select:hover .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+/* FOCUS EFFECT */
+.filters .ant-select-focused .ant-select-selector {
+  border-color: #1890ff !important;
+  box-shadow: 0 0 10px rgba(24, 144, 255, 0.4);
+}
+
+/* SELECT BOX BASE STYLE */
+.filters .ant-select-selector {
+  border-radius: 8px !important;
+  height: 45px !important;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+/* DROPDOWN STYLE */
+.ant-select-dropdown {
+  border-radius: 10px !important;
+  overflow: hidden;
+}
+
+/* DROPDOWN ITEM HOVER */
+.ant-select-item-option:hover {
+  background: #e6f7ff !important;
+}
+
+/* 🔥 OPTIONAL: ACTIVE SELECT GLOW */
+.filters .ant-select-selector:active {
+  transform: scale(0.98);
+}
+@media (max-width: 767px) {
+  .filters{flex-direction: column;gap:0px;}
+}
+@media (max-width: 420px) {
+  .filter-content .ant-row .ant-col{flex: 0 0 100%;max-width: 100%;}
+}
+@media (max-width: 356px) {
+  .fc_hero_second_btn {margin-left: 0px;}
+}
+@media (max-width: 340px) {
+  .fc_hero_second_btn {margin-top: 10px;}
+}
