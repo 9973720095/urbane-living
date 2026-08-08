@@ -1,0 +1,102 @@
+.gallery-wrapper {
+    padding: 20px 5%;
+    background: #fdfdfd;
+}
+
+.gallery-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.gallery-title {
+    font-size: 38px !important;
+    font-weight: 800 !important;
+    letter-spacing: 2px;
+    margin-bottom: 5px !important;
+    color: #001529;
+}
+
+.title-underline {
+    width: 60px;
+    height: 4px;
+    background: #eb595f;
+    margin: 10px auto 20px;
+    border-radius: 2px;
+}
+
+.gallery-subtitle {
+    color: #8c8c8c;
+    font-size: 16px;
+    max-width: 600px;
+    margin: 0 auto !important;
+}
+
+/* Card Styling */
+.gallery-card {
+    border-radius: 20px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+}
+
+.image-container {
+    position: relative;
+    height: 320px;
+    overflow: hidden;
+}
+
+.gallery-main-img {
+    width: 100% !important;
+    height: 320px !important;
+    object-fit: cover !important;
+    transition: transform 0.6s ease !important;
+}
+
+.gallery-card:hover .gallery-main-img {
+    transform: scale(1.1);
+}
+
+/* Hover Mask */
+.custom-mask {
+    font-weight: 600;
+    letter-spacing: 1px;
+    background: rgba(0, 21, 41, 0.6);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Details Overlay */
+.item-details {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.item-title {
+    color: white;
+    margin: 8px 0 0;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.category-tag {
+    border-radius: 4px !important;
+    font-weight: 500;
+}
+
+/* Mobile View */
+@media (max-width: 768px) {
+    .gallery-wrapper { padding: 40px 20px; }
+    .gallery-title { font-size: 28px !important; }
+    .image-container { height: 250px; }
+    .gallery-main-img { height: 250px !important; }
+}
