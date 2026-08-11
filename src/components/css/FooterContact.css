@@ -25,10 +25,11 @@
   text-decoration: none;
 }
 
-.footer-contact .social-icons a:hover {
-  background: #1a202c;
-  transform: translateY(-2px);
-}
+/* Brand Theme Colors on Hover */
+.footer-contact .social-icons a:nth-child(1){ background: #1877f2; transform: translateY(-2px); } /* Facebook */
+.footer-contact .social-icons a:nth-child(2){ background: #ff0000; transform: translateY(-2px); } /* YouTube */
+.footer-contact .social-icons a:nth-child(3){ background: #000000; transform: translateY(-2px); } /* Twitter/X */
+.footer-contact .social-icons a:nth-child(4){ background: #E1306C; transform: translateY(-2px); } /* Instagram */
 
 /* Mobile */
 @media (max-width: 480px) {

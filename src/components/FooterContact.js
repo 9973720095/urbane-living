@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Typography } from 'antd';
+import { Link } from 'react-router-dom'; // Route connect karne ke liye
 import {
   PhoneFilled,
   WhatsAppOutlined,
@@ -70,7 +71,7 @@ const FooterContact = () => {
         </Button>
       </div>
 
-      {/* --- SOCIAL - EXACT LIKE REF-1 --- */}
+      {/* --- SOCIAL ICONS --- */}
       <div style={{ marginTop: "40px" }}>
         <div className="social-icons">
           <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/urbaneliving.in">
@@ -87,22 +88,17 @@ const FooterContact = () => {
           </a>
         </div>
       </div>
+
+      {/* --- NEW POLICY LINKS ROW --- */}
+      <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
+        <Link to="/terms" style={{ color: "#333" }}>Terms & Conditions</Link>
+        <Link to="/support" style={{ color: "#333" }}>Support page</Link>
+        <Link to="/shipping" style={{ color: "#333" }}>Shipping & Delivery</Link>
+        <Link to="/refund" style={{ color: "#333" }}>Refund Policy</Link>
+        <Link to="/privacy" style={{ color: "#333" }}>Privacy Policy</Link>
+      </div>
     </div>
   );
-};
-
-const iconStyle = {
-  width: '36px',
-  height: '36px',
-  background: '#2d3748',
-  color: '#fff',
-  borderRadius: '50%',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  fontSize: '16px',
-  transition: 'all 0.2s',
-  textDecoration: 'none'
 };
 
 export default FooterContact;

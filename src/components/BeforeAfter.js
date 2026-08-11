@@ -59,15 +59,11 @@ const BeforeAfter = () => {
         >
           {/* Background / After View (Video) */}
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            >
-              <source src="https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4" type="video/mp4" />
-            </video>
+           <img 
+              src="https://res.cloudinary.com/diosq0s7w/image/upload/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png" 
+              alt="Before" 
+              style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '1000px', height: '100%', objectFit: 'cover', maxWidth: 'none' }} 
+            />
           </div>
 
           {/* Foreground / Before View (Clipped) */}
@@ -82,7 +78,7 @@ const BeforeAfter = () => {
             borderRight: '3px solid #ffffff'
           }}>
             <img 
-              src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" 
+              src="https://res.cloudinary.com/diosq0s7w/image/upload/v1786447286/UrbaneBefore_img_qemvxm.png" 
               alt="Before" 
               style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '1000px', height: '100%', objectFit: 'cover', maxWidth: 'none' }} 
             />
@@ -117,7 +113,7 @@ const BeforeAfter = () => {
             fontWeight: 600,
             color: '#333'
           }}>
-            <span>✨ Scratch to see the transformation</span>
+            <span>✨Slide to see the transformation</span>
           </div>
 
         </div>
