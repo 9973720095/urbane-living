@@ -15,6 +15,7 @@ import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 
 // Components & Pages imports
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SpacesGrid from './components/SpacesGrid';
@@ -36,16 +37,11 @@ import LivingHallPage from './pages/LivingHallPage';
 import KitchenPage from './pages/KitchenPage';
 import WardrobePage from './pages/WardrobePage';
 import ClientStories from './components/ClientStories';
-
-// --- IMPORT NEW POLICY PAGES HERE ---
-// Make sure these files exist in your 'pages' folder
 import TermsConditionPage from './pages/TermsConditionPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
-// Support page ka link tha, agar uska alag page hai toh import karein,
-// warna filhal ke liye ise comment ya remove kar sakte hain.
-// import SupportPage from './pages/SupportPage'; 
+import SupportPage from './pages/SupportPage';
 
 
 const { Content } = Layout;
@@ -294,6 +290,7 @@ function App() {
   return (
     <Router>
 
+      <ScrollToTop />
       <LayoutContent
         handleOpen={handleOpen}
         isModalOpen={isModalOpen}
@@ -367,7 +364,6 @@ function App() {
             element={<WardrobePage />}
           />
 
-          {/* --- ADDED ROUTES FOR POLICY PAGES --- */}
           <Route 
             path="/terms" 
             element={<TermsConditionPage />} 
@@ -384,9 +380,11 @@ function App() {
             path="/shipping" 
             element={<ShippingPolicyPage />} 
           />
-          {/* Agar Support page ka component hai toh ye line uncomment karein: */}
-          {/* <Route path="/support" element={<SupportPage />} /> */}
-
+          <Route 
+            path="/support" 
+            element={<SupportPage />} 
+          />
+        
         </Routes>
 
       </LayoutContent>
