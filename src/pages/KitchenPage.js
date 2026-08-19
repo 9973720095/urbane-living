@@ -66,22 +66,25 @@ const ModularKitchenPage = () => {
 
   return (
     <div style={{ backgroundColor: '#f8fafc', minHeight: '100vh', paddingBottom: '80px' }}>
-        <div style={{ 
-            backgroundImage: 'url(https://spaceinterio.co.in/wp-content/uploads/2024/11/Untitled-design-2024-11-16T130028.315-jpg.webp)',
-            backgroundPosition: 'center center',
-            backgroundRepeat: 'no-repeat',
-            backgroundSize: 'cover'
-        }}>
+      
+      {/* Hero Banner with Background Image and Overlay for Text Readability */}
+      <div style={{ 
+        backgroundImage: 'linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 41%)), url(https://spaceinterio.co.in/wp-content/uploads/2024/11/Untitled-design-2024-11-16T130028.315-jpg.webp)',
+        backgroundPosition: 'center center',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        padding: '60px 20px'
+      }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
           <Row gutter={[30, 30]} align="middle">
             
             {/* Left Column: Heading and description */}
             <Col xs={24} lg={14}>
               <AppstoreOutlined style={{ fontSize: '36px', marginBottom: '16px', color: '#38bdf8' }} />
-              <Title level={1} style={{ color: '#fff', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, marginBottom: '16px' }}>
+              <Title level={1} style={{ color: '#ffffff', fontSize: 'clamp(28px, 4vw, 42px)', fontWeight: 800, marginBottom: '16px', textShadow: '0 2px 4px rgba(0,0,0,0.3)' }}>
                 Modular Kitchen Designs
               </Title>
-              <Paragraph style={{ color: '#94a3b8', fontSize: '16px', lineHeight: 1.6, margin: 0 }}>
+              <Paragraph style={{ color: '#e2e8f0', fontSize: '16px', lineHeight: 1.6, margin: 0, textShadow: '0 1px 2px rgba(0,0,0,0.3)' }}>
                 At Urbane Living, we believe the kitchen is the heart of your home—a place where functionality meets style. Discover our exclusive range of custom-crafted layouts.
               </Paragraph>
             </Col>
@@ -91,7 +94,7 @@ const ModularKitchenPage = () => {
               <Card 
                 style={{ 
                   borderRadius: '16px', 
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.2)', 
+                  boxShadow: '0 10px 30px rgba(0,0,0,0.3)', 
                   border: 'none',
                   backgroundColor: '#ffffff'
                 }} 
@@ -136,10 +139,11 @@ const ModularKitchenPage = () => {
 
           </Row>
         </div>
-    </div>
+      </div>
 
       {/* Main Content Wrapper */}
-    <div style={{ maxWidth: '1200px', margin: '40px auto 0', padding: '0 20px' }}> 
+      <div style={{ maxWidth: '1200px', margin: '40px auto 0', padding: '0 20px' }}>
+        
         {/* Breadcrumb Card */}
         <Card style={{ marginBottom: '24px', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.03)', border: '1px solid #e2e8f0' }} bodyStyle={{ padding: '16px 24px' }}>
           <Breadcrumb
@@ -157,58 +161,59 @@ const ModularKitchenPage = () => {
             ]}
           />
         </Card>
+
         {/* Why Choose Our Modular Kitchens Section */}
         <Card style={{ borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', border: '1px solid #e2e8f0', marginBottom: '32px' }} bodyStyle={{ padding: 'clamp(24px, 4vw, 40px)' }}>
-            <Title level={3} style={{ color: '#0f172a', fontWeight: 700, marginBottom: '20px' }}>
-                Why Choose Our Modular Kitchens?
-            </Title>
+          <Title level={3} style={{ color: '#0f172a', fontWeight: 700, marginBottom: '20px' }}>
+            Why Choose Our Modular Kitchens?
+          </Title>
           
-            <Row gutter={[20, 20]}>
-                <Col xs={24} md={12}>
-                    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                        <CheckCircleOutlined style={{ fontSize: '20px', color: '#2563eb', marginTop: '4px' }} />
-                        <div>
-                        <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Personalised Designs</Text>
-                        <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-                            We tailor each kitchen to your specific needs, ensuring a perfect blend of aesthetics and practicality.
-                        </Paragraph>
-                        </div>
-                    </div>
-                </Col>
-                <Col xs={24} md={12}>
-                    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                        <SafetyCertificateOutlined style={{ fontSize: '20px', color: '#16a34a', marginTop: '4px' }} />
-                        <div>
-                        <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Premium Materials</Text>
-                        <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-                            Utilizing high-quality materials, our kitchens are built to withstand daily use and stand the test of time.
-                        </Paragraph>
-                        </div>
-                    </div>
-                </Col>
-                <Col xs={24} md={12}>
-                    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                        <RocketOutlined style={{ fontSize: '20px', color: '#d97706', marginTop: '4px' }} />
-                        <div>
-                        <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Innovative Storage Solutions</Text>
-                        <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-                            Maximize your kitchen’s potential with smart storage options that keep everything within easy reach.
-                        </Paragraph>
-                        </div>
-                    </div>
-                </Col>
-                <Col xs={24} md={12}>
-                    <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
-                        <CheckCircleOutlined style={{ fontSize: '20px', color: '#9333ea', marginTop: '4px' }} />
-                        <div>
-                        <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Seamless Integration</Text>
-                        <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
-                            Our designs accommodate modern appliances, ensuring a cohesive and clutter-free environment.
-                        </Paragraph>
-                        </div>
-                    </div>
-                </Col>
-            </Row>
+          <Row gutter={[20, 20]}>
+            <Col xs={24} md={12}>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <CheckCircleOutlined style={{ fontSize: '20px', color: '#2563eb', marginTop: '4px' }} />
+                <div>
+                  <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Personalised Designs</Text>
+                  <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+                    We tailor each kitchen to your specific needs, ensuring a perfect blend of aesthetics and practicality.
+                  </Paragraph>
+                </div>
+              </div>
+            </Col>
+            <Col xs={24} md={12}>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <SafetyCertificateOutlined style={{ fontSize: '20px', color: '#16a34a', marginTop: '4px' }} />
+                <div>
+                  <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Premium Materials</Text>
+                  <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+                    Utilizing high-quality materials, our kitchens are built to withstand daily use and stand the test of time.
+                  </Paragraph>
+                </div>
+              </div>
+            </Col>
+            <Col xs={24} md={12}>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <RocketOutlined style={{ fontSize: '20px', color: '#d97706', marginTop: '4px' }} />
+                <div>
+                  <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Innovative Storage Solutions</Text>
+                  <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+                    Maximize your kitchen’s potential with smart storage options that keep everything within easy reach.
+                  </Paragraph>
+                </div>
+              </div>
+            </Col>
+            <Col xs={24} md={12}>
+              <div style={{ display: 'flex', gap: '14px', alignItems: 'flex-start' }}>
+                <CheckCircleOutlined style={{ fontSize: '20px', color: '#9333ea', marginTop: '4px' }} />
+                <div>
+                  <Text strong style={{ color: '#0f172a', fontSize: '15px', display: 'block', marginBottom: '4px' }}>Seamless Integration</Text>
+                  <Paragraph style={{ color: '#64748b', fontSize: '14px', margin: 0 }}>
+                    Our designs accommodate modern appliances, ensuring a cohesive and clutter-free environment.
+                  </Paragraph>
+                </div>
+              </div>
+            </Col>
+          </Row>
         </Card>
 
         {/* Catalog Control Bar (Results count & Sorting) */}

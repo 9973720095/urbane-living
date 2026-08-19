@@ -1,104 +1,184 @@
 import React from 'react';
-import { Button, Typography } from 'antd';
-import { Link } from 'react-router-dom'; // Route connect karne ke liye
+import { Button, Typography, Row, Col, Divider } from 'antd';
 import {
   PhoneFilled,
   WhatsAppOutlined,
   FacebookFilled,
   YoutubeFilled,
   TwitterOutlined,
-  InstagramOutlined
+  InstagramOutlined,
+  MailOutlined
 } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 import './css/FooterContact.css';
 
-const { Title, Paragraph } = Typography;
+const { Title, Paragraph, Text } = Typography;
 
 const FooterContact = () => {
   return (
     <div
       className="footer-contact"
       style={{
-        background: "#f0f2f5",
-        padding: "60px 20px",
-        textAlign: "center",
+        background: "#001529",
+        color: "#fff",
+        padding: "60px 20px 20px",
       }}
     >
-      <Title level={3} style={{ marginBottom: "8px" }}>
-        Want quick assistance? Just give us a call!
-      </Title>
-      <Paragraph style={{ color: "#555", marginBottom: "24px" }}>
-        Message us on WhatsApp or call directly for premium home design
-        services.
-      </Paragraph>
+      {/* CTA Section */}
+      <div style={{ textAlign: "center", marginBottom: "50px" }}>
+        <Title level={3} style={{ marginBottom: "8px", color: "#fff" }}>
+          Want quick assistance? Just give us a call!
+        </Title>
+        <Paragraph style={{ color: "rgba(255,255,255,0.7)", marginBottom: "24px" }}>
+          Message us on WhatsApp or call directly for premium home design services.
+        </Paragraph>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "16px",
-          flexWrap: "wrap",
-        }}
-      >
-        <Button
-          type="primary"
-          icon={<PhoneFilled />}
-          size="large"
-          href="tel:+91 1800-123-6407"
+        <div
           style={{
-            background: "#006699",
-            border: "none",
-            borderRadius: "8px",
-            fontWeight: 600,
+            display: "flex",
+            justifyContent: "center",
+            gap: "16px",
+            flexWrap: "wrap",
           }}
         >
-          CALL NOW
-        </Button>
+          <Button
+            type="primary"
+            icon={<PhoneFilled />}
+            size="large"
+            href="tel:+91 1800-123-6407"
+            style={{
+              background: "#006699",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: 600,
+              height: '48px'
+            }}
+          >
+            CALL NOW
+          </Button>
 
-        <Button
-          type="primary"
-          icon={<WhatsAppOutlined />}
-          size="large"
-          href="https://wa.me/9105052454"
-          target="_blank"
-          style={{
-            background: "#25D366",
-            border: "none",
-            borderRadius: "8px",
-            fontWeight: 600,
-          }}
-        >
-          WHATSAPP
-        </Button>
+          <Button
+            type="primary"
+            icon={<WhatsAppOutlined />}
+            size="large"
+            href="https://wa.me/919105052454"
+            target="_blank"
+            style={{
+              background: "#25D366",
+              border: "none",
+              borderRadius: "8px",
+              fontWeight: 600,
+              height: '48px'
+            }}
+          >
+            WHATSAPP
+          </Button>
+        </div>
       </div>
 
-      {/* --- SOCIAL ICONS --- */}
-      <div style={{ marginTop: "40px" }}>
-        <div className="social-icons">
-          <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/urbaneliving.in">
+      
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <Row gutter={[32, 32]}>
+          <Col xs={12} sm={6}>
+            <Title level={5} style={{ color: '#fff', marginBottom: '16px' }}>Company</Title>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <Link to="/about" style={linkStyle}>About Us</Link>
+              <Link to="/contact" style={linkStyle}>Contact</Link>
+              <Link to="/blogs" style={linkStyle}>Blogs</Link>
+              <Link to="/estimate" style={linkStyle}>Estimate</Link>
+            </div>
+          </Col>
+
+          <Col xs={12} sm={6}>
+            <Title level={5} style={{ color: '#fff', marginBottom: '16px' }}>Services</Title>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <Link to="/false-ceiling" style={linkStyle}>False Ceiling</Link>
+              <Link to="/kitchen" style={linkStyle}>Modular Kitchen</Link>
+              <Link to="/wardrobe" style={linkStyle}>Wardrobe</Link>
+              <Link to="/bedroom" style={linkStyle}>Bedroom Interiors</Link>
+            </div>
+          </Col>
+
+          <Col xs={12} sm={6}>
+            <Title level={5} style={{ color: '#fff', marginBottom: '16px' }}>Legal</Title>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <Link target='_blank' to="/privacy" style={linkStyle}>Privacy Policy</Link>
+              <Link target='_blank' to="/terms" style={linkStyle}>Terms & Conditions</Link>
+              <Link target='_blank' to="/refund" style={linkStyle}>Refund Policy</Link>
+              <Link target='_blank' to="/disclaimer" style={linkStyle}>Disclaimer</Link>
+            </div>
+          </Col>
+
+          <Col xs={12} sm={6}>
+            <Title level={5} style={{ color: '#fff', marginBottom: '16px' }}>Connect</Title>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+              <a href="tel:+91-08062987240" style={linkStyle}>
+                <PhoneFilled style={{ marginRight: '8px' }} />+91-1800-123-6407
+              </a>
+              <a href="mailto:urbanelivingofficial@gmail.com" style={linkStyle}>
+                <MailOutlined style={{ marginRight: '8px' }} />urbanelivingofficial@gmail.com
+              </a>
+              <Text style={linkStyle}>G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad</Text>
+            </div>
+          </Col>
+        </Row>
+      </div>
+
+      <Divider style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '40px 0 24px' }} />
+
+      <div style={{ 
+        maxWidth: '1200px', 
+        margin: '0 auto',
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        flexWrap: 'wrap',
+        gap: '20px'
+      }}>
+        <Text style={{ color: 'rgba(255,255,255,0.6)', fontSize: '14px' }}>
+          © 2026 Urbane Living. All rights reserved.
+        </Text>
+
+        <div className="social-icons" style={{ display: 'flex', gap: '12px' }}>
+          <a target='_blank' rel="noopener noreferrer" href="https://www.facebook.com/urbaneliving.in" style={iconStyle}> 
             <FacebookFilled />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.youtube.com/@urbaneliving-ncr">
+          <a target='_blank' rel="noopener noreferrer" href="https://www.youtube.com/@urbaneliving-ncr" style={iconStyle}>
             <YoutubeFilled />
           </a>
           <a target="_blank" rel="noopener noreferrer" href="https://x.com/UrbaneLiving001">
             <TwitterOutlined />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/urbanelivingindia/">
+          <a target='_blank' rel="noopener noreferrer" href="https://www.instagram.com/urbaneliving.in" style={iconStyle}> 
             <InstagramOutlined />
           </a>
         </div>
       </div>
-
-      {/* --- NEW POLICY LINKS ROW --- */}
-      <div style={{ marginTop: "20px", display: "flex", justifyContent: "center", gap: "20px", flexWrap: "wrap" }}>
-        <Link to="/terms" style={{ color: "#333" }}>Terms & Conditions</Link>
-        <Link to="/support" style={{ color: "#333" }}>Support page</Link>
-        <Link to="/shipping" style={{ color: "#333" }}>Shipping & Delivery</Link>
-        <Link to="/refund" style={{ color: "#333" }}>Refund Policy</Link>
-        <Link to="/privacy" style={{ color: "#333" }}>Privacy Policy</Link>
-      </div>
     </div>
   );
+};
+
+const linkStyle = {
+  color: 'rgba(255,255,255,0.7)',
+  fontSize: '14px',
+  textDecoration: 'none',
+  transition: 'color 0.3s',
+  display: 'flex',
+  alignItems: 'center'
+};
+
+const iconStyle = {
+  width: '36px',
+  height: '36px',
+  background: 'rgba(255,255,255,0.1)',
+  color: '#fff',
+  borderRadius: '50%',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  fontSize: '16px',
+  transition: 'all 0.2s',
+  textDecoration: 'none'
 };
 
 export default FooterContact;
