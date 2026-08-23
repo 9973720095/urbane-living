@@ -247,7 +247,7 @@ const WardrobePage = () => {
 
         <Card style={{ borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.04)', border: '1px solid #e2e8f0', marginBottom: '32px' }} bodyStyle={{ padding: 'clamp(24px, 4vw, 40px)' }}>
             <Title level={3} style={{ color: '#0f172a', fontWeight: 700, marginBottom: '20px' }}>
-                Why Space Interio Stands Out
+                Why Urbane Living Stands Out
             </Title>
           
             <Row gutter={[20, 20]}>

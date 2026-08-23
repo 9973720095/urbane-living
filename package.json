@@ -10,9 +10,10 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^13.5.0",
+    "ajv": "^8.12.0",
     "antd": "^6.3.5",
     "axios": "^1.15.0",
-    "firebase": "^12.12.1",
+    "firebase": "^10.12.2",
     "jspdf": "^4.2.1",
     "lucide-react": "^1.14.0",
     "pannellum": "^2.5.7",
@@ -21,12 +22,13 @@
     "react-quill": "^2.0.0",
     "react-router-dom": "^7.14.1",
     "react-scripts": "^5.0.1",
+    "react-to-print": "^3.3.0",
     "three": "^0.183.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "CI=false react-scripts build",
+    "start": "react-scripts start --openssl-legacy-provider",
+    "build": "CI=false react-scripts build --openssl-legacy-provider",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

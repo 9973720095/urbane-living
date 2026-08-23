@@ -17,7 +17,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
 
   // WhatsApp Handler Function
   const handleWhatsAppClick = () => {
-    window.open("https://wa.me/919560555103", "_blank");
+    window.open("https://wa.me/919105052454", "_blank");
   };
 
   // Dynamic API URL for Local/Mobile connectivity

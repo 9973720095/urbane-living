@@ -42,6 +42,7 @@ import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import SupportPage from './pages/SupportPage';
+import EstimatePage from './pages/Estimate';
 
 
 const { Content } = Layout;
@@ -384,7 +385,10 @@ function App() {
             path="/support" 
             element={<SupportPage />} 
           />
-        
+          <Route 
+            path="/estimate" 
+            element={<EstimatePage onOpenForm={handleOpen} />} 
+          />
         </Routes>
 
       </LayoutContent>
