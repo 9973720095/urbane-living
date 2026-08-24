@@ -4,7 +4,7 @@ import { DownloadOutlined, PlusOutlined, DeleteOutlined, ArrowUpOutlined, ArrowD
 import { useReactToPrint } from "react-to-print";
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "firebase/auth";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, query, orderBy, serverTimestamp, runTransaction, getDoc } from "firebase/firestore";
 
 // ===== OFFICIAL FIREBASE CONFIG - SAME AS YOUR FILE =====
 const firebaseConfig = {
@@ -34,7 +34,6 @@ const ALLOWED_EMAILS = [
   "sales2@urbaneliving.in",
   "it@urbaneliving.in",
   "design1@urbaneliving.in",
-  "electrician@urbaneliving.in",
   "sales3@urbaneliving.in",
   "askabhi139@gmail.com",
   "jhas08387@gmail.com"
@@ -79,26 +78,50 @@ const EstimatePage = () => {
 
   const componentRef = useRef();
 
+  // ===== FIXED: FIRESTORE SHARED COUNTER - NO MORE REPEAT =====
+  const COUNTER_DOC = doc(db, "ul_counters", "estimateCounter");
+
   const getCounter = () => {
-    return parseInt(localStorage.getItem("estimateCounter_RFIUL") || "226");
+    // Legacy function kept for compatibility, now returns timestamp based value for display only
+    return parseInt(Date.now().toString().slice(-4));
   };
 
   const getEstimateNo = () => {
     const d = new Date();
     const dd = String(d.getDate()).padStart(2, "0");
     const mm = String(d.getMonth() + 1).padStart(2, "0");
-    const counter = getCounter();
-    return `RFIUL${mm}${dd}${counter}`;
+    // Display only - temporary number, final number comes from Firestore at save time
+    const tmp = Date.now().toString().slice(-3) + String(Math.floor(Math.random()*90+10));
+    return `RFIUL${mm}${dd}${tmp}`;
   };
 
   const incrementEstimateNo = () => {
-    let counter = getCounter();
-    counter += 1;
-    localStorage.setItem("estimateCounter_RFIUL", counter);
+    // This is now only for display - real increment happens in Firestore transaction during save
     const d = new Date();
     const dd = String(d.getDate()).padStart(2, "0");
     const mm = String(d.getMonth() + 1).padStart(2, "0");
-    return `RFIUL${mm}${dd}${counter}`;
+    const tmp = Date.now().toString().slice(-3) + String(Math.floor(Math.random()*90+10));
+    return `RFIUL${mm}${dd}${tmp}`;
+  };
+
+  const getNextCounterFromFirestore = async () => {
+    try {
+      const newCounter = await runTransaction(db, async (transaction) => {
+        const snap = await transaction.get(COUNTER_DOC);
+        let current = 226; // starting value
+        if (snap.exists() && snap.data().value) {
+          current = snap.data().value;
+        }
+        const next = current + 1;
+        transaction.set(COUNTER_DOC, { value: next, updatedAt: serverTimestamp(), updatedBy: auth.currentUser?.email || "system" }, { merge: true });
+        return next;
+      });
+      return newCounter;
+    } catch (e) {
+      console.error("Counter transaction failed, fallback to timestamp", e);
+      // Fallback unique number if transaction fails
+      return parseInt(Date.now().toString().slice(-5));
+    }
   };
 
   const [client, setClient] = useState({ name: "", address: "" });
@@ -378,7 +401,14 @@ const EstimatePage = () => {
 
   const saveEstimateToStorage = async () => {
     try {
-      const newEstimateNo = incrementEstimateNo();
+      setLoadingData(true);
+      // ===== GET UNIQUE NUMBER FROM FIRESTORE SHARED COUNTER =====
+      const counter = await getNextCounterFromFirestore();
+      const d = new Date();
+      const dd = String(d.getDate()).padStart(2, "0");
+      const mm = String(d.getMonth() + 1).padStart(2, "0");
+      const newEstimateNo = `RFIUL${mm}${dd}${counter}`;
+
       const finalLogs = addLog(`Saved Original Estimate ${newEstimateNo}`);
       const record = {
         id: Date.now(),
@@ -404,6 +434,7 @@ const EstimatePage = () => {
     } catch (e) {
       message.error("Save failed: " + e.message);
     }
+    setLoadingData(false);
   };
 
   const saveEditedEstimate = async () => {
@@ -514,7 +545,7 @@ const EstimatePage = () => {
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#f0f2f5' }}>
         <div style={{ background: '#fff', padding: 40, borderRadius: 12, boxShadow: '0 4px 12px rgba(0,0,0,0.1)', textAlign: 'center', width: 380 }}>
           <img src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1779706583/Urbane-Living-05-25-2026_04_25_PM_blepmc.png" style={{ height: 55, marginBottom: 15 }} alt="logo" />
-          <h2 style={{ margin: '0 0 8px' }}>Urbane Living - Admin</h2>
+          <h2 style={{ margin: '0 0 8px' }}>Urbane Living - Estimate</h2>
           <p style={{ color: '#666', marginBottom: 25 }}>Only authorised emails can access</p>
           <Button type="primary" size="large" block onClick={doLogin}>Continue with Google</Button>
         </div>
@@ -621,7 +652,6 @@ const EstimatePage = () => {
           </table>
         </div>
 
-        {/* ===== SPECS TABLE - NOW FULLY EDITABLE LIKE OTHER SECTIONS ===== */}
         <div style={{ marginTop: 20 }}>
           <div style={{ background: "#e9e9e9", border: "1px solid #000", padding: "6px 8px", fontWeight: "bold", fontSize: 13, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span>Material Specifications / Makes</span>
@@ -657,7 +687,6 @@ const EstimatePage = () => {
           </table>
         </div>
 
-        {/* ===== BASIC TERMS & CONDITIONS - EDITABLE SECTION ===== */}
         <div style={{ marginTop: 20 }}>
           <div style={{ background: "#e9e9e9", border: "1px solid #000", padding: "6px 8px", fontWeight: "bold", fontSize: 13, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span>Basic Terms & Conditions</span>
@@ -684,7 +713,6 @@ const EstimatePage = () => {
           </table>
         </div>
 
-        {/* ===== BANK DETAILS - FIXED NON-EDITABLE ===== */}
         <div style={{ marginTop: 20 }}>
           <div style={{ background: "#f9c78c", border: "1px solid #000", padding: "6px 8px", fontWeight: "bold", fontSize: 13 }}>Bank Details:-</div>
           <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 12 }}>
