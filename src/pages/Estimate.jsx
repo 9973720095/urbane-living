@@ -569,6 +569,7 @@ const EstimatePage = () => {
           )}
           <Button type="primary" icon={<SaveOutlined />} onClick={saveEstimateToStorage}>Save New Estimate</Button>
           <Button icon={<FileAddOutlined />} onClick={handleNewBlankEstimate}>New Blank Estimate</Button>
+          {isEditing && <Button type="primary" icon={<PlusOutlined />} onClick={addSection} style={{background:"#52c41a", borderColor:"#52c41a"}}>Add Section</Button>}
           <Button icon={<UnorderedListOutlined />} onClick={() => { fetchAllEstimates(); setIsModalVisible(true); }}>View Saved</Button>
         </Space>
         <Space wrap>
@@ -621,7 +622,7 @@ const EstimatePage = () => {
                       <td colSpan={4} style={{ padding: "6px 8px", border: "1px solid #000" }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                           {isEditing ? <Input value={section.title} onChange={(e) => updateSectionTitle(sIdx, e.target.value)} style={{ fontWeight: 'bold', width: '55%' }} /> : <span>{section.title}</span>}
-                          {isEditing && <Space size={4}><Button size="small" icon={<ArrowUpOutlined />} disabled={sIdx === 0} onClick={() => moveSection(sIdx, -1)} /><Button size="small" icon={<ArrowDownOutlined />} disabled={sIdx === sections.length - 1} onClick={() => moveSection(sIdx, 1)} /><Button size="small" type="dashed" icon={<PlusOutlined />} onClick={() => addItemToSection(sIdx)}>Add Item</Button><Button size="small" danger icon={<DeleteOutlined />} onClick={() => removeSection(sIdx)}>Del Sec</Button></Space>}
+                          {isEditing && <Space size={4}><Button size="small" icon={<ArrowUpOutlined />} disabled={sIdx === 0} onClick={() => moveSection(sIdx, -1)} /><Button size="small" icon={<ArrowDownOutlined />} disabled={sIdx === sections.length - 1} onClick={() => moveSection(sIdx, 1)} /><Button size="small" type="primary" icon={<PlusOutlined />} onClick={addSection} style={{background:"#52c41a", borderColor:"#52c41a"}}>Add Sec</Button><Button size="small" type="dashed" icon={<PlusOutlined />} onClick={() => addItemToSection(sIdx)}>Add Item</Button><Button size="small" danger icon={<DeleteOutlined />} onClick={() => removeSection(sIdx)}>Del Sec</Button></Space>}
                         </div>
                       </td>
                     </tr>
