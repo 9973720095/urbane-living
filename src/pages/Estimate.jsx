@@ -37,6 +37,7 @@ const ALLOWED_EMAILS = [
   "sales3@urbaneliving.in",
   "askabhi139@gmail.com",
   "jhas08387@gmail.com",
+  "urbanelivingofficial@gmail.com",
   "sales4@urbaneliving.in"
 ].map(e => e.toLowerCase());
 
