@@ -36,7 +36,8 @@ const ALLOWED_EMAILS = [
   "design1@urbaneliving.in",
   "sales3@urbaneliving.in",
   "askabhi139@gmail.com",
-  "jhas08387@gmail.com"
+  "jhas08387@gmail.com",
+  "sales4@urbaneliving.in"
 ].map(e => e.toLowerCase());
 
 const EstimatePage = () => {
