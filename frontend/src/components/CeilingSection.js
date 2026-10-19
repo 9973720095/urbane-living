@@ -23,7 +23,7 @@ const CeilingSection = () => {
         style={{ maxWidth: "1200px", margin: "0 auto" }}
       >
         <Col xs={24} md={12}>
-          <Space direction="vertical" size="middle">
+          <Space orientation="vertical" size="middle">
             <Text
               strong
               style={{

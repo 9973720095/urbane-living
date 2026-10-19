@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '.././pages/BedroomPage.css';
+import { API_BASE_URL } from '../config/api';
 
 const BedroomPage = () => {
     const [designs, setDesigns] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/bedroom')
+        axios.get(`${API_BASE_URL}/api/bedroom`)
             .then(res => setDesigns(res.data))
             .catch(err => console.error("Error fetching bedroom designs:", err));
     }, []);

@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500&display=swap');
 
 /* === Arrows === */
 .hero_carousel .slick-arrow {
@@ -43,7 +42,7 @@
 }
 
 .hero-content h1 {
-  font-family: 'Poppins', sans-serif !important;
+  font-family: var(--font-heading) !important;
   font-size: 48px !important;
   letter-spacing: -0.5px;
   font-weight: 800 !important;
@@ -53,7 +52,7 @@
 }
 
 .hero-content p {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-body);
   color: #ffffff !important;
   font-size: 18px;
   line-height: 1.6;
@@ -63,7 +62,7 @@
 /* === Button === */
 .hero-content .explore-btn {
   color: #fff !important;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 17px;
   font-weight: 700 !important;
   border: none;

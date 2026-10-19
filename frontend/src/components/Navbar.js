@@ -95,7 +95,7 @@ const Navbar = ({ onOpenForm }) => {
         placement="right" 
         onClose={onClose} 
         open={visible}
-        width={420}
+        size={420}
         className={`custom-drawer ${isPastHero ? 'drawer-old' : 'drawer-transparent'}`}
         closeIcon={<CloseOutlined />}
       >

@@ -38,6 +38,7 @@ import LivingHallPage from './pages/LivingHallPage';
 import KitchenPage from './pages/KitchenPage';
 import WardrobePage from './pages/WardrobePage';
 import Estimate from './pages/Estimate';
+import { API_BASE_URL } from './config/api';
 
 const { Content } = Layout;
 
@@ -66,8 +67,6 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleOpen = () => setIsModalOpen(true);
   const handleClose = () => setIsModalOpen(false);
-
-  const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:5000' : 'https://urbaneliving.in/api';
 
   const onFinish = async (values, type = 'lead') => {
     try {

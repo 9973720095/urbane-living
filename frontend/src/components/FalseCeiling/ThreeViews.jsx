@@ -145,7 +145,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
   }, [filters]);
 
   return (
-    <div style={{ background: '#f8f9fa', minHeight: '100vh', fontFamily: 'Inter, sans-serif' }}>
+    <div style={{ background: '#f8f9fa', minHeight: '100vh', fontFamily: 'var(--font-body)' }}>
       {/* INLINE CSS to avoid resolve errors */}
       <style>{`
         .hero {

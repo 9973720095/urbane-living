@@ -5,6 +5,7 @@ import { WhatsAppOutlined } from "@ant-design/icons";
 import ThreeViews from "../components/FalseCeiling/ThreeViews";
 import CostEstimator from "../components/FalseCeiling/CostEstimator"; 
 import "./falseCeiling.css";
+import { API_BASE_URL } from '../config/api';
 
 const { Option } = Select;
 
@@ -20,10 +21,6 @@ export default function FalseCeilingPage({ onOpenForm }) {
     window.open("https://wa.me/919560555103", "_blank");
   };
 
-  // Dynamic API URL for Local/Mobile connectivity
-  const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5000' 
-    : 'https://urbane-living.onrender.com';
 
   // Responsive PageSize Logic
   useEffect(() => {
