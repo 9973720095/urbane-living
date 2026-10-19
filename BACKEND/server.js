@@ -1,7 +1,8 @@
 // Step 1: Configuration for Path & Environment
 const path = require('path');
-// Path fix: Ye root folder se .env file ko pick karega
-require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); 
+// Path fix: Pehle root folder ki .env, phir BACKEND/.env check karega
+const envPaths = [path.resolve(__dirname, '../.env'), path.resolve(__dirname, '.env')];
+require('dotenv').config({ path: envPaths });
 
 const express = require('express');
 const mongoose = require('mongoose');
@@ -45,6 +46,8 @@ const mongoURI = process.env.MONGO_URI || (currentEnv === 'production' ? process
 
 if (!mongoURI) {
     console.error(`❌ MONGO_URI missing for ${currentEnv} mode!`);
+    console.error(`   .env file mein MONGO_URI ya ${currentEnv === 'production' ? 'PROD_MONGO_URI' : 'LOCAL_MONGO_URI'} add karo. Checked:`);
+    envPaths.forEach(p => console.error(`   - ${p}`));
     process.exit(1);
 }
 
@@ -95,6 +98,7 @@ app.post('/api/save-lead', async (req, res) => {
         const savedLead = await newLead.save();
         res.status(200).json({ success: true, message: "✅ Lead saved", id: savedLead._id });
     } catch (err) {
+        console.error("❌ Lead save failed:", err.message);
         res.status(500).json({ success: false, error: "Database save failed" });
     }
 });

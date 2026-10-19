@@ -42,7 +42,7 @@
     font-weight: 700 !important;
     color: #333 !important;
     margin-bottom: 25px !important;
-    font-family: 'Poppins', sans-serif; /* Clean font reference */
+    font-family: var(--font-heading);
 }
 
 /* Form Item & Border styling */

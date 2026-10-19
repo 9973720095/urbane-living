@@ -3,6 +3,7 @@ import { Card, Row, Col, Typography, Breadcrumb, Spin, Avatar, Pagination } from
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './BlogPage.css';
+import { API_BASE_URL } from '../config/api';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -12,9 +13,6 @@ const BlogPage = () => {
   const [currentPage, setCurrentPage] = useState(1); // Pagination state
   const pageSize = 12; // 12 cards ke baad pagination aayega
 
-  const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5000' 
-    : 'https://urbane-living.onrender.com';
 
   const bannerImg = "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg";
 

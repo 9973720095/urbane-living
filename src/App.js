@@ -9,6 +9,7 @@ import {
   Navigate
 } from 'react-router-dom';
 
+import { API_BASE_URL } from './config/api';
 import './App.css';
 
 import AdminDashboard from './pages/AdminDashboard';
@@ -102,10 +103,6 @@ function App() {
 
   const handleClose = () => setIsModalOpen(false);
 
-  const API_BASE_URL =
-    window.location.hostname === 'localhost'
-     ? 'http://localhost:5000'
-      : 'https://urbaneliving.in/api';
 
   const onFinish = async (values, type = 'lead') => {
 

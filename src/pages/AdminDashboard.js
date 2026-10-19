@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { API_BASE_URL } from '../config/api';
 
 const { Content, Sider, Header } = Layout;
 const { Option } = Select;
@@ -34,9 +35,6 @@ const AdminDashboard = ({ onFinish }) => {
   const [editingLead, setEditingLead] = useState(null);
   const [isPreview, setIsPreview] = useState(false);
 
-  const API_BASE_URL = window.location.hostname === 'localhost'
-   ? 'http://localhost:5000'
-    : 'https://urbane-living.onrender.com';
 
   // --- NEW AUTH CHECK LOGIC ---
   useEffect(() => {
@@ -226,7 +224,7 @@ const AdminDashboard = ({ onFinish }) => {
         {MenuItems}
       </Sider>
 
-      <Drawer title="URBANE ADMIN" placement="left" onClose={() => setDrawerVisible(false)} open={drawerVisible} styles={{ body: { padding: 0 } }} width={250}>
+      <Drawer title="URBANE ADMIN" placement="left" onClose={() => setDrawerVisible(false)} open={drawerVisible} styles={{ body: { padding: 0 } }} size={250}>
         <div style={{ background: '#001529', height: '100%' }}>{MenuItems}</div>
       </Drawer>
 
