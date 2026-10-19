@@ -78,7 +78,7 @@ const BlogDetails = () => {
             fontSize: '18px', 
             lineHeight: '2.1', 
             color: '#444',
-            fontFamily: "'Poppins', sans-serif"
+            fontFamily: 'var(--font-body)'
           }} 
           dangerouslySetInnerHTML={{ __html: blog.content }} 
         />

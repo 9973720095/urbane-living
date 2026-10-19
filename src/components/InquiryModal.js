@@ -5,12 +5,16 @@ import './css/InquiryModal.css';
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://urbane-living.onrender.com';
+
 const InquiryModal = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();
 
   const onFinish = async (values) => {
     try {
-      const response = await fetch('https://urbane-living.onrender.com/api/save-lead', {
+      const response = await fetch(`${API_BASE_URL}/api/save-lead`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
