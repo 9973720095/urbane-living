@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const LivingHallPage = () => {
     const [designs, setDesigns] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/living')
+        axios.get(`${API_BASE_URL}/api/living`)
             .then(res => setDesigns(res.data))
             .catch(err => console.error("Error fetching living hall designs:", err));
     }, []);

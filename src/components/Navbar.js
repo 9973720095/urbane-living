@@ -73,7 +73,7 @@ const Navbar = ({ onOpenForm }) => {
         placement="right" 
         onClose={onClose} 
         open={visible}
-        width={420}
+        size={420}
         className="custom-drawer drawer-old"
         closeIcon={<CloseOutlined />}
       >

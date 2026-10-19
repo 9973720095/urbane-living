@@ -98,6 +98,7 @@ app.post('/api/save-lead', async (req, res) => {
         const savedLead = await newLead.save();
         res.status(200).json({ success: true, message: "✅ Lead saved", id: savedLead._id });
     } catch (err) {
+        console.error("❌ Lead save failed:", err.message);
         res.status(500).json({ success: false, error: "Database save failed" });
     }
 });

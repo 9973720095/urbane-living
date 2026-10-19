@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Breadcrumb, Typography, Spin, Avatar, Divider } from 'antd';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const { Title, Paragraph, Text } = Typography;
 
@@ -10,9 +11,6 @@ const BlogDetails = () => {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5000' 
-    : 'https://urbane-living.onrender.com';
 
   useEffect(() => {
     const fetchBlog = async () => {

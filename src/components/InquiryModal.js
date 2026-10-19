@@ -1,13 +1,11 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Typography, Row, Col, Select, message } from 'antd';
 import './css/InquiryModal.css';
+import { API_BASE_URL } from '../config/api';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
 
-const API_BASE_URL = window.location.hostname === 'localhost'
-  ? 'http://localhost:5000'
-  : 'https://urbane-living.onrender.com';
 
 const InquiryModal = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();

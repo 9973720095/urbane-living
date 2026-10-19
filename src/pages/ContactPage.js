@@ -51,7 +51,7 @@ export default function ContactPage({ onOpenForm }) {
         <Row gutter={[32, 32]}>
           {/* LEFT: QUICK CONNECT */}
           <Col xs={24} lg={10}>
-            <Space direction="vertical" size={20} style={{ width: "100%" }}>
+            <Space orientation="vertical" size={20} style={{ width: "100%" }}>
               <a href={`tel:${phoneNumber}`} className="contact-link">
                 <Card className="info-card call-card" hoverable>
                   <Space size={15}>
