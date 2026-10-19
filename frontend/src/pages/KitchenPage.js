@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const KitchenPage = () => {
     const [designs, setDesigns] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/kitchen')
+        axios.get(`${API_BASE_URL}/api/kitchen`)
             .then(res => setDesigns(res.data))
             .catch(err => console.error("Error fetching kitchen designs:", err));
     }, []);

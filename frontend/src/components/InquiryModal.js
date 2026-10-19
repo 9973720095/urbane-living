@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Typography, Row, Col, Select, message } from 'antd';
 import './css/InquiryModal.css';
+import { API_BASE_URL } from '../config/api';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -13,7 +14,7 @@ const InquiryModal = ({ isOpen, onClose }) => {
 
   const onFinish = async (values) => {
     try {
-      const response = await fetch('https://urbane-living.onrender.com/api/save-lead', {
+      const response = await fetch(`${API_BASE_URL}/api/save-lead`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),

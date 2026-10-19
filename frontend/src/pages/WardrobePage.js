@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config/api';
 
 const WardrobePage = () => {
     const [designs, setDesigns] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/wardrobe')
+        axios.get(`${API_BASE_URL}/api/wardrobe`)
             .then(res => setDesigns(res.data))
             .catch(err => console.error("Error fetching wardrobe designs:", err));
     }, []);

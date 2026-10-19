@@ -35,7 +35,7 @@ const GallerySection = () => {
                     src={item.src}
                     alt={item.title}
                     className="gallery-main-img"
-                    preview={{ mask: <div className="custom-mask">VIEW PROJECT</div> }}
+                    preview={{ cover: <div className="custom-mask">VIEW PROJECT</div> }}
                   />
                   {/* Floating Info Overlay */}
                   <div className="item-details">
