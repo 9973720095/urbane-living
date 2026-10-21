@@ -1,107 +1,55 @@
 import React from 'react';
-import { Row, Col, Typography, Space } from 'antd';
+import { Typography, Row, Col, Image, Tag } from 'antd';
+import './css/GallerySection.css';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title, Paragraph } = Typography;
 
-const CeilingSection = () => {
+const GallerySection = () => {
+  // Advanced Data Array
+  const galleryData = [
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png", title: "Living Interior", category: "Modern" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png", title: "Master Bedroom Interior", category: "Premium" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png", title: "Kid's Bedroom Interior", category: "Cozy" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png", title: "Living Room Interior", category: "Commercial" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png", title: "Living Room Interior", category: "Exclusive" },
+    { src: "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png", title: "Parents Room Interior", category: "Luxury" }
+  ];
+
   return (
-    <div
-      className="ceiling-section"
-      style={{
-        padding: "40px 5%", // Mobile friendly padding
-        // backgroundImage: "url('/images/marble-bg.png')", // Path updated
-        // backgroundSize: 'cover',
-        // backgroundPosition: 'center',
-        // backgroundAttachment: 'fixed',
-        background: "rgb(235 235 235)",
-        overflow: "hidden",
-      }}
-    >
-      <Row
-        align="middle"
-        gutter={[40, 40]}
-        style={{ maxWidth: "1200px", margin: "0 auto" }}
-      >
-        <Col xs={24} md={12}>
-          <Space direction="vertical" size="middle">
-            <Text
-              strong
-              style={{
-                color: "red",
-                letterSpacing: "2px",
-                textTransform: "uppercase",
-              }}
-            >
-              Premium Interior Solutions
-            </Text>
-            <Title
-              level={2}
-              style={{ fontSize: "clamp(28px, 4vw, 42px)", lineHeight: "1", marginTop: '0px' }}
-            >
-              The Art of Silence and Light: <br />
-              <span style={{ color: "red" }}>Signature Ceilings</span>
-            </Title>
-            <Paragraph
-              style={{ fontSize: "18px", color: "#555", lineHeight: "1.8" }}
-            >
-              Transform your overhead space into a captivating masterpiece. Our
-              UrbaneLiving-certified installations offer sculpted architectural
-              depth and intimate, premium ambiance that lasts a lifetime.
-            </Paragraph>
-            <ul
-              style={{ color: "#666", paddingLeft: "20px", fontSize: "16px" }}
-            >
-              <li>100% Termite Proof</li>
-              <li>Fire Resistant Material</li>
-              <li>Seamless Lighting Integration</li>
-            </ul>
-          </Space>
-        </Col>
+    <div className="gallery-wrapper">
+      <div className="gallery-header">
+        <Title level={2} className="gallery-title">OUR MASTERPIECES</Title>
+        <div className="title-underline"></div>
+        <Paragraph className="gallery-subtitle">
+          Transforming spaces into experiences. Explore our latest interior and ceiling projects.
+        </Paragraph>
+      </div>
 
-        <Col xs={24} md={12}>
-          <div
-            style={{
-              padding: "12px",
-              background: "#fff",
-              borderRadius: "20px",
-              boxShadow: "0 25px 50px -12px rgba(0,0,0,0.15)",
-              transition: "transform 0.3s ease",
-            }}
-            className="hover-zoom"
-          >
-            {/* <img 
-              src="https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778833113/AQNqIaCU_-L4b5BOQTJLKgQS--Dum1Q4v5A_VsmLok7fcxrt0B7m8mnjduJVZOBeoKRQV_evQOl-oh-CAhZy26yyijtUaXsydmb4uoM_ra27o7.mp4" 
-              alt="Premium Ceiling Design" 
-              style={{ 
-                width: '100%', 
-                borderRadius: '12px',
-                display: 'block'
-              }}
-            /> */}
-            <video
-  autoPlay
-  muted
-  loop
-  playsInline
-  onCanPlayThrough={(e) => e.target.play()} // Ye line video ko normally chalne par majboor karegi
-  style={{
-    position: "relative",
-    top: 0,
-    left: 0,
-    width: "100%",
-    height: "100%",
-    objectFit: "cover",
-    zIndex: 1, // Isse 1 kar do taaki image box ke upar dikhe
-    borderRadius: "12px", // Border radius yahan bhi add kar do clean look ke liye
-  }}
->
-  <source src="https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778833113/AQNqIaCU_-L4b5BOQTJLKgQS--Dum1Q4v5A_VsmLok7fcxrt0B7m8mnjduJVZOBeoKRQV_evQOl-oh-CAhZy26yyijtUaXsydmb4uoM_ra27o7.mp4" />
-</video>
-          </div>
-        </Col>
-      </Row>
+      <Image.PreviewGroup>
+        <Row gutter={[24, 24]} className="gallery-row">
+          {galleryData.map((item, index) => (
+            <Col xs={24} sm={12} md={8} key={index}>
+              <div className="gallery-card">
+                <div className="image-container">
+                  <Image
+                    src={item.src}
+                    alt={item.title}
+                    className="gallery-main-img"
+                    preview={{ cover: <div className="custom-mask">VIEW PROJECT</div> }}
+                  />
+                  {/* Floating Info Overlay */}
+                  <div className="item-details">
+                    <Tag color="gold" className="category-tag">{item.category}</Tag>
+                    <h4 className="item-title">{item.title}</h4>
+                  </div>
+                </div>
+              </div>
+            </Col>
+          ))}
+        </Row>
+      </Image.PreviewGroup>
     </div>
   );
 };
 
-export default CeilingSection;
+export default GallerySection;

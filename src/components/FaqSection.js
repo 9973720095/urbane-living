@@ -4,7 +4,6 @@ import { PlusOutlined } from '@ant-design/icons';
 import './css/FaqSection.css';
 
 const { Title } = Typography;
-const { Panel } = Collapse;
 
 const FaqSection = () => {
   const faqData = [
@@ -43,20 +42,16 @@ const FaqSection = () => {
           
           <Collapse
             accordion
-            expandIconPosition="end"
+            expandIconPlacement="end"
             expandIcon={({ isActive }) => <PlusOutlined rotate={isActive ? 45 : 0} />}
             className="custom-faq-collapse"
-          >
-            {faqData.map((item) => (
-              <Panel 
-                header={item.question} 
-                key={item.key}
-                className="faq-panel"
-              >
-                <p>{item.answer}</p>
-              </Panel>
-            ))}
-          </Collapse>
+            items={faqData.map((item) => ({
+              key: item.key,
+              label: item.question,
+              className: 'faq-panel',
+              children: <p>{item.answer}</p>,
+            }))}
+          />
         </Col>
       </Row>
     </div>

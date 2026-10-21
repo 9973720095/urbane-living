@@ -29,7 +29,7 @@
     align-items: flex-start;
 }
 
-.side-title { color: #fff !important; font-weight: 800 !important; font-size: 32px !important; line-height: 20px !important; }
+.side-title { color: #fff !important; font-weight: 600 !important; font-size: 32px !important; line-height: 20px !important; }
 .side-subtitle { color: #f0f0f0; font-size: 14px; letter-spacing: 0.5px; }
 
 /* Background & Font for Right Side (Match ref-1) */
@@ -39,10 +39,10 @@
 }
 
 .form-header h3 {
-    font-weight: 700 !important;
-    color: #333 !important;
+    font-weight: 600 !important;
+    color: var(--brand-navy, #1F2A44) !important;
     margin-bottom: 25px !important;
-    font-family: 'Poppins', sans-serif; /* Clean font reference */
+    font-family: inherit;
 }
 
 /* Form Item & Border styling */
@@ -65,22 +65,36 @@
 
 .ref-style-form .ant-input:focus, 
 .ref-style-form .ant-select-focused .ant-select-selector {
-    border-bottom-color: #7b42f5 !important;
+    border-bottom-color: var(--brand-blue, #4167B3) !important;
+}
+
+/* antd v6 Select: same bottom-line style as the inputs */
+.ref-style-form .ant-select {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 1.5px solid #d9d9d9 !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    box-shadow: none !important;
+}
+
+.ref-style-form .ant-select-focused {
+    border-bottom-color: var(--brand-blue, #4167B3) !important;
 }
 
 /* Button style */
 .ref-submit-btn {
-    background: #1a1a1a !important; /* Black/Dark button as per premium reference */
+    background: var(--brand-red, #E40B12) !important; /* Logo red */
     border: none !important;
     height: 48px !important;
-    font-weight: 700 !important;
+    font-weight: 600 !important;
     letter-spacing: 1px;
     margin-top: 20px;
     border-radius: 4px !important;
 }
 
 .ref-submit-btn:hover {
-    background: #333 !important;
+    background: var(--brand-red-dark, #C2090F) !important;
     transform: translateY(-1px);
 }
 

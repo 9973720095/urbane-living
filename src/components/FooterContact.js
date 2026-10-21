@@ -19,7 +19,7 @@ const FooterContact = () => {
     <div
       className="footer-contact"
       style={{
-        background: "#001529",
+        background: "#1F2A44",
         color: "#fff",
         padding: "60px 20px 20px",
       }}
@@ -47,7 +47,7 @@ const FooterContact = () => {
             size="large"
             href="tel:+91 1800-123-6407"
             style={{
-              background: "#006699",
+              background: "#E40B12",
               border: "none",
               borderRadius: "8px",
               fontWeight: 600,
@@ -115,8 +115,8 @@ const FooterContact = () => {
               <a href="tel:+91-1800-123-6407" style={linkStyle}>
                 <PhoneFilled style={{ marginRight: '8px' }} />+91-1800-123-6407
               </a>
-              <a href="mailto:urbanelivingofficial@gmail.com" style={linkStyle}>
-                <MailOutlined style={{ marginRight: '8px' }} />urbanelivingofficial@gmail.com
+              <a href="mailto:sales1@urbaneliving.in" style={linkStyle}>
+                <MailOutlined style={{ marginRight: '8px' }} />sales1@urbaneliving.in
               </a>
               <Text style={linkStyle}>G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad</Text>
             </div>
@@ -146,7 +146,7 @@ const FooterContact = () => {
           <a target='_blank' rel="noopener noreferrer" href="https://www.youtube.com/@urbaneliving-ncr" style={iconStyle}>
             <YoutubeFilled />
           </a>
-          <a target="_blank" rel="noopener noreferrer" href="https://x.com/UrbaneLiving001">
+          <a target="_blank" rel="noopener noreferrer" href="https://x.com/UrbaneLiving001" style={iconStyle}>
             <TwitterOutlined />
           </a>
           <a target='_blank' rel="noopener noreferrer" href="https://www.instagram.com/urbaneliving.in" style={iconStyle}> 

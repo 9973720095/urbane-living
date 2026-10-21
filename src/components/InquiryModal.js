@@ -5,31 +5,38 @@ import './css/InquiryModal.css';
 const { Title, Text } = Typography;
 const { Option } = Select;
 
+// Local backend on localhost, Render in production (same as the rest of the site)
+const API_BASE_URL = window.location.hostname === 'localhost'
+  ? 'http://localhost:5000'
+  : 'https://urbane-living.onrender.com';
+
 const InquiryModal = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onFinish = async (values) => {
     try {
-      const response = await fetch('https://urbane-living.onrender.com/api/save-lead', {
+      const response = await fetch(`${API_BASE_URL}/api/save-lead`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(values),
       });
 
       if (response.ok) {
-        message.success("Design request sent successfully!");
+        messageApi.success("Design request sent successfully!");
         form.resetFields();
         onClose(); 
       } else {
-        message.error("Server error. Please try again.");
+        messageApi.error("Server error. Please try again.");
       }
     } catch (error) {
-      console.error("Connection Error:", error);
-      message.error("Backend connection failed!");
+      messageApi.error("Backend connection failed!");
     }
   };
 
   return (
+    <>
+    {contextHolder}
     <Modal 
       className='quick-inquiry-modern' 
       open={isOpen} 
@@ -100,6 +107,7 @@ const InquiryModal = ({ isOpen, onClose }) => {
         </Col>
       </Row>
     </Modal>
+    </>
   );
 };
 

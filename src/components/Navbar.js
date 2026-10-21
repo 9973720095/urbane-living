@@ -10,6 +10,15 @@ const Navbar = ({ onOpenForm }) => {
   const [visible, setVisible] = useState(false);
   const location = useLocation(); 
   const [current, setCurrent] = useState('1');
+  const [isFixed, setIsFixed] = useState(false);
+
+  // Header becomes fixed after scrolling down a little
+  useEffect(() => {
+    const onScroll = () => setIsFixed(window.scrollY > 120);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const path = location.pathname;
@@ -47,7 +56,9 @@ const Navbar = ({ onOpenForm }) => {
   ];
 
   return (
-    <Header className="custom-header is-old">
+    <>
+    {isFixed && <div className="header-spacer" />}
+    <Header className={`custom-header is-old${isFixed ? ' is-fixed' : ''}`}>
       <Link to="/" className='logo relative inline-block overflow-hidden rounded-md'>
         <img 
           src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777899675/UrbaneLiving_Logo_6_1_dfh2r1.png"
@@ -93,6 +104,7 @@ const Navbar = ({ onOpenForm }) => {
         </Button>
       </Drawer>
     </Header>
+    </>
   );
 };
 

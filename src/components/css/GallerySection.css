@@ -10,16 +10,16 @@
 
 .gallery-title {
     font-size: 38px !important;
-    font-weight: 800 !important;
+    font-weight: 600 !important;
     letter-spacing: 2px;
     margin-bottom: 5px !important;
-    color: #001529;
+    color: var(--brand-navy, #1F2A44) !important;
 }
 
 .title-underline {
     width: 60px;
     height: 4px;
-    background: #eb595f;
+    background: var(--brand-red, #E40B12);
     margin: 10px auto 20px;
     border-radius: 2px;
 }
@@ -61,7 +61,7 @@
 .custom-mask {
     font-weight: 600;
     letter-spacing: 1px;
-    background: rgba(0, 21, 41, 0.6);
+    background: rgba(31, 42, 68, 0.6);
     height: 100%;
     width: 100%;
     display: flex;

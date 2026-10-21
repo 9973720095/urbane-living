@@ -1,13 +1,103 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base ----------
+   No global reset on purpose: pages not yet converted to Tailwind
+   (Estimate tables, Admin, etc.) keep their current look. */
+@layer base {
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: theme('fontFamily.sans');
+    color: theme('colors.brand.navy');
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  input, button, textarea, select { font-family: inherit; }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after { animation: none !important; transition: none !important; }
+  }
+}
+
+/* ---------- antd internals that utility classes can't reach ---------- */
+@layer components {
+  /* Navbar menu */
+  .nav-menu.ant-menu { border-bottom: 0 !important; background: transparent !important; line-height: 70px; }
+  .nav-menu .ant-menu-item,
+  .nav-menu .ant-menu-submenu-title,
+  .nav-menu .ant-menu-item a { color: theme('colors.brand.navy'); font-size: 15px; font-weight: 500; }
+  .nav-menu .ant-menu-item::after,
+  .nav-menu .ant-menu-submenu::after { display: none !important; }
+  .nav-menu .ant-menu-item-selected,
+  .nav-menu .ant-menu-item-selected a,
+  .nav-menu .ant-menu-submenu-selected > .ant-menu-submenu-title,
+  .nav-menu .ant-menu-item:hover,
+  .nav-menu .ant-menu-item:hover a,
+  .nav-menu .ant-menu-submenu-title:hover { color: theme('colors.brand.red') !important; }
+
+  /* Mobile drawer menu */
+  .nav-drawer .ant-menu { border-inline-end: 0 !important; }
+  .nav-drawer .ant-menu-item,
+  .nav-drawer .ant-menu-submenu-title { font-size: 15px; font-weight: 500; color: theme('colors.brand.navy'); }
+  .nav-drawer .ant-menu-item-selected { background: rgba(228, 11, 18, 0.06) !important; }
+  .nav-drawer .ant-menu-item-selected,
+  .nav-drawer .ant-menu-item-selected a { color: theme('colors.brand.red') !important; }
+
+  /* Hero form: country code select sitting inside the phone box */
+  .country-code-select.ant-select {
+    width: 104px; height: 46px; padding: 0 10px 0 12px; flex-shrink: 0;
+    background: #eef0f5; border-right: 1px solid #e3e6ee; border-radius: 0;
+    font-size: 13px; font-weight: 500; color: #4b5563; box-shadow: none !important;
+  }
+  .country-code-select .ant-select-content { display: flex; align-items: center; }
+  .country-code-dropdown .ant-select-item-option-content { display: flex; }
+
+  /* Inquiry modal */
+  .inquiry-modal .ant-modal-content,
+  .inquiry-modal .ant-modal-container { padding: 0 !important; overflow: hidden; border-radius: 18px; }
+  .inquiry-modal .ant-modal-close { top: 16px; right: 16px; background: #fff; border-radius: 999px; }
+  .inquiry-form .ant-form-item-label > label {
+    font-size: 12px; font-weight: 600; color: #6b7280; text-transform: uppercase; letter-spacing: 0.4px;
+  }
+  .inquiry-form .ant-input,
+  .inquiry-form .ant-select {
+    background: transparent !important; border: 0 !important; border-bottom: 1.5px solid #d9d9d9 !important;
+    border-radius: 0 !important; padding-left: 0 !important; box-shadow: none !important;
+  }
+  .inquiry-form .ant-input:focus,
+  .inquiry-form .ant-select-focused { border-bottom-color: theme('colors.brand.blue') !important; }
+
+  /* Spaces carousel: equal-height cards */
+  .spaces-carousel .slick-track { display: flex !important; align-items: stretch !important; }
+  .spaces-carousel .slick-slide { height: auto !important; display: flex !important; }
+  .spaces-carousel .slick-slide > div { display: flex !important; width: 100%; }
+  .spaces-carousel .slick-dots li button { background: theme('colors.brand.red') !important; opacity: 0.3; }
+  .spaces-carousel .slick-dots li.slick-active button { opacity: 1; }
+
+  /* FAQ accordion */
+  .faq-collapse.ant-collapse { background: transparent !important; border: 0 !important; }
+  .faq-collapse .ant-collapse-item {
+    background: #fff; margin-bottom: 12px; border: 1px solid #e8ebf2 !important;
+    border-radius: 14px !important; overflow: hidden; transition: box-shadow 0.2s ease;
+  }
+  .faq-collapse .ant-collapse-item-active { box-shadow: theme('boxShadow.card'); border-color: rgba(65, 103, 179, 0.3) !important; }
+  .faq-collapse .ant-collapse-header {
+    padding: 18px 20px !important; font-size: 16px; font-weight: 500; color: theme('colors.brand.navy') !important;
+  }
+  .faq-collapse .ant-collapse-expand-icon { color: theme('colors.brand.red'); font-size: 16px; }
+  .faq-collapse .ant-collapse-content { background: #fff !important; border-top: 1px solid #f0f2f7 !important; }
+  .faq-collapse .ant-collapse-content-box { padding: 16px 20px !important; color: #4b5563; line-height: 1.7; }
+
+  /* Gallery image fills its card */
+  .gallery-img.ant-image,
+  .gallery-img .ant-image-img { width: 100% !important; height: 100% !important; object-fit: cover; }
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

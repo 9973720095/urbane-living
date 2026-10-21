@@ -8,19 +8,19 @@ const ClientStories = ({ onOpenForm }) => {
   const stories = [
     {
       id: 1,
-      videoUrl: "https://www.youtube.com/embed/evkW_kZdf2s",
+      videoUrl: "https://res.cloudinary.com/nzqefovs/video/upload/v1792578318/1723703873641441_1.mp4",
       quote: `"We wanted our new home to reflect contemporary and modern styles, inspired by designs we loved, perfectly curated by UrbaneLiving."`,
       author: "Dr. Lipika and Dr. Satendra"
     },
     {
       id: 2,
-      videoUrl: "https://www.youtube.com/embed/ICvpClnA7Ts",
+      videoUrl: "https://res.cloudinary.com/diosq0s7w/video/upload/v1792576908/urbane_living_logo_download_alxjjp.mp4",
       quote: `"Combining our family’s heritage with a modern look was our dream, and UrbaneLiving helped make it a reality."`,
       author: "Amrish"
     },
     {
       id: 3,
-      videoUrl: "https://www.youtube.com/embed/WpdoW7NXsbU",
+      videoUrl: "https://res.cloudinary.com/nzqefovs/video/upload/v1792578997/video_20260922_194112_1.mp4",
       quote: `"Thanks to UrbaneLiving, our new home seamlessly blends heritage beauty with modern style, reflecting our taste."`,
       author: "Neha and Manish"
     }
@@ -62,13 +62,13 @@ const ClientStories = ({ onOpenForm }) => {
       <div style={{ width: '100%', maxWidth: '1200px' }}>
         
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '50px', flexWrap: 'wrap', gap: '20px' }}>
-          <Title level={2} style={{ fontSize: '38px', fontWeight: 800, color: '#1a1a1a', margin: 0, lineHeight: 1.2 }}>
+          <Title level={2} style={{ fontSize: '38px', fontWeight: 600, color: '#1F2A44', margin: 0, lineHeight: 1.2 }}>
             Heard from us? Now it’s time to hear our <br /> clients’ stories
           </Title>
           <Button 
             type="primary" 
             onClick={onOpenForm}
-            style={{ backgroundColor: '#ff0000', borderColor: '#ff0000', height: '48px', padding: '0 28px', fontSize: '15px', fontWeight: 700, borderRadius: '100px', boxShadow: '0 4px 15px rgba(255, 0, 0, 0.3)' }}
+            style={{ backgroundColor: '#E40B12', borderColor: '#E40B12', height: '48px', padding: '0 28px', fontSize: '15px', fontWeight: 600, borderRadius: '100px', boxShadow: '0 4px 15px rgba(228, 11, 18, 0.25)' }}
           >
             BOOK FREE CONSULTATION
           </Button>
@@ -95,7 +95,7 @@ const ClientStories = ({ onOpenForm }) => {
                 <Paragraph style={{ fontSize: '14px', color: '#444444', fontStyle: 'italic', lineHeight: 1.5, textAlign: 'center', marginBottom: '8px' }}>
                   {item.quote}
                 </Paragraph>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: '#1a1a1a', display: 'block', textAlign: 'center' }}>
+                <span style={{ fontSize: '13px', fontWeight: 600, color: '#1F2A44', display: 'block', textAlign: 'center' }}>
                   — {item.author}
                 </span>
               </div>
@@ -107,7 +107,7 @@ const ClientStories = ({ onOpenForm }) => {
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '40px' }}>
             <Button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} icon={<LeftOutlined />} style={{ borderRadius: '50%', width: '40px', height: '40px' }} />
             {Array.from({ length: totalPages }, (_, index) => (
-              <button key={index + 1} onClick={() => setCurrentPage(index + 1)} style={{ width: '40px', height: '40px', borderRadius: '50%', border: 'none', backgroundColor: currentPage === index + 1 ? '#ff0000' : '#f0f2f5', color: currentPage === index + 1 ? '#ffffff' : '#333333', fontWeight: 700, cursor: 'pointer' }}>{index + 1}</button>
+              <button key={index + 1} onClick={() => setCurrentPage(index + 1)} style={{ width: '40px', height: '40px', borderRadius: '50%', border: 'none', backgroundColor: currentPage === index + 1 ? '#E40B12' : '#f0f2f5', color: currentPage === index + 1 ? '#ffffff' : '#333333', fontWeight: 700, cursor: 'pointer' }}>{index + 1}</button>
             ))}
             <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} icon={<RightOutlined />} style={{ borderRadius: '50%', width: '40px', height: '40px' }} />
           </div>

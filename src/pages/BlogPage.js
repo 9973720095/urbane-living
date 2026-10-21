@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Row, Col, Typography, Breadcrumb, Spin, Avatar, Pagination } from 'antd'; // Pagination add kiya
+import React, { useState, useEffect, useMemo } from 'react';
+import { Pagination } from 'antd';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './BlogPage.css';
+import PageBanner from '../components/PageBanner';
+import ClientReviews from '../components/ClientReviews';
+import useSeo from '../hooks/useSeo';
+import { API_BASE_URL, blogPage, siteUrl } from '../data/siteData';
 
-const { Title, Paragraph, Text } = Typography;
+const pageSize = 6; // 6 cards ke baad pagination aayega
+
+const formatDate = (date) => (date ? new Date(date).toLocaleDateString('en-GB') : '');
 
 const BlogPage = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1); // Pagination state
-  const pageSize = 12; // 12 cards ke baad pagination aayega
-
-  const API_BASE_URL = window.location.hostname === 'localhost' 
-    ? 'http://localhost:5000' 
-    : 'https://urbane-living.onrender.com';
-
-  const bannerImg = "https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg";
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -30,12 +28,40 @@ const BlogPage = () => {
       }
     };
     fetchBlogs();
-  }, [API_BASE_URL]);
+  }, []);
+
+  // SEO: page meta + Blog / Breadcrumb structured data (blog list from the API)
+  const schema = useMemo(() => [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'Blog',
+      name: blogPage.seo.title,
+      url: `${siteUrl}${blogPage.seo.path}`,
+      blogPost: blogs.slice(0, 20).map((blog) => ({
+        '@type': 'BlogPosting',
+        headline: blog.title,
+        description: blog.description,
+        image: blog.image,
+        datePublished: blog.createdAt,
+        author: { '@type': 'Person', name: blog.author || 'Urbane Living' },
+        url: `${siteUrl}/blog/${blog._id}`,
+      })),
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${siteUrl}/` },
+        { '@type': 'ListItem', position: 2, name: 'Blog', item: `${siteUrl}${blogPage.seo.path}` },
+      ],
+    },
+  ], [blogs]);
+  useSeo({ ...blogPage.seo, schema });
 
   // Pagination Change Handler
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    window.scrollTo({ top: 400, behavior: 'smooth' }); // Banner ke niche scroll karega
+    document.getElementById('blog-list')?.scrollIntoView({ behavior: 'smooth' }); // Banner ke niche scroll karega
   };
 
   // Logic to slice blogs for current page
@@ -43,70 +69,92 @@ const BlogPage = () => {
   const indexOfFirstBlog = indexOfLastBlog - pageSize;
   const currentBlogs = blogs.slice(indexOfFirstBlog, indexOfLastBlog);
 
-  if (loading) return <div className="loader-container"><Spin size="large" description="Loading Trends..." /></div>;
-
-  const breadcrumbItems = [
-    { title: <Link to="/">Home</Link> },
-    { title: 'Blog' }
-  ];
-
   return (
-    <div className="blog-wrapper">
-      <div className="modern-hero" style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${bannerImg})` }}>
-        <div className="hero-overlay-box">
-          <Title level={1} className="hero-main-title">OUR BLOG</Title>
-          <div className="hero-divider"></div>
-          <Paragraph className="hero-sub-para">Upgrade your home with modern renovation ideas and expert tips.</Paragraph>
+    <div className="bg-[#fdfdfd]">
+      <PageBanner {...blogPage.banner} />
+
+      <section id="blog-list" aria-labelledby="blog-list-title" className="scroll-mt-20 px-4 pb-16 pt-8 sm:px-6 lg:px-[8%] lg:pt-12">
+        <div className="mx-auto max-w-[1300px]">
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb" className="mb-6 text-sm">
+            <ol className="m-0 flex list-none items-center gap-2 p-0 text-gray-500">
+              <li><Link to="/" className="text-gray-500 no-underline hover:text-brand-red">Home</Link></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page" className="font-medium text-brand-navy">Blog</li>
+            </ol>
+          </nav>
+
+          <h2 id="blog-list-title" className="m-0 mb-8 text-[24px] font-semibold text-brand-navy sm:text-[30px]">
+            {blogPage.listTitle}
+          </h2>
+
+          {loading ? (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8" aria-busy="true">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div key={i} className="h-[420px] animate-pulse rounded-2xl bg-white shadow-card" />
+              ))}
+            </div>
+          ) : currentBlogs.length === 0 ? (
+            <p className="m-0 rounded-2xl bg-white px-6 py-12 text-center text-gray-500 shadow-card">
+              New articles are coming soon.
+            </p>
+          ) : (
+            <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {currentBlogs.map((blog) => (
+                <li key={blog._id}>
+                  <Link to={`/blog/${blog._id}`} className="group block h-full no-underline">
+                    <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 group-hover:-translate-y-2 group-hover:shadow-card-hover">
+                      <div className="relative h-[210px] overflow-hidden sm:h-[230px] lg:h-[250px]">
+                        <img
+                          src={blog.image || "https://via.placeholder.com/400x250"}
+                          alt={blog.title}
+                          loading="lazy"
+                          className="block h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                        />
+                        <span className="absolute left-4 top-4 rounded-md bg-brand-red px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-cta">
+                          {blog.category || 'Interior Design'}
+                        </span>
+                      </div>
+
+                      <div className="flex flex-1 flex-col p-5">
+                        <h3 className="m-0 mb-2.5 line-clamp-2 min-h-[2.6em] text-lg font-semibold leading-snug text-brand-navy transition group-hover:text-brand-red sm:text-xl">
+                          {blog.title}
+                        </h3>
+                        <p className="m-0 line-clamp-3 min-h-[4.5em] flex-1 text-sm leading-relaxed text-gray-500">
+                          {blog.description}
+                        </p>
+
+                        <div className="mt-4 flex items-center justify-between border-0 border-t border-solid border-gray-100 pt-4">
+                          <span className="flex items-center gap-2 text-[13px] font-semibold text-gray-700">
+                            <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-red text-[10px] font-bold text-white">UL</span>
+                            Urbane Living
+                          </span>
+                          <time dateTime={blog.createdAt} className="text-xs text-gray-400">{formatDate(blog.createdAt)}</time>
+                        </div>
+                      </div>
+                    </article>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {/* Pagination Section Center Mein */}
+          {blogs.length > pageSize && (
+            <nav aria-label="Blog pages" className="mt-12 flex justify-center">
+              <Pagination
+                current={currentPage}
+                total={blogs.length}
+                pageSize={pageSize}
+                onChange={handlePageChange}
+                showSizeChanger={false}
+              />
+            </nav>
+          )}
         </div>
-      </div>
+      </section>
 
-      <div className="container-padding">
-        <Breadcrumb items={breadcrumbItems} className="modern-breadcrumb" />
-        
-        {/* currentBlogs map kar rahe hain pagination ke liye */}
-        <Row gutter={[32, 48]}>
-          {currentBlogs.map((blog) => (
-            <Col xs={24} sm={12} md={8} key={blog._id}>
-              <Link to={`/blog/${blog._id}`}>
-                <Card
-                  hoverable
-                  className="premium-blog-card"
-                  cover={
-                    <div className="card-img-container">
-                      <img alt={blog.title} src={blog.image || "https://via.placeholder.com/400x250"} className="modern-card-img" />
-                      <div className="modern-ticker">{blog.category || 'Interior Design'}</div>
-                    </div>
-                  }
-                >
-                  <Title level={4} className="card-blog-title" ellipsis={{ rows: 2 }}>{blog.title}</Title>
-                  <Paragraph className="card-blog-desc" ellipsis={{ rows: 3 }}>{blog.description}</Paragraph>
-                  
-                  <div className="card-footer-branding">
-                    <div className="author-info">
-                      <Avatar size="small" src="https://urbaneliving.in/wp-content/uploads/2024/07/cropped-Untitled-design-87-png.webp" />
-                      <Text className="author-name">Urbane Living</Text>
-                    </div>
-                    <Text className="blog-date">{new Date(blog.createdAt).toLocaleDateString('en-GB')}</Text>
-                  </div>
-                </Card>
-              </Link>
-            </Col>
-          ))}
-        </Row>
-
-        {/* Pagination Section Center Mein */}
-        {blogs.length > pageSize && (
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '60px' }}>
-            <Pagination
-              current={currentPage}
-              total={blogs.length}
-              pageSize={pageSize}
-              onChange={handlePageChange}
-              showSizeChanger={false}
-            />
-          </div>
-        )}
-      </div>
+      <ClientReviews />
     </div>
   );
 };

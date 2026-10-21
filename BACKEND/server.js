@@ -1,6 +1,5 @@
 // Step 1: Configuration for Path & Environment
 const path = require('path');
-// Path fix: Ye root folder se .env file ko pick karega
 require('dotenv').config({ path: path.resolve(__dirname, '../.env') }); 
 
 const express = require('express');
@@ -13,6 +12,12 @@ const bedroomRoutes = require('./routes/bedroomRoutes');
 const livingRoutes = require('./routes/livingRoutes');
 const wardrobeRoutes = require('./routes/wardrobeRoutes');
 const kitchenRoutes = require('./routes/kitchenRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
+
+// Google Sheet sync
+const Blog = require('./models/Blog');
+const Review = require('./models/Review');
+const { startSheetSync, syncAll, getLastSyncResult } = require('./sheetSync');
 
 const app = express();
 
@@ -24,6 +29,8 @@ const currentEnv = process.env.NODE_ENV || 'development';
 ========================= */
 app.use(cors({
   origin: [
+    "https://urbaneliving.in",
+    "https://www.urbaneliving.in",
     "https://ncr.urbaneliving.in",
     "http://ncr.urbaneliving.in",
     "https://urbane-living.vercel.app",
@@ -37,6 +44,7 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 
+
 /* =========================
    MONGODB CONNECTION 
 ========================= */
@@ -49,7 +57,10 @@ if (!mongoURI) {
 }
 
 mongoose.connect(mongoURI, { dbName: 'UrbaneLiving' })
-    .then(() => console.log(`✅ MongoDB Connected | Mode: ${currentEnv}`))
+    .then(() => {
+        console.log(`✅ MongoDB Connected | Mode: ${currentEnv}`);
+        startSheetSync({ designs: Design, blogs: Blog, reviews: Review }); // Google Sheet -> website (every SHEET_SYNC_MINUTES)
+    })
     .catch(err => console.error("❌ DB Error:", err.message));
 
 /* =========================
@@ -71,6 +82,8 @@ const designSchema = new mongoose.Schema({
     category: String, 
     style: String,    
     image: String,
+    sheetKey: { type: String, index: true }, // Google Sheet "ID" column (empty for admin-added designs)
+    source: String,                          // 'sheet' when it came from Google Sheet
     createdAt: { type: Date, default: Date.now }
 }, { collection: 'designs' });
 const Design = mongoose.model("Design", designSchema);
@@ -83,6 +96,7 @@ app.use('/api/bedroom', bedroomRoutes);
 app.use('/api/living', livingRoutes);
 app.use('/api/wardrobe', wardrobeRoutes);
 app.use('/api/kitchen', kitchenRoutes);
+app.use('/api/reviews', reviewRoutes);
 
 app.get('/', (req, res) => {
     res.send(`🚀 Urbane Living Backend is active [${currentEnv}]`);
@@ -140,6 +154,25 @@ app.get('/api/designs', async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
+});
+
+/* ---------- GOOGLE SHEET SYNC APIs ---------- */
+// "Sync Now" (instant sync instead of waiting SHEET_SYNC_MINUTES)
+app.post('/api/sheet-sync', async (req, res) => {
+    try {
+        if (process.env.SHEET_SYNC_KEY && req.get('x-sync-key') !== process.env.SHEET_SYNC_KEY) {
+            return res.status(401).json({ error: 'Invalid sync key' });
+        }
+        const results = await syncAll({ designs: Design, blogs: Blog, reviews: Review });
+        res.json({ message: '✅ Sheet synced', results });
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+// Last sync result per tab (time, new / updated / removed, row errors)
+app.get('/api/sheet-sync/status', (req, res) => {
+    res.json({ last: getLastSyncResult() });
 });
 
 app.post('/api/designs/add', async (req, res) => {

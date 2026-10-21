@@ -27,6 +27,7 @@ import FooterContact from './components/FooterContact';
 import InquiryModal from './components/InquiryModal';
 import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
+import PageBanner from './components/PageBanner';
 import FalseCeilingPage from './pages/FalseCeilingPage';
 import AboutUsPage from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
@@ -43,6 +44,7 @@ import RefundPolicyPage from './pages/RefundPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import SupportPage from './pages/SupportPage';
 import EstimatePage from './pages/Estimate';
+import StyleQuiz from './components/StyleQuiz';
 
 
 const { Content } = Layout;
@@ -219,8 +221,9 @@ function App() {
 
       <CeilingSection />
       <BeforeAfter />
+      <StyleQuiz onOpenForm={handleOpen} />
       <MarketOfferings onOpenForm={handleOpen} />
-      <GallerySection />
+      {/* <GallerySection /> */}
 
       <div className="blend-section-wrapper" style={{ padding: '40px 20px', display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff' }}>
         <div style={{ 
@@ -281,8 +284,8 @@ function App() {
 
         </div>
       </div>
-
       <ProcessSection />
+      {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
       <FaqSection />
     </>

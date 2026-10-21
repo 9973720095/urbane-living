@@ -1,288 +1,254 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  Slider, 
-  InputNumber, 
-  Row, 
-  Col, 
-  Card, 
-  Typography, 
-  Divider, 
-  Button, 
-  Tag, 
-  Tooltip 
-} from 'antd';
-import { 
-  CalculatorOutlined, 
-  CheckCircleFilled, 
-  InfoCircleOutlined, 
+import { Slider, InputNumber, Tooltip } from 'antd';
+import {
+  CalculatorOutlined,
+  CheckCircleFilled,
+  InfoCircleOutlined,
   ThunderboltOutlined,
   BlockOutlined,
   WhatsAppOutlined,
-  FileProtectOutlined
+  FileProtectOutlined,
+  ArrowRightOutlined,
 } from '@ant-design/icons';
-import '../FalseCeilingCSS/CostEstimator.css';
+import { estimator, contact } from '../../data/siteData';
 
+const formatINR = (n) => `₹${Number(n || 0).toLocaleString('en-IN')}`;
 
-const { Title, Text, Paragraph } = Typography;
+const CostEstimator = ({ onOpenForm }) => {
+  const { materials, designTiers, lightRate } = estimator;
 
-const CostEstimator = () => {
   // State for Calculator
-  const [area, setArea] = useState(350);
-  const [material, setMaterial] = useState('Premium Gypsum');
+  const [area, setArea] = useState(estimator.defaultArea);
+  const [material, setMaterial] = useState(estimator.defaultMaterial);
   const [complexity, setComplexity] = useState(1.0); // 1.0: Basic, 1.2: Standard, 1.5: Luxury
-  const [lightPoints, setLightPoints] = useState(10);
-  // WhatsApp Handler Function
-  const handleWhatsAppClick = () => {
-    window.open("https://wa.me/919105052454", "_blank");
-  };
-
-  // Configuration Constants
-  const materials = [
-    { name: 'Standard POP', rate: 95, color: '#f0f2f5' },
-    { name: 'Premium Gypsum', rate: 115, color: '#e6f7ff' },
-    { name: 'PVC Panel', rate: 145, color: '#f6ffed' },
-    { name: 'Luxe Wooden', rate: 210, color: '#fff7e6' }
-  ];
-
-  const designTiers = [
-    { label: 'Basic', sub: 'Single Level', value: 1.0 },
-    { label: 'Standard', sub: 'Cove Lights', value: 1.2 },
-    { label: 'Luxury', sub: 'Multi-Tier', value: 1.5 }
-  ];
-
-  const LIGHT_RATE = 450;
+  const [lightPoints, setLightPoints] = useState(estimator.defaultLightPoints);
 
   // Real-time Calculations
   const calculations = useMemo(() => {
+    const safeArea = area || 0;
     const selectedRate = materials.find(m => m.name === material)?.rate || 0;
-    const baseCost = area * selectedRate * complexity;
-    const lightingCost = lightPoints * LIGHT_RATE;
+    const baseCost = safeArea * selectedRate * complexity;
+    const lightingCost = (lightPoints || 0) * lightRate;
     const total = baseCost + lightingCost;
-    
+
     return {
       base: Math.round(baseCost),
       lighting: Math.round(lightingCost),
       total: Math.round(total),
-      perSqFt: Math.round(total / area)
+      perSqFt: safeArea ? Math.round(total / safeArea) : 0
     };
-  }, [area, material, complexity, lightPoints]);
+  }, [area, material, complexity, lightPoints, materials, lightRate]);
+
+  const tierLabel = designTiers.find((t) => t.value === complexity)?.label || '';
+
+  // WhatsApp opens with the customer's estimate already typed in
+  const handleWhatsAppClick = () => {
+    const text = `Hi Urbane Living, I used the false ceiling estimator:\n• Area: ${area} sq ft\n• Material: ${material}\n• Design: ${tierLabel}\n• LED points: ${lightPoints}\n• Estimate: ${formatINR(calculations.total)}\nPlease share the detailed quote.`;
+    window.open(`${contact.whatsappHref}?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const stepTitle = 'm-0 mb-4 block text-[15px] font-semibold text-brand-navy sm:text-base';
 
   return (
-    <div style={{ padding: '60px 20px', background: '#fff' }}>
-      <div style={{ maxWidth: 1200, margin: '0 auto' }}>
-        
-        {/* Header Section */}
-        <div style={{ textAlign: 'center', marginBottom: 50 }}>
-          <Tag color="blue" icon={<CalculatorOutlined />} style={{ padding: '4px 12px', borderRadius: 4, marginBottom: 16 }}>
-            SMART PRICING ENGINE
-          </Tag>
-          <Title level={2} style={{ fontSize: '2.5rem', fontWeight: 800, margin: 0 }}>
-            Instant Cost Estimator
-          </Title>
-          <Paragraph type="secondary" style={{ fontSize: 18, marginTop: 10 }}>
-            Get a transparent, itemized quote for your interior ceiling project.
-          </Paragraph>
+    <section aria-labelledby="estimator-title" className="bg-white px-4 py-12 sm:px-5 lg:py-16">
+      <div className="mx-auto max-w-[1200px]">
+
+        {/* Header */}
+        <div className="mb-8 text-center sm:mb-12">
+          <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold tracking-wider text-brand-blue">
+            <CalculatorOutlined /> {estimator.tag}
+          </span>
+          <h2 id="estimator-title" className="m-0 text-[28px] font-semibold text-brand-navy sm:text-4xl lg:text-[40px]">
+            {estimator.title}
+          </h2>
+          <p className="m-0 mx-auto mt-3 max-w-[560px] text-[15px] text-gray-500 sm:text-lg">
+            {estimator.subtitle}
+          </p>
         </div>
 
-        <Row gutter={[40, 40]}>
-          {/* Left Column: Controls */}
-          <Col xs={24} lg={15}>
-            <div style={{ background: '#f8fafc', padding: 40, borderRadius: 32, border: '1px solid #edf2f7' }}>
-              
-              {/* Step 1: Area Selection */}
-              <div style={{ marginBottom: 40 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 15 }}>
-                  <Text strong style={{ fontSize: 16 }}>1. Define Total Area (Sq. Ft.)</Text>
-                  <InputNumber 
-                    min={50} 
-                    max={5000} 
-                    value={area} 
-                    onChange={setArea} 
-                    style={{ borderRadius: 8, width: 100 }}
-                    formatter={value => `${value} ft²`}
-                  />
-                </div>
-                <Slider 
-                  min={50} 
-                  max={2500} 
-                  step={10} 
-                  value={area} 
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,15fr)_minmax(0,9fr)] lg:items-start lg:gap-10">
+          {/* Left: controls */}
+          <div className="rounded-3xl border border-solid border-[#edf2f7] bg-[#f8fafc] p-5 sm:p-8 lg:p-10">
+
+            {/* 1. Area */}
+            <div className="mb-9">
+              <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+                <label htmlFor="estimator-area" className="text-[15px] font-semibold text-brand-navy sm:text-base">
+                  1. Define Total Area (Sq. Ft.)
+                </label>
+                <InputNumber
+                  id="estimator-area"
+                  min={estimator.minArea}
+                  max={estimator.maxArea}
+                  value={area}
                   onChange={setArea}
-                  trackStyle={{ background: '#1890ff', height: 6 }}
-                  handleStyle={{ borderColor: '#1890ff', height: 20, width: 20 }}
+                  className="!w-[120px] !rounded-lg"
+                  formatter={value => `${value} ft²`}
+                  parser={value => (value || '').replace(/[^\d]/g, '')}
                 />
               </div>
+              <Slider
+                min={estimator.minArea}
+                max={estimator.sliderMax}
+                step={10}
+                value={area}
+                onChange={setArea}
+                aria-label="Area in square feet"
+              />
+            </div>
 
-              {/* Step 2: Material Selection */}
-              <div style={{ marginBottom: 40 }}>
-                <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 20 }}>
-                  2. Select Material Grade <Tooltip title="Rates vary based on durability and finish quality"><InfoCircleOutlined /></Tooltip>
-                </Text>
-                <Row gutter={[12, 12]}>
-                  {materials.map(m => (
-                    <Col xs={12} sm={6} key={m.name}>
-                      <div 
-                        onClick={() => setMaterial(m.name)}
-                        style={{
-                          background: material === m.name ? m.color : '#fff',
-                          border: `2px solid ${material === m.name ? '#1890ff' : '#e2e8f0'}`,
-                          padding: '16px 10px',
-                          borderRadius: 16,
-                          textAlign: 'center',
-                          cursor: 'pointer',
-                          transition: 'all 0.3s ease',
-                          height: '100%'
-                        }}
-                      >
-                        <BlockOutlined style={{ fontSize: 24, color: material === m.name ? '#1890ff' : '#94a3b8', marginBottom: 8 }} />
-                        <Text strong style={{ display: 'block', fontSize: 12 }}>{m.name}</Text>
-                        <Text type="secondary" style={{ fontSize: 10 }}>₹{m.rate}/sqft</Text>
-                      </div>
-                    </Col>
-                  ))}
-                </Row>
+            {/* 2. Material */}
+            <div className="mb-9">
+              <span className={stepTitle}>
+                2. Select Material Grade{' '}
+                <Tooltip title="Rates vary based on durability and finish quality">
+                  <InfoCircleOutlined className="text-gray-400" />
+                </Tooltip>
+              </span>
+              <div className="grid grid-cols-2 gap-3 sm:grid-cols-4" role="radiogroup" aria-label="Material grade">
+                {materials.map(m => {
+                  const active = material === m.name;
+                  return (
+                    <button
+                      type="button"
+                      role="radio"
+                      aria-checked={active}
+                      key={m.name}
+                      onClick={() => setMaterial(m.name)}
+                      className={`flex h-full cursor-pointer flex-col items-center rounded-2xl border-2 border-solid px-2.5 py-4 text-center transition ${
+                        active ? 'border-brand-blue bg-brand-blue/10 shadow-card' : 'border-[#e2e8f0] bg-white hover:border-brand-blue/40'
+                      }`}
+                    >
+                      <BlockOutlined className={`mb-2 text-2xl ${active ? 'text-brand-blue' : 'text-slate-400'}`} />
+                      <span className="block text-xs font-semibold text-brand-navy">{m.name}</span>
+                      <span className="text-[11px] text-gray-500">₹{m.rate}/sqft</span>
+                    </button>
+                  );
+                })}
               </div>
+            </div>
 
-              {/* Step 3: Design Complexity & Lighting */}
-              <Row className='designer_electrical_m-view' gutter={32}>
-                <Col span={12} xs={24} md={12}>
-                  <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 20 }}>3. Design Tier</Text>
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                    {designTiers.map(tier => (
-                      <div 
+            {/* 3. Design tier + 4. Electrical points */}
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+              <div>
+                <span className={stepTitle}>3. Design Tier</span>
+                <div className="flex flex-col gap-2.5" role="radiogroup" aria-label="Design tier">
+                  {designTiers.map(tier => {
+                    const active = complexity === tier.value;
+                    return (
+                      <button
+                        type="button"
+                        role="radio"
+                        aria-checked={active}
                         key={tier.label}
                         onClick={() => setComplexity(tier.value)}
-                        style={{
-                          padding: '12px 20px',
-                          borderRadius: 12,
-                          border: '1.5px solid',
-                          borderColor: complexity === tier.value ? '#1890ff' : '#e2e8f0',
-                          background: complexity === tier.value ? '#e6f7ff' : '#fff',
-                          cursor: 'pointer',
-                          display: 'flex',
-                          justifyContent: 'space-between',
-                          alignItems: 'center'
-                        }}
+                        className={`flex cursor-pointer items-center justify-between rounded-xl border-[1.5px] border-solid px-5 py-3 text-left transition ${
+                          active ? 'border-brand-blue bg-brand-blue/10' : 'border-[#e2e8f0] bg-white hover:border-brand-blue/40'
+                        }`}
                       >
-                        <div>
-                          <Text strong style={{ display: 'block' }}>{tier.label}</Text>
-                          <Text type="secondary" style={{ fontSize: 11 }}>{tier.sub}</Text>
-                        </div>
-                        {complexity === tier.value && <CheckCircleFilled style={{ color: '#1890ff' }} />}
-                      </div>
-                    ))}
-                  </div>
-                </Col>
-                <Col span={12} xs={24} md={12}>
-                  <Text strong style={{ fontSize: 16, display: 'block', marginBottom: 20 }}>4. Electrical Points</Text>
-                  <div style={{ background: '#fff', padding: 25, borderRadius: 20, border: '1px solid #e2e8f0', textAlign: 'center' }}>
-                    <ThunderboltOutlined style={{ fontSize: 32, color: '#faad14', marginBottom: 15 }} />
-                    <InputNumber 
-                      min={0} 
-                      max={100} 
-                      value={lightPoints} 
-                      onChange={setLightPoints} 
-                      style={{ width: '100%', borderRadius: 8 }}
+                        <span>
+                          <span className="block text-sm font-semibold text-brand-navy">{tier.label}</span>
+                          <span className="text-[11px] text-gray-500">{tier.sub}</span>
+                        </span>
+                        {active && <CheckCircleFilled className="text-brand-blue" />}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="estimator-lights" className={stepTitle}>4. Electrical Points</label>
+                <div className="rounded-2xl border border-solid border-[#e2e8f0] bg-white p-6 text-center">
+                  <ThunderboltOutlined className="mb-3 text-[32px] text-amber-500" />
+                  <div className="flex items-center overflow-hidden rounded-lg border border-solid border-[#d9d9d9]">
+                    <span className="whitespace-nowrap bg-[#fafafa] px-3 text-sm leading-[38px] text-gray-600">LED Points</span>
+                    <InputNumber
+                      id="estimator-lights"
+                      min={0}
+                      max={100}
+                      value={lightPoints}
+                      onChange={setLightPoints}
+                      variant="borderless"
                       size="large"
-                      addonBefore="LED Points"
+                      className="!w-full"
                     />
-                    <Text type="secondary" style={{ fontSize: 11, marginTop: 10, display: 'block' }}>
-                      Market average: ₹450 per point
-                    </Text>
                   </div>
-                </Col>
-              </Row>
+                  <span className="mt-2.5 block text-[11px] text-gray-500">
+                    Market average: ₹{lightRate} per point
+                  </span>
+                </div>
+              </div>
             </div>
-          </Col>
+          </div>
 
-          {/* Right Column: Quote Summary */}
-          <Col xs={24} lg={9}>
-            <div style={{ 
-              background: '#001529', 
-              borderRadius: 32, 
-              padding: '45px 35px', 
-              color: 'white', 
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
-              position: 'sticky',
-              top: 100
-            }}>
-              <Title level={4} style={{ color: 'rgba(255,255,255,0.7)', textTransform: 'uppercase', letterSpacing: 1, fontSize: 14 }}>
-                Estimated Investment
-              </Title>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 10, marginTop: 10 }}>
-                <span style={{ fontSize: 56, fontWeight: 800 }}>₹{calculations.total.toLocaleString()}</span>
-                <span style={{ color: 'rgba(255,255,255,0.5)', fontSize: 18 }}>*</span>
-              </div>
-              <Text style={{ color: '#52c41a', display: 'block', marginTop: -5, fontWeight: 600 }}>
-                Approx. ₹{calculations.perSqFt} per sq. ft.
-              </Text>
-
-              <Divider style={{ borderColor: 'rgba(255,255,255,0.1)', margin: '30px 0' }} />
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text style={{ color: 'rgba(255,255,255,0.6)' }}>Ceiling Fabrication</Text>
-                  <Text style={{ color: '#fff' }}>₹{calculations.base.toLocaleString()}</Text>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text style={{ color: 'rgba(255,255,255,0.6)' }}>Electrical & Lights</Text>
-                  <Text style={{ color: '#fff' }}>₹{calculations.lighting.toLocaleString()}</Text>
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <Text style={{ color: 'rgba(255,255,255,0.6)' }}>GST (Estimated)</Text>
-                  <Text style={{ color: '#fff' }}>Included</Text>
-                </div>
-              </div>
-
-              <div style={{ background: 'rgba(255,255,255,0.05)', borderRadius: 16, padding: '20px', marginTop: 35 }}>
-                <div style={{ display: 'flex', gap: 12, marginBottom: 12 }}>
-                  <FileProtectOutlined style={{ color: '#1890ff', fontSize: 20 }} />
-                  <Text style={{ color: '#fff', fontSize: 12 }}>10 Year Anti-Crack Warranty</Text>
-                </div>
-                <div style={{ display: 'flex', gap: 12 }}>
-                  <CheckCircleFilled style={{ color: '#52c41a', fontSize: 20 }} />
-                  <Text style={{ color: '#fff', fontSize: 12 }}>Installation in 7-10 Working Days</Text>
-                </div>
-              </div>
-
-              <Button 
-                block 
-                type="primary" 
-                size="large" 
-                style={{ 
-                  height: 60, 
-                  borderRadius: 15, 
-                  marginTop: 35, 
-                  fontWeight: 700, 
-                  fontSize: 16,
-                  background: '#1890ff',
-                  border: 'none',
-                  boxShadow: '0 10px 20px rgba(24,144,255,0.3)'
-                }}
-              >
-                Get Full PDF Breakdown
-              </Button>
-
-              <Button 
-                block 
-                icon={<WhatsAppOutlined />}
-                size="large" onClick={handleWhatsAppClick}
-                style={{ 
-                  height: 60, borderRadius: 15, marginTop: 15, fontWeight: 600,
-                   background: 'transparent',color: '#25d366', borderColor: '#25d366'
-                }}
-              >
-                Chat with Expert
-              </Button>
-
-              <Text type="secondary" style={{ display: 'block', textAlign: 'center', marginTop: 20, fontSize: 10, color: 'rgba(255,255,255,0.4)' }}>
-                *Actual costs may vary based on site conditions and final measurements.
-              </Text>
+          {/* Right: quote summary (sticks under the header on large screens) */}
+          <aside
+            aria-label="Estimated investment"
+            className="rounded-3xl bg-brand-navy px-6 py-8 text-white shadow-[0_25px_50px_-12px_rgba(0,0,0,0.25)] sm:px-9 sm:py-11 lg:sticky lg:top-24"
+          >
+            <span className="block text-xs font-semibold uppercase tracking-[0.12em] text-white/70 sm:text-sm">
+              Estimated Investment
+            </span>
+            <div className="mt-2 flex items-baseline gap-2" aria-live="polite">
+              <span className="text-[40px] font-bold leading-tight sm:text-[52px]">{formatINR(calculations.total)}</span>
+              <span className="text-lg text-white/50">*</span>
             </div>
-          </Col>
-        </Row>
+            <span className="block text-sm font-semibold text-emerald-400">
+              Approx. ₹{calculations.perSqFt} per sq. ft.
+            </span>
+
+            <div className="my-7 h-px bg-white/10" />
+
+            <dl className="m-0 flex flex-col gap-4 text-sm">
+              <div className="flex justify-between">
+                <dt className="text-white/60">Ceiling Fabrication</dt>
+                <dd className="m-0">{formatINR(calculations.base)}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-white/60">Electrical &amp; Lights</dt>
+                <dd className="m-0">{formatINR(calculations.lighting)}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-white/60">GST (Estimated)</dt>
+                <dd className="m-0">Included</dd>
+              </div>
+            </dl>
+
+            <ul className="m-0 mt-8 flex list-none flex-col gap-3 rounded-2xl bg-white/5 p-5">
+              {estimator.promises.map((p, i) => (
+                <li key={p} className="flex items-center gap-3 text-xs sm:text-[13px]">
+                  {i === 0
+                    ? <FileProtectOutlined className="text-lg text-[#7da2e8]" />
+                    : <CheckCircleFilled className="text-lg text-emerald-400" />}
+                  {p}
+                </li>
+              ))}
+            </ul>
+
+            <button
+              type="button"
+              onClick={() => typeof onOpenForm === 'function' && onOpenForm()}
+              className="mt-8 inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border-0 bg-brand-red text-[15px] font-semibold text-white shadow-cta transition hover:bg-brand-red-dark"
+            >
+              Get Full PDF Breakdown <ArrowRightOutlined />
+            </button>
+
+            <button
+              type="button"
+              onClick={handleWhatsAppClick}
+              className="mt-3 inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-2xl border-[1.5px] border-solid border-[#25d366] bg-transparent text-[15px] font-semibold text-[#25d366] transition hover:bg-[#25d366] hover:text-white"
+            >
+              <WhatsAppOutlined /> Chat with Expert
+            </button>
+
+            <p className="m-0 mt-5 text-center text-[11px] text-white/40">
+              {estimator.disclaimer}
+            </p>
+          </aside>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
