@@ -104,7 +104,7 @@ export default function AboutUsPage({ onOpenForm }) {
               <Card className="testi-card shadow-hover">
                 <Paragraph>"The speed and finishing of Urbane Living is unmatched."</Paragraph>
                 <div className="user-info">
-                  <Avatar src="https://i.pravatar.cc/100?u=1" /><div style={{ marginLeft: 12 }}><Text strong>Amit Sharma</Text><br /><Text type="secondary">Gurgaon</Text></div>
+                  <Avatar src="https://i.pravatar.cc/100?u=1" /><div style={{ marginLeft: 12 }}><Text strong>Mrs. Saubhagya</Text><br /><Text type="secondary">Gurgaon</Text></div>
                 </div>
               </Card>
             </Col>

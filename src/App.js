@@ -11,6 +11,9 @@ import {
 
 import './App.css';
 
+// Backend URL: localhost -> http://localhost:5000, live -> Render (from siteData.js)
+import { API_BASE_URL } from './data/siteData';
+
 import AdminDashboard from './pages/AdminDashboard';
 import Login from './pages/Login';
 
@@ -18,16 +21,16 @@ import Login from './pages/Login';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import SpacesGrid from './components/SpacesGrid';
+// import SpacesGrid from './components/SpacesGrid';
 import CeilingSection from './components/CeilingSection';
 import BeforeAfter from './components/BeforeAfter';
-import ProcessSection from './components/ProcessSection';
+// import ProcessSection from './components/ProcessSection';
 import FaqSection from './components/FaqSection';
 import FooterContact from './components/FooterContact';
 import InquiryModal from './components/InquiryModal';
-import GallerySection from './components/GallerySection';
+// import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
-import PageBanner from './components/PageBanner';
+// import PageBanner from './components/PageBanner';
 import FalseCeilingPage from './pages/FalseCeilingPage';
 import AboutUsPage from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
@@ -45,6 +48,7 @@ import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import SupportPage from './pages/SupportPage';
 import EstimatePage from './pages/Estimate';
 import StyleQuiz from './components/StyleQuiz';
+import SolutionsGrid from './components/SolutionsGrid';
 
 
 const { Content } = Layout;
@@ -82,7 +86,6 @@ const LayoutContent = ({
 
       <Content>
         {children}
-
         {!isAdminPage && <FooterContact />}
       </Content>
 
@@ -99,16 +102,8 @@ const LayoutContent = ({
 function App() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-
   const handleOpen = () => setIsModalOpen(true);
-
   const handleClose = () => setIsModalOpen(false);
-
-  const API_BASE_URL =
-    window.location.hostname === 'localhost'
-     ? 'http://localhost:5000'
-      : 'https://urbaneliving.in/api';
-
   const onFinish = async (values, type = 'lead') => {
 
     try {
@@ -124,13 +119,10 @@ function App() {
       );
 
       if (res.status === 200) {
-
         message.success(
           `${type === 'design'? 'Design' : 'Lead'} successfully saved!`
         );
-
         if (type === 'lead') handleClose();
-
         return true;
       }
 
@@ -215,9 +207,9 @@ function App() {
         </div>
       </div>
 
-      <div style={{ padding: '0px 0px 40px', backgroundColor: '#ffffff' }}>
+      {/* <div style={{ padding: '0px 0px 40px', backgroundColor: '#ffffff' }}>
         <SpacesGrid onOpenForm={handleOpen} />
-      </div>
+      </div> */}
 
       <CeilingSection />
       <BeforeAfter />
@@ -284,10 +276,11 @@ function App() {
 
         </div>
       </div>
-      <ProcessSection />
+      {/* <ProcessSection /> */}
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
-      <FaqSection />
+      <SolutionsGrid onOpenForm={handleOpen} />
+      <FaqSection onOpenForm={handleOpen} />
     </>
   );
 
@@ -350,12 +343,12 @@ function App() {
 
           <Route
             path="/bedroom"
-            element={<BedroomPage />}
+            element={<BedroomPage onOpenForm={handleOpen} />}
           />
 
           <Route
             path="/living-hall"
-            element={<LivingHallPage />}
+            element={<LivingHallPage onOpenForm={handleOpen} />}
           />
 
           <Route

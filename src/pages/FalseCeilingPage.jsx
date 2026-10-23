@@ -6,6 +6,8 @@ import PageBanner from "../components/PageBanner";
 import useSeo from "../hooks/useSeo";
 import { API_BASE_URL, banners, designFilters, seo } from "../data/siteData";
 import CeilingEdge from "../components/FalseCeiling/CeilingEdge";
+import ProcessSection from '../components/ProcessSection';
+import SpacesGrid from "../components/SpacesGrid";
 
 const { Option } = Select;
 
@@ -79,6 +81,9 @@ export default function FalseCeilingPage({ onOpenForm }) {
       />
 
       <CostEstimator onOpenForm={onOpenForm} />
+      <div style={{ padding: '0px 0px 40px', backgroundColor: '#ffffff' }}>
+                <SpacesGrid onOpenForm={onOpenForm} />
+      </div>
       {/* DESIGNS */}
       <section aria-labelledby="designs-title" className="bg-brand-soft px-4 py-12 sm:px-5 lg:py-16">
         <div className="mx-auto max-w-[1200px]">
@@ -174,6 +179,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
         </div>
       </section>
       <CeilingEdge onOpenForm={onOpenForm} /> 
+      <ProcessSection />
     </div>
   );
 }
