@@ -35,8 +35,7 @@ app.use(cors({
     "http://ncr.urbaneliving.in",
     "https://urbane-living.vercel.app",
     /^https:\/\/urbane-living[a-z0-9-]*\.vercel\.app$/,
-    "http://localhost:3000",
-    "http://localhost:5173"
+    /^http:\/\/localhost:\d+$/ // any local port (3000, 5001, ...) for development
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   credentials: true
@@ -73,6 +72,7 @@ const leadSchema = new mongoose.Schema({
     email: String,
     state: String,
     propertyType: String,
+    message: String,
     date: { type: Date, default: Date.now }
 }, { collection: 'leads' });
 const Lead = mongoose.model('Lead', leadSchema);

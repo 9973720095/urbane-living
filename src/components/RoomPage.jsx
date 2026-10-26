@@ -18,6 +18,8 @@ import {
   ReadOutlined,
   SmileOutlined,
   SkinOutlined,
+  ThunderboltOutlined,
+  ToolOutlined,
   WhatsAppOutlined,
 } from '@ant-design/icons';
 import PageBanner from '../components/PageBanner';
@@ -38,6 +40,8 @@ const elementIcons = {
   study: <ReadOutlined />,
   kids: <SmileOutlined />,
   dressing: <SkinOutlined />,
+  appliance: <ThunderboltOutlined />,
+  hardware: <ToolOutlined />,
 };
 
 const sectionTitle = 'm-0 text-[26px] font-semibold leading-tight text-brand-navy sm:text-[34px]';
@@ -87,7 +91,7 @@ const Lightbox = ({ items, index, onClose, onMove, onQuote }) => {
 };
 
 /*
-  Shared room page (living room, bedroom, ...). All text comes from a siteData config:
+  Shared room page (living room, bedroom, kitchen, ...). All text comes from a siteData config:
   { banner, gallery, elements, sizes, steps, faqs, faqTitle, cta, seo, service, breadcrumb, api, category, altSuffix }
   Designs = admin items from `api` (e.g. /api/bedroom) + items with `category` from /api/designs (Google Sheet).
 */
@@ -276,7 +280,7 @@ const RoomPage = ({ page, onOpenForm }) => {
         </div>
       </section>
 
-      {/* 4. Ideas by size */}
+      {/* 4. Ideas by size / layout */}
       <section aria-labelledby="living-sizes" className="px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto max-w-[1200px]">
           <h2 id="living-sizes" className={`${sectionTitle} mb-8 text-center lg:mb-10`}>{sizes.title}</h2>

@@ -44,6 +44,7 @@ import ClientStories from './components/ClientStories';
 import TermsConditionPage from './pages/TermsConditionPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
+import DisclaimerPage from './pages/DisclaimerPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import SupportPage from './pages/SupportPage';
 import EstimatePage from './pages/Estimate';
@@ -353,12 +354,12 @@ function App() {
 
           <Route
             path="/kitchen"
-            element={<KitchenPage />}
+            element={<KitchenPage onOpenForm={handleOpen} />}
           />
 
           <Route
             path="/wardrobe"
-            element={<WardrobePage />}
+            element={<WardrobePage onOpenForm={handleOpen} />}
           />
 
           <Route 
@@ -372,6 +373,10 @@ function App() {
           <Route 
             path="/refund" 
             element={<RefundPolicyPage />} 
+          />
+          <Route 
+            path="/disclaimer" 
+            element={<DisclaimerPage />} 
           />
           <Route 
             path="/shipping" 
