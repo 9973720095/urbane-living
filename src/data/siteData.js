@@ -28,6 +28,7 @@ export * from './privacy';
 export * from './terms';
 export * from './refund';
 export * from './disclaimer';
+export * from './roomExplorer';
 export * from './rooms/living';
 export * from './rooms/bedroom';
 export * from './rooms/kitchen';

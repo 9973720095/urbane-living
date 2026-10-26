@@ -23,6 +23,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // import SpacesGrid from './components/SpacesGrid';
 import CeilingSection from './components/CeilingSection';
+import RoomExplorer from './components/RoomExplorer';
 import BeforeAfter from './components/BeforeAfter';
 // import ProcessSection from './components/ProcessSection';
 import FaqSection from './components/FaqSection';
@@ -278,6 +279,7 @@ function App() {
         </div>
       </div>
       {/* <ProcessSection /> */}
+            <RoomExplorer onOpenForm={handleOpen} />
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
       <SolutionsGrid onOpenForm={handleOpen} />
