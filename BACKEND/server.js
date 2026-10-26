@@ -19,6 +19,7 @@ const Blog = require('./models/Blog');
 const Review = require('./models/Review');
 const { startSheetSync, syncAll, getLastSyncResult } = require('./sheetSync');
 const { sendLeadsToSheet, syncAllLeadsToSheet } = require('./leadsToSheet');
+const { nextLeadId, assignMissingLeadIds } = require('./leadId');
 
 const app = express();
 
@@ -61,6 +62,9 @@ mongoose.connect(mongoURI, { dbName: 'UrbaneLiving' })
     .then(() => {
         console.log(`✅ MongoDB Connected | Mode: ${currentEnv}`);
         startSheetSync({ designs: Design, blogs: Blog, reviews: Review }); // Google Sheet -> website (every SHEET_SYNC_MINUTES)
+        assignMissingLeadIds(Lead)
+            .then(n => n && console.log(`🔢 Lead IDs given to ${n} old leads`))
+            .catch(err => console.error('Lead ID backfill failed:', err.message));
     })
     .catch(err => console.error("❌ DB Error:", err.message));
 
@@ -68,15 +72,34 @@ mongoose.connect(mongoURI, { dbName: 'UrbaneLiving' })
    SCHEMAS & MODELS
 ========================= */
 const leadSchema = new mongoose.Schema({
+    leadId: { type: String, index: true }, // WEBL0001, WEBL0002, ...
     name: String,
     phone: String,
     email: String,
-    state: String,
+    city: String,      // service area picked in the form
+    locality: String,  // sector / society (optional)
+    state: String,     // old leads only
     propertyType: String,
     message: String,
+    page: String,      // page the form was sent from
     date: { type: Date, default: Date.now }
 }, { collection: 'leads' });
 const Lead = mongoose.model('Lead', leadSchema);
+
+// Keeps only known form fields; a 10-digit Indian number is saved as "+91 XXXXXXXXXX"
+const LEAD_FIELDS = ['name', 'phone', 'email', 'city', 'locality', 'state', 'propertyType', 'message', 'page'];
+const cleanLead = (body = {}) => {
+    const lead = {};
+    LEAD_FIELDS.forEach(k => {
+        if (body[k] != null && String(body[k]).trim()) lead[k] = String(body[k]).trim().slice(0, 1000);
+    });
+    if (lead.phone) {
+        const digits = lead.phone.replace(/\D/g, '');
+        if (digits.length === 10) lead.phone = `+91 ${digits}`;
+        else if (digits.length === 12 && digits.startsWith('91') && !lead.phone.startsWith('+')) lead.phone = `+91 ${digits.slice(2)}`;
+    }
+    return lead;
+};
 
 const designSchema = new mongoose.Schema({
     title: String,
@@ -107,10 +130,10 @@ app.get('/', (req, res) => {
 /* ---------- LEAD APIs ---------- */
 app.post('/api/save-lead', async (req, res) => {
     try {
-        const newLead = new Lead(req.body);
+        const newLead = new Lead({ ...cleanLead(req.body), leadId: await nextLeadId() });
         const savedLead = await newLead.save();
         sendLeadsToSheet([savedLead]).catch(err => console.error('Lead -> Sheet failed:', err.message)); // copy to Google Sheet, never blocks the form
-        res.status(200).json({ success: true, message: "✅ Lead saved", id: savedLead._id });
+        res.status(200).json({ success: true, message: "✅ Lead saved", id: savedLead._id, leadId: savedLead.leadId });
     } catch (err) {
         res.status(500).json({ success: false, error: "Database save failed" });
     }
@@ -126,7 +149,7 @@ app.get('/api/leads', async (req, res) => {
 });
 app.put('/api/leads/:id', async (req, res) => {
     try {
-        const updatedLead = await Lead.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        const updatedLead = await Lead.findByIdAndUpdate(req.params.id, cleanLead(req.body), { new: true });
         if (updatedLead) sendLeadsToSheet([updatedLead]).catch(err => console.error('Lead -> Sheet failed:', err.message));
         res.json({ success: true, message: "✅ Lead updated", data: updatedLead });
     } catch (err) {
@@ -148,6 +171,7 @@ app.post('/api/leads/sync-sheet', async (req, res) => {
         if (process.env.SHEET_SYNC_KEY && req.get('x-sync-key') !== process.env.SHEET_SYNC_KEY) {
             return res.status(401).json({ error: 'Invalid sync key' });
         }
+        await assignMissingLeadIds(Lead);
         const result = await syncAllLeadsToSheet(Lead);
         res.json({ message: '✅ Leads copied to sheet', result });
     } catch (err) {

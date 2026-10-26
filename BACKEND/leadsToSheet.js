@@ -3,14 +3,16 @@
 // If the URL is not set, nothing is sent and the website works as before.
 
 const toRow = (lead) => ({
-  id: String(lead._id),
+  id: lead.leadId || String(lead._id),
   date: (lead.date ? new Date(lead.date) : new Date()).toISOString(),
   name: lead.name || '',
   phone: lead.phone || '',
   email: lead.email || '',
-  state: lead.state || '',
+  city: lead.city || lead.state || '', // old leads only had a state
+  locality: lead.locality || '',
   propertyType: lead.propertyType || '',
   message: lead.message || '',
+  page: lead.page || '',
 });
 
 // Sends leads (new or updated) to the sheet; the script adds new rows or updates existing ones by ID

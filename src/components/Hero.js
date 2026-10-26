@@ -53,6 +53,7 @@ const Hero = () => {
         name: formData.name.trim(),
         phone: `${formData.countryCode} ${formData.phone.replace(/\D/g, '')}`,
         email: formData.email.trim(),
+        page: window.location.pathname,
       });
       messageApi.success('Thank you! Our design expert will call you shortly.');
       setFormData(EMPTY_FORM);

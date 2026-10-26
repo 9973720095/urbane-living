@@ -291,11 +291,14 @@ const AdminDashboard = ({ onFinish }) => {
                 loading={loading}
                 scroll={{ x: 'max-content' }}
                 columns={[
+                    { title: 'Lead ID', dataIndex: 'leadId', width: 100 },
                     { title: 'Name', dataIndex: 'name', width: 130 },
                     { title: 'Phone', dataIndex: 'phone', width: 130 },
+                    { title: 'City', render: (_, r) => [r.city || r.state, r.locality].filter(Boolean).join(', ') || 'N/A', width: 160 },
+                    { title: 'Property', dataIndex: 'propertyType', width: 110 },
                     {
                         title: 'Date',
-                        dataIndex: 'createdAt',
+                        dataIndex: 'date',
                         render: (d) => d? new Date(d).toLocaleDateString() : 'N/A',
                         width: 100
                     },

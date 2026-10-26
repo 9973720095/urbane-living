@@ -16,7 +16,7 @@ import { API_BASE_URL, contactPage, contact, brand, inquiryOptions, socials, sit
 
 const { banner, form, cards, areas, map, seo } = contactPage;
 
-const EMPTY = { name: '', phone: '', email: '', state: '', propertyType: '', service: '', message: '' };
+const EMPTY = { name: '', phone: '', email: '', city: '', locality: '', propertyType: '', service: '', message: '' };
 
 const field =
   'h-12 w-full rounded-xl border border-solid border-gray-200 bg-white px-4 text-[15px] text-brand-navy outline-none transition placeholder:text-gray-400 focus:border-brand-blue focus:ring-[3px] focus:ring-brand-blue/15';
@@ -59,9 +59,11 @@ export default function ContactPage() {
         name: values.name.trim(),
         phone: `+91 ${values.phone.replace(/\D/g, '')}`,
         email: values.email.trim(),
-        state: values.state,
+        city: values.city,
+        locality: values.locality.trim(),
         propertyType: values.propertyType,
         message: [values.service && `Service: ${values.service}`, values.message.trim()].filter(Boolean).join(' | '),
+        page: window.location.pathname,
       });
       setStatus('done');
       setValues(EMPTY);
@@ -183,11 +185,15 @@ export default function ContactPage() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="c-state" className={label}>State</label>
-                  <select id="c-state" value={values.state} onChange={set('state')} className={field}>
-                    <option value="">Select state</option>
-                    {inquiryOptions.states.map((s) => <option key={s} value={s}>{s}</option>)}
+                  <label htmlFor="c-city" className={label}>City</label>
+                  <select id="c-city" value={values.city} onChange={set('city')} className={field}>
+                    <option value="">Select city</option>
+                    {inquiryOptions.serviceAreas.map((s) => <option key={s} value={s}>{s}</option>)}
                   </select>
+                </div>
+                <div>
+                  <label htmlFor="c-locality" className={label}>Locality / Society</label>
+                  <input id="c-locality" value={values.locality} onChange={set('locality')} placeholder="e.g. Sector 62, Gaur City" className={field} />
                 </div>
                 <div>
                   <label htmlFor="c-type" className={label}>Property type</label>
