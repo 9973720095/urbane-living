@@ -20,7 +20,7 @@ const ClientStories = ({ onOpenForm }) => {
     },
     {
       id: 3,
-      videoUrl: "https://res.cloudinary.com/diosq0s7w/video/upload/v1792572358/urbane_review_clean_audio_gyaq4s.mp4",
+      videoUrl: "https://res.cloudinary.com/diosq0s7w/video/upload/v1793003212/Saubhagya_Review_16x9_cyfxcb.mp4",
       quote: `"Thanks to UrbaneLiving, our new home seamlessly blends heritage beauty with modern style, reflecting our taste."`,
       author: "Mrs. Saubhagya"
     }
