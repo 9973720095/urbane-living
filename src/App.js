@@ -279,7 +279,7 @@ function App() {
         </div>
       </div>
       {/* <ProcessSection /> */}
-            <RoomExplorer onOpenForm={handleOpen} />
+      <RoomExplorer onOpenForm={handleOpen} />
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
       <SolutionsGrid onOpenForm={handleOpen} />
