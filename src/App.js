@@ -32,6 +32,7 @@ import InquiryModal from './components/InquiryModal';
 // import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
 // import PageBanner from './components/PageBanner';
+import MetaPixel from './components/MetaPixel';
 import FalseCeilingPage from './pages/FalseCeilingPage';
 import AboutUsPage from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
@@ -291,6 +292,7 @@ function App() {
     <Router>
 
       <ScrollToTop />
+      <MetaPixel />
       <LayoutContent
         handleOpen={handleOpen}
         isModalOpen={isModalOpen}

@@ -10,6 +10,7 @@ import {
   TagFilled,
 } from '@ant-design/icons';
 import './css/Hero.css';
+import { trackLead } from '../utils/metaPixel';
 
 const { Title } = Typography;
 
@@ -49,12 +50,13 @@ const Hero = () => {
 
     setSubmitting(true);
     try {
-      await axios.post(`${API_BASE_URL}/api/save-lead`, {
+      const res = await axios.post(`${API_BASE_URL}/api/save-lead`, {
         name: formData.name.trim(),
         phone: `${formData.countryCode} ${formData.phone.replace(/\D/g, '')}`,
         email: formData.email.trim(),
         page: window.location.pathname,
       });
+      trackLead({ leadId: res.data?.leadId, form: 'Hero form' });
       messageApi.success('Thank you! Our design expert will call you shortly.');
       setFormData(EMPTY_FORM);
     } catch (err) {

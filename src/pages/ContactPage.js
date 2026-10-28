@@ -12,6 +12,7 @@ import {
 } from '@ant-design/icons';
 import PageBanner from '../components/PageBanner';
 import useSeo from '../hooks/useSeo';
+import { trackLead } from '../utils/metaPixel';
 import { API_BASE_URL, contactPage, contact, brand, inquiryOptions, socials, siteUrl } from '../data/siteData';
 
 const { banner, form, cards, areas, map, seo } = contactPage;
@@ -55,7 +56,7 @@ export default function ContactPage() {
     if (!validate()) return;
     setStatus('sending');
     try {
-      await axios.post(`${API_BASE_URL}/api/save-lead`, {
+      const res = await axios.post(`${API_BASE_URL}/api/save-lead`, {
         name: values.name.trim(),
         phone: `+91 ${values.phone.replace(/\D/g, '')}`,
         email: values.email.trim(),
@@ -65,6 +66,7 @@ export default function ContactPage() {
         message: [values.service && `Service: ${values.service}`, values.message.trim()].filter(Boolean).join(' | '),
         page: window.location.pathname,
       });
+      trackLead({ leadId: res.data?.leadId, city: values.city, propertyType: values.propertyType, form: 'Contact page' });
       setStatus('done');
       setValues(EMPTY);
     } catch (err) {

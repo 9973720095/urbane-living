@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, Form, Input, Button, Typography, Row, Col, Select, message } from 'antd';
 import { inquiryOptions } from '../data/siteData';
+import { trackLead } from '../utils/metaPixel';
 import './css/InquiryModal.css';
 
 const { Title } = Typography;
@@ -36,6 +37,8 @@ const InquiryModal = ({ isOpen, onClose }) => {
       });
 
       if (response.ok) {
+        const data = await response.json().catch(() => ({}));
+        trackLead({ leadId: data.leadId, city: values.city, propertyType: values.propertyType, form: 'Popup form' });
         messageApi.success("Thank you! Our designer will call you shortly.");
         form.resetFields();
         onClose(); 
