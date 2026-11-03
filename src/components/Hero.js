@@ -11,6 +11,7 @@ import {
 } from '@ant-design/icons';
 import './css/Hero.css';
 import { trackLead } from '../utils/metaPixel';
+import { inquiryOptions } from '../data/siteData';
 
 const { Title } = Typography;
 
@@ -19,7 +20,7 @@ const API_BASE_URL = window.location.hostname === 'localhost'
   ? 'http://localhost:5000'
   : 'https://urbane-living.onrender.com';
 
-const EMPTY_FORM = { name: '', countryCode: '+91', phone: '', email: '' };
+const EMPTY_FORM = { name: '', countryCode: '+91', phone: '', email: '', city: '', locality: '' };
 
 const Hero = () => {
   const [messageApi, contextHolder] = message.useMessage();
@@ -40,6 +41,7 @@ const Hero = () => {
       next.phone = 'Please enter a valid phone number';
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) next.email = 'Please enter a valid email';
+    if (!formData.city) next.city = 'Please select your city';
     setErrors(next);
     return Object.keys(next).length === 0;
   };
@@ -54,9 +56,11 @@ const Hero = () => {
         name: formData.name.trim(),
         phone: `${formData.countryCode} ${formData.phone.replace(/\D/g, '')}`,
         email: formData.email.trim(),
+        city: formData.city,
+        locality: formData.locality.trim(),
         page: window.location.pathname,
       });
-      trackLead({ leadId: res.data?.leadId, form: 'Hero form' });
+      trackLead({ leadId: res.data?.leadId, city: formData.city, form: 'Hero form' });
       messageApi.success('Thank you! Our design expert will call you shortly.');
       setFormData(EMPTY_FORM);
     } catch (err) {
@@ -186,7 +190,7 @@ const Hero = () => {
               <div className="hero-field">
                 <input
                   type="text"
-                  placeholder="First Name"
+                  placeholder="Name"
                   value={formData.name}
                   onChange={(e) => updateField('name', e.target.value)}
                   className={errors.name ? 'has-error' : ''}
@@ -211,7 +215,7 @@ const Hero = () => {
                   />
                   <input
                     type="tel"
-                    placeholder="Phone Number"
+                    placeholder="Number"
                     value={formData.phone}
                     onChange={(e) => updateField('phone', e.target.value.replace(/[^\d\s-]/g, ''))}
                     autoComplete="tel-national"
@@ -224,13 +228,38 @@ const Hero = () => {
               <div className="hero-field">
                 <input
                   type="email"
-                  placeholder="Enter Your Email"
+                  placeholder="Email"
                   value={formData.email}
                   onChange={(e) => updateField('email', e.target.value)}
                   className={errors.email ? 'has-error' : ''}
                   autoComplete="email"
                 />
                 {errors.email && <span className="hero-field-error">{errors.email}</span>}
+              </div>
+
+              <div className="hero-field-row">
+                <div className="hero-field">
+                  <select
+                    value={formData.city}
+                    onChange={(e) => updateField('city', e.target.value)}
+                    className={`${errors.city ? 'has-error' : ''}${formData.city ? '' : ' is-empty'}`}
+                    aria-label="City"
+                  >
+                    <option value="">City</option>
+                    {inquiryOptions.serviceAreas.map((c) => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  {errors.city && <span className="hero-field-error">{errors.city}</span>}
+                </div>
+                <div className="hero-field">
+                  <input
+                    type="text"
+                    placeholder="Locality (optional)"
+                    value={formData.locality}
+                    onChange={(e) => updateField('locality', e.target.value)}
+                    maxLength={120}
+                    aria-label="Locality or society (optional)"
+                  />
+                </div>
               </div>
 
               <button className="hero-quote-btn" type="submit" disabled={submitting}>

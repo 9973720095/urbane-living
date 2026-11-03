@@ -19,11 +19,11 @@ import Login from './pages/Login';
 
 // Components & Pages imports
 import ScrollToTop from './components/ScrollToTop';
+import MetaPixel from './components/MetaPixel';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 // import SpacesGrid from './components/SpacesGrid';
 import CeilingSection from './components/CeilingSection';
-import RoomExplorer from './components/RoomExplorer';
 import BeforeAfter from './components/BeforeAfter';
 // import ProcessSection from './components/ProcessSection';
 import FaqSection from './components/FaqSection';
@@ -32,7 +32,6 @@ import InquiryModal from './components/InquiryModal';
 // import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
 // import PageBanner from './components/PageBanner';
-import MetaPixel from './components/MetaPixel';
 import FalseCeilingPage from './pages/FalseCeilingPage';
 import AboutUsPage from './pages/AboutUs';
 import ContactPage from './pages/ContactPage';
@@ -52,6 +51,10 @@ import SupportPage from './pages/SupportPage';
 import EstimatePage from './pages/Estimate';
 import StyleQuiz from './components/StyleQuiz';
 import SolutionsGrid from './components/SolutionsGrid';
+import RoomExplorer from './components/RoomExplorer';
+import VastuBanner from './components/VastuBanner';
+import VastuPage from './pages/VastuPage';
+import VastuAnalyzer from './pages/VastuAnalyzer';
 
 
 const { Content } = Layout;
@@ -216,6 +219,8 @@ function App() {
 
       <CeilingSection />
       <BeforeAfter />
+      <RoomExplorer onOpenForm={handleOpen} />
+      <VastuBanner />
       <StyleQuiz onOpenForm={handleOpen} />
       <MarketOfferings onOpenForm={handleOpen} />
       {/* <GallerySection /> */}
@@ -280,7 +285,6 @@ function App() {
         </div>
       </div>
       {/* <ProcessSection /> */}
-      <RoomExplorer onOpenForm={handleOpen} />
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
       <SolutionsGrid onOpenForm={handleOpen} />
@@ -378,10 +382,9 @@ function App() {
             path="/refund" 
             element={<RefundPolicyPage />} 
           />
-          <Route 
-            path="/disclaimer" 
-            element={<DisclaimerPage />} 
-          />
+          <Route path="/disclaimer" element={<DisclaimerPage />} />
+          <Route path="/vastu" element={<VastuPage />} />
+          <Route path="/vastu/analyze" element={<VastuAnalyzer />} />
           <Route 
             path="/shipping" 
             element={<ShippingPolicyPage />} 
