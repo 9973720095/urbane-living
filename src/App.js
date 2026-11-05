@@ -22,14 +22,22 @@ import ScrollToTop from './components/ScrollToTop';
 import MetaPixel from './components/MetaPixel';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+import PromiseStrip from './components/PromiseStrip';
+import Seo from './components/Seo';
+import NotFoundPage from './pages/NotFoundPage';
+import LocalServicePage from './pages/LocalServicePage';
+import AreasPage from './pages/AreasPage';
+import LocalityPage from './pages/LocalityPage';
+import { localServices } from './data/localSeo';
+import { pageSeo } from './data/pageSeo';
 // import SpacesGrid from './components/SpacesGrid';
-import CeilingSection from './components/CeilingSection';
+// import CeilingSection from './components/CeilingSection';
+import GallerySection from './components/GallerySection';
 import BeforeAfter from './components/BeforeAfter';
 // import ProcessSection from './components/ProcessSection';
 import FaqSection from './components/FaqSection';
 import FooterContact from './components/FooterContact';
 import InquiryModal from './components/InquiryModal';
-// import GallerySection from './components/GallerySection';
 import MarketOfferings from './components/MarketOfferings';
 // import PageBanner from './components/PageBanner';
 import FalseCeilingPage from './pages/FalseCeilingPage';
@@ -145,38 +153,7 @@ function App() {
   const HomePage = () => (
     <>
       <Hero onOpenForm={handleOpen} />
-
-      <div className="notice" style={{ padding: '40px 20px', display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-        <div className="notice-content" style={{ display: 'flex', width: '100%', maxWidth: '1100px', justifyContent: 'space-around', alignItems: 'center', flexWrap: 'wrap', gap: '40px' }}>
-          {/* Item 1 */}
-          <div className="notice-content-item" style={{ textAlign: 'center' }}>
-            <picture style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-              {/* Icon size increased to 60px */}
-              <img src="https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-e1720440694404.png" alt="Notice" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
-              <figcaption style={{ fontSize: '16px', color: '#333333', fontWeight: 500 }}>Personalised designs</figcaption>
-            </picture>
-          </div>
-
-          {/* Item 2 */}
-          <div className="notice-content-item" style={{ textAlign: 'center' }}>
-            <picture style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-              {/* Icon size increased to 60px */}
-              <img src="https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-5-e1720442786627.png" alt="Notice" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
-              <figcaption style={{ fontSize: '16px', color: '#333333', fontWeight: 500 }}>10-year warranty¹</figcaption>
-            </picture>
-          </div>
-
-          {/* Item 3 */}
-          <div className="notice-content-item" style={{ textAlign: 'center' }}>
-            <picture style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px' }}>
-              {/* Icon size increased to 60px */}
-              <img src="https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-6-e1720443121163.png" alt="Notice" style={{ width: '60px', height: '60px', objectFit: 'contain' }} />
-              <figcaption style={{ fontSize: '16px', color: '#333333', fontWeight: 500 }}>Transparent pricing</figcaption>
-            </picture>
-          </div>
-
-        </div>
-      </div>
+      <PromiseStrip />
 
       <div className="brand-story-section" style={{ padding: '60px 20px', backgroundColor: '#f5f5f5', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
@@ -213,17 +190,12 @@ function App() {
         </div>
       </div>
 
-      {/* <div style={{ padding: '0px 0px 40px', backgroundColor: '#ffffff' }}>
-        <SpacesGrid onOpenForm={handleOpen} />
-      </div> */}
-
-      <CeilingSection />
+      <GallerySection />
       <BeforeAfter />
       <RoomExplorer onOpenForm={handleOpen} />
       <VastuBanner />
       <StyleQuiz onOpenForm={handleOpen} />
       <MarketOfferings onOpenForm={handleOpen} />
-      {/* <GallerySection /> */}
 
       <div className="blend-section-wrapper" style={{ padding: '40px 20px', display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff' }}>
         <div style={{ 
@@ -310,6 +282,7 @@ function App() {
             path="/admin-dashboard"
             element={
               <ProtectedRoute>
+                <Seo {...pageSeo.adminDashboard} />
                 <AdminDashboard onFinish={onFinish} />
               </ProtectedRoute>
             }
@@ -317,7 +290,7 @@ function App() {
 
           <Route
             path="/admin-login"
-            element={<Login />}
+            element={<><Seo {...pageSeo.adminLogin} /><Login /></>}
           />
 
           <Route
@@ -370,33 +343,39 @@ function App() {
             element={<WardrobePage onOpenForm={handleOpen} />}
           />
 
-          <Route 
-            path="/terms" 
-            element={<TermsConditionPage />} 
-          />
-          <Route 
-            path="/privacy" 
-            element={<PrivacyPolicyPage />} 
-          />
-          <Route 
-            path="/refund" 
-            element={<RefundPolicyPage />} 
-          />
+          <Route path="/terms" element={<TermsConditionPage />} />
+          <Route path="/privacy" element={<PrivacyPolicyPage />} />
+          <Route path="/refund" element={<RefundPolicyPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/vastu" element={<VastuPage />} />
           <Route path="/vastu/analyze" element={<VastuAnalyzer />} />
-          <Route 
-            path="/shipping" 
-            element={<ShippingPolicyPage />} 
+
+          <Route
+            path="/shipping"
+            element={<><Seo {...pageSeo.shipping} /><ShippingPolicyPage /></>}
           />
-          <Route 
-            path="/support" 
-            element={<SupportPage />} 
+          <Route
+            path="/support"
+            element={<><Seo {...pageSeo.support} /><SupportPage /></>}
           />
-          <Route 
-            path="/estimate" 
-            element={<EstimatePage onOpenForm={handleOpen} />} 
+          <Route
+            path="/estimate"
+            element={<><Seo {...pageSeo.estimate} /><EstimatePage onOpenForm={handleOpen} /></>}
           />
+
+          {/* Local SEO: /interior-designers, /false-ceiling/noida, /interior-designers/ghaziabad/indirapuram ... */}
+          <Route path="/interior-designers" element={<AreasPage />} />
+          <Route path="/interior-designers/:city/:locality" element={<LocalityPage onOpenForm={handleOpen} />} />
+          {localServices.map((s) => (
+            <Route
+              key={s.slug}
+              path={`/${s.slug}/:city`}
+              element={<LocalServicePage serviceSlug={s.slug} onOpenForm={handleOpen} />}
+            />
+          ))}
+
+          {/* Any unknown URL: 404 page (noindex) - always keep this LAST */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
 
       </LayoutContent>

@@ -25,11 +25,11 @@ const BeforeAfter = () => {
   };
 
   return (
-    <div style={{ padding: '60px 20px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ padding: '10px 20px 50px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
         
         {/* Header Text */}
-        <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '8px' }}>
+        <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '8px', lineHeight: "36px" }}>
           Transforming homes with love
         </h2>
         <p style={{ fontSize: '15px', color: '#666666', marginBottom: '30px' }}>

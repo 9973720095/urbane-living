@@ -32,10 +32,10 @@ const meta = (key, value, restore, isProperty = false) => {
 
 /*
   Per-page SEO for this single-page app.
-  useSeo({ title, description, path, image, schema })
+  useSeo({ title, description, path, image, schema, noindex })
   Values are restored when the page unmounts, so other pages keep the defaults from index.html.
 */
-const useSeo = ({ title, description, path = '/', image, schema } = {}) => {
+const useSeo = ({ title, description, path = '/', image, schema, noindex = false } = {}) => {
   useEffect(() => {
     const restore = [];
     const url = `${siteUrl}${path}`;
@@ -56,6 +56,8 @@ const useSeo = ({ title, description, path = '/', image, schema } = {}) => {
       meta('og:image', image, restore, true);
       meta('twitter:image', image, restore);
     }
+    // private / tool pages and 404: keep them out of Google
+    if (noindex) meta('robots', 'noindex, nofollow', restore);
     meta('og:url', url, restore, true);
     upsert(
       'link[rel="canonical"]',
@@ -80,7 +82,7 @@ const useSeo = ({ title, description, path = '/', image, schema } = {}) => {
     });
 
     return () => restore.reverse().forEach((fn) => fn());
-  }, [title, description, path, image, schema]);
+  }, [title, description, path, image, schema, noindex]);
 };
 
 export default useSeo;

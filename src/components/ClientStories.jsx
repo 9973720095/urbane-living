@@ -1,119 +1,142 @@
-import React, { useState } from 'react';
-import { Typography, Button } from 'antd';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
+import React, { useRef, useState } from 'react';
+import { ArrowRightOutlined } from '@ant-design/icons';
 
-const { Title, Paragraph } = Typography;
+// Client video stories (edit here). Add more items and they appear automatically.
+const stories = [
+  {
+    id: 1,
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792578318/1723703873641441_1.mp4',
+    quote: 'We wanted our new home to reflect contemporary and modern styles, inspired by designs we loved, perfectly curated by UrbaneLiving.',
+    author: 'Dr. Lipika and Dr. Satendra',
+  },
+  {
+    id: 2,
+    videoUrl: 'https://res.cloudinary.com/diosq0s7w/video/upload/v1792576908/urbane_living_logo_download_alxjjp.mp4',
+    quote: 'Combining our family’s heritage with a modern look was our dream, and UrbaneLiving helped make it a reality.',
+    author: 'Amrish',
+  },
+  {
+    id: 3,
+    videoUrl: 'https://res.cloudinary.com/diosq0s7w/video/upload/v1793003212/Saubhagya_Review_16x9_cyfxcb.mp4',
+    quote: 'Thanks to UrbaneLiving, our new home seamlessly blends heritage beauty with modern style, reflecting our taste.',
+    author: 'Mrs. Saubhagya',
+  },
+];
 
+// Cloudinary gives a free thumbnail when .mp4 is swapped for .jpg
+const posterOf = (url) => (url.includes('res.cloudinary.com') ? url.replace(/\.mp4$/, '.jpg') : undefined);
+const initials = (name) => name.replace(/^(Dr\.|Mr\.|Mrs\.|Ms\.)\s*/i, '').charAt(0).toUpperCase();
+
+// Phones: swipe one story at a time (with dots). Desktop: all 3 side by side.
 const ClientStories = ({ onOpenForm }) => {
-  const stories = [
-    {
-      id: 1,
-      videoUrl: "https://res.cloudinary.com/nzqefovs/video/upload/v1792578318/1723703873641441_1.mp4",
-      quote: `"We wanted our new home to reflect contemporary and modern styles, inspired by designs we loved, perfectly curated by UrbaneLiving."`,
-      author: "Dr. Lipika and Dr. Satendra"
-    },
-    {
-      id: 2,
-      videoUrl: "https://res.cloudinary.com/diosq0s7w/video/upload/v1792576908/urbane_living_logo_download_alxjjp.mp4",
-      quote: `"Combining our family’s heritage with a modern look was our dream, and UrbaneLiving helped make it a reality."`,
-      author: "Amrish"
-    },
-    {
-      id: 3,
-      videoUrl: "https://res.cloudinary.com/diosq0s7w/video/upload/v1793003212/Saubhagya_Review_16x9_cyfxcb.mp4",
-      quote: `"Thanks to UrbaneLiving, our new home seamlessly blends heritage beauty with modern style, reflecting our taste."`,
-      author: "Mrs. Saubhagya"
-    }
-    // {
-    //   id: 4,
-    //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    //   quote: `"The modular kitchen and wardrobe designs are simply outstanding. Professional execution from start to finish!"`,
-    //   author: "Rahul Sharma"
-    // },
-    // {
-    //   id: 5,
-    //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    //   quote: `"Incredible false ceiling work completed well before the deadline. Highly recommend their design team."`,
-    //   author: "Pooja Verma"
-    // },
-    // {
-    //   id: 6,
-    //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    //   quote: `"Transparent pricing and top-notch quality finishes. Our living room looks straight out of a luxury magazine."`,
-    //   author: "Vikram Malhotra"
-    // },
-    // {
-    //   id: 7,
-    //   videoUrl: "https://www.youtube.com/embed/dQw4w9WgXcQ",
-    //   quote: `"Amazing attention to detail and great customer support throughout the entire project journey."`,
-    //   author: "Ananya Roy"
-    // }
-  ];
+  const [active, setActive] = useState(0);
+  const trackRef = useRef(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 3;
+  // which card is in view while swiping
+  const onScroll = (e) => {
+    const el = e.currentTarget;
+    const card = el.firstElementChild;
+    if (!card) return;
+    setActive(Math.round(el.scrollLeft / (card.offsetWidth + 16)));
+  };
 
-  const totalPages = Math.ceil(stories.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentStories = stories.slice(startIndex, startIndex + itemsPerPage);
+  const goTo = (i) => {
+    const el = trackRef.current;
+    const card = el?.children[i];
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: 'smooth' });
+  };
+
+  // only one video plays at a time
+  const onPlay = (e) => {
+    trackRef.current?.querySelectorAll('video').forEach((v) => { if (v !== e.currentTarget) v.pause(); });
+  };
 
   return (
-    <div style={{ padding: '80px 20px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '100%', maxWidth: '1200px' }}>
-        
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '50px', flexWrap: 'wrap', gap: '20px' }}>
-          <Title level={2} style={{ fontSize: '38px', fontWeight: 600, color: '#1F2A44', margin: 0, lineHeight: 1.2 }}>
-            Heard from us? Now it’s time to hear our <br /> clients’ stories
-          </Title>
-          <Button 
-            type="primary" 
-            onClick={onOpenForm}
-            style={{ backgroundColor: '#E40B12', borderColor: '#E40B12', height: '48px', padding: '0 28px', fontSize: '15px', fontWeight: 600, borderRadius: '100px', boxShadow: '0 4px 15px rgba(228, 11, 18, 0.25)' }}
+    <section aria-labelledby="stories-title" className="bg-white px-4 py-12 sm:px-6 lg:py-20">
+      <div className="mx-auto max-w-[1200px]">
+        {/* Header (same style as the other home sections) */}
+        <div className="flex flex-col items-center gap-5 text-center lg:flex-row lg:items-end lg:justify-between lg:text-left">
+          <div className="max-w-[640px]">
+            <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red">
+              CLIENT STORIES
+            </span>
+            <h2 id="stories-title" className="m-0 text-[24px] font-semibold leading-tight text-brand-navy sm:text-[36px] lg:text-[40px]">
+              Heard from us? Now hear our <span className="text-brand-red">clients’ stories</span>
+            </h2>
+          </div>
+          <button
+            type="button"
+            onClick={() => typeof onOpenForm === 'function' && onOpenForm()}
+            className="hidden h-12 shrink-0 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white shadow-cta transition hover:bg-brand-red-dark lg:inline-flex"
           >
-            BOOK FREE CONSULTATION
-          </Button>
+            Book Free Consultation <ArrowRightOutlined />
+          </button>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(360px, 1fr))', gap: '30px', marginBottom: '50px' }}>
-          {currentStories.map((item) => (
-            <div key={item.id} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-              
-              {/* Direct Video Embed */}
-              <div style={{ borderRadius: '16px', overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,0,0,0.08)', height: '240px', backgroundColor: '#000' }}>
-                <iframe
-                  width="100%"
-                  height="100%"
-                  src={item.videoUrl}
-                  title="YouTube video player"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
+        {/* Stories */}
+        <ul
+          ref={trackRef}
+          onScroll={onScroll}
+          className="-mx-4 mb-0 mt-8 flex snap-x snap-mandatory list-none gap-4 overflow-x-auto px-4 pb-2 [scrollbar-width:none] lg:mx-0 lg:mt-10 lg:grid lg:grid-cols-3 lg:gap-6 lg:overflow-visible lg:px-0 [&::-webkit-scrollbar]:hidden"
+        >
+          {stories.map((s) => (
+            <li key={s.id} className="flex w-[85%] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-solid border-gray-100 bg-white shadow-card sm:w-[60%] lg:w-auto">
+              <div className="aspect-video bg-brand-ink">
+                <video
+                  src={s.videoUrl}
+                  poster={posterOf(s.videoUrl)}
+                  controls
+                  playsInline
+                  preload="none"
+                  onPlay={onPlay}
+                  className="block h-full w-full object-contain"
+                  aria-label={`Video review by ${s.author}`}
+                />
               </div>
-
-              <div style={{ padding: '0 4px' }}>
-                <Paragraph style={{ fontSize: '14px', color: '#444444', fontStyle: 'italic', lineHeight: 1.5, textAlign: 'center', marginBottom: '8px' }}>
-                  {item.quote}
-                </Paragraph>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#1F2A44', display: 'block', textAlign: 'center' }}>
-                  — {item.author}
-                </span>
-              </div>
-            </div>
+              <figure className="m-0 flex flex-1 flex-col p-5">
+                <span aria-hidden="true" className="h-6 font-serif text-5xl leading-none text-brand-red/40">“</span>
+                <blockquote className="m-0 mt-1 flex-1 text-sm leading-relaxed text-gray-600">{s.quote}</blockquote>
+                <figcaption className="mt-4 flex items-center gap-3 border-0 border-t border-solid border-gray-100 pt-4">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-brand-navy text-sm font-semibold text-white">
+                    {initials(s.author)}
+                  </span>
+                  <span>
+                    <span className="block text-sm font-semibold text-brand-navy">{s.author}</span>
+                    <span className="block text-xs text-gray-400">Urbane Living client</span>
+                  </span>
+                </figcaption>
+              </figure>
+            </li>
           ))}
-        </div>
+        </ul>
 
-        {totalPages > 1 && (
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '12px', marginTop: '40px' }}>
-            <Button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1} icon={<LeftOutlined />} style={{ borderRadius: '50%', width: '40px', height: '40px' }} />
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button key={index + 1} onClick={() => setCurrentPage(index + 1)} style={{ width: '40px', height: '40px', borderRadius: '50%', border: 'none', backgroundColor: currentPage === index + 1 ? '#E40B12' : '#f0f2f5', color: currentPage === index + 1 ? '#ffffff' : '#333333', fontWeight: 700, cursor: 'pointer' }}>{index + 1}</button>
+        {/* Dots (phones / tablets) */}
+        {stories.length > 1 && (
+          <div className="mt-5 flex justify-center gap-2 lg:hidden">
+            {stories.map((s, i) => (
+              <button
+                key={s.id}
+                type="button"
+                aria-label={`Show story ${i + 1}`}
+                onClick={() => goTo(i)}
+                className={`h-2 cursor-pointer rounded-full border-0 p-0 transition-all ${active === i ? 'w-6 bg-brand-red' : 'w-2 bg-gray-300'}`}
+              />
             ))}
-            <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))} disabled={currentPage === totalPages} icon={<RightOutlined />} style={{ borderRadius: '50%', width: '40px', height: '40px' }} />
           </div>
         )}
+
+        {/* CTA on phones */}
+        <div className="mt-8 text-center lg:hidden">
+          <button
+            type="button"
+            onClick={() => typeof onOpenForm === 'function' && onOpenForm()}
+            className="inline-flex h-12 w-full max-w-[360px] cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white shadow-cta transition hover:bg-brand-red-dark"
+          >
+            Book Free Consultation <ArrowRightOutlined />
+          </button>
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
