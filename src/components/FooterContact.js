@@ -22,7 +22,7 @@ const footer = {
     title: 'Want quick assistance?',
     text: 'Call or WhatsApp us for premium home design services.',
   },
-  phone: { label: '+91-1800-123-6407', href: 'tel:+9118001236407' },
+  phone: { label: '1800-123-6407', href: 'tel:+9118001236407' },
   whatsapp: 'https://wa.me/919105052454',
   email: 'sales1@urbaneliving.in',
   address: 'G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad',

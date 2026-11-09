@@ -63,8 +63,8 @@ export const ceiling = {
 export const beforeAfter = {
   title: 'Transforming homes with love',
   subtitle: 'Get a glimpse of our exceptional home designs.',
-  before: `${cdn}/image/upload/v1786447286/UrbaneBefore_img_qemvxm.png`,
-  after: `${cdn}/image/upload/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png`,
+  before: `${cdn}/image/upload/q_auto,f_auto,w_1400/v1786447286/UrbaneBefore_img_qemvxm.png`,
+  after: `${cdn}/image/upload/q_auto,f_auto,w_1400/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png`,
 };
 
 // tone: which brand color the icon uses

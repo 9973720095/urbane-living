@@ -10,7 +10,7 @@ export const brand = {
 };
 
 export const contact = {
-  phoneDisplay: '+91-1800-123-6407',
+  phoneDisplay: '1800-123-6407',
   phoneHref: 'tel:+9118001236407',
   whatsappHref: 'https://wa.me/919105052454',
   email: 'urbanelivingofficial@gmail.com',

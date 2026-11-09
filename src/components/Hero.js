@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { Typography, Select, message } from 'antd';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import {
   ArrowRightOutlined,
   CheckCircleFilled,
-  SafetyCertificateFilled,
-  BulbFilled,
-  TagFilled,
 } from '@ant-design/icons';
 import './css/Hero.css';
 import { trackLead } from '../utils/metaPixel';
@@ -73,17 +69,10 @@ const Hero = () => {
   // Single static content (Slider removed)
   const slide = {
     id: 1,
-    title: <>Aapka Vision. Hamara Execution.<span className="hero-title-accent"> No Confusion!</span></>,
+    title: <>Aapka Vision. Hamara Execution.<span className="hero-title-accent">No Confusion!</span></>,
     subTitle: "Click today move into your Dream Home Tomorrow.",
     img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4"
   };
-
-  // Same promises shown in the strip below the hero
-  const highlights = [
-    { icon: <BulbFilled />, text: 'Personalised designs' },
-    { icon: <SafetyCertificateFilled />, text: '10-year warranty¹' },
-    { icon: <TagFilled />, text: 'Transparent pricing' },
-  ];
 
   // Country codes for the phone field (India first = default); flags from flagcdn.com
   const countryCodes = [
@@ -151,34 +140,16 @@ const Hero = () => {
         <div className="hero-overlay"></div>
 
         <div className="hero-content-layout">
-          {/* Left Side Text Content */}
+          {/* Left Side Text Content: glass box only behind the heading */}
           <div className="hero-text-section">
-            <span className="hero-eyebrow">
-              <span className="hero-eyebrow-dot" />
-              Interior &amp; False Ceiling Experts · Delhi NCR
-            </span>
-
-            <Title className="hero-main-title">
-              {slide.title}
-            </Title>
-            <p className="hero-sub-text">
-              {slide.subTitle}
-            </p>
-
-            <div className="hero-cta-row">
-              <Link to="/false-ceiling" className="hero-cta-primary">
-                Explore Designs <ArrowRightOutlined />
-              </Link>
+            <div className="hero-text-glass">
+              <Title className="hero-main-title">
+                {slide.title}
+              </Title>
+              <p className="hero-sub-text">
+                {slide.subTitle}
+              </p>
             </div>
-
-            <ul className="hero-highlights">
-              {highlights.map((item) => (
-                <li key={item.text}>
-                  <span className="hero-highlight-icon">{item.icon}</span>
-                  {item.text}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="hero-form-card">

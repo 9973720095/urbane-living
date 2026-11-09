@@ -20,6 +20,7 @@ import Login from './pages/Login';
 // Components & Pages imports
 import ScrollToTop from './components/ScrollToTop';
 import MetaPixel from './components/MetaPixel';
+import TopBar from './components/TopBar';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PromiseStrip from './components/PromiseStrip';
@@ -93,6 +94,9 @@ const LayoutContent = ({
 
   return (
     <Layout style={{ background: '#fff' }}>
+
+      {/* Top bar: rotating offers + call button (hidden on admin pages) */}
+      {!isAdminPage && <TopBar />}
 
       {!isAdminPage && (
         <Navbar onOpenForm={handleOpen} />

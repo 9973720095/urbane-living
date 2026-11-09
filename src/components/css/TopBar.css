@@ -1,0 +1,321 @@
+/* ===== Top bar: endless right -> left strip in brand colours ===== */
+.ul-tb {
+  position: relative;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  /* deep ink -> navy, with a soft red glow left and blue glow right (logo colours) */
+  background:
+    radial-gradient(120px 60px at 0% 50%, rgba(228, 11, 18, 0.28), transparent 70%),
+    radial-gradient(160px 60px at 100% 50%, rgba(65, 103, 179, 0.35), transparent 70%),
+    linear-gradient(90deg, #0F1628 0%, #1F2A44 50%, #0F1628 100%);
+  overflow: hidden;
+}
+
+/* logo stripe at the bottom: red half + blue half */
+.ul-tb-stripe {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #E40B12 0 50%, #4167B3 50% 100%);
+  opacity: 0.9;
+}
+
+.ul-tb-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 40px;
+}
+
+/* ---- the moving strip ---- */
+.ul-tb-marquee {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  /* soft fade at both edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, #000 48px, #000 calc(100% - 48px), transparent 100%);
+}
+
+.ul-tb-track {
+  display: flex;
+  width: max-content;
+  animation: ulTbScroll var(--ul-tb-speed, 45s) linear infinite;
+  will-change: transform;
+}
+
+/* stop on hover / keyboard focus so people can read and click */
+.ul-tb-marquee:hover .ul-tb-track,
+.ul-tb-marquee:focus-within .ul-tb-track {
+  animation-play-state: paused;
+}
+
+@keyframes ulTbScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.ul-tb-list {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ul-tb-item {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.ul-tb-item > a,
+.ul-tb-item > span:first-child {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 4px;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.ul-tb-item > a:hover .ul-tb-text {
+  color: #FFB800;
+}
+
+.ul-tb-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: rgba(255, 184, 0, 0.14);
+  color: #FFC93C;
+  font-size: 12px;
+}
+
+.ul-tb-tag {
+  padding: 3px 7px;
+  border-radius: 100px;
+  background: #E40B12;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.ul-tb-text {
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+/* gold diamond between items */
+.ul-tb-sep {
+  width: 6px;
+  height: 6px;
+  margin: 0 22px;
+  background: #FFB800;
+  transform: rotate(45deg);
+  opacity: 0.8;
+}
+
+/* ---- right side: WhatsApp + call ---- */
+.ul-tb-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-right: 48px;
+}
+
+.ul-tb-wa {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #15803D;
+  color: #ffffff !important;
+  font-size: 15px;
+  text-decoration: none;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.ul-tb-wa:hover {
+  background: #166534;
+  transform: translateY(-1px);
+}
+
+.ul-tb-call {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 30px;
+  padding: 0 14px 0 4px;
+  border-radius: 100px;
+  background: #E40B12;
+  color: #ffffff !important;
+  text-decoration: none;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(228, 11, 18, 0.35);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ul-tb-call:hover {
+  background: #C2090F;
+  transform: translateY(-1px);
+}
+
+/* light sweep across the call button every few seconds */
+.ul-tb-call::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transform: skewX(-20deg);
+  animation: ulTbShine 4s ease-in-out infinite;
+}
+
+@keyframes ulTbShine {
+  0%, 70% { left: -60%; }
+  100% { left: 130%; }
+}
+
+/* white circle with the phone icon + a soft pulse ring */
+.ul-tb-call-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #E40B12;
+  font-size: 11px;
+}
+
+.ul-tb-call-ring .anticon {
+  transform: scaleX(-1);
+}
+
+.ul-tb-call-ring::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+  animation: ulTbPulse 2s ease-out infinite;
+}
+
+@keyframes ulTbPulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.6); }
+  100% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+}
+
+.ul-tb-call-text {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.ul-tb-call-small {
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.ul-tb-call-number {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* ---- mobile ---- */
+@media (max-width: 767px) {
+  .ul-tb {
+    font-size: 12px;
+  }
+
+  .ul-tb-inner {
+    height: 36px;
+    gap: 8px;
+  }
+
+  .ul-tb-marquee {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 20px, #000 calc(100% - 20px), transparent 100%);
+  }
+
+  .ul-tb-sep {
+    margin: 0 14px;
+  }
+
+  .ul-tb-actions {
+    gap: 6px;
+    padding-right: 10px;
+  }
+
+  .ul-tb-wa {
+    width: 26px;
+    height: 26px;
+    font-size: 14px;
+  }
+
+  .ul-tb-call {
+    height: 26px;
+    padding: 0 10px 0 3px;
+  }
+
+  .ul-tb-call-ring {
+    width: 20px;
+    height: 20px;
+  }
+
+  .ul-tb-call-small {
+    display: none;
+  }
+
+  .ul-tb-call-number {
+    font-size: 12px;
+  }
+}
+
+/* very small phones: keep only the phone icon + number */
+@media (max-width: 380px) {
+  .ul-tb-wa {
+    display: none;
+  }
+}
+
+/* people who turn off motion: no sliding, strip can be scrolled by hand */
+@media (prefers-reduced-motion: reduce) {
+  .ul-tb-track,
+  .ul-tb-call::after,
+  .ul-tb-call-ring::before {
+    animation: none;
+  }
+
+  .ul-tb-marquee {
+    overflow-x: auto;
+  }
+}
