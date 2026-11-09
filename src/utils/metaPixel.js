@@ -1,5 +1,6 @@
 // Meta Pixel helpers. The pixel only runs on the live site (never on localhost), so test leads stay out of Ads data.
 import { metaPixelId } from '../data/config';
+import { markLeadSubmitted } from './leadStatus';
 
 const isEnabled = () => Boolean(metaPixelId) && typeof window !== 'undefined' && window.location.hostname !== 'localhost';
 
@@ -27,10 +28,13 @@ export const trackEvent = (name, params = {}, eventId) => {
 };
 
 // Call after a lead is saved. No name / phone / email is sent to Meta.
-export const trackLead = ({ leadId, city, propertyType, form } = {}) =>
+// Also remembers the lead in this browser, so the auto popup stops opening.
+export const trackLead = ({ leadId, city, propertyType, form } = {}) => {
+  markLeadSubmitted();
   trackEvent('Lead', {
     content_name: form || 'Website form',
     content_category: propertyType || undefined,
     city: city || undefined,
     page: window.location.pathname,
   }, leadId);
+};

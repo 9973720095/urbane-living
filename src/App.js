@@ -21,6 +21,7 @@ import Login from './pages/Login';
 import ScrollToTop from './components/ScrollToTop';
 import MetaPixel from './components/MetaPixel';
 import TopBar from './components/TopBar';
+import useAutoPopup from './hooks/useAutoPopup';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PromiseStrip from './components/PromiseStrip';
@@ -91,6 +92,9 @@ const LayoutContent = ({
 
   const isAdminPage =
     location.pathname.startsWith('/admin');
+
+  // Auto-open the free consultation form: 5 sec, 5 min and 10 min into each visit
+  useAutoPopup({ isOpen: isModalOpen, open: handleOpen, pathname: location.pathname });
 
   return (
     <Layout style={{ background: '#fff' }}>
