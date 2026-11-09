@@ -1,43 +1,58 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { beforeAfter } from '../data/home';
 
+// Before / after slider. Images + text come from data/home.js (beforeAfter),
+// so the compressed Cloudinary URLs (q_auto,f_auto,w_1400) are used here.
 const BeforeAfter = () => {
   const [sliderPosition, setSliderPosition] = useState(50);
   const [isDragging, setIsDragging] = useState(false);
+  const [boxWidth, setBoxWidth] = useState(1000);
   const containerRef = useRef(null);
+
+  // Keep both images the same width as the box (also after resize / rotate)
+  useEffect(() => {
+    const update = () => {
+      if (containerRef.current) setBoxWidth(containerRef.current.offsetWidth);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   const handleMouseDown = () => setIsDragging(true);
   const handleMouseUp = () => setIsDragging(false);
 
-  const handleMouseMove = (e) => {
-    if (!isDragging || !containerRef.current) return;
+  const moveTo = (clientX) => {
+    if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100));
     setSliderPosition(percentage);
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) moveTo(e.clientX);
   };
 
   const handleTouchMove = (e) => {
-    if (!containerRef.current || !e.touches[0]) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
-    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-    setSliderPosition(percentage);
+    if (e.touches[0]) moveTo(e.touches[0].clientX);
   };
 
+  const imgStyle = { width: `${boxWidth}px`, height: '100%', objectFit: 'cover', maxWidth: 'none' };
+
   return (
-    <div style={{ padding: '10px 20px 50px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
+    <div style={{ padding: '60px 20px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
       <div style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
-        
+
         {/* Header Text */}
-        <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '8px', lineHeight: "36px" }}>
-          Transforming homes with love
+        <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '8px', lineHeight: '36px' }}>
+          {beforeAfter.title}
         </h2>
         <p style={{ fontSize: '15px', color: '#666666', marginBottom: '30px' }}>
-          Get a glimpse of our exceptional home designs.
+          {beforeAfter.subtitle}
         </p>
 
         {/* Interactive Before/After Container */}
-        <div 
+        <div
           ref={containerRef}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
@@ -46,67 +61,73 @@ const BeforeAfter = () => {
           onTouchStart={handleMouseDown}
           onTouchEnd={handleMouseUp}
           onTouchMove={handleTouchMove}
-          style={{ 
-            position: 'relative', 
-            width: '100%', 
-            height: '450px', 
-            borderRadius: '12px', 
-            overflow: 'hidden', 
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '450px',
+            borderRadius: '12px',
+            overflow: 'hidden',
             cursor: 'ew-resize',
             boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
             userSelect: 'none'
           }}
         >
-          {/* Background / After View (Video) */}
+          {/* Background / After view */}
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
-           <img 
-              src="https://res.cloudinary.com/diosq0s7w/image/upload/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png" 
-              alt="Before" 
-              style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '1000px', height: '100%', objectFit: 'cover', maxWidth: 'none' }} 
+            <img
+              src={beforeAfter.after}
+              alt="Dining area after interior design by Urbane Living"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+              style={imgStyle}
             />
           </div>
 
-          {/* Foreground / Before View (Clipped) */}
-          <div style={{ 
-            position: 'absolute', 
-            top: 0, 
-            left: 0, 
-            width: `${sliderPosition}%`, 
-            height: '100%', 
-            zIndex: 2, 
+          {/* Foreground / Before view (clipped) */}
+          <div style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: `${sliderPosition}%`,
+            height: '100%',
+            zIndex: 2,
             overflow: 'hidden',
             borderRight: '3px solid #ffffff'
           }}>
-            <img 
-              src="https://res.cloudinary.com/diosq0s7w/image/upload/v1786447286/UrbaneBefore_img_qemvxm.png" 
-              alt="Before" 
-              style={{ width: containerRef.current ? `${containerRef.current.offsetWidth}px` : '1000px', height: '100%', objectFit: 'cover', maxWidth: 'none' }} 
+            <img
+              src={beforeAfter.before}
+              alt="Dining area before the interior work"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+              style={imgStyle}
             />
-            <span style={{ 
-              position: 'absolute', 
-              top: '20px', 
-              left: '20px', 
-              backgroundColor: 'rgba(0,0,0,0.6)', 
-              color: '#ffffff', 
-              padding: '6px 14px', 
-              borderRadius: '4px', 
-              fontSize: '13px', 
-              fontWeight: 600 
+            <span style={{
+              position: 'absolute',
+              top: '20px',
+              left: '20px',
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              color: '#ffffff',
+              padding: '6px 14px',
+              borderRadius: '4px',
+              fontSize: '13px',
+              fontWeight: 600
             }}>
               Before
             </span>
           </div>
 
-          {/* Scratch Badge */}
-          <div style={{ 
-            position: 'absolute', 
-            bottom: '25px', 
-            left: '50%', 
-            transform: 'translateX(-50%)', 
-            backgroundColor: 'rgba(255, 255, 255, 0.9)', 
-            padding: '10px 20px', 
-            borderRadius: '30px', 
-            zIndex: 3, 
+          {/* Hint badge */}
+          <div style={{
+            position: 'absolute',
+            bottom: '25px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            padding: '10px 20px',
+            borderRadius: '30px',
+            zIndex: 3,
             boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
             pointerEvents: 'none',
             fontSize: '13px',
