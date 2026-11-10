@@ -76,6 +76,8 @@ const Navbar = ({ onOpenForm }) => {
       />
       <div className="nav-right">
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>GET FREE QUOTE</Button>
+        {/* phones / tablets: small quote button next to the menu icon */}
+        <button type="button" className="book-btn-mobile" onClick={onOpenForm}>Free Quote</button>
         <Button className="mobile-menu-icon" type="text" icon={<MenuOutlined />} onClick={showDrawer} />
       </div>
 

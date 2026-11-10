@@ -144,4 +144,4 @@ const BeforeAfter = () => {
   );
 };
 
-export default BeforeAfter;
+export default BeforeAfter; 

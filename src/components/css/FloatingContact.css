@@ -1,0 +1,113 @@
+/* Floating WhatsApp + call buttons (every page) */
+.ul-float {
+  position: fixed;
+  right: 18px;
+  bottom: 24px;
+  z-index: 990;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.ul-float-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  color: #ffffff !important;
+  font-size: 26px;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(15, 22, 40, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ul-float-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 14px 30px rgba(15, 22, 40, 0.3);
+}
+
+.ul-float-wa {
+  background: #15803D;
+}
+
+/* soft pulse ring around WhatsApp */
+.ul-float-wa::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.55);
+  animation: ulFloatPulse 2.2s ease-out infinite;
+}
+
+@keyframes ulFloatPulse {
+  0% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.55); }
+  100% { box-shadow: 0 0 0 14px rgba(21, 128, 61, 0); }
+}
+
+.ul-float-call {
+  background: #E40B12;
+  font-size: 22px;
+}
+
+.ul-float-call .anticon {
+  transform: scaleX(-1);
+}
+
+/* label slides out on hover (desktop) */
+.ul-float-label {
+  position: absolute;
+  right: 64px;
+  top: 50%;
+  transform: translateY(-50%) translateX(8px);
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #1F2A44;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ul-float-btn:hover .ul-float-label,
+.ul-float-btn:focus-visible .ul-float-label {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* phones: smaller, sits above the bottom app bar, no labels */
+@media (max-width: 767px) {
+  .ul-float {
+    right: 12px;
+    bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+    gap: 10px;
+  }
+
+  .ul-float-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 24px;
+  }
+
+  .ul-float-call {
+    font-size: 20px;
+  }
+
+  .ul-float-label {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ul-float-wa::before {
+    animation: none;
+  }
+}

@@ -11,8 +11,9 @@ export const brand = {
 
 export const contact = {
   phoneDisplay: '1800-123-6407',
-  phoneHref: 'tel:+9118001236407',
+  phoneHref: 'tel:18001236407', // toll-free number: dial without +91
   whatsappHref: 'https://wa.me/919105052454',
+  whatsappText: 'Hi Urbane Living, I want a free design consultation for my home.',
   email: 'urbanelivingofficial@gmail.com',
   address: 'G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad',
 };
@@ -30,6 +31,31 @@ export const navLinks = {
     { label: 'Living Hall', to: '/living-hall' },
     { label: 'Modular Kitchen', to: '/kitchen' },
     { label: 'Wardrobe Design', to: '/wardrobe' },
+  ],
+};
+
+// Mobile "app" bar at the bottom of every page (phones only).
+// icon = key in components/MobileBottomNav.jsx. action: 'form' opens the free consultation form,
+// 'more' opens the menu sheet. The middle item is the big round button.
+export const mobileNav = {
+  items: [
+    { label: 'Home', icon: 'home', to: '/' },
+    { label: 'Ceiling', icon: 'ceiling', to: '/false-ceiling' },
+    { label: 'Free Consult', icon: 'consult', action: 'form', center: true, badge: 'Free' },
+    { label: 'Estimate', icon: 'estimate', to: '/estimate' },
+    { label: 'More', icon: 'more', action: 'more' },
+  ],
+  // Links inside the "More" sheet
+  more: [
+    { label: 'Modular Kitchen', to: '/kitchen' },
+    { label: 'Wardrobe Design', to: '/wardrobe' },
+    { label: 'Bedroom Design', to: '/bedroom' },
+    { label: 'Living Hall', to: '/living-hall' },
+    { label: 'Vastu Score', to: '/vastu' },
+    { label: 'Areas We Serve', to: '/interior-designers' },
+    { label: 'Blog', to: '/blogs' },
+    { label: 'About Us', to: '/about' },
+    { label: 'Contact', to: '/contact' },
   ],
 };
 

@@ -22,6 +22,8 @@ import ScrollToTop from './components/ScrollToTop';
 import MetaPixel from './components/MetaPixel';
 import TopBar from './components/TopBar';
 import useAutoPopup from './hooks/useAutoPopup';
+import FloatingContact from './components/FloatingContact';
+import MobileBottomNav from './components/MobileBottomNav';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import PromiseStrip from './components/PromiseStrip';
@@ -110,6 +112,10 @@ const LayoutContent = ({
         {children}
         {!isAdminPage && <FooterContact />}
       </Content>
+
+      {/* WhatsApp + call buttons and the phone app bar (not on admin pages) */}
+      {!isAdminPage && <FloatingContact />}
+      {!isAdminPage && <MobileBottomNav onOpenForm={handleOpen} />}
 
       <InquiryModal
         isOpen={isModalOpen}
