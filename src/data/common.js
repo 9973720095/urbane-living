@@ -36,13 +36,14 @@ export const navLinks = {
 
 // Mobile "app" bar at the bottom of every page (phones only).
 // icon = key in components/MobileBottomNav.jsx. action: 'form' opens the free consultation form,
+// 'designs' opens the design grid (same list as the home page "End-to-end interior solutions"),
 // 'more' opens the menu sheet. The middle item is the big round button.
 export const mobileNav = {
   items: [
     { label: 'Home', icon: 'home', to: '/' },
-    { label: 'Ceiling', icon: 'ceiling', to: '/false-ceiling' },
+    { label: 'Designs', icon: 'designs', action: 'designs' },
     { label: 'Free Consult', icon: 'consult', action: 'form', center: true, badge: 'Free' },
-    { label: 'Estimate', icon: 'estimate', to: '/estimate' },
+    { label: 'Vastu', icon: 'vastu', to: '/vastu' },
     { label: 'More', icon: 'more', action: 'more' },
   ],
   // Links inside the "More" sheet
@@ -51,7 +52,7 @@ export const mobileNav = {
     { label: 'Wardrobe Design', to: '/wardrobe' },
     { label: 'Bedroom Design', to: '/bedroom' },
     { label: 'Living Hall', to: '/living-hall' },
-    { label: 'Vastu Score', to: '/vastu' },
+    { label: 'False Ceiling', to: '/false-ceiling' },
     { label: 'Areas We Serve', to: '/interior-designers' },
     { label: 'Blog', to: '/blogs' },
     { label: 'About Us', to: '/about' },
@@ -90,7 +91,7 @@ export const footer = {
   ctaTitle: 'Want quick assistance? Just give us a call!',
   ctaText: 'Message us on WhatsApp or call directly for premium home design services.',
   columns: [
-    { title: 'Company', links: [{ label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' }, { label: 'Blogs', to: '/blogs' }, { label: 'Estimate', to: '/estimate' }] },
+    { title: 'Company', links: [{ label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' }, { label: 'Blogs', to: '/blogs' }, { label: 'Vastu Score', to: '/vastu' }] },
     { title: 'Services', links: [{ label: 'False Ceiling', to: '/false-ceiling' }, { label: 'Modular Kitchen', to: '/kitchen' }, { label: 'Wardrobe', to: '/wardrobe' }, { label: 'Bedroom Interiors', to: '/bedroom' }] },
     { title: 'Legal', newTab: true, links: [{ label: 'Privacy Policy', to: '/privacy' }, { label: 'Terms & Conditions', to: '/terms' }, { label: 'Refund Policy', to: '/refund' }, { label: 'Disclaimer', to: '/disclaimer' }] },
   ],

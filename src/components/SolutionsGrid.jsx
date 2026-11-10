@@ -2,13 +2,14 @@ import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined } from '@ant-design/icons';
 import { solutions, siteUrl } from '../data/siteData';
+import SectionHeading from './SectionHeading';
 
 /*
   Line icons (64x64). Grey/navy lines = currentColor, red details = the "accent" class.
   To add a service: add an icon here and an item in siteData.js -> solutions.items.
 */
 const A = 'stroke-brand-red'; // accent stroke
-const icons = {
+export const icons = {
   kitchen: (
     <>
       <path d="M26 6v6M20 18l6-6 6 6" className={A} />
@@ -122,7 +123,7 @@ const Icon = ({ name }) => (
   <svg
     viewBox="0 0 64 64"
     aria-hidden="true"
-    className="h-14 w-14 text-brand-navy/70 transition duration-300 group-hover:-translate-y-1 group-hover:text-brand-navy sm:h-16 sm:w-16"
+    className="h-11 w-11 text-brand-navy/70 transition duration-300 group-hover:-translate-y-1 group-hover:text-brand-navy sm:h-16 sm:w-16"
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
@@ -142,7 +143,7 @@ const SolutionsGrid = ({ onOpenForm }) => {
     script.text = JSON.stringify({
       '@context': 'https://schema.org',
       '@type': 'ItemList',
-      name: solutions.title,
+      name: [solutions.title, solutions.highlight].filter(Boolean).join(' '),
       itemListElement: solutions.items.map((s, i) => ({
         '@type': 'ListItem',
         position: i + 1,
@@ -159,18 +160,19 @@ const SolutionsGrid = ({ onOpenForm }) => {
   }, []);
 
   const card =
-    'group flex h-full w-full cursor-pointer flex-col items-center justify-start gap-3 rounded-2xl border border-solid border-transparent bg-transparent px-2 py-5 text-center no-underline transition duration-300 hover:border-gray-100 hover:bg-white hover:shadow-card sm:py-6';
+    'group flex h-full w-full cursor-pointer flex-col items-center justify-start gap-3 rounded-2xl border border-solid border-transparent bg-transparent px-1 py-3 text-center no-underline transition duration-300 hover:border-gray-100 hover:bg-white hover:shadow-card sm:py-6';
   const text = 'text-[13px] font-medium leading-snug text-gray-700 transition group-hover:text-brand-red sm:text-[15px]';
 
   return (
-    <section aria-labelledby="solutions-title" className="bg-white px-4 py-14 sm:px-6 lg:py-20">
+    <section aria-labelledby="solutions-title" className="bg-white px-4 py-12 sm:px-6 lg:py-20">
       <div className="mx-auto max-w-[1200px]">
-        <div className="mx-auto mb-8 max-w-[680px] text-center lg:mb-12">
-          <h2 id="solutions-title" className="m-0 text-[26px] font-semibold text-brand-navy sm:text-[34px]">
-            {solutions.title}
-          </h2>
-          {solutions.subtitle && <p className="m-0 mt-3 text-[15px] text-gray-500 sm:text-base">{solutions.subtitle}</p>}
-        </div>
+        <SectionHeading
+          id="solutions-title"
+          eyebrow={solutions.eyebrow}
+          title={solutions.title}
+          highlight={solutions.highlight}
+          subtitle={solutions.subtitle}
+        />
 
         <ul className="m-0 grid list-none grid-cols-3 gap-x-2 gap-y-2 p-0 sm:grid-cols-4 sm:gap-x-4 lg:grid-cols-5 lg:gap-y-4">
           {solutions.items.map((s) => (

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { beforeAfter } from '../data/home';
+import SectionHeading from './SectionHeading';
 
 // Before / after slider. Images + text come from data/home.js (beforeAfter),
 // so the compressed Cloudinary URLs (q_auto,f_auto,w_1400) are used here.
@@ -40,16 +41,16 @@ const BeforeAfter = () => {
   const imgStyle = { width: `${boxWidth}px`, height: '100%', objectFit: 'cover', maxWidth: 'none' };
 
   return (
-    <div style={{ padding: '60px 20px', backgroundColor: '#ffffff', display: 'flex', justifyContent: 'center' }}>
-      <div style={{ width: '100%', maxWidth: '1000px', textAlign: 'center' }}>
+    <section aria-labelledby="ba-title" className="bg-white px-4 py-12 sm:px-6 lg:py-20">
+      <div className="mx-auto max-w-[1000px]">
 
-        {/* Header Text */}
-        <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '8px', lineHeight: '36px' }}>
-          {beforeAfter.title}
-        </h2>
-        <p style={{ fontSize: '15px', color: '#666666', marginBottom: '30px' }}>
-          {beforeAfter.subtitle}
-        </p>
+        <SectionHeading
+          id="ba-title"
+          eyebrow={beforeAfter.eyebrow}
+          title={beforeAfter.title}
+          highlight={beforeAfter.highlight}
+          subtitle={beforeAfter.subtitle}
+        />
 
         {/* Interactive Before/After Container */}
         <div
@@ -64,8 +65,8 @@ const BeforeAfter = () => {
           style={{
             position: 'relative',
             width: '100%',
-            height: '450px',
-            borderRadius: '12px',
+            height: 'clamp(300px, 62vw, 480px)',
+            borderRadius: '20px',
             overflow: 'hidden',
             cursor: 'ew-resize',
             boxShadow: '0 8px 30px rgba(0,0,0,0.1)',
@@ -140,8 +141,8 @@ const BeforeAfter = () => {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 
-export default BeforeAfter; 
+export default BeforeAfter;

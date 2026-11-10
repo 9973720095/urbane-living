@@ -38,6 +38,8 @@ import { pageSeo } from './data/pageSeo';
 // import CeilingSection from './components/CeilingSection';
 import GallerySection from './components/GallerySection';
 import BeforeAfter from './components/BeforeAfter';
+import BrandStory from './components/BrandStory';
+import BlendSection from './components/BlendSection';
 // import ProcessSection from './components/ProcessSection';
 import FaqSection from './components/FaqSection';
 import FooterContact from './components/FooterContact';
@@ -169,40 +171,7 @@ function App() {
       <Hero onOpenForm={handleOpen} />
       <PromiseStrip />
 
-      <div className="brand-story-section" style={{ padding: '60px 20px', backgroundColor: '#f5f5f5', textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          
-          <h2 style={{ fontSize: '36px', fontWeight: 700, color: '#1a1a1a', marginBottom: '16px', lineHeight: 1.2 }}>
-            Your Space, Your Story! Let It Shine
-          </h2>
-
-          <p style={{ fontSize: '16px', color: '#555555', lineHeight: 1.6, marginBottom: '28px', padding: '0 15px' }}>
-            At Urbane Living, we craft living spaces that are both stylish and functional. With modern technology and quality materials, We design spaces that reflect you and stand the test of time, and also that last for years to come
-          </p>
-
-          <button 
-            onClick={handleOpen} 
-            style={{
-              backgroundColor: '#ff0000',
-              color: '#ffffff',
-              lineHeight: 1,
-              border: 'none',
-              padding: '14px 22px',
-              fontSize: '15px',
-              fontWeight: 600,
-              borderRadius: '100px 100px 100px 100px',
-              cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(255, 0, 0, 0.3)',
-              transition: 'background-color 0.2s ease'
-            }}
-            onMouseOver={(e) => e.target.style.backgroundColor = '#ff0000'}
-            onMouseOut={(e) => e.target.style.backgroundColor = '#ff0000'}
-          >
-            BOOK FREE CONSULTATION
-          </button>
-
-        </div>
-      </div>
+      <BrandStory onOpenForm={handleOpen} />
 
       <GallerySection />
       <BeforeAfter />
@@ -211,65 +180,7 @@ function App() {
       <StyleQuiz onOpenForm={handleOpen} />
       <MarketOfferings onOpenForm={handleOpen} />
 
-      <div className="blend-section-wrapper" style={{ padding: '40px 20px', display: 'flex', justifyContent: 'center', backgroundColor: '#ffffff' }}>
-        <div style={{ 
-          display: 'flex', 
-          width: '100%', 
-          maxWidth: '1100px', 
-          background: '#f2f5e8', 
-          borderRadius: '16px', 
-          overflow: 'hidden',
-          boxShadow: '0 8px 24px rgba(0, 0, 0, 0.06)',
-          alignItems: 'center',
-          flexWrap: 'wrap'
-        }}>
-          
-          {/* Left Side Content */}
-          <div style={{ flex: '1', padding: '50px 40px', minWidth: '300px' }}>
-            <h2 style={{ fontSize: '38px', fontWeight: 800, color: '#111111', lineHeight: '1.2', marginBottom: '20px' }}>
-              A blend of beauty and functionality
-            </h2>
-            <p style={{ fontSize: '16px', color: '#333333', lineHeight: '1.6', marginBottom: '35px', maxWidth: '450px' }}>
-              Because nothing less than a tailor-made, luxurious experience with high-end finishes will do for your home.
-            </p>
-            <button 
-              onClick={handleOpen} 
-              style={{
-                backgroundColor: '#ff0000',
-                color: '#ffffff',
-                border: 'none',
-                padding: '14px 32px',
-                fontSize: '15px',
-                fontWeight: 700,
-                borderRadius: '8px',
-                cursor: 'pointer',
-                letterSpacing: '0.5px',
-                boxShadow: '0 4px 15px rgba(255, 0, 0, 0.3)',
-                transition: 'background-color 0.2s ease'
-              }}
-              onMouseOver={(e) => e.target.style.backgroundColor = '#d90000'}
-              onMouseOut={(e) => e.target.style.backgroundColor = '#ff0000'}
-            >
-              GET FREE QUOTE
-            </button>
-          </div>
-
-          {/* Right Side Video Section */}
-          <div style={{ flex: '1', height: '380px', minWidth: '300px', position: 'relative', overflow: 'hidden', background: '#000' }}>
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-            >
-              <source src="https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-        </div>
-      </div>
+      <BlendSection onOpenForm={handleOpen} />
       {/* <ProcessSection /> */}
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />

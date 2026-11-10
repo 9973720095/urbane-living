@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   PhoneFilled,
-  WhatsAppOutlined,
   CalendarOutlined,
   BulbOutlined,
   CodeSandboxOutlined,
@@ -12,7 +11,6 @@ import {
   StarFilled,
 } from '@ant-design/icons';
 import { topBar } from '../data/topBar';
-import { contact } from '../data/siteData';
 import './css/TopBar.css';
 
 const ICONS = {
@@ -45,7 +43,8 @@ function Item({ item, hidden }) {
   );
 }
 
-// Thin brand bar above the navbar: endless right -> left strip + WhatsApp + call.
+// Thin brand bar above the navbar: endless right -> left strip + call button.
+// (WhatsApp lives in the floating button on every page, so it is not repeated here.)
 export default function TopBar() {
   const { items, phone, speed } = topBar;
 
@@ -65,17 +64,6 @@ export default function TopBar() {
         </div>
 
         <div className="ul-tb-actions">
-          {contact?.whatsappHref && (
-            <a
-              href={contact.whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ul-tb-wa"
-              aria-label="Chat with us on WhatsApp"
-            >
-              <WhatsAppOutlined />
-            </a>
-          )}
           <a href={phone.href} className="ul-tb-call" aria-label={`Call us on ${phone.label}`}>
             <span className="ul-tb-call-ring" aria-hidden="true">
               <PhoneFilled />

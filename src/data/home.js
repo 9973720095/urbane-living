@@ -13,9 +13,11 @@ export const hero = {
 };
 
 export const brandStory = {
-  title: 'Your Space, Your Story! Let It Shine',
-  text: 'At Urbane Living, we craft living spaces that are both stylish and functional. With modern technology and quality materials, We design spaces that reflect you and stand the test of time, and also that last for years to come',
-  cta: 'BOOK FREE CONSULTATION',
+  eyebrow: 'WHY URBANE LIVING',
+  title: 'Your Space, Your Story!',
+  highlight: 'Let It Shine',
+  text: 'At Urbane Living, we craft living spaces that are both stylish and functional. With modern technology and quality materials, we design homes that reflect you and stand the test of time.',
+  cta: 'Book Free Consultation',
 };
 
 // Home page "spaces" slider. Each title / text describes what its own video shows.
@@ -61,8 +63,10 @@ export const ceiling = {
 };
 
 export const beforeAfter = {
-  title: 'Transforming homes with love',
-  subtitle: 'Get a glimpse of our exceptional home designs.',
+  eyebrow: 'BEFORE & AFTER',
+  title: 'Transforming homes',
+  highlight: 'with love',
+  subtitle: 'Drag the slider to see a real space before and after our work.',
   before: `${cdn}/image/upload/q_auto,f_auto,w_1400/v1786447286/UrbaneBefore_img_qemvxm.png`,
   after: `${cdn}/image/upload/q_auto,f_auto,w_1400/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png`,
 };
@@ -95,9 +99,12 @@ export const gallery = {
 };
 
 export const blend = {
-  title: 'A blend of beauty and functionality',
-  text: 'Because nothing less than a tailor-made, luxurious experience with high-end finishes will do for your home.',
-  cta: 'GET FREE QUOTE',
+  eyebrow: 'CRAFTED FOR YOU',
+  title: 'A blend of beauty and',
+  highlight: 'functionality',
+  text: 'Because nothing less than a tailor-made experience with high-end finishes will do for your home.',
+  points: ['Designed around how your family lives', 'Quality materials and clean finishing', 'One team from design to handover'],
+  cta: 'Get Free Quote',
   video: hero.video,
 };
 
@@ -162,7 +169,9 @@ export const faqs = [
 // `to` opens that page; items without `to` open the free consultation form.
 // Keep only the services you actually offer.
 export const solutions = {
-  title: 'End-to-end interior solutions',
+    eyebrow: 'WHAT WE DO',
+  title: 'End-to-end',
+  highlight: 'interior solutions',
   subtitle: 'From one wardrobe to a complete home, designed, made and installed by one team.',
   cta: 'BOOK FREE DESIGN SESSION',
   items: [
