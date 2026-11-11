@@ -82,8 +82,8 @@ export const countryCodes = [
 
 export const inquiryOptions = {
   // Cities we work in (lead forms); "Other" lets anyone outside these still send a request
-  serviceAreas: ['Ghaziabad', 'Noida', 'Greater Noida', 'Delhi', 'Faridabad', 'Gurgaon', 'Other'],
-  states: ['Delhi', 'Bihar', 'UP'],
+  serviceAreas: ['Gurgaon', 'Noida', 'Greater Noida', 'Delhi','Ghaziabad', 'Faridabad', 'Other'],
+  states: ['Delhi', 'Haryana', 'UP'],
   propertyTypes: ['Residential', 'Commercial'],
 };
 

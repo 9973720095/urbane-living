@@ -292,3 +292,106 @@
   .custom-header .logo img { width: 140px !important; }
   .nav-right { gap: 4px; }
 }
+
+/* ===== Phones (≤767px): call button instead of Free Quote + menu ===== */
+/* (Free Consult and More are in the bottom app bar on phones) */
+.nav-call-mobile {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .custom-header .book-btn-mobile,
+  .custom-header.is-old .mobile-menu-icon,
+  .custom-header .mobile-menu-icon {
+    display: none !important;
+  }
+
+  .nav-call-mobile {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 14px 0 4px;
+    border-radius: 100px;
+    background: var(--brand-red-dark, #C2090F);
+    color: #ffffff !important;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(228, 11, 18, 0.25);
+  }
+
+  .nav-call-mobile:active {
+    background: var(--brand-red-dark, #C2090F);
+  }
+
+  .nav-call-ring {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--brand-red, #E40B12);
+    font-size: 14px;
+  }
+
+  .nav-call-ring .anticon {
+    transform: scaleX(-1);
+  }
+
+  /* soft pulse so the call button gets noticed */
+  .nav-call-ring::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    animation: navCallPulse 2s ease-out infinite;
+  }
+
+  @keyframes navCallPulse {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    100% { box-shadow: 0 0 0 8px rgba(255, 255, 255, 0); }
+  }
+
+  .nav-call-text {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1;
+  }
+
+  .nav-call-small {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+
+  .nav-call-number {
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 360px) {
+  .nav-call-small {
+    display: none;
+  }
+
+  .nav-call-mobile {
+    padding-right: 10px;
+  }
+
+  .nav-call-number {
+    font-size: 12.5px;
+  }
+}
+
+@media (max-width: 767px) and (prefers-reduced-motion: reduce) {
+  .nav-call-ring::before {
+    animation: none;
+  }
+}

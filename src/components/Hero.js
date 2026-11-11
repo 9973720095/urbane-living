@@ -18,7 +18,23 @@ const API_BASE_URL = window.location.hostname === 'localhost'
 
 const EMPTY_FORM = { name: '', countryCode: '+91', phone: '', email: '', city: '', locality: '' };
 
-const Hero = () => {
+// Home page values (other pages pass their own props)
+const HOME_HERO = {
+  title: 'Aapka Vision. Hamara Execution.',
+  highlight: 'No Confusion!',
+  subTitle: 'Click today move into your Dream Home Tomorrow.',
+  media: 'https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4',
+  mediaAlt: '',
+  formTitle: 'Beautiful Designs That Fit Your Budget',
+  formSubtitle: 'Beauty That Works, Function That Inspires! Guaranteed,',
+  formBadge: 'Free Design Consultation',
+  formName: 'Hero form',
+};
+
+// Big banner with a lead form. Used on the home page and on service pages (e.g. False Ceiling).
+// media can be a video (.mp4) or an image.
+const Hero = (props) => {
+  const h = { ...HOME_HERO, ...props };
   const [messageApi, contextHolder] = message.useMessage();
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
@@ -56,7 +72,7 @@ const Hero = () => {
         locality: formData.locality.trim(),
         page: window.location.pathname,
       });
-      trackLead({ leadId: res.data?.leadId, city: formData.city, form: 'Hero form' });
+      trackLead({ leadId: res.data?.leadId, city: formData.city, form: h.formName });
       messageApi.success('Thank you! Our design expert will call you shortly.');
       setFormData(EMPTY_FORM);
     } catch (err) {
@@ -64,14 +80,6 @@ const Hero = () => {
     } finally {
       setSubmitting(false);
     }
-  };
-
-  // Single static content (Slider removed)
-  const slide = {
-    id: 1,
-    title: <>Aapka Vision. Hamara Execution.<span className="hero-title-accent">No Confusion!</span></>,
-    subTitle: "Click today move into your Dream Home Tomorrow.",
-    img: "https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4"
   };
 
   // Country codes for the phone field (India first = default); flags from flagcdn.com
@@ -107,16 +115,14 @@ const Hero = () => {
     full: <span className="country-option">{flagImg(c.iso)}<span className="country-option-name">{c.name}</span><span className="country-option-code">{c.code}</span></span>,
   }));
 
-  const isVideo = slide.img.endsWith('.mp4');
+  const isVideo = /\.mp4($|\?)/.test(h.media);
 
   return (
     <div className="hero-container-wrapper">
       {contextHolder}
-      <div className="hero-banner" style={{
-        backgroundImage: !isVideo ? `url('${slide.img}')` : 'none',
-      }}>
+      <div className="hero-banner">
 
-        {isVideo && (
+        {isVideo ? (
           <video
             ref={(el) => {
               if (el) {
@@ -133,29 +139,36 @@ const Hero = () => {
             }}
             className="hero-bg-video"
           >
-            <source src={slide.img} type="video/mp4" />
+            <source src={h.media} type="video/mp4" />
           </video>
+        ) : (
+          <img src={h.media} alt={h.mediaAlt} className="hero-bg-video" fetchpriority="high" decoding="async" />
         )}
 
         <div className="hero-overlay"></div>
 
         <div className="hero-content-layout">
-          {/* Left Side Text Content: glass box only behind the heading */}
+          {/* Left Side Text Content: soft dark shadow behind the heading */}
           <div className="hero-text-section">
             <div className="hero-text-glass">
               <Title className="hero-main-title">
-                {slide.title}
+                {h.title}
+                {h.highlight && <>{' '}<span className="hero-title-accent">{h.highlight}</span></>}
               </Title>
-              <p className="hero-sub-text">
-                {slide.subTitle}
-              </p>
+              {h.subTitle && (
+                <p className="hero-sub-text">
+                  {h.subTitle}
+                </p>
+              )}
             </div>
           </div>
 
           <div className="hero-form-card">
-            <span className="form-card-badge"><CheckCircleFilled /> Free Design Consultation</span>
-            <h3>Beautiful Designs That Fit Your Budget</h3>
-            <p className="form-card-subtitle">Beauty That Works, Function That Inspires! Guaranteed,</p>
+            <span className="form-card-badge"><CheckCircleFilled /> {h.formBadge}</span>
+            <h2 style={{ fontSize: 23, fontWeight: 600, color: '#1F2A44', margin: '0 0 6px', lineHeight: 1.3, fontFamily: 'inherit' }}>
+              {h.formTitle}
+            </h2>
+            <p className="form-card-subtitle">{h.formSubtitle}</p>
 
             <form className="form-fake-inputs" onSubmit={handleSubmit} noValidate>
               <div className="hero-field">
@@ -166,6 +179,7 @@ const Hero = () => {
                   onChange={(e) => updateField('name', e.target.value)}
                   className={errors.name ? 'has-error' : ''}
                   autoComplete="given-name"
+                  aria-label="Name"
                 />
                 {errors.name && <span className="hero-field-error">{errors.name}</span>}
               </div>
@@ -191,6 +205,7 @@ const Hero = () => {
                     onChange={(e) => updateField('phone', e.target.value.replace(/[^\d\s-]/g, ''))}
                     autoComplete="tel-national"
                     maxLength={15}
+                    aria-label="Mobile number"
                   />
                 </div>
                 {errors.phone && <span className="hero-field-error">{errors.phone}</span>}
@@ -204,6 +219,7 @@ const Hero = () => {
                   onChange={(e) => updateField('email', e.target.value)}
                   className={errors.email ? 'has-error' : ''}
                   autoComplete="email"
+                  aria-label="Email"
                 />
                 {errors.email && <span className="hero-field-error">{errors.email}</span>}
               </div>

@@ -1,5 +1,3 @@
-// Home page FAQ (full home interiors), grouped by topic.
-
 // Home page FAQ (full home interiors). Grouped by topic; edit answers to match your exact terms.
 export const homeFaq = {
   tag: 'FAQs',
@@ -102,6 +100,4 @@ export const homeFaq = {
       ],
     },
   ],
-  helpTitle: 'Still have a question?',
-  helpText: 'Talk to a designer. No sales pressure, just honest answers for your home.',
 };

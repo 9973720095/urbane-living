@@ -14,6 +14,11 @@ export const banners = {
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
+        // Hero (same design as the home page hero, with the lead form)
+    heroSubtitle: 'Gypsum, POP, PVC and wooden false ceilings from ₹120/sqft, with lights planned in.',
+    formBadge: 'Free Site Visit & 3D Design',
+    formTitle: 'Get Your False Ceiling Quote',
+    formSubtitle: 'Share your details, our ceiling expert will call you back.',
   },
 };
 

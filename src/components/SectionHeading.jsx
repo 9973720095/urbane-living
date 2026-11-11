@@ -10,7 +10,7 @@ export default function SectionHeading({ id, eyebrow, title, highlight, subtitle
       {eyebrow && (
         <span
           className={`mb-3 inline-block rounded-full px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] ${
-            dark ? 'bg-white/10 text-brand-gold' : 'bg-brand-red/10 text-brand-red'
+            dark ? 'bg-white/10 text-brand-gold' : 'bg-brand-red/10 text-brand-red-dark'
           }`}
         >
           {eyebrow}

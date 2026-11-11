@@ -56,6 +56,7 @@ import LivingHallPage from './pages/LivingHallPage';
 import KitchenPage from './pages/KitchenPage';
 import WardrobePage from './pages/WardrobePage';
 import ClientStories from './components/ClientStories';
+import GoogleReviews from './components/GoogleReviews';
 import TermsConditionPage from './pages/TermsConditionPage';
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
 import RefundPolicyPage from './pages/RefundPolicyPage';
@@ -97,7 +98,7 @@ const LayoutContent = ({
   const isAdminPage =
     location.pathname.startsWith('/admin');
 
-  // Auto-open the free consultation form: 5 sec, 5 min and 10 min into each visit
+  // Auto-open the free consultation form (timing in data/autoPopup.js)
   useAutoPopup({ isOpen: isModalOpen, open: handleOpen, pathname: location.pathname });
 
   return (
@@ -184,8 +185,9 @@ function App() {
       {/* <ProcessSection /> */}
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
+      <GoogleReviews onOpenForm={handleOpen} />
       <SolutionsGrid onOpenForm={handleOpen} />
-      <FaqSection onOpenForm={handleOpen} />
+      <FaqSection />
     </>
   );
 

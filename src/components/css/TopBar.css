@@ -319,3 +319,10 @@
     overflow-x: auto;
   }
 }
+
+/* ===== Phones (≤767px): number moved to the navbar, so the strip uses the full width ===== */
+@media (max-width: 767px) {
+  .ul-tb-actions {
+    display: none;
+  }
+}

@@ -186,7 +186,7 @@ const PageBanner = ({
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`${btnBase} bg-[#25D366] !text-white shadow-[0_10px_24px_rgba(37,211,102,0.30)] hover:brightness-95`}
+                className={`${btnBase} bg-[#15803D] !text-white shadow-[0_10px_24px_rgba(21,128,61,0.30)] hover:bg-[#166534]`}
               >
                 <WhatsAppOutlined /> {whatsappLabel}
               </a>

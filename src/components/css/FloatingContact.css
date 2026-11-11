@@ -32,7 +32,7 @@
 }
 
 .ul-float-wa {
-  background: #15803D;
+  background: #25D366; /* official WhatsApp green */
 }
 
 /* soft pulse ring around WhatsApp */
@@ -41,17 +41,17 @@
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.55);
+  box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55);
   animation: ulFloatPulse 2.2s ease-out infinite;
 }
 
 @keyframes ulFloatPulse {
-  0% { box-shadow: 0 0 0 0 rgba(21, 128, 61, 0.55); }
-  100% { box-shadow: 0 0 0 14px rgba(21, 128, 61, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.55); }
+  100% { box-shadow: 0 0 0 14px rgba(37, 211, 102, 0); }
 }
 
 .ul-float-call {
-  background: #E40B12;
+  background: #1A73E8; /* phone-app blue, so it doesn't look like a second WhatsApp */
   font-size: 22px;
 }
 

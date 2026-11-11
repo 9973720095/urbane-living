@@ -38,38 +38,38 @@ const CeilingEdge = ({ onOpenForm }) => {
   const active = anatomy.layers[layer];
 
   return (
-    <section aria-labelledby="edge-title" className="relative overflow-hidden bg-brand-ink px-4 py-14 text-white sm:px-6 lg:py-20">
+    <section aria-labelledby="edge-title" className="relative overflow-hidden bg-brand-ink px-4 py-12 text-white sm:px-6 lg:py-20">
       {/* soft brand glow */}
       <div aria-hidden="true" className="pointer-events-none absolute -right-40 -top-40 h-[420px] w-[420px] rounded-full bg-brand-red/20 blur-[120px]" />
       <div aria-hidden="true" className="pointer-events-none absolute -bottom-40 -left-40 h-[420px] w-[420px] rounded-full bg-brand-blue/25 blur-[120px]" />
 
       <div className="relative mx-auto max-w-[1200px]">
         {/* Header */}
-        <div className="mx-auto mb-10 max-w-[760px] text-center lg:mb-14">
-          <span className="mb-4 inline-block rounded-full border border-solid border-white/15 bg-white/5 px-3.5 py-1 text-[11px] font-semibold tracking-[0.18em] text-brand-gold">
+        <div className="mx-auto mb-8 max-w-[760px] text-center lg:mb-14">
+          <span className="mb-3 inline-block rounded-full border border-solid border-white/15 bg-white/5 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-gold">
             {ceilingEdge.tag}
           </span>
-          <h2 id="edge-title" className="m-0 text-[28px] font-semibold leading-tight sm:text-[38px] lg:text-[44px]">
+          <h2 id="edge-title" className="m-0 text-[26px] font-semibold leading-tight sm:text-[36px] lg:text-[40px]">
             {ceilingEdge.title}{' '}
             <span className="text-brand-gold">{ceilingEdge.highlight}</span>
           </h2>
-          <p className="m-0 mt-4 text-[15px] leading-relaxed text-white/70 sm:text-lg">{ceilingEdge.subtitle}</p>
+          <p className="m-0 mt-3 text-[15px] leading-relaxed text-white/70 sm:text-base">{ceilingEdge.subtitle}</p>
         </div>
 
         {/* 1. Promises */}
-        <ul className="m-0 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        <ul className="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:gap-4 lg:grid-cols-4">
           {promises.map((p) => (
-            <li key={p.title} className="rounded-2xl border border-solid border-white/10 bg-white/[0.04] p-5 backdrop-blur transition hover:-translate-y-1 hover:border-brand-gold/40 hover:bg-white/[0.07]">
-              <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-brand-red text-xl text-white shadow-cta">
+            <li key={p.title} className="rounded-2xl border border-solid border-white/10 bg-white/[0.04] p-4 backdrop-blur transition hover:-translate-y-1 hover:border-brand-gold/40 hover:bg-white/[0.07] sm:p-5">
+              <span className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-brand-red text-lg text-white shadow-cta sm:mb-4 sm:h-11 sm:w-11 sm:text-xl">
                 {icons[p.icon]}
               </span>
-              <h3 className="m-0 text-base font-semibold">{p.title}</h3>
-              <p className="m-0 mt-1.5 text-sm leading-relaxed text-white/65">{p.text}</p>
+              <h3 className="m-0 text-[14.5px] font-semibold leading-snug sm:text-base">{p.title}</h3>
+              <p className="m-0 mt-1.5 text-[12.5px] leading-relaxed text-white/65 sm:text-sm">{p.text}</p>
             </li>
           ))}
         </ul>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:mt-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-12 lg:mt-16 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
           {/* 2. Comparison */}
           <div className="rounded-3xl bg-white p-5 text-brand-navy sm:p-7">
             <h3 className="m-0 mb-5 text-xl font-semibold sm:text-2xl">{compare.title}</h3>
@@ -106,10 +106,10 @@ const CeilingEdge = ({ onOpenForm }) => {
             <ul className="m-0 flex list-none flex-col gap-3 p-0 sm:hidden">
               {compare.rows.map((row) => (
                 <li key={row.feature} className="rounded-2xl border border-solid border-gray-100 p-4">
-                  <p className="m-0 mb-2.5 text-xs font-semibold uppercase tracking-wider text-gray-400">{row.feature}</p>
+                  <p className="m-0 mb-2.5 text-xs font-semibold uppercase tracking-wider text-gray-500">{row.feature}</p>
                   <div className="flex flex-col gap-2 text-sm">
                     <div className="flex justify-between gap-3 rounded-lg bg-brand-red/[0.05] px-3 py-2">
-                      <span className="font-semibold text-brand-red">{compare.columns[0]}</span>
+                      <span className="font-semibold text-brand-red-dark">{compare.columns[0]}</span>
                       <Cell value={row.values[0]} />
                     </div>
                     <div className="flex justify-between gap-3 px-3">
@@ -121,7 +121,7 @@ const CeilingEdge = ({ onOpenForm }) => {
               ))}
             </ul>
 
-            <p className="m-0 mt-4 text-[11px] leading-relaxed text-gray-400">{compare.note}</p>
+            <p className="m-0 mt-4 text-[11px] leading-relaxed text-gray-500">{compare.note}</p>
           </div>
 
           {/* 3. Ceiling anatomy (interactive) */}
@@ -149,7 +149,7 @@ const CeilingEdge = ({ onOpenForm }) => {
                     }`}
                   >
                     <span className="font-semibold">{l.name}</span>
-                    <span className={`text-[11px] ${on ? 'text-brand-ink/70' : 'text-white/40'}`}>Layer {i + 1}</span>
+                    <span className={`text-[11px] ${on ? 'text-brand-ink/80' : 'text-white/60'}`}>Layer {i + 1}</span>
                   </button>
                 );
               })}
@@ -165,11 +165,11 @@ const CeilingEdge = ({ onOpenForm }) => {
         </div>
 
         {/* CTA */}
-        <div className="mt-12 text-center">
+        <div className="mt-10 text-center sm:mt-12">
           <button
             type="button"
             onClick={() => typeof onOpenForm === 'function' && onOpenForm()}
-            className="inline-flex h-14 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-8 text-[15px] font-semibold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-red-dark"
+            className="inline-flex h-14 w-full cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-8 text-[15px] font-semibold text-white shadow-cta transition hover:-translate-y-0.5 hover:bg-brand-red-dark sm:w-auto"
           >
             {ceilingEdge.cta} <ArrowRightOutlined />
           </button>

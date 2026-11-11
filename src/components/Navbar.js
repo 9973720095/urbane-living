@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Layout, Button, Menu, Drawer } from 'antd';
-import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import { MenuOutlined, CloseOutlined, PhoneFilled } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
+import { contact } from '../data/siteData';
 import './Navbar.css';
 
 const { Header } = Layout;
@@ -76,7 +77,15 @@ const Navbar = ({ onOpenForm }) => {
       />
       <div className="nav-right">
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>GET FREE QUOTE</Button>
-        {/* phones / tablets: small quote button next to the menu icon */}
+        {/* phones: toll-free call button (quote + menu live in the bottom app bar) */}
+        <a href={contact.phoneHref} className="nav-call-mobile">
+          <span className="nav-call-ring" aria-hidden="true"><PhoneFilled /></span>
+          <span className="nav-call-text">
+            <span className="nav-call-small">Toll free</span>
+            <span className="nav-call-number">{contact.phoneDisplay}</span>
+          </span>
+        </a>
+        {/* tablets: small quote button next to the menu icon */}
         <button type="button" className="book-btn-mobile" onClick={onOpenForm}>Free Quote</button>
         <Button className="mobile-menu-icon" type="text" icon={<MenuOutlined />} onClick={showDrawer} />
       </div>

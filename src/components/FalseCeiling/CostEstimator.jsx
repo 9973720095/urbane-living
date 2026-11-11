@@ -58,7 +58,7 @@ const CostEstimator = ({ onOpenForm }) => {
           <span className="mb-4 inline-flex items-center gap-1.5 rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-semibold tracking-wider text-brand-blue">
             <CalculatorOutlined /> {estimator.tag}
           </span>
-          <h2 id="estimator-title" className="m-0 text-[28px] font-semibold text-brand-navy sm:text-4xl lg:text-[40px]">
+          <h2 id="estimator-title" className="m-0 text-[26px] font-semibold leading-tight text-brand-navy sm:text-[36px] lg:text-[40px]">
             {estimator.title}
           </h2>
           <p className="m-0 mx-auto mt-3 max-w-[560px] text-[15px] text-gray-500 sm:text-lg">
@@ -93,7 +93,7 @@ const CostEstimator = ({ onOpenForm }) => {
                 step={10}
                 value={area}
                 onChange={setArea}
-                aria-label="Area in square feet"
+                ariaLabelForHandle="Area in square feet"
               />
             </div>
 
@@ -121,7 +121,7 @@ const CostEstimator = ({ onOpenForm }) => {
                     >
                       <BlockOutlined className={`mb-2 text-2xl ${active ? 'text-brand-blue' : 'text-slate-400'}`} />
                       <span className="block text-xs font-semibold text-brand-navy">{m.name}</span>
-                      <span className="text-[11px] text-gray-500">₹{m.rate}/sqft</span>
+                      <span className="text-[11px] text-gray-600">₹{m.rate}/sqft</span>
                     </button>
                   );
                 })}
@@ -148,7 +148,7 @@ const CostEstimator = ({ onOpenForm }) => {
                       >
                         <span>
                           <span className="block text-sm font-semibold text-brand-navy">{tier.label}</span>
-                          <span className="text-[11px] text-gray-500">{tier.sub}</span>
+                          <span className="text-[11px] text-gray-600">{tier.sub}</span>
                         </span>
                         {active && <CheckCircleFilled className="text-brand-blue" />}
                       </button>
@@ -174,7 +174,7 @@ const CostEstimator = ({ onOpenForm }) => {
                       className="!w-full"
                     />
                   </div>
-                  <span className="mt-2.5 block text-[11px] text-gray-500">
+                  <span className="mt-2.5 block text-[11px] text-gray-600">
                     Market average: ₹{lightRate} per point
                   </span>
                 </div>
@@ -242,7 +242,7 @@ const CostEstimator = ({ onOpenForm }) => {
               <WhatsAppOutlined /> Chat with Expert
             </button>
 
-            <p className="m-0 mt-5 text-center text-[11px] text-white/40">
+            <p className="m-0 mt-5 text-center text-[11px] text-white/60">
               {estimator.disclaimer}
             </p>
           </aside>
