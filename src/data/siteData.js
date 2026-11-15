@@ -4,15 +4,19 @@
 //   config.js        backend URL, CDN, live domain
 //   common.js        brand, contact, socials, nav, footer, form options
 //   home.js          home page sections
+//   roomExplorer.js  home page Room Explorer (photo hotspots)
+//   vastu.js         home page Vastu Check (rooms, zones, tips)
 //   styleQuiz.js     home page style quiz
 //   homeFaq.js       home page FAQ
 //   falseCeiling.js  False Ceiling page
 //   blog.js          Blog page
+//   blogPosts.js     Blog articles (SEO posts at /blog/<slug>)
 //   about.js         About Us page
 //   contactPage.js   Contact page
 //   privacy.js       Privacy Policy page
 //   terms.js         Terms & Conditions page
 //   refund.js        Refund & Cancellation Policy page
+//   disclaimer.js    Disclaimer page
 //   rooms/*.js       Living Hall, Bedroom, Kitchen, Wardrobe
 
 export * from './config';
@@ -22,6 +26,7 @@ export * from './styleQuiz';
 export * from './homeFaq';
 export * from './falseCeiling';
 export * from './blog';
+export * from './blogPosts';
 export * from './about';
 export * from './contactPage';
 export * from './privacy';

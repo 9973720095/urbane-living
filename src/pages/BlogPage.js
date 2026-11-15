@@ -1,36 +1,32 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { Pagination } from 'antd';
 import { Link } from 'react-router-dom';
-import axios from 'axios';
 import PageBanner from '../components/PageBanner';
 import ClientReviews from '../components/ClientReviews';
 import useSeo from '../hooks/useSeo';
-import { API_BASE_URL, blogPage, siteUrl } from '../data/siteData';
+import { blogPage, siteUrl, blogAuthor } from '../data/siteData';
+import { mergePosts, fetchBlogList } from '../utils/blogs';
 
 const pageSize = 6; // 6 cards ke baad pagination aayega
 
 const formatDate = (date) => (date ? new Date(date).toLocaleDateString('en-GB') : '');
 
 const BlogPage = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [apiBlogs, setApiBlogs] = useState([]);
   const [currentPage, setCurrentPage] = useState(1); // Pagination state
 
+  // admin panel + Google Sheet posts (website articles show at once, even if the API is slow)
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        const res = await axios.get(`${API_BASE_URL}/api/blogs`);
-        setBlogs(res.data);
-      } catch (err) {
-        console.error("Error fetching blogs:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchBlogs();
+    let alive = true;
+    fetchBlogList()
+      .then((data) => { if (alive) setApiBlogs(data); })
+      .catch((err) => console.error('Error fetching blogs:', err));
+    return () => { alive = false; };
   }, []);
 
-  // SEO: page meta + Blog / Breadcrumb structured data (blog list from the API)
+  const blogs = useMemo(() => mergePosts(apiBlogs), [apiBlogs]);
+
+  // SEO: page meta + Blog / Breadcrumb structured data
   const schema = useMemo(() => [
     {
       '@context': 'https://schema.org',
@@ -43,8 +39,10 @@ const BlogPage = () => {
         description: blog.description,
         image: blog.image,
         datePublished: blog.createdAt,
-        author: { '@type': 'Person', name: blog.author || 'Urbane Living' },
-        url: `${siteUrl}/blog/${blog._id}`,
+        author: blog.author && blog.author !== blogAuthor
+          ? { '@type': 'Person', name: blog.author }
+          : { '@type': 'Organization', name: 'Urbane Living', url: siteUrl },
+        url: `${siteUrl}${blog.url}`,
       })),
     },
     {
@@ -88,26 +86,20 @@ const BlogPage = () => {
             {blogPage.listTitle}
           </h2>
 
-          {loading ? (
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8" aria-busy="true">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="h-[420px] animate-pulse rounded-2xl bg-white shadow-card" />
-              ))}
-            </div>
-          ) : currentBlogs.length === 0 ? (
+          {currentBlogs.length === 0 ? (
             <p className="m-0 rounded-2xl bg-white px-6 py-12 text-center text-gray-500 shadow-card">
               New articles are coming soon.
             </p>
           ) : (
             <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
               {currentBlogs.map((blog) => (
-                <li key={blog._id}>
-                  <Link to={`/blog/${blog._id}`} className="group block h-full no-underline">
+                <li key={blog.key}>
+                  <Link to={blog.url} className="group block h-full no-underline">
                     <article className="flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition duration-500 group-hover:-translate-y-2 group-hover:shadow-card-hover">
                       <div className="relative h-[210px] overflow-hidden sm:h-[230px] lg:h-[250px]">
                         <img
                           src={blog.image || "https://via.placeholder.com/400x250"}
-                          alt={blog.title}
+                          alt={blog.imageAlt || blog.title}
                           loading="lazy"
                           className="block h-full w-full object-cover transition duration-700 group-hover:scale-110"
                         />
@@ -127,7 +119,7 @@ const BlogPage = () => {
                         <div className="mt-4 flex items-center justify-between border-0 border-t border-solid border-gray-100 pt-4">
                           <span className="flex items-center gap-2 text-[13px] font-semibold text-gray-700">
                             <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand-red text-[10px] font-bold text-white">UL</span>
-                            Urbane Living
+                            {blog.readMin ? `${blog.readMin} min read` : 'Urbane Living'}
                           </span>
                           <time dateTime={blog.createdAt} className="text-xs text-gray-400">{formatDate(blog.createdAt)}</time>
                         </div>
@@ -154,7 +146,7 @@ const BlogPage = () => {
         </div>
       </section>
 
-      <ClientReviews />
+      {/* <ClientReviews /> */}
     </div>
   );
 };

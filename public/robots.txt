@@ -3,3 +3,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://urbaneliving.in/sitemap.xml
+Sitemap: https://urbaneliving.in/blog-sitemap.php
