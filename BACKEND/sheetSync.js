@@ -10,12 +10,17 @@
 //
 // "Designs" tab headers: ID | Title | Price | Category | Style | Image | Active
 // "Blogs" tab headers:   ID | Title | Description | Content | Image | Category | Author | Date | Video | Active
+//                        optional SEO columns: Slug | SEO Title | FAQ
+//   Slug      - the post URL /blog/<slug>; empty = made from the Title once (later title edits keep the URL)
+//   SEO Title - title shown on Google (empty = Title)
+//   FAQ       - one question per line:  Question? | Answer
 // "Reviews" tab headers: ID | Name | Location | Rating | Review | Photo | Video | Project | Date | Active
 //   ID     - your own unique code per row, e.g. D001 / B001 (required, never change it)
 //   Active - "No" hides the row from the website and admin; empty / "Yes" shows it
 
 const https = require('https');
 const http = require('http');
+const { slugify, parseFaq } = require('./blogSeo');
 
 // Download a URL as text, following Google's redirects
 const fetchText = (url, redirects = 5) =>
@@ -172,6 +177,11 @@ const SHEETS = {
       };
       if (get('author')) doc.author = get('author');
       if (get('date')) doc.createdAt = parseDate(get('date'));
+      doc.seoTitle = get('seo title');
+      doc.faq = parseFaq(get('faq'));
+      // URL: Slug column wins; otherwise made from the title only when the post is first created
+      if (slugify(get('slug'))) doc.slug = slugify(get('slug'));
+      else doc._onInsert = { slug: slugify(get('title')) || slugify(get('id')) };
       return doc;
     },
   },
@@ -267,11 +277,23 @@ const syncSheet = async (name, Model) => {
     let updated = 0;
     for (const { sheetKey, active, fields } of docs) {
       if (!active) continue;
-      const res = await Model.updateOne(
-        { sheetKey },
-        { $set: { ...fields, source: 'sheet' } },
-        { upsert: true },
-      );
+      const { _onInsert, ...set } = fields;
+      const update = (suffix = '') => {
+        const u = { $set: { ...set, source: 'sheet' } };
+        if (suffix && u.$set.slug) u.$set.slug += suffix;
+        if (_onInsert) u.$setOnInsert = { ..._onInsert, slug: _onInsert.slug + suffix };
+        return u;
+      };
+      let res;
+      try {
+        res = await Model.updateOne({ sheetKey }, update(), { upsert: true });
+      } catch (err) {
+        if (err.code !== 11000) { errors.push(`ID "${sheetKey}": ${err.message}`); continue; }
+        // the URL (slug) is already used by another post: add the sheet ID to make it unique
+        try {
+          res = await Model.updateOne({ sheetKey }, update(`-${slugify(sheetKey)}`), { upsert: true });
+        } catch (err2) { errors.push(`ID "${sheetKey}": ${err2.message}`); continue; }
+      }
       if (res.upsertedCount) created += 1;
       else if (res.modifiedCount) updated += 1;
     }
