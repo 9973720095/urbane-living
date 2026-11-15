@@ -21,6 +21,7 @@ const Review = require('./models/Review');
 const { startSheetSync, syncAll, getLastSyncResult } = require('./sheetSync');
 const { sendLeadsToSheet, syncAllLeadsToSheet } = require('./leadsToSheet');
 const { nextLeadId, assignMissingLeadIds } = require('./leadId');
+const { requireAdmin, requireAdminOrSyncKey } = require('./adminAuth'); // admin-only APIs (Firebase login token)
 
 const app = express();
 
@@ -41,6 +42,7 @@ app.use(cors({
     /^http:\/\/localhost:\d+$/ // any local port (3000, 5001, ...) for development
   ],
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization", "x-sync-key"],
   credentials: true
 }));
 
@@ -141,7 +143,7 @@ app.post('/api/save-lead', async (req, res) => {
     }
 });
 
-app.get('/api/leads', async (req, res) => {
+app.get('/api/leads', requireAdmin, async (req, res) => {
     try {
         const leads = await Lead.find().sort({ date: -1 });
         res.json(leads);
@@ -149,7 +151,7 @@ app.get('/api/leads', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-app.put('/api/leads/:id', async (req, res) => {
+app.put('/api/leads/:id', requireAdmin, async (req, res) => {
     try {
         const updatedLead = await Lead.findByIdAndUpdate(req.params.id, cleanLead(req.body), { new: true });
         if (updatedLead) sendLeadsToSheet([updatedLead]).catch(err => console.error('Lead -> Sheet failed:', err.message));
@@ -158,7 +160,7 @@ app.put('/api/leads/:id', async (req, res) => {
         res.status(500).json({ error: err.message });
     }
 });
-app.delete('/api/leads/:id', async (req, res) => {
+app.delete('/api/leads/:id', requireAdmin, async (req, res) => {
     try {
         await Lead.findByIdAndDelete(req.params.id);
         res.json({ success: true, message: "🗑️ Lead deleted" });
@@ -167,12 +169,9 @@ app.delete('/api/leads/:id', async (req, res) => {
     }
 });
 
-// Copy ALL leads to Google Sheet (first time, or to re-sync). Header x-sync-key = SHEET_SYNC_KEY when it is set
-app.post('/api/leads/sync-sheet', async (req, res) => {
+// Copy ALL leads to Google Sheet (first time, or to re-sync). Admin login, or header x-sync-key = SHEET_SYNC_KEY
+app.post('/api/leads/sync-sheet', requireAdminOrSyncKey, async (req, res) => {
     try {
-        if (process.env.SHEET_SYNC_KEY && req.get('x-sync-key') !== process.env.SHEET_SYNC_KEY) {
-            return res.status(401).json({ error: 'Invalid sync key' });
-        }
         await assignMissingLeadIds(Lead);
         const result = await syncAllLeadsToSheet(Lead);
         res.json({ message: '✅ Leads copied to sheet', result });
@@ -200,12 +199,9 @@ app.get('/api/designs', async (req, res) => {
 });
 
 /* ---------- GOOGLE SHEET SYNC APIs ---------- */
-// "Sync Now" (instant sync instead of waiting SHEET_SYNC_MINUTES)
-app.post('/api/sheet-sync', async (req, res) => {
+// "Sync Now" (instant sync instead of waiting SHEET_SYNC_MINUTES). Admin login, or header x-sync-key = SHEET_SYNC_KEY
+app.post('/api/sheet-sync', requireAdminOrSyncKey, async (req, res) => {
     try {
-        if (process.env.SHEET_SYNC_KEY && req.get('x-sync-key') !== process.env.SHEET_SYNC_KEY) {
-            return res.status(401).json({ error: 'Invalid sync key' });
-        }
         const results = await syncAll({ designs: Design, blogs: Blog, reviews: Review });
         res.json({ message: '✅ Sheet synced', results });
     } catch (err) {
@@ -214,11 +210,11 @@ app.post('/api/sheet-sync', async (req, res) => {
 });
 
 // Last sync result per tab (time, new / updated / removed, row errors)
-app.get('/api/sheet-sync/status', (req, res) => {
+app.get('/api/sheet-sync/status', requireAdmin, (req, res) => {
     res.json({ last: getLastSyncResult() });
 });
 
-app.post('/api/designs/add', async (req, res) => {
+app.post('/api/designs/add', requireAdmin, async (req, res) => {
     try {
         const newDesign = new Design(req.body);
         await newDesign.save();
@@ -228,7 +224,7 @@ app.post('/api/designs/add', async (req, res) => {
     }
 });
 
-app.put('/api/designs/:id', async (req, res) => {
+app.put('/api/designs/:id', requireAdmin, async (req, res) => {
     try {
         const updatedDesign = await Design.findByIdAndUpdate(req.params.id, req.body, { new: true });
         res.json({ message: "✅ Design updated", data: updatedDesign });
@@ -237,7 +233,7 @@ app.put('/api/designs/:id', async (req, res) => {
     }
 });
 
-app.delete('/api/designs/:id', async (req, res) => {
+app.delete('/api/designs/:id', requireAdmin, async (req, res) => {
     try {
         await Design.findByIdAndDelete(req.params.id);
         res.json({ message: "🗑️ Design deleted" });
@@ -247,7 +243,7 @@ app.delete('/api/designs/:id', async (req, res) => {
 });
 
 /* ---------- DASHBOARD STATS API ---------- */
-app.get('/api/admin/stats', async (req, res) => {
+app.get('/api/admin/stats', requireAdmin, async (req, res) => {
     try {
         const designCount = await Design.countDocuments();
         const leadCount = await Lead.countDocuments();

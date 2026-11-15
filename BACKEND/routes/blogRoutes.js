@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const router = express.Router();
 const Blog = require('../models/Blog');
 const { uniqueSlug, parseFaq, blogSitemapXml, assignMissingSlugs } = require('../blogSeo');
+const { requireAdmin } = require('../adminAuth'); // add / edit / delete only for admins
 
 // Old blogs (saved before slugs existed) get their slug once, on the first request after a restart
 let slugsReady = null;
@@ -27,7 +28,7 @@ const blogFields = (body = {}) => {
 };
 
 // Add Blog (slug is made from the title when it is left empty)
-router.post('/add', async (req, res) => {
+router.post('/add', requireAdmin, async (req, res) => {
   try {
     const fields = blogFields(req.body);
     fields.slug = await uniqueSlug(Blog, fields.slug || fields.title);
@@ -70,7 +71,7 @@ router.get('/:slug', async (req, res) => {
 });
 
 // Update Blog (Edit functionality)
-router.put('/:id', async (req, res) => {
+router.put('/:id', requireAdmin, async (req, res) => {
   try {
     const current = await Blog.findById(req.params.id);
     if (!current) return res.status(404).json({ error: 'Blog not found' });
@@ -85,7 +86,7 @@ router.put('/:id', async (req, res) => {
 });
 
 // Delete Blog
-router.delete('/:id', async (req, res) => {
+router.delete('/:id', requireAdmin, async (req, res) => {
   try {
     await Blog.findByIdAndDelete(req.params.id);
     res.json({ message: "Deleted" });

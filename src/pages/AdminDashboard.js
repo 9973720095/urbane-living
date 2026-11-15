@@ -9,6 +9,7 @@ import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { isAdminEmail } from '../config/admins';
+import '../utils/adminApi'; // sends the admin login token to the backend
 
 const { Content, Sider, Header } = Layout;
 const { Option } = Select;
