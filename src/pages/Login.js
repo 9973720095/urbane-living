@@ -1,9 +1,10 @@
 import React from 'react';
 import { auth, provider } from '../firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { signInWithPopup, signOut } from 'firebase/auth';
 import { Button, Card, Typography, message } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
+import { isAdminEmail } from '../config/admins';
 
 const { Title, Text } = Typography;
 
@@ -15,17 +16,9 @@ const Login = () => {
       const result = await signInWithPopup(auth, provider);
 
       const user = result.user;
-
-      const allowedAdmins = [
-        "sabankumarjha9@gmail.com",
-        "urbaneliving.in@gmail.com",
-        "jhas08387@gmail.com",
-        "askabhi139@gmail.com"
-      ];
-
       const userEmail = user.email?.toLowerCase().trim();
 
-      if (allowedAdmins.includes(userEmail)) {
+      if (isAdminEmail(userEmail)) {
 
         localStorage.setItem('adminAuth', 'true');
         localStorage.setItem('adminEmail', userEmail);
@@ -35,8 +28,9 @@ const Login = () => {
         navigate('/admin-dashboard');
 
       } else {
-
-        message.error('Access Denied!');
+        // not an admin: sign out so another Google account can be picked next time
+        await signOut(auth);
+        message.error(`Access Denied! ${userEmail} is not an admin.`);
       }
 
     } catch (error) {
@@ -80,8 +74,8 @@ const Login = () => {
         }}
       >
         <img
-          src="https://urbaneliving.in/wp-content/uploads/2024/07/cropped-Untitled-design-87-png.webp"
-          alt="Logo"
+          src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777899675/UrbaneLiving_Logo_6_1_dfh2r1.png"
+          alt="Urbane Living"
           style={{ width: 140, marginBottom: 20 }}
         />
 

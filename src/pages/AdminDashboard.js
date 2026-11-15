@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { isAdminEmail } from '../config/admins';
 
 const { Content, Sider, Header } = Layout;
 const { Option } = Select;
@@ -38,11 +39,10 @@ const AdminDashboard = ({ onFinish }) => {
    ? 'http://localhost:5000'
     : 'https://urbane-living.onrender.com';
 
-  // --- NEW AUTH CHECK LOGIC ---
+  // --- AUTH CHECK (only emails in src/config/admins.js) ---
   useEffect(() => {
-    const ALLOWED_EMAILS = ["sabankumarjha9@gmail.com", "urbaneliving.in@gmail.com", "jhas08387@gmail.com", "askabhi139@gmail.com"];
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (!user ||!ALLOWED_EMAILS.includes(user.email)) {
+      if (!user || !isAdminEmail(user.email)) { // admin list: src/config/admins.js
         signOut(auth);
         navigate('/admin-login');
       } else {
@@ -125,7 +125,8 @@ const AdminDashboard = ({ onFinish }) => {
     if (blog) {
       setEditingBlog(blog);
       setBlogContent(blog.content);
-      blogForm.setFieldsValue(blog);
+      // FAQ list -> "Question | Answer" lines for the text box
+      blogForm.setFieldsValue({ ...blog, faq: (blog.faq || []).map((f) => `${f.q} | ${f.a}`).join('\n') });
     } else {
       setEditingBlog(null);
       setBlogContent('');
@@ -138,7 +139,8 @@ const AdminDashboard = ({ onFinish }) => {
   const handleSaveBlog = async (values) => {
     setLoading(true);
     try {
-      const finalBlogData = {...values, content: blogContent };
+      // slug, SEO title and FAQ are optional: the backend makes the slug from the title when empty
+      const finalBlogData = {...values, content: blogContent, faq: values.faq || '' };
       if (editingBlog) {
         await axios.put(`${API_BASE_URL}/api/blogs/${editingBlog._id}`, finalBlogData);
         message.success("✅ Blog Updated Successfully!");
@@ -330,6 +332,10 @@ const AdminDashboard = ({ onFinish }) => {
                 columns={[
                   { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
                   { title: 'Title', dataIndex: 'title', width: 200 },
+                  { title: 'URL', dataIndex: 'slug', width: 180, render: (slug, r) => (
+                    <a href={`/blog/${slug || r._id}`} target="_blank" rel="noopener noreferrer">/blog/{slug || r._id}</a>
+                  ) },
+                  { title: 'From', dataIndex: 'source', width: 70, render: (src) => <Tag color={src === 'sheet' ? 'green' : 'blue'}>{src === 'sheet' ? 'Sheet' : 'Admin'}</Tag> },
                   { title: 'Action', render: (_, r) => (
                     <Space>
                       <Button type="link" size="small" onClick={() => handleOpenBlogModal(r)}>Edit</Button>
@@ -400,7 +406,26 @@ const AdminDashboard = ({ onFinish }) => {
                 <ReactQuill theme="snow" value={blogContent} onChange={setBlogContent} style={{ height: '250px', marginBottom: '40px' }} />
             </div>
           )}
-          <Button type="primary" htmlType="submit" block loading={loading} style={{ marginTop: '20px' }} size="large">Save & Sync</Button>
+          {/* SEO (optional) */}
+          <Row gutter={16} style={{ marginTop: '20px' }}>
+            <Col xs={24} md={12}>
+              <Form.Item label="URL Slug (optional)" name="slug" extra="Empty = made from the title. Example: false-ceiling-cost-noida. Don't change it after publishing.">
+                <Input addonBefore="/blog/" placeholder="auto from title" />
+              </Form.Item>
+            </Col>
+            <Col xs={24} md={12}>
+              <Form.Item label="SEO Title for Google (optional)" name="seoTitle" extra="About 50–60 characters with the main keyword. Empty = Blog Title.">
+                <Input maxLength={70} showCount />
+              </Form.Item>
+            </Col>
+          </Row>
+          <Form.Item label="FAQ (optional)" name="faq" extra="One question per line:  Question? | Answer. Shown under the blog and sent to Google.">
+            <Input.TextArea rows={4} placeholder={'What is the false ceiling cost per sq. ft.? | It starts at ₹120 per sq. ft.\nHow long does it take? | About 7 working days.'} />
+          </Form.Item>
+          {editingBlog?.source === 'sheet' && (
+            <p style={{ color: '#b45309', margin: '0 0 8px' }}>This blog comes from the Google Sheet. Edit it in the sheet, or your changes here will be replaced at the next sync.</p>
+          )}
+          <Button type="primary" htmlType="submit" block loading={loading} style={{ marginTop: '8px' }} size="large">Save & Sync</Button>
         </Form>
       </Modal>
 
