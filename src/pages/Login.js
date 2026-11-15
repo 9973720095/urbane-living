@@ -8,6 +8,16 @@ import { isAdminEmail } from '../config/admins';
 
 const { Title, Text } = Typography;
 
+// Firebase error code -> clear message (the code is also shown, so problems are easy to fix)
+const loginErrorText = (code) => ({
+  'auth/unauthorized-domain': 'This website is not allowed in Firebase. Add it in Firebase → Authentication → Settings → Authorized domains.',
+  'auth/popup-blocked': 'The browser blocked the Google popup. Allow popups for this site and try again.',
+  'auth/popup-closed-by-user': 'The Google popup was closed before login finished.',
+  'auth/cancelled-popup-request': 'Another login popup was already open. Try again.',
+  'auth/network-request-failed': 'Network problem. Check the internet and try again.',
+  'auth/operation-not-allowed': 'Google login is turned off in Firebase → Authentication → Sign-in method.',
+}[code] || 'Login failed!');
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -34,8 +44,8 @@ const Login = () => {
       }
 
     } catch (error) {
-      console.error(error);
-      message.error('Login failed!');
+      console.error('Admin login error:', error.code, error.message);
+      message.error(`${loginErrorText(error.code)}${error.code ? ` (${error.code})` : ''}`, 8);
     }
   };
 
