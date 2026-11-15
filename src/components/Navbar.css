@@ -313,11 +313,12 @@
     height: 40px;
     padding: 0 14px 0 4px;
     border-radius: 100px;
-    background: var(--brand-red-dark, #C2090F);
+    background: #4267b2;
     color: #ffffff !important;
     text-decoration: none;
-    box-shadow: 0 4px 12px rgba(228, 11, 18, 0.25);
+    /* box-shadow: 0 4px 12px rgba(228, 11, 18, 0.25); */
   }
+  .nav-call-ring span{color: #4267b2;}
 
   .nav-call-mobile:active {
     background: var(--brand-red-dark, #C2090F);
