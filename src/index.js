@@ -14,6 +14,10 @@ const theme = {
   },
 };
 
+// Pre-rendered pages (scripts/prerender.js) carry a saved copy of the page's structured data.
+// The app adds the live version itself, so the saved copy is removed first (no duplicates).
+document.querySelectorAll('script[data-prerendered]').forEach((s) => s.remove());
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
