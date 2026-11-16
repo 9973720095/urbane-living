@@ -74,7 +74,7 @@ const SupportPage = () => {
                   </div>
                   <div>
                     <Text type="secondary" style={{ display: 'block', fontSize: '12px', fontWeight: 500 }}>Toll-Free Helpline</Text>
-                    <a href="tel:18001236407" style={{ color: '#0f172a', fontWeight: 700, fontSize: '16px' }}>1800-123-6407</a>
+                    <a href="tel:07965315325" style={{ color: '#0f172a', fontWeight: 700, fontSize: '16px' }}>07965315325</a>
                     <Text type="secondary" style={{ display: 'block', fontSize: '11px', marginTop: '2px' }}>Mon - SUN (9:30 AM - 6:30 PM)</Text>
                   </div>
                 </div>

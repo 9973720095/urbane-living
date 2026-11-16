@@ -38,7 +38,7 @@ const footer = {
     title: 'Want quick assistance?',
     text: 'Call or WhatsApp us for premium home design services.',
   },
-  phone: { label: '1800-123-6407', href: 'tel:18001236407' }, // toll-free: dial without +91
+  phone: { label: '07965315325', href: 'tel:07965315325' }, // local number: dial with +91
   whatsapp: 'https://wa.me/919105052454',
   email: 'sales1@urbaneliving.in',
   address: 'G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad',

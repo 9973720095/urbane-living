@@ -10,8 +10,8 @@ export const brand = {
 };
 
 export const contact = {
-  phoneDisplay: '1800-123-6407',
-  phoneHref: 'tel:18001236407', // toll-free number: dial without +91
+  phoneDisplay: '07965315325',
+  phoneHref: 'tel:07965315325', // local number: dial with +91
   whatsappHref: 'https://wa.me/919105052454',
   whatsappText: 'Hi Urbane Living, I want a free design consultation for my home.',
   email: 'urbanelivingofficial@gmail.com',

@@ -102,7 +102,7 @@ export const blogPosts = [
 <blockquote>Tip: finish the false ceiling before modular furniture is fitted, and after electrical and AC piping work. This order avoids breaking a finished ceiling later.</blockquote>
 
 <h2>Get an exact quote</h2>
-<p>Every home is different, so the final price is fixed only after measuring the site. We visit for free, show you designs in 3D and give an itemised quote per sq. ft., with no surprise "extra material" bills later. <a href="/contact">Book a free site visit</a> or call our toll-free number 1800-123-6407.</p>
+<p>Every home is different, so the final price is fixed only after measuring the site. We visit for free, show you designs in 3D and give an itemised quote per sq. ft., with no surprise "extra material" bills later. <a href="/contact">Book a free site visit</a> or call our toll-free number 07965315325.</p>
 `,
     faq: [
       {

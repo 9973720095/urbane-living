@@ -223,7 +223,7 @@ const ShippingPolicyPage = () => {
                   <PhoneOutlined style={{ fontSize: '20px', color: '#16a34a' }} />
                   <div>
                     <Text type="secondary" style={{ display: 'block', fontSize: '12px' }}>Toll-Free Helpline</Text>
-                    <a href="tel:18001236407" style={{ color: '#0f172a', fontWeight: 600 }}>1800-123-6407</a>
+                    <a href="tel:07965315325" style={{ color: '#0f172a', fontWeight: 600 }}>07965315325</a>
                   </div>
                 </div>
               </Col>
