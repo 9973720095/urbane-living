@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Typography, Select, message } from 'antd';
 import axios from 'axios';
 import {
@@ -19,22 +19,133 @@ const API_BASE_URL = window.location.hostname === 'localhost'
 const EMPTY_FORM = { name: '', countryCode: '+91', phone: '', email: '', city: '', locality: '' };
 
 // Home page values (other pages pass their own props)
+// media = desktop video (16:9), mediaMobile = phone video (9:16). The original files are big
+// (4K = 16 MB), so Cloudinary resizes them on the fly: desktop 1920px (~2 MB), phone 720px (~1 MB).
 const HOME_HERO = {
   title: 'Aapka Vision. Hamara Execution.',
   highlight: 'No Confusion!',
   subTitle: 'Click today move into your Dream Home Tomorrow.',
-  media: 'https://res.cloudinary.com/diosq0s7w/video/upload/q_auto/f_auto/v1778846969/AQPPPai3iDlmpoWAl2Do5RAPE5X-opF5dVERGYcK0KMopwZThd4xaz6sAKKnZPuHhL1767QbSXcO9pvrpYJ-1oC9QZJR5f_tiq89RE4_detdg9.mp4',
-  mediaAlt: '',
+  media: 'https://res.cloudinary.com/nzqefovs/video/upload/v1794816175/living-room-hero-4k.mp4',
+  mediaMobile: 'https://res.cloudinary.com/nzqefovs/video/upload/v1794816172/living-room-hero-mobile.mp4',
+  mediaAlt: 'Modern living room interior with cove-lit false ceiling, TV unit and dining area designed by Urbane Living, Delhi NCR',
   formTitle: 'Beautiful Designs That Fit Your Budget',
   formSubtitle: 'Beauty That Works, Function That Inspires! Guaranteed,',
   formBadge: 'Free Design Consultation',
   formName: 'Hero form',
 };
 
+const MOBILE_QUERY = '(max-width: 767px)';
+const isVideoUrl = (url) => /\.(mp4|webm|mov)($|\?)/i.test(url || '');
+
+// Cloudinary: put a transformation right after /upload/ (links from other hosts stay as they are)
+const cld = (url, t) => (/res\.cloudinary\.com\/[^/]+\/(video|image)\/upload\//.test(url || '')
+  ? url.replace(/\/upload\/(?:q_auto[^/]*\/)?(?:f_auto\/)?/, `/upload/${t}/`)
+  : url);
+
+// Video -> its first frame as a light image (shown at once, good for Google's speed score)
+const videoPoster = (url, width) =>
+  cld(url, `so_0,q_auto,f_auto,w_${width}`).replace(/\.(mp4|webm|mov)($|\?)/i, '.jpg$2');
+
+const useIsMobile = () => {
+  const [mobile, setMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia(MOBILE_QUERY).matches,
+  );
+  useEffect(() => {
+    const mq = window.matchMedia(MOBILE_QUERY);
+    const onChange = () => setMobile(mq.matches);
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else mq.addListener(onChange);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener('change', onChange);
+      else mq.removeListener(onChange);
+    };
+  }, []);
+  return mobile;
+};
+
+// Background: the poster image shows first (fast, with alt text for Google),
+// then the video fades in on top once the page has loaded.
+// People who chose "reduce motion" or "data saver" keep the still image (no video download).
+const HeroMedia = ({ media, mediaMobile, mediaAlt, poster, posterMobile }) => {
+  const isMobile = useIsMobile();
+  const videoRef = useRef(null);
+  const [startVideo, setStartVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+
+  const mobileSrc = mediaMobile || media;
+  const src = isMobile ? mobileSrc : media;
+  const isVideo = isVideoUrl(src);
+
+  const posterDesktop = poster || (isVideoUrl(media) ? videoPoster(media, 1280) : media);
+  const posterPhone = posterMobile || (isVideoUrl(mobileSrc) ? videoPoster(mobileSrc, 720) : mobileSrc);
+  const videoSrc = isVideo ? cld(src, isMobile ? 'q_auto,w_720' : 'q_auto,w_1920') : '';
+
+  // start the video only after the page has loaded (keeps the first paint fast)
+  useEffect(() => {
+    if (!isVideo) return undefined;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const saveData = navigator.connection && navigator.connection.saveData;
+    if (reduceMotion || saveData) return undefined;
+
+    let timer;
+    const start = () => { timer = setTimeout(() => setStartVideo(true), 300); };
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+    return () => {
+      window.removeEventListener('load', start);
+      clearTimeout(timer);
+    };
+  }, [isVideo]);
+
+  // phone <-> desktop switch: the new video fades in again
+  useEffect(() => {
+    setVideoReady(false);
+  }, [videoSrc]);
+
+  return (
+    <>
+      <picture>
+        <source media={MOBILE_QUERY} srcSet={posterPhone} />
+        <img
+          src={posterDesktop}
+          alt={mediaAlt}
+          className="hero-bg-video hero-poster"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+
+      {isVideo && startVideo && (
+        <video
+          ref={videoRef}
+          key={videoSrc}
+          className={`hero-bg-video hero-video${videoReady ? ' is-ready' : ''}`}
+          src={videoSrc}
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="auto"
+          aria-hidden="true"
+          tabIndex={-1}
+          disablePictureInPicture
+          onPlaying={() => setVideoReady(true)}
+          onCanPlay={(e) => { e.currentTarget.play().catch(() => {}); }}
+        />
+      )}
+    </>
+  );
+};
+
 // Big banner with a lead form. Used on the home page and on service pages (e.g. False Ceiling).
-// media can be a video (.mp4) or an image.
+// media / mediaMobile can be a video (.mp4) or an image.
 const Hero = (props) => {
   const h = { ...HOME_HERO, ...props };
+  // A page with its own media (e.g. False Ceiling) must not get the home page's phone video / alt text
+  if (props.media) {
+    h.mediaMobile = props.mediaMobile;
+    h.mediaAlt = props.mediaAlt || '';
+  }
   const [messageApi, contextHolder] = message.useMessage();
   const [formData, setFormData] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
@@ -115,35 +226,18 @@ const Hero = (props) => {
     full: <span className="country-option">{flagImg(c.iso)}<span className="country-option-name">{c.name}</span><span className="country-option-code">{c.code}</span></span>,
   }));
 
-  const isVideo = /\.mp4($|\?)/.test(h.media);
-
   return (
-    <div className="hero-container-wrapper">
+    <section className="hero-container-wrapper" aria-label="Urbane Living interior design and false ceiling">
       {contextHolder}
       <div className="hero-banner">
 
-        {isVideo ? (
-          <video
-            ref={(el) => {
-              if (el) {
-                el.play().catch(error => {
-                  console.log("Autoplay prevented:", error);
-                });
-              }
-            }}
-            muted
-            loop
-            playsInline
-            onCanPlayThrough={(e) => {
-              e.target.play().catch(err => console.log("CanPlayThrough play error:", err));
-            }}
-            className="hero-bg-video"
-          >
-            <source src={h.media} type="video/mp4" />
-          </video>
-        ) : (
-          <img src={h.media} alt={h.mediaAlt} className="hero-bg-video" fetchpriority="high" decoding="async" />
-        )}
+        <HeroMedia
+          media={h.media}
+          mediaMobile={h.mediaMobile}
+          mediaAlt={h.mediaAlt}
+          poster={h.poster}
+          posterMobile={h.posterMobile}
+        />
 
         <div className="hero-overlay"></div>
 
@@ -257,7 +351,7 @@ const Hero = (props) => {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 };
 

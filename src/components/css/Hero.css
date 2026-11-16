@@ -31,13 +31,34 @@
   height: 100%;
   object-fit: cover;
   z-index: 0;
-  transform: scale(1.04);
-  animation: heroZoom 18s ease-in-out infinite alternate;
+  /* transform: scale(1.04); */
+  /* animation: heroZoom 18s ease-in-out infinite alternate; */
 }
 
 @keyframes heroZoom {
   from { transform: scale(1.04); }
   to { transform: scale(1.12); }
+}
+
+/* ===== Hero media: poster photo shows first, the video fades in on top ===== */
+/* <picture> only wraps the poster <img>; it must not take any space of its own */
+.hero-banner picture {
+  display: contents;
+}
+
+/* poster = first frame of the video (fast first paint + alt text for Google) */
+.hero-poster {
+  background-color: #1F2A44;
+}
+
+/* the video stays invisible until it really plays, then fades in over the poster */
+.hero-video {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.hero-video.is-ready {
+  opacity: 1;
 }
 
 /* Top-down overlay: dark under the navbar, fades out so the video stays clear */
@@ -486,8 +507,10 @@
     background-color: #fff;
   }
 
-  /* video + overlay only cover the video card, not the form below */
+  /* poster, video and overlay only cover the video card, not the form below */
   .hero-bg-video,
+  .hero-poster,
+  .hero-video,
   .hero-overlay {
     height: var(--hero-media-h);
     bottom: auto;
@@ -575,5 +598,9 @@
   .hero-text-section,
   .hero-form-card {
     animation: none;
+  }
+
+  .hero-video {
+    transition: none;
   }
 }
