@@ -4,7 +4,8 @@
 import { metaPixelId } from '../data/config';
 import { markLeadSubmitted } from './leadStatus';
 
-const isLive = () => typeof window !== 'undefined' && window.location.hostname !== 'localhost';
+// 127.0.0.1 = the pre-render script (scripts/prerender.js): no pixel / analytics there either
+const isLive = () => typeof window !== 'undefined' && !['localhost', '127.0.0.1'].includes(window.location.hostname);
 const isEnabled = () => Boolean(metaPixelId) && isLive();
 
 // Loads Meta's script once (official base code)

@@ -125,7 +125,7 @@ const renderPage = async (browser, route) => {
       }
       // things that must not be saved in the static HTML
       document.querySelectorAll(
-        '.hero-video, .ant-message, .ant-notification, .ant-modal-root, .ant-select-dropdown, .ant-image-preview-root, #webpack-dev-server-client-overlay',
+        'script[src*="fbevents"], .hero-video, .ant-message, .ant-notification, .ant-modal-root, .ant-select-dropdown, .ant-image-preview-root, #webpack-dev-server-client-overlay',
       ).forEach((el) => el.remove());
       // structured data added by the app (page schema, FAQ, services list) is added again when the
       // app starts: mark the saved copies so src/index.js removes them first (no duplicates).

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Layout, message } from 'antd';
 import axios from 'axios';
 import {
@@ -14,8 +14,6 @@ import './App.css';
 // Backend URL: localhost -> http://localhost:5000, live -> Render (from siteData.js)
 import { API_BASE_URL } from './data/siteData';
 
-import AdminDashboard from './pages/AdminDashboard';
-import Login from './pages/Login';
 
 // Components & Pages imports
 import ScrollToTop from './components/ScrollToTop';
@@ -63,7 +61,6 @@ import RefundPolicyPage from './pages/RefundPolicyPage';
 import DisclaimerPage from './pages/DisclaimerPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import SupportPage from './pages/SupportPage';
-import EstimatePage from './pages/Estimate';
 import StyleQuiz from './components/StyleQuiz';
 import SolutionsGrid from './components/SolutionsGrid';
 import RoomExplorer from './components/RoomExplorer';
@@ -71,6 +68,11 @@ import VastuBanner from './components/VastuBanner';
 import VastuPage from './pages/VastuPage';
 import VastuAnalyzer from './pages/VastuAnalyzer';
 
+// Admin + estimate pages pull in Firebase, Quill editor etc. (~1 MB).
+// Load them only when someone opens those pages, so normal visitors get a much lighter site.
+const AdminDashboard = lazy(() => import('./pages/AdminDashboard'));
+const Login = lazy(() => import('./pages/Login'));
+const EstimatePage = lazy(() => import('./pages/Estimate'));
 
 const { Content } = Layout;
 
@@ -203,6 +205,7 @@ function App() {
         onFinish={onFinish}
       >
 
+        <Suspense fallback={<div style={{ minHeight: '60vh' }} />}>
         <Routes>
 
           <Route
@@ -304,6 +307,7 @@ function App() {
           {/* Any unknown URL: 404 page (noindex) - always keep this LAST */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        </Suspense>
 
       </LayoutContent>
 
