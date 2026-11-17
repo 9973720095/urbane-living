@@ -74,7 +74,7 @@ export default function GoogleReviews({ onOpenForm }) {
           <ul className="m-0 grid list-none grid-cols-2 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
             {photos.map((p) => (
               <li key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-soft sm:aspect-[1/1]">
-                <img src={p.src.replace('/upload/q_auto/f_auto/', '/upload/q_auto/f_auto/w_500,c_limit/')} alt={`${p.title} by Urbane Living`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <img src={p.src.replace('w_1400,', 'w_500,')} alt={p.alt || `${p.title} by Urbane Living`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-[12.5px] font-semibold text-white sm:text-[13px]">
                   {p.title}
                 </span>

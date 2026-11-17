@@ -5,17 +5,18 @@
 // To add a post: copy one object, give it a new unique slug (small letters and hyphens),
 // write the content in HTML, then add the URL to public/sitemap.xml.
 import { cdn } from './config';
+import { photo, alt as photoAlt } from './media';
 
 const img = (file) => `${cdn}/image/upload/q_auto,f_auto,w_1400/${file}`;
 
 const images = {
-  ceiling: img('v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png'),
-  living: img('v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png'),
-  kitchen: img('v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png'), // replace with a real kitchen photo when you have one
-  framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'),
-  wardrobe: img('v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png'),
-  bedroom: img('v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png'),
-  livingAlt: img('v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png'),
+  ceiling: photo('livingTvWall'),
+  living: photo('livingTvWallWide'),
+  kitchen: photo('kitchenL'),
+  framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), // real site photo
+  wardrobe: photo('guestRoom'),
+  bedroom: photo('plumBedroom'),
+  livingAlt: photo('livingArchway'),
 };
 
 export const blogAuthor = 'Urbane Living Design Team';
@@ -30,7 +31,7 @@ export const blogPosts = [
       'How much does a false ceiling cost in Delhi, Noida, Ghaziabad and Gurgaon? Rates per sq. ft. for gypsum, POP, PVC and wooden ceilings, with worked examples for a bedroom, living room and full flat.',
     category: 'False Ceiling',
     image: images.ceiling,
-    imageAlt: 'Living room with a cove-lit gypsum false ceiling in Delhi NCR',
+    imageAlt: photoAlt('livingTvWall'),
     date: '2026-11-14',
     readMin: 4,
     content: `
@@ -205,7 +206,7 @@ export const blogPosts = [
       'L-shape, U-shape, parallel or straight? A practical modular kitchen guide for Indian cooking: layouts, standard sizes, carcass and shutter materials, and the mistakes to avoid.',
     category: 'Modular Kitchen',
     image: images.kitchen,
-    imageAlt: 'Open modular kitchen with a dining area designed by Urbane Living',
+    imageAlt: photoAlt('kitchenL'),
     date: '2026-11-10',
     readMin: 4,
     content: `
@@ -297,7 +298,7 @@ export const blogPosts = [
       'Just got possession of your flat? A step-by-step interior checklist for new flats in Noida, Greater Noida West and Ghaziabad: what to check, the right order of work, budget split and society rules.',
     category: 'Home Interiors',
     image: images.livingAlt,
-    imageAlt: 'Finished living room of a new flat designed by Urbane Living',
+    imageAlt: photoAlt('livingArchway'),
     date: '2026-11-08',
     readMin: 3,
     content: `
@@ -378,7 +379,7 @@ export const blogPosts = [
       'Sliding or hinged wardrobe? Compare space, cost and usability, learn the standard wardrobe sizes for Indian bedrooms and pick the right materials and finishes.',
     category: 'Wardrobe',
     image: images.wardrobe,
-    imageAlt: 'Bedroom with a full-height custom wardrobe',
+    imageAlt: photoAlt('guestRoom'),
     date: '2026-11-06',
     readMin: 3,
     content: `
@@ -466,7 +467,7 @@ export const blogPosts = [
       'Simple Vastu tips for flats: the traditional directions for the entrance, kitchen, bedroom, pooja room and toilets, plus practical fixes that need no demolition.',
     category: 'Vastu',
     image: images.bedroom,
-    imageAlt: 'Master bedroom with a calm layout and warm cove lighting',
+    imageAlt: photoAlt('plumBedroom'),
     date: '2026-11-04',
     readMin: 3,
     content: `

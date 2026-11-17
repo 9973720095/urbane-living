@@ -1,5 +1,5 @@
 // About Us page (/about). Keep every promise here true: customers and Google read it.
-import { cdn } from './config';
+import { photo, alt as photoAlt } from './media';
 
 export const aboutPage = {
   banner: {
@@ -7,8 +7,8 @@ export const aboutPage = {
     title: 'We design homes that',
     highlight: 'feel like you',
     subtitle: 'An interior and false ceiling team from Delhi NCR that designs, builds and installs your home, with one point of contact from the first visit to handover.',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png`,
-    imageAlt: 'Elegant living room designed by Urbane Living',
+    image: photo('openPlanLiving'),
+    imageAlt: photoAlt('openPlanLiving'),
     whatsappMessage: 'Hi Urbane Living, I would like to know more about your interior design services.',
     height: 'md',
     align: 'center',
@@ -26,8 +26,8 @@ export const aboutPage = {
       'Branded materials, named in your quote',
       '10-year anti-crack warranty on our false ceilings',
     ],
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png`,
-    imageAlt: 'Living room with designer false ceiling and TV unit by Urbane Living',
+    image: photo('livingArchway'),
+    imageAlt: photoAlt('livingArchway'),
   },
   values: {
     title: 'What we stand for',
@@ -57,6 +57,6 @@ export const aboutPage = {
     description:
       'Urbane Living is an interior design and false ceiling company in Delhi NCR. Free 3D design, itemised quotes, branded materials and one team from design to installation.',
     path: '/about',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png`,
+    image: photo('openPlanLiving'),
   },
 };

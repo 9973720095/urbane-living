@@ -17,7 +17,10 @@ export default function RoomExplorer({ onOpenForm }) {
   const [touring, setTouring] = useState(true); // gentle auto tour until the visitor taps something
   const [inView, setInView] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [natural, setNatural] = useState(null); // photo's real width / height
+  const [box, setBox] = useState(null); // shown photo box width / height
   const sectionRef = useRef(null);
+  const boxRef = useRef(null);
 
   const room = rooms[roomIdx];
   const spot = room.spots[spotIdx];
@@ -46,10 +49,35 @@ export default function RoomExplorer({ onOpenForm }) {
     img.src = next.image;
   }, [roomIdx]);
 
+  // The photo is cropped to fill its box (object-cover). Hotspot x / y are % of the WHOLE photo,
+  // so work out where that point lands inside the cropped box. Same spot on every screen size.
+  useEffect(() => {
+    const el = boxRef.current;
+    if (!el || typeof ResizeObserver === 'undefined') return undefined;
+    const ro = new ResizeObserver(([entry]) => setBox({ w: entry.contentRect.width, h: entry.contentRect.height }));
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const place = (s) => {
+    if (!natural || !box || !box.w || !box.h) return { left: `${s.x}%`, top: `${s.y}%` };
+    const scale = Math.max(box.w / natural.w, box.h / natural.h);
+    const w = natural.w * scale;
+    const h = natural.h * scale;
+    const left = (box.w - w) / 2 + (s.x / 100) * w;
+    const top = (box.h - h) / 2 + (s.y / 100) * h;
+    // keep the point inside the photo box
+    return {
+      left: `${(Math.min(Math.max(left, 18), box.w - 18) / box.w) * 100}%`,
+      top: `${(Math.min(Math.max(top, 18), box.h - 18) / box.h) * 100}%`,
+    };
+  };
+
   const pickRoom = (i) => {
     setTouring(false);
     if (i === roomIdx) return;
     setLoaded(false);
+    setNatural(null);
     setRoomIdx(i);
     setSpotIdx(0);
   };
@@ -63,8 +91,18 @@ export default function RoomExplorer({ onOpenForm }) {
   const logPosition = (e) => {
     if (!e.altKey || window.location.hostname !== 'localhost') return;
     const r = e.currentTarget.getBoundingClientRect();
-    const x = Math.round(((e.clientX - r.left) / r.width) * 100);
-    const y = Math.round(((e.clientY - r.top) / r.height) * 100);
+    const px = e.clientX - r.left;
+    const py = e.clientY - r.top;
+    let x = (px / r.width) * 100;
+    let y = (py / r.height) * 100;
+    if (natural) {
+      // convert to % of the whole photo (same as data/roomExplorer.js)
+      const scale = Math.max(r.width / natural.w, r.height / natural.h);
+      x = ((px - (r.width - natural.w * scale) / 2) / (natural.w * scale)) * 100;
+      y = ((py - (r.height - natural.h * scale) / 2) / (natural.h * scale)) * 100;
+    }
+    x = Math.round(x);
+    y = Math.round(y);
     console.log(`Room Explorer [${room.id}] → x: ${x}, y: ${y}`); // eslint-disable-line no-console
   };
 
@@ -114,20 +152,24 @@ export default function RoomExplorer({ onOpenForm }) {
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-8">
           {/* Photo + hotspots */}
           <div className="overflow-hidden rounded-3xl bg-white/5 shadow-2xl ring-1 ring-white/10 lg:flex lg:flex-col">
-            <div className="relative lg:min-h-[420px] lg:flex-1" onClick={logPosition}>
+            <div ref={boxRef} className="relative lg:min-h-[420px] lg:flex-1" onClick={logPosition}>
               <img
                 key={room.id}
                 src={room.image}
                 alt={room.imageAlt}
                 loading="lazy"
-                onLoad={() => setLoaded(true)}
+                onLoad={(e) => {
+                  setNatural({ w: e.currentTarget.naturalWidth, h: e.currentTarget.naturalHeight });
+                  setLoaded(true);
+                }}
                 className={`block aspect-[4/3] w-full object-cover transition-opacity duration-700 lg:absolute lg:inset-0 lg:aspect-auto lg:h-full ${loaded ? 'opacity-100' : 'opacity-0'}`}
               />
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-black/10" />
 
               {room.spots.map((s, i) => {
                 const active = i === spotIdx;
-                const labelLeft = s.x > 58; // keep the label inside the photo
+                const pos = place(s);
+                const labelLeft = parseFloat(pos.left) > 58; // keep the label inside the photo
                 return (
                   <button
                     key={s.title}
@@ -136,7 +178,7 @@ export default function RoomExplorer({ onOpenForm }) {
                     aria-label={s.title}
                     aria-pressed={active}
                     className="group absolute z-[1] -translate-x-1/2 -translate-y-1/2 cursor-pointer border-0 bg-transparent p-2"
-                    style={{ left: `${s.x}%`, top: `${s.y}%` }}
+                    style={pos}
                   >
                     <span className="relative flex h-7 w-7 items-center justify-center sm:h-8 sm:w-8">
                       <span className={`absolute inline-flex h-full w-full rounded-full ${active ? 'bg-brand-red/70' : 'bg-white/60'} animate-ping`} />

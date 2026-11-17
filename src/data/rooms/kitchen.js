@@ -1,5 +1,5 @@
 // Modular Kitchen page (/kitchen). Layout: components/RoomPage.jsx
-import { cdn } from '../config';
+import { photo, alt as photoAlt } from '../media';
 import { highlights } from '../common';
 
 export const kitchenPage = {
@@ -14,8 +14,8 @@ export const kitchenPage = {
     title: 'A kitchen that makes',
     highlight: 'cooking easy',
     subtitle: 'Smart storage, easy-clean finishes and soft-close fittings, designed around how your family cooks and made to fit your space.',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png`,
-    imageAlt: 'Modern modular kitchen with handle-less cabinets and under-cabinet lighting by Urbane Living',
+    image: photo('kitchenIsland'),
+    imageAlt: photoAlt('kitchenIsland'),
     whatsappMessage: 'Hi Urbane Living, I want a free 3D design for my modular kitchen.',
     align: 'left',
     highlights,
@@ -84,6 +84,6 @@ export const kitchenPage = {
     description:
       'Modular kitchen design in Delhi, Noida, Ghaziabad and Gurgaon. Smart storage, soft-close fittings and easy-clean finishes with a free 3D design and itemised quote.',
     path: '/kitchen',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png`,
+    image: photo('kitchenIsland'),
   },
 };

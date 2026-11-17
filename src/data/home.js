@@ -1,5 +1,6 @@
 // Home page sections.
 import { cdn } from './config';
+import { photo, alt as photoAlt, videos } from './media';
 
 export const hero = {
   eyebrow: 'Interior & False Ceiling Experts · Delhi NCR',
@@ -87,14 +88,14 @@ export const offerings = {
 
 export const gallery = {
   title: 'Our Masterpieces',
-  subtitle: 'Transforming spaces into experiences. Explore our latest interior and ceiling projects.',
+  subtitle: 'Living rooms, bedrooms, kitchens and bathrooms designed in 3D by our in-house team, so you see your home before work starts.',
   items: [
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png`, title: 'Living Interior', category: 'Modern' },
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png`, title: 'Master Bedroom Interior', category: 'Premium' },
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png`, title: "Kid's Bedroom Interior", category: 'Cozy' },
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png`, title: 'Living Room Interior', category: 'Commercial' },
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png`, title: 'Living Interior', category: 'Exclusive' },
-    { src: `${cdn}/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png`, title: 'Parents Room Interior', category: 'Luxury' },
+    { src: photo('livingSofa'), title: 'Living Room', alt: photoAlt('livingSofa') },
+    { src: photo('guestRoom'), title: 'Guest Room', alt: photoAlt('guestRoom') },
+    { src: photo('kitchenL'), title: 'Modular Kitchen', alt: photoAlt('kitchenL') },
+    { src: photo('openPlanLiving'), title: 'Living & Dining', alt: photoAlt('openPlanLiving') },
+    { src: photo('kidsRoomPink'), title: 'Kids Bedroom', alt: photoAlt('kidsRoomPink') },
+    { src: photo('bathroomBeige'), title: 'Bathroom', alt: photoAlt('bathroomBeige') },
   ],
 };
 
@@ -105,7 +106,7 @@ export const blend = {
   text: 'Because nothing less than a tailor-made experience with high-end finishes will do for your home.',
   points: ['Designed around how your family lives', 'Quality materials and clean finishing', 'One team from design to handover'],
   cta: 'Get Free Quote',
-  video: hero.video,
+  video: videos.ceilingInstall, // our team installing a false ceiling
 };
 
 // Home page "7 days" process. Vertical (9:16) reels; img is the still shown before the video loads.
@@ -140,7 +141,7 @@ export const process = {
       heading: 'Enjoy the new look',
       duration: 'Just 7* days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580360/enjoy-new-look-reel-9x16.mp4',
-      img: `${cdn}/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_42_01_PM_us9ay1.png`,
+      img: photo('swingLounge', 720),
     },
   ],
   note: '*Typical timeline after design approval. Larger areas may take a little longer.',

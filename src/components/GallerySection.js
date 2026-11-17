@@ -1,20 +1,21 @@
 import React from 'react';
 import { Image } from 'antd';
 import { ExpandOutlined } from '@ant-design/icons';
+import { photo, alt as photoAlt } from '../data/media';
 
 // Our work gallery. Phones: 2 per row with a wide photo on top and at the end.
 // Desktop: big first photo + 5 smaller ones (3 columns). Tap any photo to open the full view.
-// Cloudinary: deliver each photo at the size it is shown (first tile is big), full size only in the preview
-const sized = (src, w) => src.replace('/upload/q_auto/f_auto/', `/upload/q_auto/f_auto/w_${w},c_limit/`);
+// Our own design photos (data/media.js). Small copy in the tile, full size in the preview.
+const sized = (src, w) => src.replace('w_1400,', `w_${w},`);
 
 const galleryData = [
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png', title: 'Living Interior', category: 'Modern' },
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png', title: 'Master Bedroom Interior', category: 'Premium' },
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png', title: "Kid's Bedroom Interior", category: 'Cozy' },
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png', title: 'Living Room Interior', category: 'Commercial' },
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png', title: 'Living Room Interior', category: 'Exclusive' },
-  { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png', title: 'Parents Room Interior', category: 'Luxury' },
-];
+  { key: 'livingTvWall', title: 'Living Room with Fluted TV Wall', category: 'Living Room' },
+  { key: 'plumBedroom', title: 'Plum-Panelled Master Bedroom', category: 'Bedroom' },
+  { key: 'kidsRoomJungle', title: 'Kids Room with Bunk Bed', category: 'Kids Room' },
+  { key: 'kitchenIsland', title: 'Island Modular Kitchen', category: 'Kitchen' },
+  { key: 'diningPendant', title: 'Dining Area with Recessed Ceiling', category: 'Dining' },
+  { key: 'bathroomBeige', title: 'Modern Beige Bathroom', category: 'Bathroom' },
+].map((item) => ({ ...item, src: photo(item.key), alt: photoAlt(item.key) }));
 
 // layout of each tile by position
 const tileClass = (i, total) => {
@@ -38,7 +39,7 @@ const GallerySection = () => (
           Our <span className="text-brand-red">Masterpieces</span>
         </h2>
         <p className="m-0 mt-3 text-[15px] text-gray-500 sm:text-base">
-          Transforming spaces into experiences. Explore our latest interior and ceiling projects.
+          Living rooms, bedrooms, kitchens and bathrooms designed in 3D by our in-house team, so you see your home before work starts.
         </p>
       </div>
 
@@ -52,7 +53,7 @@ const GallerySection = () => (
               <Image
                 src={sized(item.src, i === 0 ? 1000 : 640)}
                 preview={{ src: item.src, cover: <span className="inline-flex items-center gap-2 font-semibold"><ExpandOutlined /> View</span> }}
-                alt={`${item.title} designed by Urbane Living`}
+                alt={item.alt}
                 loading="lazy"
                 className="transition duration-700 group-hover:scale-105"
               />

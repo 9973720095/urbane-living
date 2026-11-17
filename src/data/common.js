@@ -61,9 +61,9 @@ export const mobileNav = {
 };
 
 export const highlights = [
-  { key: 'design', text: 'Personalised designs', icon: 'https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-e1720440694404.png' },
-  { key: 'warranty', text: '10-year warranty¹', icon: 'https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-5-e1720442786627.png' },
-  { key: 'pricing', text: 'Transparent pricing', icon: 'https://spaceinterio.co.in/wp-content/uploads/2024/07/Personalised-designs-6-e1720443121163.png' },
+  { key: 'design', text: 'Personalised designs' },
+  { key: 'warranty', text: '10-year warranty¹' },
+  { key: 'pricing', text: 'Transparent pricing' },
 ];
 
 export const countryCodes = [

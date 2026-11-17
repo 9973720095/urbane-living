@@ -1,5 +1,5 @@
 // Contact page (/contact). Phone, WhatsApp, email and address come from common.js -> contact.
-import { cdn } from './config';
+import { photo, alt as photoAlt } from './media';
 
 export const contactPage = {
   banner: {
@@ -7,8 +7,8 @@ export const contactPage = {
     title: "Let's design your",
     highlight: 'dream home',
     subtitle: 'Call, WhatsApp or send us your details. A designer will get back to you to plan a free site visit.',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png`,
-    imageAlt: 'Designer living room by Urbane Living',
+    image: photo('livingSofa'),
+    imageAlt: photoAlt('livingSofa'),
     whatsappMessage: 'Hi Urbane Living, I want to discuss my home interior project.',
     height: 'sm',
     align: 'center',
@@ -43,6 +43,6 @@ export const contactPage = {
     description:
       'Contact Urbane Living for interior design and false ceiling work in Delhi, Noida, Ghaziabad, Gurgaon and Faridabad. Call, WhatsApp or request a free consultation.',
     path: '/contact',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png`,
+    image: photo('livingSofa'),
   },
 };

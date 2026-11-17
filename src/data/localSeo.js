@@ -1,4 +1,4 @@
-import { cdn } from './config';
+import { photo } from './media';
 
 /*
   City × Service landing pages (local SEO), e.g. /false-ceiling/noida, /interior-designers/ghaziabad
@@ -16,7 +16,7 @@ export const localServices = [
       `Full home interiors in ${c}: modular kitchens, wardrobes, false ceilings, TV units and lighting, designed in 3D and installed by one team. Book a free consultation.`,
     intro: (c) =>
       `From the first site visit to the final handover, our designers plan your complete home in ${c} in one 3D design, so every room matches and nothing is left to chance.`,
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png`,
+    image: photo('livingArchway'),
     mainLink: { to: '/living-hall', label: 'See our living room designs' },
     includes: [
       { title: 'Modular kitchen', text: 'L, U, parallel or island kitchens with soft-close fittings.' },
@@ -38,7 +38,7 @@ export const localServices = [
       `Gypsum, POP, PVC and wooden false ceilings in ${c} with cove and profile lighting. Rates from ₹120/sqft. Free design consultation and site visit.`,
     intro: (c) =>
       `We design and install gypsum, POP, PVC and wooden false ceilings across ${c}, with lighting planned together so the ceiling looks finished on day one.`,
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png`,
+    image: photo('livingTvWallWide'),
     mainLink: { to: '/false-ceiling', label: 'Explore false ceiling designs & cost estimator' },
     includes: [
       { title: 'Gypsum ceiling', text: 'Smooth, crack-resistant finish for living rooms and bedrooms.' },
@@ -60,7 +60,7 @@ export const localServices = [
       `Modular kitchens in ${c}: L-shaped, U-shaped, parallel and island designs with smart storage and easy-clean finishes. Free 3D design and site visit.`,
     intro: (c) =>
       `Your kitchen in ${c} is planned around how your family cooks: the right storage for every utensil, finishes that clean easily and fittings that last.`,
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png`,
+    image: photo('kitchenL'),
     mainLink: { to: '/kitchen', label: 'See our modular kitchen designs' },
     includes: [
       { title: 'All layouts', text: 'L-shaped, U-shaped, parallel, straight and island.' },
@@ -82,7 +82,7 @@ export const localServices = [
       `Sliding, hinged and walk-in wardrobes in ${c}, made to your wall size with lofts, drawers and organisers. Free design consultation and site visit.`,
     intro: (c) =>
       `We build wardrobes in ${c} to your exact wall size, and plan the inside around what you actually store: clothes, shoes, bags and bed linen.`,
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png`,
+    image: photo('guestRoom'),
     mainLink: { to: '/wardrobe', label: 'See our wardrobe designs' },
     includes: [
       { title: 'Sliding wardrobes', text: 'Space-saving doors for compact bedrooms.' },

@@ -1,5 +1,5 @@
 // Wardrobe page (/wardrobe). Layout: components/RoomPage.jsx
-import { cdn } from '../config';
+import { photo, alt as photoAlt } from '../media';
 import { highlights } from '../common';
 
 export const wardrobePage = {
@@ -14,8 +14,8 @@ export const wardrobePage = {
     title: 'Wardrobes that fit',
     highlight: 'everything you own',
     subtitle: 'Sliding, hinged or walk-in wardrobes made to your wall size, with smart inside storage planned around your clothes, shoes and bags.',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png`,
-    imageAlt: 'Bedroom with a full-height custom wardrobe by Urbane Living',
+    image: photo('guestRoom'),
+    imageAlt: photoAlt('guestRoom'),
     whatsappMessage: 'Hi Urbane Living, I want a free 3D design for my wardrobe.',
     align: 'left',
     highlights,
@@ -83,6 +83,6 @@ export const wardrobePage = {
     description:
       'Custom wardrobe design in Delhi, Noida, Ghaziabad and Gurgaon. Sliding, hinged and walk-in wardrobes made to size with smart inside storage, a free 3D design and itemised quote.',
     path: '/wardrobe',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png`,
+    image: photo('guestRoom'),
   },
 };

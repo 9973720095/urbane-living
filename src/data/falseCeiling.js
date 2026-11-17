@@ -1,5 +1,5 @@
 // False Ceiling page: banner, cost estimator, design filters, SEO, "Urbane Ceiling Standard".
-import { cdn } from './config';
+import { photo, alt as photoAlt } from './media';
 import { highlights } from './common';
 
 // Page banners: use with <PageBanner {...banners.falseCeiling} primary={...} />
@@ -9,8 +9,8 @@ export const banners = {
     title: 'Get Your False Ceiling done in',
     highlight: 'Just 7 Days*',
     // subtitle: 'Premium False Ceiling Designs Starting ₹120/sqft',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png`,
-    imageAlt: 'Luxury living room with a designer false ceiling by Urbane Living',
+    image: photo('livingTvWall'),
+    imageAlt: photoAlt('livingTvWall'),
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
@@ -78,7 +78,7 @@ export const seo = {
     description:
       'Gypsum, POP, PVC and wooden false ceilings installed in just 7 days in Delhi, Noida, Ghaziabad and Gurgaon. Starting ₹120/sqft with a 10-year anti-crack warranty. Use our instant cost estimator and get a free design.',
     path: '/false-ceiling',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png`,
+    image: photo('livingTvWall'),
     schema: [
       {
         '@context': 'https://schema.org',
