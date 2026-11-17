@@ -204,6 +204,97 @@ export const localCities = [
   },
 ];
 
+/*
+  Extra content for ONE service in ONE city (deeper page = better Google ranking for that search).
+  Key = 'service-slug/city-slug', e.g. 'false-ceiling/noida' -> /false-ceiling/noida
+  Every part is optional. A section shows only when it has content.
+  - images: leave '' until you have a REAL photo of that work; the card then shows text only.
+  - projects: REAL work only (sector / society + what was done + photo).
+*/
+export const serviceCityContent = {
+  'false-ceiling/noida': {
+    guide: {
+      tag: 'FALSE CEILING GUIDE FOR NOIDA HOMES',
+      title: 'Planning a false ceiling for your Noida flat',
+      paragraphs: [
+        'Most Noida homes are flats in high-rise societies, from older sectors like 50 and 62 to newer towers along the Noida–Greater Noida Expressway in Sectors 75, 128, 137, 143 and 150. These flats usually come with a plain concrete slab, a few bare light points and AC pipes running along the walls. A false ceiling hides all of that and lets you plan lighting room by room, instead of one tube light in the middle.',
+        'Before the first board goes up, our designer checks the ceiling height, beam positions, AC and exhaust points and where your furniture will sit. That way cove lights fall where they look best, the ceiling does not drop too low in rooms with beams, and fan and light points line up with your bed, sofa and dining table.',
+        'For most Noida flats we suggest gypsum board ceilings: they are smooth, do not crack when fitted with proper GI framing and joint tape, and suit both 2 BHK and large 4 BHK apartments. POP works well for curved or classic designs, PVC for balconies and bathrooms, and wooden panels when you want a warm accent over the dining or TV area.',
+      ],
+      points: [
+        'Lighting planned with the ceiling: cove, profile and spot lights',
+        'Ceiling height and beams checked at the site visit',
+        'AC, fan and exhaust points marked before framing',
+        '12.5 mm branded gypsum board on rust-free GI framing',
+        'Written 10-year anti-crack warranty',
+        'Installation in 7–10 working days for most homes',
+      ],
+    },
+    rates: {
+      tag: 'FALSE CEILING COST IN NOIDA',
+      title: 'False ceiling rates in Noida',
+      text: 'Rates are per sq. ft. of ceiling area. Your final, item-wise quote comes after the free site visit and 3D design, and the price is locked when you book.',
+      rows: [
+        { type: 'Gypsum false ceiling', rate: 'From ₹120/sqft', bestFor: 'Living rooms, bedrooms, full home' },
+        { type: 'POP false ceiling', rate: 'From ₹120/sqft', bestFor: 'Curves, mouldings, classic designs' },
+        { type: 'PVC panel ceiling', rate: 'From ₹200/sqft', bestFor: 'Balconies, bathrooms, damp areas' },
+        { type: 'Wooden ceiling', rate: 'From ₹210/sqft', bestFor: 'Accent over TV wall or dining' },
+        { type: 'Light points', rate: '₹450 per point', bestFor: 'Spot, cove and profile lights' },
+      ],
+      example: {
+        title: 'Example: living room in a Noida 3 BHK',
+        text: 'A 12 × 16 ft living room (192 sq. ft.) with a gypsum ceiling and cove lighting, plus 8 light points, works out to about ₹31,000. Plain single-level designs cost less; multi-level and wooden designs cost more.',
+      },
+      note: '*Indicative rates. The exact price depends on design, material, lighting and site conditions.',
+    },
+    ideas: {
+      tag: 'DESIGN IDEAS',
+      title: 'False ceiling ideas for every room',
+      items: [
+        { title: 'Living room', text: 'A peripheral gypsum ceiling with warm cove lighting and a few spot lights over the sofa and TV wall. It makes standard Noida living rooms feel taller and more finished.', image: '' },
+        { title: 'Master bedroom', text: 'A soft cove or a wooden strip above the bed, with dimmable lights for night-time. Fan point stays centred over the bed.', image: '' },
+        { title: 'Kids room', text: 'Simple shapes, bright profile lights and easy-to-clean paint. We keep designs playful but timeless, so they still work as children grow.', image: '' },
+        { title: 'Dining area', text: 'A raised panel or wooden accent right above the table, with a pendant light point planned in the ceiling.', image: '' },
+        { title: 'Kitchen', text: 'Moisture-resistant gypsum or PVC with bright, even lighting over the counter and space kept for the chimney duct.', image: '' },
+        { title: 'Balcony', text: 'PVC or wooden-look panels that handle sun and rain, with one or two warm lights for the evening.', image: '' },
+      ],
+    },
+    society: {
+      tag: 'WORKING IN NOIDA SOCIETIES',
+      title: 'We follow your society’s rules',
+      text: 'Most Noida societies have rules for interior work. We plan around them, so you never have to deal with complaints from the maintenance office or neighbours.',
+      points: [
+        'Work only in the society’s allowed hours',
+        'Material and lift booking done with the maintenance office',
+        'Floors and lift covered while material moves in',
+        'Debris cleared from site regularly, not left in corridors',
+        'Your RWA / maintenance paperwork arranged before work starts',
+      ],
+    },
+    projects: [],
+    faqs: [
+      {
+        q: 'How long does a false ceiling take in a Noida flat?',
+        a: 'Most 2 and 3 BHK flats are done in 7–10 working days, depending on the number of rooms, design and your society’s working hours. The timeline is written in your quote.',
+      },
+      {
+        q: 'Gypsum or POP: which is better for a Noida apartment?',
+        a: 'For most flats we suggest gypsum: it is quicker to install, gives a smooth finish and, with proper framing and joint tape, does not crack. POP is better when you want curves or detailed mouldings.',
+      },
+      {
+        q: 'Will a false ceiling make my room look smaller?',
+        a: 'Not when it is planned well. We check the ceiling height at the site visit and usually suggest a peripheral design that drops only around the edges, so the centre stays high and the room feels taller with cove lighting.',
+      },
+      {
+        q: 'Do I need permission from my Noida society for false ceiling work?',
+        a: 'Most societies only need you to inform the maintenance office and follow their working hours and material rules. We help with the paperwork and plan the work around those rules.',
+      },
+    ],
+  },
+};
+
+export const findServiceCityContent = (serviceSlug, citySlug) => serviceCityContent[`${serviceSlug}/${citySlug}`] || null;
+
 // Process shown on every local page
 export const localProcess = [
   { title: 'Free consultation', text: 'Tell us about your home, budget and style on a call or WhatsApp.' },

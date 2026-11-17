@@ -11,7 +11,7 @@ import {
 import useSeo from '../hooks/useSeo';
 import NotFoundPage from './NotFoundPage';
 import { brand, contact, siteUrl } from '../data/siteData';
-import { localServices, localCities, localProcess, findLocalService, findLocalCity } from '../data/localSeo';
+import { localServices, localCities, localProcess, findLocalService, findLocalCity, findServiceCityContent } from '../data/localSeo';
 
 const btnRed =
   'inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white no-underline shadow-cta transition hover:bg-brand-red-dark';
@@ -49,7 +49,13 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
   const city = findLocalCity(citySlug);
   const [open, setOpen] = useState(0);
 
-  const faqs = useMemo(() => (service && city ? buildFaqs(service, city) : []), [service, city]);
+  // Extra, deeper content for this exact service + city (e.g. /false-ceiling/noida), if written in localSeo.js
+  const extra = service && city ? findServiceCityContent(service.slug, city.slug) : null;
+  const faqs = useMemo(
+    () => (service && city ? [...buildFaqs(service, city), ...(extra?.faqs || [])] : []),
+    [service, city, extra],
+  );
+  const projects = [...(extra?.projects || []), ...(city?.projects || [])];
   const path = service && city ? `/${service.slug}/${city.slug}` : '/404';
 
   const schema = useMemo(() => {
@@ -162,6 +168,115 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
         </div>
       </section>
 
+      {/* Guide: deeper city + service content */}
+      {extra?.guide && (
+        <section className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)]">
+            <div>
+              <span className={tag}>{extra.guide.tag}</span>
+              <h2 className={h2}>{extra.guide.title}</h2>
+              {extra.guide.paragraphs.map((p) => (
+                <p key={p.slice(0, 40)} className="m-0 mt-4 text-[15px] leading-relaxed text-gray-600">{p}</p>
+              ))}
+            </div>
+            {extra.guide.points?.length > 0 && (
+              <ul className="m-0 flex list-none flex-col gap-3 self-start rounded-2xl bg-white p-5 shadow-card sm:p-6">
+                {extra.guide.points.map((t) => (
+                  <li key={t} className="flex items-start gap-2.5 text-[14px] leading-relaxed text-brand-navy sm:text-[15px]">
+                    <CheckCircleFilled className="mt-1 shrink-0 text-emerald-500" /> {t}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Rates table */}
+      {extra?.rates && (
+        <section className="px-4 py-12 sm:px-6 lg:py-16">
+          <div className="mx-auto max-w-[1000px]">
+            <div className="text-center">
+              <span className={tag}>{extra.rates.tag}</span>
+              <h2 className={h2}>{extra.rates.title}</h2>
+              <p className="m-0 mx-auto mt-3 max-w-[720px] text-[15px] leading-relaxed text-gray-600">{extra.rates.text}</p>
+            </div>
+            <div className="mt-8 overflow-x-auto rounded-2xl border border-solid border-gray-100 shadow-card">
+              <table className="w-full min-w-[560px] border-collapse text-left text-sm sm:text-[15px]">
+                <thead>
+                  <tr className="bg-brand-navy text-white">
+                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Type</th>
+                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Rate</th>
+                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Best for</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {extra.rates.rows.map((r, i) => (
+                    <tr key={r.type} className={i % 2 ? 'bg-brand-soft' : 'bg-white'}>
+                      <th scope="row" className="px-4 py-3 font-semibold text-brand-navy sm:px-5">{r.type}</th>
+                      <td className="whitespace-nowrap px-4 py-3 font-semibold text-brand-red sm:px-5">{r.rate}</td>
+                      <td className="px-4 py-3 text-gray-600 sm:px-5">{r.bestFor}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            {extra.rates.example && (
+              <div className="mt-5 rounded-2xl border border-solid border-brand-red/20 bg-brand-red/5 p-5">
+                <span className="block font-semibold text-brand-navy">{extra.rates.example.title}</span>
+                <span className="mt-1 block text-sm leading-relaxed text-gray-600">{extra.rates.example.text}</span>
+              </div>
+            )}
+            {extra.rates.note && <p className="m-0 mt-3 text-xs text-gray-500">{extra.rates.note}</p>}
+          </div>
+        </section>
+      )}
+
+      {/* Design ideas by room (photo shows only when added) */}
+      {extra?.ideas && (
+        <section className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
+          <div className="mx-auto max-w-[1200px]">
+            <div className="text-center">
+              <span className={tag}>{extra.ideas.tag}</span>
+              <h2 className={h2}>{extra.ideas.title}</h2>
+            </div>
+            <ul className="m-0 mt-8 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
+              {extra.ideas.items.map((it) => (
+                <li key={it.title} className="overflow-hidden rounded-2xl bg-white shadow-card">
+                  {it.image && (
+                    <img src={it.image} alt={`${it.title} false ceiling design in ${city.name} by Urbane Living`} loading="lazy" width="600" height="450" className="block aspect-[4/3] w-full object-cover" />
+                  )}
+                  <div className="p-5">
+                    <h3 className="m-0 text-base font-semibold text-brand-navy">{it.title}</h3>
+                    <p className="m-0 mt-1.5 text-sm leading-relaxed text-gray-600">{it.text}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
+      {/* Society rules */}
+      {extra?.society && (
+        <section className="px-4 py-12 sm:px-6 lg:py-16">
+          <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-start gap-8 lg:grid-cols-2">
+            <div>
+              <span className={tag}>{extra.society.tag}</span>
+              <h2 className={h2}>{extra.society.title}</h2>
+              <p className="m-0 mt-4 text-[15px] leading-relaxed text-gray-600">{extra.society.text}</p>
+            </div>
+            <ul className="m-0 grid list-none grid-cols-1 gap-3 p-0">
+              {extra.society.points.map((t) => (
+                <li key={t} className="flex items-start gap-2.5 rounded-2xl border border-solid border-gray-100 bg-brand-soft px-4 py-3 text-[14px] text-brand-navy sm:text-[15px]">
+                  <CheckCircleFilled className="mt-1 shrink-0 text-brand-red" /> {t}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       {/* Areas covered */}
       <section className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto max-w-[1200px] text-center">
@@ -179,12 +294,12 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
       </section>
 
       {/* Real projects (only when added in data) */}
-      {city.projects.length > 0 && (
+      {projects.length > 0 && (
         <section className="px-4 py-12 sm:px-6 lg:py-16">
           <div className="mx-auto max-w-[1200px]">
             <h2 className={`${h2} text-center`}>Recent work in <span className="text-brand-red">{city.name}</span></h2>
             <ul className="m-0 mt-8 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-2 lg:grid-cols-3">
-              {city.projects.map((p) => (
+              {projects.map((p) => (
                 <li key={p.title} className="overflow-hidden rounded-2xl border border-solid border-gray-100 bg-white shadow-card">
                   {p.image && <img src={p.image} alt={`${p.title} in ${city.name} by Urbane Living`} loading="lazy" className="block aspect-[4/3] w-full object-cover" />}
                   <div className="p-4">
