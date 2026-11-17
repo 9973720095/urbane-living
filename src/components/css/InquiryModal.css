@@ -1,180 +1,174 @@
-/* Modal Overrides */
-.quick-inquiry-modern .ant-modal-content {
-    padding: 0 !important;
-    overflow: hidden;
-    border-radius: 15px;
-    border: none;
+/* Popup lead form (InquiryModal.js): compact card, photo banner on top, underline inputs */
+
+.ul-lead-modal .ant-modal-container,
+.ul-lead-modal .ant-modal-content {
+  padding: 0 !important;
+  border-radius: 6px;
+  overflow: visible;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
-.modal-container {
-    display: flex;
-    min-height: 520px;
+/* Round dark close button sitting just above the card */
+.ul-lead-close {
+  position: absolute;
+  top: -54px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 50%;
+  background: #1a1a1a;
+  color: #fff;
+  font-size: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s;
 }
-.ant-modal-container .ant-modal-close{
-    top: 25px;
-    right: 30px;
-    background: #fff;
-    border-radius: 16px;
-    width: 25px;
-    height: 25px;
-    color: #000;
+.ul-lead-close:hover { background: var(--brand-red, #E40B12); }
+.ul-lead-close:focus { outline: none; }
+
+/* Banner */
+.ul-lead-banner {
+  position: relative;
+  height: 170px;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  background: #1F2A44;
 }
-.modal-image-side {
-    background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778563293/urbaneLiving_l2vjuj.png');
-    background-size: cover;
-    background-position: center;
-    padding: 40px 25px;
-    display: flex;
-    align-items: flex-start;
+.ul-lead-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.ul-lead-banner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(10, 14, 25, 0.82) 0%, rgba(10, 14, 25, 0.45) 55%, rgba(10, 14, 25, 0.05) 100%);
+}
+.ul-lead-banner-text {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  padding: 26px 22px;
+  max-width: 260px;
+  color: #fff;
+}
+.ul-lead-banner-title {
+  margin: 0 0 10px;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.25;
+}
+.ul-lead-banner-sub {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
 }
 
-.side-title { color: #fff !important; font-weight: 600 !important; font-size: 32px !important; line-height: 20px !important; }
-.side-subtitle { color: #f0f0f0; font-size: 14px; letter-spacing: 0.5px; }
-
-/* Background & Font for Right Side (Match ref-1) */
-.modal-form-side {
-    background-color: #f9f7f2; /* Light beige/grey background as per reference image */
-    padding: 45px 35px;
+/* Body */
+.ul-lead-body { padding: 22px 22px 18px; background: #fff; border-radius: 0 0 6px 6px; }
+.ul-lead-title {
+  margin: 0 0 12px;
+  font-size: 21px;
+  font-weight: 600;
+  color: #1a1a1a;
 }
 
-.form-header h3 {
-    font-weight: 600 !important;
-    color: var(--brand-navy, #1F2A44) !important;
-    margin-bottom: 25px !important;
-    font-family: inherit;
-}
+.ul-lead-form .ant-form-item { margin-bottom: 14px; }
 
-/* Form Item & Border styling */
-.ref-style-form .ant-form-item-label > label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #666;
-    text-transform: uppercase;
+/* Underline-only inputs */
+.ul-lead-form .ant-input,
+.ul-lead-form .ant-input-affix-wrapper,
+.ul-lead-form .ant-select .ant-select-selector,
+.ul-lead-form .ant-select {
+  border: 0 !important;
+  border-bottom: 1px solid #d0d0d0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  padding-left: 0 !important;
+  font-size: 15px;
 }
+.ul-lead-form .ant-input,
+.ul-lead-form .ant-input-affix-wrapper { height: 46px; }
+.ul-lead-form .ant-input-affix-wrapper .ant-input { border: 0 !important; height: auto; }
+.ul-lead-form .ant-select { height: 46px; }
+.ul-lead-form .ant-select .ant-select-selector { border-bottom: 0 !important; }
+.ul-lead-form .ant-input:focus,
+.ul-lead-form .ant-input-affix-wrapper-focused,
+.ul-lead-form .ant-select-focused { border-bottom-color: var(--brand-red, #E40B12) !important; }
+.ul-lead-form .ant-form-item-has-error .ant-input,
+.ul-lead-form .ant-form-item-has-error .ant-input-affix-wrapper,
+.ul-lead-form .ant-form-item-has-error .ant-select { border-bottom-color: #ff4d4f !important; }
 
-.ref-style-form .ant-input, 
-.ref-style-form .ant-select-selector {
-    background: transparent !important;
-    border: none !important;
-    border-bottom: 1.5px solid #d9d9d9 !important; /* Bottom border only style for cleaner look */
-    border-radius: 0 !important;
-    padding-left: 0 !important;
-    box-shadow: none !important;
+.ul-lead-prefix {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 10px;
+  padding-right: 10px;
+  border-right: 1px solid #e3e3e3;
+  font-size: 14px;
+  color: #444;
 }
+.ul-lead-prefix img { border-radius: 2px; display: block; }
 
-.ref-style-form .ant-input:focus, 
-.ref-style-form .ant-select-focused .ant-select-selector {
-    border-bottom-color: var(--brand-blue, #4167B3) !important;
+/* WhatsApp toggle row */
+.ul-lead-whatsapp {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 4px 0 16px;
+  border-bottom: 1px solid #d0d0d0;
+  margin-bottom: 14px;
 }
+.ul-lead-whatsapp label { font-size: 13px; font-weight: 500; color: #333; cursor: pointer; }
+.ul-lead-whatsapp .ant-switch-checked { background: var(--brand-red, #E40B12) !important; }
 
-/* antd v6 Select: same bottom-line style as the inputs */
-.ref-style-form .ant-select {
-    background: transparent !important;
-    border: none !important;
-    border-bottom: 1.5px solid #d9d9d9 !important;
-    border-radius: 0 !important;
-    padding-left: 0 !important;
-    box-shadow: none !important;
+/* Submit */
+.ul-lead-submit.ant-btn {
+  height: 50px;
+  margin-top: 8px;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--brand-red, #E40B12);
+  border-color: var(--brand-red, #E40B12);
+  box-shadow: none;
 }
+.ul-lead-submit.ant-btn:hover { background: var(--brand-red-dark, #C2090F) !important; border-color: var(--brand-red-dark, #C2090F) !important; }
+.ul-lead-submit .anticon { margin-left: 8px; }
 
-.ref-style-form .ant-select-focused {
-    border-bottom-color: var(--brand-blue, #4167B3) !important;
+.ul-lead-consent {
+  margin: 12px 0 0;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #555;
 }
+.ul-lead-consent a { color: var(--brand-red, #E40B12); }
 
-/* Button style */
-.ref-submit-btn {
-    background: var(--brand-red, #E40B12) !important; /* Logo red */
-    border: none !important;
-    height: 48px !important;
-    font-weight: 600 !important;
-    letter-spacing: 1px;
-    margin-top: 20px;
-    border-radius: 4px !important;
-}
-
-.ref-submit-btn:hover {
-    background: var(--brand-red-dark, #C2090F) !important;
-    transform: translateY(-1px);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .modal-form-side { padding: 30px 20px; }
-}
-
-/* ===== Phones: form opens as a clean bottom sheet (not full page) ===== */
-@media (max-width: 767px) {
-  .quick-inquiry-modern {
-    position: fixed !important;
-    top: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
+/* Phones: card nearly full width, close button inside the banner corner */
+@media (max-width: 480px) {
+  .ul-lead-modal { max-width: calc(100vw - 24px) !important; margin: 0 auto; }
+  .ul-lead-close {
+    top: 10px;
+    right: 10px;
+    transform: none;
+    width: 34px;
+    height: 34px;
+    font-size: 14px;
+    background: rgba(0, 0, 0, 0.6);
   }
-
-  .quick-inquiry-modern .ant-modal-content {
-    max-height: 90vh;
-    overflow-y: auto !important;
-    border-radius: 20px 20px 0 0 !important;
-  }
-
-  /* small grab handle at the top of the sheet */
-  .quick-inquiry-modern .ant-modal-content::before {
-    content: "";
-    display: block;
-    width: 42px;
-    height: 4px;
-    margin: 10px auto 0;
-    border-radius: 4px;
-    background: #D7DBE3;
-  }
-
-  /* hide the big image on phones, keep only the form */
-  .quick-inquiry-modern .modal-image-side {
-    display: none !important;
-  }
-
-  .quick-inquiry-modern .modal-container {
-    min-height: 0;
-  }
-
-  .quick-inquiry-modern .modal-form-side {
-    padding: 14px 20px calc(20px + env(safe-area-inset-bottom, 0px));
-    background: #ffffff;
-  }
-
-  .quick-inquiry-modern .form-header h3 {
-    margin-bottom: 14px !important;
-    padding-right: 36px;
-    font-size: 19px !important;
-  }
-
-  .quick-inquiry-modern .ref-style-form .ant-form-item {
-    margin-bottom: 12px;
-  }
-
-  .quick-inquiry-modern .ref-style-form .ant-form-item-label {
-    padding-bottom: 2px;
-  }
-
-  .quick-inquiry-modern .ref-style-form .ant-form-item-label > label {
-    font-size: 11.5px;
-  }
-
-  .quick-inquiry-modern .ref-submit-btn {
-    margin-top: 8px;
-    border-radius: 10px !important;
-  }
-
-  .quick-inquiry-modern .ant-modal-close {
-    top: 14px !important;
-    right: 14px !important;
-    background: #F1F3F7 !important;
-    border-radius: 50% !important;
-  }
+  .ul-lead-banner { height: 150px; }
+  .ul-lead-banner-title { font-size: 17px; }
+  .ul-lead-body { padding: 18px 18px 14px; }
+  .ul-lead-title { font-size: 19px; }
 }

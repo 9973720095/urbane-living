@@ -1,130 +1,153 @@
-import React from 'react';
-import { Modal, Form, Input, Button, Typography, Row, Col, Select, message } from 'antd';
+import React, { useState } from 'react';
+import { Modal, Form, Input, Button, Select, Switch, message } from 'antd';
+import { CloseOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { inquiryOptions } from '../data/siteData';
 import { trackLead } from '../utils/metaPixel';
 import './css/InquiryModal.css';
-
-const { Title } = Typography;
 
 // Local backend on localhost, Render in production (same as the rest of the site)
 const API_BASE_URL = window.location.hostname === 'localhost'
   ? 'http://localhost:5000'
   : 'https://urbane-living.onrender.com';
 
+// Top banner photo (our own living-room shoot, first frame of the hero video)
+const BANNER_IMG = 'https://res.cloudinary.com/nzqefovs/video/upload/so_0,q_auto,f_auto,w_800,h_340,c_fill/v1794816175/living-room-hero-4k.jpg';
+
 const toOptions = (list) => list.map((v) => ({ value: v, label: v }));
+
+// Phone keeps digits only, so a pasted "+91 98765 43210" still works
+const cleanPhone = (e) => {
+  let digits = e.target.value.replace(/\D/g, '');
+  if (digits.length > 10 && digits.startsWith('91')) digits = digits.slice(2);
+  return digits.slice(0, 10);
+};
+
+const IndiaPrefix = () => (
+  <span className="ul-lead-prefix">
+    <img src="https://flagcdn.com/w40/in.png" srcSet="https://flagcdn.com/w80/in.png 2x" width="22" height="15" alt="India" />
+    <span>+91</span>
+  </span>
+);
 
 const InquiryModal = ({ isOpen, onClose }) => {
   const [form] = Form.useForm();
   const [messageApi, contextHolder] = message.useMessage();
-
-  // Phone keeps digits only, so a pasted "+91 98765 43210" still works
-  const cleanPhone = (e) => {
-    let digits = e.target.value.replace(/\D/g, '');
-    if (digits.length > 10 && digits.startsWith('91')) digits = digits.slice(2);
-    return digits.slice(0, 10);
-  };
+  const [sending, setSending] = useState(false);
 
   const onFinish = async (values) => {
+    setSending(true);
     try {
       const response = await fetch(`${API_BASE_URL}/api/save-lead`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...values,
-          locality: (values.locality || '').trim(),
+          name: values.name.trim(),
+          phone: values.phone,
+          city: values.city,
+          message: `WhatsApp updates: ${values.whatsapp ? 'Yes' : 'No'}`,
           page: window.location.pathname,
         }),
       });
 
       if (response.ok) {
         const data = await response.json().catch(() => ({}));
-        trackLead({ leadId: data.leadId, city: values.city, propertyType: values.propertyType, form: 'Popup form' });
-        messageApi.success("Thank you! Our designer will call you shortly.");
+        trackLead({ leadId: data.leadId, city: values.city, form: 'Popup form' });
+        messageApi.success('Thank you! Our designer will call you shortly.');
         form.resetFields();
-        onClose(); 
+        onClose();
       } else {
-        messageApi.error("Server error. Please try again.");
+        messageApi.error('Server error. Please try again.');
       }
     } catch (error) {
-      messageApi.error("Backend connection failed!");
+      messageApi.error('Connection failed. Please try again or call us.');
+    } finally {
+      setSending(false);
     }
   };
 
   return (
     <>
-    {contextHolder}
-    <Modal 
-      className='quick-inquiry-modern' 
-      open={isOpen} 
-      onCancel={onClose} 
-      footer={null} 
-      centered
-      width={850}
-    >
-      <Row className="modal-container">
-        {/* Left Side Image - As per Reference */}
-        <Col xs={24} md={10} className="modal-image-side">
-          <div className="image-content">
-            <img 
-              src='https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778232393/urbane-logo-transparent-icon-removebg-preview_jepdln.png' 
-              alt="form-img" 
-            />
+      {contextHolder}
+      <Modal
+        className="ul-lead-modal"
+        open={isOpen}
+        onCancel={onClose}
+        footer={null}
+        closable={false}
+        centered
+        width={400}
+        destroyOnHidden
+      >
+        <button type="button" className="ul-lead-close" onClick={onClose} aria-label="Close form">
+          <CloseOutlined />
+        </button>
+
+        {/* Top banner: photo + headline */}
+        <div className="ul-lead-banner">
+          <img src={BANNER_IMG} alt="Living room designed by Urbane Living" width="400" height="170" />
+          <div className="ul-lead-banner-text">
+            <p className="ul-lead-banner-title">Dream home on your mind?</p>
+            <p className="ul-lead-banner-sub">Urbane Living designers plan it with you, free of cost.</p>
           </div>
-        </Col>
+        </div>
 
-        {/* Right Side Form - As per Reference Background & Style */}
-        <Col xs={24} md={14} className="modal-form-side">
-          <div className="form-header">
-            <Title level={3}>Book Free Design Consultation</Title>
-          </div>
+        {/* Form */}
+        <div className="ul-lead-body">
+          <h2 className="ul-lead-title">Talk to a designer</h2>
 
-          <Form form={form} layout="vertical" onFinish={onFinish} className="ref-style-form">
-            <Row gutter={12}>
-              <Col xs={24} sm={12}>
-                <Form.Item label="Name" name="name" rules={[{ required: true, whitespace: true, message: 'Please enter your name' }]}>
-                  <Input placeholder="Your name" autoComplete="name" />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item
-                  label="Mobile no"
-                  name="phone"
-                  getValueFromEvent={cleanPhone}
-                  rules={[{ required: true, pattern: /^[6-9][0-9]{9}$/, message: 'Enter a valid 10-digit mobile number' }]}
-                >
-                  <Input placeholder="10-digit mobile" inputMode="numeric" autoComplete="tel-national" />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Form.Item label="Email" name="email" rules={[{ required: true, type: 'email', message: 'Please enter a valid email' }]}>
-              <Input placeholder="you@example.com" autoComplete="email" />
+          <Form
+            form={form}
+            onFinish={onFinish}
+            initialValues={{ whatsapp: true }}
+            requiredMark={false}
+            className="ul-lead-form"
+          >
+            <Form.Item name="name" rules={[{ required: true, whitespace: true, message: 'Please enter your name' }]}>
+              <Input placeholder="Enter your name" autoComplete="name" aria-label="Name" />
             </Form.Item>
 
-            <Row gutter={12}>
-              <Col xs={24} sm={12}>
-                <Form.Item label="City" name="city" rules={[{ required: true, message: 'Please select your city' }]}>
-                  <Select placeholder="Select city" options={toOptions(inquiryOptions.serviceAreas)} />
-                </Form.Item>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Form.Item label="Property Type" name="propertyType" rules={[{ required: true, message: 'Please select property type' }]}>
-                  <Select placeholder="Residential/Commercial" options={toOptions(inquiryOptions.propertyTypes)} />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Form.Item label="Locality / Society (optional)" name="locality">
-              <Input placeholder="e.g. Sector 62, Gaur City" maxLength={120} />
+            <Form.Item
+              name="phone"
+              getValueFromEvent={cleanPhone}
+              rules={[{ required: true, pattern: /^[6-9][0-9]{9}$/, message: 'Enter a valid 10-digit mobile number' }]}
+            >
+              <Input
+                prefix={<IndiaPrefix />}
+                placeholder="Enter your mobile number"
+                inputMode="numeric"
+                autoComplete="tel-national"
+                aria-label="Mobile number"
+              />
             </Form.Item>
 
-            <Button type="primary" htmlType="submit" block className="ref-submit-btn">
-              SUBMIT
+            <div className="ul-lead-whatsapp">
+              <label htmlFor="ul-lead-wa">Send me updates on WhatsApp</label>
+              <Form.Item name="whatsapp" valuePropName="checked" noStyle>
+                <Switch id="ul-lead-wa" size="small" />
+              </Form.Item>
+            </div>
+
+            <Form.Item name="city" rules={[{ required: true, message: 'Please select your city' }]}>
+              <Select
+                placeholder="Select your property city"
+                options={toOptions(inquiryOptions.serviceAreas)}
+                aria-label="Property city"
+              />
+            </Form.Item>
+
+            <Button type="primary" htmlType="submit" block loading={sending} className="ul-lead-submit">
+              Book Free Consultation <ArrowRightOutlined />
             </Button>
+
+            <p className="ul-lead-consent">
+              By submitting, you agree to our{' '}
+              <a href="/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a> and{' '}
+              <a href="/terms" target="_blank" rel="noopener noreferrer">terms of use</a>, and allow us to
+              contact you about your request.
+            </p>
           </Form>
-        </Col>
-      </Row>
-    </Modal>
+        </div>
+      </Modal>
     </>
   );
 };
