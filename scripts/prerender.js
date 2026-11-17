@@ -127,6 +127,10 @@ const renderPage = async (browser, route) => {
       document.querySelectorAll(
         'script[src*="fbevents"], .hero-video, .ant-message, .ant-notification, .ant-modal-root, .ant-select-dropdown, .ant-image-preview-root, #webpack-dev-server-client-overlay',
       ).forEach((el) => el.remove());
+      // Google Font loads with media="print" + onload (non-blocking, see public/index.html). In this
+      // hidden Chrome the onload already ran and switched it to "all", which would make the saved page
+      // wait for the font again. Put it back to "print": the visitor's browser switches it itself.
+      document.querySelectorAll('link[rel="stylesheet"][onload]').forEach((l) => l.setAttribute('media', 'print'));
       // structured data added by the app (page schema, FAQ, services list) is added again when the
       // app starts: mark the saved copies so src/index.js removes them first (no duplicates).
       // The first one is the business schema written in public/index.html, it stays.
