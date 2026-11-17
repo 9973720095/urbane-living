@@ -74,7 +74,7 @@ export default function GoogleReviews({ onOpenForm }) {
           <ul className="m-0 grid list-none grid-cols-2 gap-2.5 p-0 sm:grid-cols-3 sm:gap-3">
             {photos.map((p) => (
               <li key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl bg-brand-soft sm:aspect-[1/1]">
-                <img src={p.src} alt={`${p.title} by Urbane Living`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <img src={p.src.replace('/upload/q_auto/f_auto/', '/upload/q_auto/f_auto/w_500,c_limit/')} alt={`${p.title} by Urbane Living`} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                 <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/70 to-transparent px-3 pb-2.5 pt-8 text-[12.5px] font-semibold text-white sm:text-[13px]">
                   {p.title}
                 </span>
@@ -87,7 +87,7 @@ export default function GoogleReviews({ onOpenForm }) {
                 className="flex h-full w-full cursor-pointer flex-col items-center justify-center gap-1.5 rounded-2xl border-0 bg-brand-red p-3 text-center text-white transition hover:bg-brand-red-dark"
               >
                 <span className="text-[17px] font-bold leading-tight sm:text-[20px]">Your home next</span>
-                <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-white/90">
+                <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-white">
                   Free consultation <ArrowRightOutlined />
                 </span>
               </button>

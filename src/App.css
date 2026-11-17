@@ -7,7 +7,7 @@
 /* Hero Section */
 .hero-banner {
   height: 500px;
-  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://your-image-url.com'); /* Image niche upload folder se use karein */
+  background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3));
   background-size: cover;
   display: flex;
   align-items: center;

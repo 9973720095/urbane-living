@@ -131,6 +131,12 @@ const renderPage = async (browser, route) => {
       // hidden Chrome the onload already ran and switched it to "all", which would make the saved page
       // wait for the font again. Put it back to "print": the visitor's browser switches it itself.
       document.querySelectorAll('link[rel="stylesheet"][onload]').forEach((l) => l.setAttribute('media', 'print'));
+      // antd puts its <style> tags at the very top of <head>. Move charset + viewport back to the top,
+      // so the browser (and Lighthouse) finds the character encoding in the first 1024 bytes.
+      ['meta[name="viewport"]', 'meta[charset]'].forEach((sel) => {
+        const m = document.head.querySelector(sel);
+        if (m) document.head.prepend(m);
+      });
       // structured data added by the app (page schema, FAQ, services list) is added again when the
       // app starts: mark the saved copies so src/index.js removes them first (no duplicates).
       // The first one is the business schema written in public/index.html, it stays.

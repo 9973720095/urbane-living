@@ -62,7 +62,7 @@ const Navbar = ({ onOpenForm }) => {
     <Header className={`custom-header is-old${isFixed ? ' is-fixed' : ''}`}>
       <Link to="/" className='logo relative inline-block overflow-hidden rounded-md'>
         <img 
-          src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1777899675/UrbaneLiving_Logo_6_1_dfh2r1.png"
+          src="https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/w_400,c_limit/v1777899675/UrbaneLiving_Logo_6_1_dfh2r1.png"
           alt="Urbane Living Logo" 
           className="navbar-logo-img relative z-10 w-[188px] h-auto block" 
         />

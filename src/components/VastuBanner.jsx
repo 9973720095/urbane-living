@@ -71,14 +71,14 @@ export default function VastuBanner() {
                   <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold">{preview.score}</span>
                 </div>
                 <div>
-                  <p className="m-0 text-xs font-semibold uppercase tracking-wider text-gray-400">Vastu score</p>
+                  <p className="m-0 text-xs font-semibold uppercase tracking-wider text-gray-500">Vastu score</p>
                   <p className="m-0 text-lg font-semibold">{preview.label}</p>
                 </div>
               </div>
               <ul className="m-0 mt-4 flex list-none flex-col gap-2 p-0">
                 {preview.rows.map((r) => (
                   <li key={r.room} className="flex items-center justify-between rounded-xl bg-brand-soft px-3 py-2.5 text-sm">
-                    <span className="font-medium">{r.room} <span className="text-gray-400">· {r.zone}</span></span>
+                    <span className="font-medium">{r.room} <span className="text-gray-500">· {r.zone}</span></span>
                     <span className={`inline-flex items-center gap-1 rounded-full bg-brand-ink px-2 py-0.5 text-xs font-semibold ${TONE[r.status].text}`}>
                       {TONE[r.status].icon} {TONE[r.status].label}
                     </span>

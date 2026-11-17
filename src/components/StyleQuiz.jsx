@@ -32,7 +32,7 @@ const StyleQuiz = ({ onOpenForm }) => {
       <div className="mx-auto max-w-[1100px]">
         {/* Header */}
         <div className="mx-auto mb-6 max-w-[700px] text-center sm:mb-8 lg:mb-10">
-          <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red">
+          <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red-dark">
             {styleQuiz.tag}
           </span>
           <h2 id="quiz-title" className="m-0 text-[22px] font-semibold leading-tight text-brand-navy sm:text-[36px] lg:text-[40px]">
@@ -46,7 +46,7 @@ const StyleQuiz = ({ onOpenForm }) => {
             <div className="p-4 sm:p-8 lg:p-10">
               {/* Progress */}
               <div className="mb-4 flex items-center gap-3 sm:mb-6 sm:gap-4">
-                <span className="shrink-0 text-xs font-semibold text-gray-400">
+                <span className="shrink-0 text-xs font-semibold text-gray-500">
                   {step + 1} / {questions.length}
                 </span>
                 <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-gray-100">

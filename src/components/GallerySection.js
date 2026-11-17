@@ -4,6 +4,9 @@ import { ExpandOutlined } from '@ant-design/icons';
 
 // Our work gallery. Phones: 2 per row with a wide photo on top and at the end.
 // Desktop: big first photo + 5 smaller ones (3 columns). Tap any photo to open the full view.
+// Cloudinary: deliver each photo at the size it is shown (first tile is big), full size only in the preview
+const sized = (src, w) => src.replace('/upload/q_auto/f_auto/', `/upload/q_auto/f_auto/w_${w},c_limit/`);
+
 const galleryData = [
   { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png', title: 'Living Interior', category: 'Modern' },
   { src: 'https://res.cloudinary.com/diosq0s7w/image/upload/q_auto/f_auto/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png', title: 'Master Bedroom Interior', category: 'Premium' },
@@ -28,7 +31,7 @@ const GallerySection = () => (
     <div className="mx-auto max-w-[1200px]">
       {/* Header (same style as the other home sections) */}
       <div className="mx-auto max-w-[720px] text-center">
-        <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red">
+        <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red-dark">
           OUR WORK
         </span>
         <h2 id="gallery-title" className="m-0 text-[26px] font-semibold leading-tight text-brand-navy sm:text-[36px] lg:text-[40px]">
@@ -47,11 +50,11 @@ const GallerySection = () => (
               className={`group relative overflow-hidden rounded-2xl bg-brand-soft ${fill} ${tileClass(i, galleryData.length)}`}
             >
               <Image
-                src={item.src}
+                src={sized(item.src, i === 0 ? 1000 : 640)}
+                preview={{ src: item.src, cover: <span className="inline-flex items-center gap-2 font-semibold"><ExpandOutlined /> View</span> }}
                 alt={`${item.title} designed by Urbane Living`}
                 loading="lazy"
                 className="transition duration-700 group-hover:scale-105"
-                preview={{ cover: <span className="inline-flex items-center gap-2 font-semibold"><ExpandOutlined /> View</span> }}
               />
               <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-brand-navy/90 via-brand-navy/40 to-transparent p-3 pt-10 sm:p-5 sm:pt-14">
                 <span className="inline-block rounded-full bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-brand-red sm:text-[11px]">

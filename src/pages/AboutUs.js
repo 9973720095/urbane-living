@@ -93,7 +93,7 @@ export default function AboutUsPage({ onOpenForm }) {
             </div>
           </div>
           <div>
-            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-red">{story.tag}</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-red-dark">{story.tag}</span>
             <h2 id="about-story" className={`${sectionTitle} mt-2`}>{story.title}</h2>
             {story.paragraphs.map((p) => (
               <p key={p} className="m-0 mt-4 text-[15px] leading-relaxed text-gray-600 sm:text-base">{p}</p>

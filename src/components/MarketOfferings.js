@@ -31,7 +31,7 @@ const MarketOfferings = ({ onOpenForm }) => (
     <div className="mx-auto max-w-[1200px]">
       {/* Header (same style as the other home sections) */}
       <div className="mx-auto mb-8 max-w-[720px] text-center lg:mb-10">
-        <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red">
+        <span className="mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red-dark">
           MARKET OFFERINGS
         </span>
         <h2 id="offerings-title" className="m-0 text-[26px] font-semibold leading-tight text-brand-navy sm:text-[36px] lg:text-[40px]">
@@ -48,7 +48,6 @@ const MarketOfferings = ({ onOpenForm }) => (
             <button
               type="button"
               onClick={() => typeof onOpenForm === 'function' && onOpenForm()}
-              aria-label={`${item.title}: get a free quote`}
               className="group flex h-full w-full cursor-pointer flex-col items-start rounded-2xl border border-solid border-gray-100 bg-white p-4 text-left shadow-card transition duration-300 hover:-translate-y-1 hover:border-brand-red/20 hover:shadow-card-hover sm:p-6 lg:flex-row lg:gap-5"
             >
               <span className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-xl transition duration-300 sm:h-14 sm:w-14 sm:text-2xl ${TONES[item.tone]}`}>
