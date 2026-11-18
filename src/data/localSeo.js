@@ -26,7 +26,6 @@ export const localServices = [
       { title: 'Bedrooms & kids rooms', text: 'Bed back panels, study tables and smart storage.' },
       { title: 'Pooja unit & foyer', text: 'Mandir, shoe racks and entrance consoles.' },
     ],
-    price: null,
     serviceType: 'Interior Design',
   },
   {
@@ -69,7 +68,6 @@ export const localServices = [
       { title: 'Appliance planning', text: 'Space for chimney, hob, oven and microwave.' },
       { title: 'Lighting', text: 'Under-cabinet and task lights over the counter.' },
     ],
-    price: null,
     serviceType: 'Modular Kitchen Design',
   },
   {
@@ -91,7 +89,6 @@ export const localServices = [
       { title: 'Finishes', text: 'Laminate, acrylic, mirror and glass shutters.' },
       { title: 'Lighting', text: 'Profile and sensor lights inside.' },
     ],
-    price: null,
     serviceType: 'Wardrobe Design',
   },
 ];
@@ -314,6 +311,10 @@ export const serviceCityContent = {
         a: 'Most 2, 3 and 4 BHK homes are done in 7–10 working days, depending on the number of rooms, the design and your society’s working hours. The timeline is written in your quote.',
       },
       {
+        q: 'How much does a false ceiling cost in Gurugram?',
+        a: 'It depends on the ceiling area, the material (gypsum, POP, PVC or wood), the design and the number of light points. Use the cost estimator on our false ceiling page to work out your own estimate, then get an exact, itemised quote after the free site visit.',
+      },
+      {
         q: 'Can the false ceiling be designed around ducted or VRV AC?',
         a: 'Yes. We mark every duct, grille, sprinkler and service panel at the site visit and design the ceiling around them, so the AC can still be serviced easily.',
       },
@@ -490,6 +491,10 @@ export const serviceCityContent = {
       {
         q: 'Gypsum or POP: which is better for a Noida apartment?',
         a: 'For most flats we suggest gypsum: it is quicker to install, gives a smooth finish and, with proper framing and joint tape, does not crack. POP is better when you want curves or detailed mouldings.',
+      },
+      {
+        q: 'How much does a false ceiling cost in Noida?',
+        a: 'It depends on the ceiling area, the material, the design and the number of light points. Use the cost estimator on our false ceiling page to work out your own estimate, then get an exact, itemised quote after the free site visit.',
       },
       {
         q: 'Will a false ceiling make my room look smaller?',
