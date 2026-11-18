@@ -111,8 +111,17 @@ const RoomPage = ({ page, onOpenForm }) => {
 
   const openForm = () => typeof onOpenForm === 'function' && onOpenForm();
 
-  // Admin items + Google Sheet items for this room, without duplicates
+  // Admin items + Google Sheet items for this room, without duplicates.
+  // OFF for now: some admin / sheet photos carry another company's logo (e.g. Gyproc) or show the
+  // wrong room. The page shows only our own checked photos (data/media.js -> roomGalleries).
+  // After cleaning the admin panel / sheet, add  showAdminDesigns: true  to the page's data file
+  // (e.g. data/rooms/bedroom.js) to show them again, before our own photos.
   useEffect(() => {
+    if (!page.showAdminDesigns) {
+      setDesigns(roomGallery(category));
+      setLoading(false);
+      return;
+    }
     Promise.allSettled([
       axios.get(`${API_BASE_URL}${api}`),
       axios.get(`${API_BASE_URL}/api/designs`, { params: { category } }),
@@ -128,7 +137,7 @@ const RoomPage = ({ page, onOpenForm }) => {
         setDesigns([...merged, ...roomGallery(category)]);
       })
       .finally(() => setLoading(false));
-  }, [api, category]);
+  }, [api, category, page.showAdminDesigns]);
 
   // Style chips come from the designs themselves (modern, luxury, ...)
   const styles = useMemo(
