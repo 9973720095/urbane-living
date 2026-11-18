@@ -12,6 +12,6 @@ export const topBar = {
     { icon: 'cube', text: 'See your home in 3D before work starts', to: '/contact' },
     { icon: 'compass', tag: 'New', text: 'Check your home’s Vastu score', to: '/vastu' },
     { icon: 'kitchen', text: 'Modular kitchens, wardrobes & full home interiors', to: '/kitchen' },
-    { icon: 'pin', text: 'Ghaziabad · Noida · Delhi · Gurgaon · Faridabad', to: '/interior-designers' },
+    { icon: 'pin', text: 'Gurugram · Delhi · Noida · Ghaziabad · Faridabad', to: '/interior-designers' },
   ],
 };
