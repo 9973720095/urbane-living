@@ -47,7 +47,6 @@ export default function FalseCeilingPage({ onOpenForm }) {
   const [filters, setFilters] = useState({ category: "", style: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(8);
-  const loading = false;
 
   // Responsive page size
   useEffect(() => {
@@ -132,13 +131,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
             </div>
 
             {/* Cards */}
-            {loading ? (
-              <div className="grid grid-cols-2 gap-3 sm:gap-6 md:grid-cols-4" aria-busy="true">
-                {Array.from({ length: pageSize }).map((_, i) => (
-                  <div key={i} className="h-[230px] animate-pulse rounded-2xl bg-white shadow-card sm:h-[280px]" />
-                ))}
-              </div>
-            ) : currentItems.length === 0 ? (
+            {currentItems.length === 0 ? (
               <p className="m-0 rounded-2xl bg-white px-6 py-10 text-center text-gray-500 shadow-card">
                 No designs found for this filter. Try another room type or style, or{' '}
                 <button type="button" onClick={onOpenForm} className="cursor-pointer border-0 bg-transparent p-0 font-semibold text-brand-red underline">
