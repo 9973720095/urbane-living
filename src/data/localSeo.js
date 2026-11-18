@@ -108,9 +108,14 @@ export const localCities = [
     region: 'Haryana',
     intro:
       'Gurugram (Gurgaon) is our main focus in Delhi NCR. From premium apartments on Golf Course Road to new possessions on Dwarka Expressway and Sohna Road, we plan every site visit in advance and give you one designer and one site supervisor from 3D design to handover.',
-    localities: ['DLF Phase 1–5', 'Golf Course Road', 'Golf Course Extension Road', 'Sohna Road', 'Dwarka Expressway', 'South City', 'Palam Vihar', 'Sector 56', 'Sector 57', 'New Gurgaon'],
+    localities: ['DLF Phase 1–5', 'Golf Course Road', 'Golf Course Extension Road', 'Sohna Road', 'MG Road', 'Dwarka Expressway', 'South City', 'Palam Vihar', 'Sector 56', 'Sector 57', 'New Gurgaon'],
     nearby: ['delhi', 'faridabad', 'noida'],
-    projects: [],
+    // REAL projects only. Add a photo later as image: 'https://res.cloudinary.com/nzqefovs/image/upload/...'
+    projects: [
+      { title: '3 BHK at DLF Park Place, Golf Course Road', text: 'False ceiling and wardrobes, designed in 3D and installed by our team.', image: '' },
+      { title: 'Full home interior on Sohna Road', text: 'Complete home interior, from 3D design to handover, by one team.', image: '' },
+      { title: 'Full home interior on MG Road', text: 'Complete home interior, from 3D design to handover, by one team.', image: '' },
+    ],
     localityInfo: {
       'dlf-phase-1-5': {
         about: 'DLF Phases 1 to 5 range from independent builder floors in the older phases to premium high-rise apartments in Phase 5. Builder floors usually need a full refresh with a new kitchen, wardrobes and ceilings, while newer apartments need interiors that match their premium finish. We plan both around the space you already have.',
@@ -119,8 +124,10 @@ export const localCities = [
       },
       'golf-course-road': {
         about: 'Homes on Golf Course Road are mostly large, premium apartments with big living rooms, ducted AC and high expectations on finish. We plan the false ceiling around AC ducts and sprinklers, use branded materials named in your quote and keep the design clean and timeless.',
-        societies: [],
-        projects: [],
+        societies: ['DLF Park Place'],
+        projects: [
+          { title: '3 BHK at DLF Park Place', text: 'False ceiling and wardrobes, designed in 3D and installed by our team.', image: '' },
+        ],
       },
       'golf-course-extension-road': {
         about: 'Golf Course Extension Road has many newer high-rise societies, and a lot of owners here have just taken possession. That is the best time to do interiors: we plan the whole flat in one 3D design, so the kitchen, wardrobes, ceilings and living room are done in one go.',
@@ -130,7 +137,16 @@ export const localCities = [
       'sohna-road': {
         about: 'Sohna Road has a wide mix of societies, from established apartments to new towers. Whether you are refreshing an older flat or doing up a new one, we give you an itemised quote so you can decide what to do now and what can wait.',
         societies: [],
-        projects: [],
+        projects: [
+          { title: 'Full home interior on Sohna Road', text: 'Complete home interior, from 3D design to handover, by one team.', image: '' },
+        ],
+      },
+      'mg-road': {
+        about: 'MG Road is one of Gurugram’s oldest and best-connected stretches, with established apartments and builder floors close to the metro and malls. Homes here often need a complete refresh to match today’s living, so we plan the whole home in one 3D design and do the work with one team.',
+        societies: [],
+        projects: [
+          { title: 'Full home interior on MG Road', text: 'Complete home interior, from 3D design to handover, by one team.', image: '' },
+        ],
       },
       'dwarka-expressway': {
         about: 'Dwarka Expressway is one of the busiest new-possession areas in Gurugram, with many bare flats waiting for their first interiors. We help you go from bare flat to move-in ready: false ceiling, modular kitchen, wardrobes and lighting, planned together and installed by one team.',
