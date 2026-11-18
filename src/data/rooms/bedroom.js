@@ -11,7 +11,7 @@ export const bedroomPage = {
   altSuffix: 'bedroom interior design',
   faqTitle: 'Bedroom interior FAQs',
   banner: {
-    eyebrow: 'Bedroom Interiors · Delhi NCR',
+    eyebrow: 'Bedroom Interiors · Gurugram & Delhi NCR',
     title: 'Bedrooms designed for',
     highlight: 'better sleep',
     subtitle: 'Wardrobes, bed back panels, soft lighting and smart storage, planned in one 3D design around how you rest and live.',
@@ -72,7 +72,7 @@ export const bedroomPage = {
     { q: 'Sliding or hinged wardrobe: which is better for my bedroom?', a: 'Sliding wardrobes save space in small rooms because the doors do not open outwards. Hinged wardrobes cost less and give full access to the inside. Our designer will suggest the right one for your room.' },
     { q: 'Can you make a small bedroom feel bigger?', a: 'Yes. We use storage beds, sliding doors, wall-mounted units, light colours and mirrors to make small bedrooms feel open and clutter-free.' },
     { q: 'Will I see the design before work starts?', a: 'Yes. You get a 3D design of your bedroom first. Work starts only after you approve it.' },
-    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR: Delhi, Noida, Greater Noida, Ghaziabad, Gurgaon and Faridabad.' },
+    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR, with most of our projects in Gurugram (Gurgaon). We also serve Delhi, Noida, Greater Noida, Ghaziabad and Faridabad.' },
   ],
   cta: {
     title: 'Ready for a bedroom you love waking up in?',
@@ -80,9 +80,9 @@ export const bedroomPage = {
     button: 'Get Free 3D Design',
   },
   seo: {
-    title: 'Bedroom Interior Design in Delhi NCR | Wardrobes, Beds & Ceilings | Urbane Living',
+    title: 'Bedroom Interior Design in Gurugram & Delhi NCR | Urbane Living',
     description:
-      'Modern bedroom interior design in Delhi, Noida, Ghaziabad and Gurgaon. Wardrobes, storage beds, back panels, false ceilings and lighting with a free 3D design and itemised quote.',
+      'Modern bedroom interior design in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. Wardrobes, storage beds, back panels, false ceilings and lighting with a free 3D design and itemised quote.',
     path: '/bedroom',
     image: slot('bedroom.banner', 'plumBedroom', 1400, 'Bedroom page › Top banner'),
   },

@@ -10,7 +10,7 @@ export const kitchenPage = {
   altSuffix: 'modular kitchen design',
   faqTitle: 'Modular kitchen FAQs',
   banner: {
-    eyebrow: 'Modular Kitchens · Delhi NCR',
+    eyebrow: 'Modular Kitchens · Gurugram & Delhi NCR',
     title: 'A kitchen that makes',
     highlight: 'cooking easy',
     subtitle: 'Smart storage, easy-clean finishes and soft-close fittings, designed around how your family cooks and made to fit your space.',
@@ -72,7 +72,7 @@ export const kitchenPage = {
     { q: 'Which layout is right for my kitchen?', a: 'L-shaped suits most small and medium kitchens, U-shaped gives the most storage, and parallel or straight layouts work best in narrow spaces. Our designer will suggest the best one after measuring your kitchen.' },
     { q: 'How long does a modular kitchen take?', a: 'It depends on the size and finish. Your quote includes a written timeline from design approval to installation.' },
     { q: 'Will I see the design before work starts?', a: 'Yes. You get a 3D design of your kitchen first. Work starts only after you approve it.' },
-    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR: Delhi, Noida, Greater Noida, Ghaziabad, Gurgaon and Faridabad.' },
+    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR, with most of our projects in Gurugram (Gurgaon). We also serve Delhi, Noida, Greater Noida, Ghaziabad and Faridabad.' },
   ],
   cta: {
     title: 'Ready for a kitchen you love cooking in?',
@@ -80,9 +80,9 @@ export const kitchenPage = {
     button: 'Get Free 3D Design',
   },
   seo: {
-    title: 'Modular Kitchen Design in Delhi NCR | L, U & Parallel Kitchens | Urbane Living',
+    title: 'Modular Kitchen in Gurugram & Delhi NCR | L, U & Parallel Kitchens | Urbane Living',
     description:
-      'Modular kitchen design in Delhi, Noida, Ghaziabad and Gurgaon. Smart storage, soft-close fittings and easy-clean finishes with a free 3D design and itemised quote.',
+      'Modular kitchen design in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. Smart storage, soft-close fittings and easy-clean finishes with a free 3D design and itemised quote.',
     path: '/kitchen',
     image: slot('kitchen.banner', 'uShapeKitchen', 1400, 'Modular Kitchen page › Top banner'),
   },

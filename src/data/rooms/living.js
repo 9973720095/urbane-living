@@ -11,7 +11,7 @@ export const livingPage = {
   altSuffix: 'living room interior design',
   faqTitle: 'Living room interior FAQs',
   banner: {
-    eyebrow: 'Living Room Interiors · Delhi NCR',
+    eyebrow: 'Living Room Interiors · Gurugram & Delhi NCR',
     title: 'Living rooms your guests',
     highlight: 'never forget',
     subtitle: 'TV units, designer ceilings, wall panels and lighting, planned together in one 3D design and installed by one team.',
@@ -72,7 +72,7 @@ export const livingPage = {
     { q: 'How long does a living room interior take?', a: 'It depends on the scope. Your quote includes a written timeline, and a false ceiling alone is typically ready in 7 days after design approval.' },
     { q: 'Can you design my living room in a small flat?', a: 'Yes. We use wall-mounted units, light colours, mirrors and smart storage to make small living rooms look bigger and stay clutter-free.' },
     { q: 'Will I see the design before work starts?', a: 'Yes. You get a 3D design of your living room first. Work starts only after you approve it.' },
-    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR: Delhi, Noida, Greater Noida, Ghaziabad, Gurgaon and Faridabad.' },
+    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR, with most of our projects in Gurugram (Gurgaon). We also serve Delhi, Noida, Greater Noida, Ghaziabad and Faridabad.' },
   ],
   cta: {
     title: 'Ready to transform your living room?',
@@ -80,9 +80,9 @@ export const livingPage = {
     button: 'Get Free 3D Design',
   },
   seo: {
-    title: 'Living Room Interior Design in Delhi NCR | TV Units, Ceilings & Panels | Urbane Living',
+    title: 'Living Room Interior Design in Gurugram & Delhi NCR | Urbane Living',
     description:
-      'Modern living room interior design in Delhi, Noida, Ghaziabad and Gurgaon. TV units, false ceilings, wall panelling and lighting with a free 3D design and itemised quote.',
+      'Modern living room interior design in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. TV units, false ceilings, wall panelling and lighting with a free 3D design and itemised quote.',
     path: '/living-hall',
     image: slot('living.banner', 'livingTvWallWide', 1400, 'Living Hall page › Top banner'),
   },

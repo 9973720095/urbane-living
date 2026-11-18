@@ -10,7 +10,7 @@ export const wardrobePage = {
   altSuffix: 'wardrobe design',
   faqTitle: 'Wardrobe FAQs',
   banner: {
-    eyebrow: 'Wardrobes · Delhi NCR',
+    eyebrow: 'Wardrobes · Gurugram & Delhi NCR',
     title: 'Wardrobes that fit',
     highlight: 'everything you own',
     subtitle: 'Sliding, hinged or walk-in wardrobes made to your wall size, with smart inside storage planned around your clothes, shoes and bags.',
@@ -71,7 +71,7 @@ export const wardrobePage = {
     { q: 'Sliding or hinged wardrobe: which should I choose?', a: 'Sliding wardrobes save space in small rooms because the doors do not open outwards. Hinged wardrobes open fully and usually cost less. Our designer will suggest the right one after seeing your room.' },
     { q: 'Can you make a wardrobe for an odd-sized wall or corner?', a: 'Yes. Every wardrobe is made to your exact wall size, including corners, alcoves and sloping or beam-heavy ceilings.' },
     { q: 'Will I see the design before work starts?', a: 'Yes. You get a 3D design of your wardrobe first, inside and out. Work starts only after you approve it.' },
-    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR: Delhi, Noida, Greater Noida, Ghaziabad, Gurgaon and Faridabad.' },
+    { q: 'Which areas do you serve?', a: 'We work across Delhi NCR, with most of our projects in Gurugram (Gurgaon). We also serve Delhi, Noida, Greater Noida, Ghaziabad and Faridabad.' },
   ],
   cta: {
     title: 'Ready for a wardrobe with a place for everything?',
@@ -79,9 +79,9 @@ export const wardrobePage = {
     button: 'Get Free 3D Design',
   },
   seo: {
-    title: 'Wardrobe Design in Delhi NCR | Sliding, Hinged & Walk-in Wardrobes | Urbane Living',
+    title: 'Wardrobe Design in Gurugram & Delhi NCR | Sliding & Walk-in | Urbane Living',
     description:
-      'Custom wardrobe design in Delhi, Noida, Ghaziabad and Gurgaon. Sliding, hinged and walk-in wardrobes made to size with smart inside storage, a free 3D design and itemised quote.',
+      'Custom wardrobe design in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. Sliding, hinged and walk-in wardrobes made to size with smart inside storage, a free 3D design and itemised quote.',
     path: '/wardrobe',
     image: slot('wardrobe.banner', 'beigeWardrobeFront', 1400, 'Wardrobe page › Top banner'),
   },
