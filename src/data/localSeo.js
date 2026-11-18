@@ -106,13 +106,76 @@ export const localServices = [
 */
 export const localCities = [
   {
+    // Main focus city. Slug stays 'gurgaon' so the old URLs (already on Google) keep working.
+    slug: 'gurgaon',
+    name: 'Gurugram',
+    region: 'Haryana',
+    intro:
+      'Gurugram (Gurgaon) is our main focus in Delhi NCR. From premium apartments on Golf Course Road to new possessions on Dwarka Expressway and Sohna Road, we plan every site visit in advance and give you one designer and one site supervisor from 3D design to handover.',
+    localities: ['DLF Phase 1–5', 'Golf Course Road', 'Golf Course Extension Road', 'Sohna Road', 'Dwarka Expressway', 'South City', 'Palam Vihar', 'Sector 56', 'Sector 57', 'New Gurgaon'],
+    nearby: ['delhi', 'faridabad', 'noida'],
+    projects: [],
+    localityInfo: {
+      'dlf-phase-1-5': {
+        about: 'DLF Phases 1 to 5 range from independent builder floors in the older phases to premium high-rise apartments in Phase 5. Builder floors usually need a full refresh with a new kitchen, wardrobes and ceilings, while newer apartments need interiors that match their premium finish. We plan both around the space you already have.',
+        societies: [],
+        projects: [],
+      },
+      'golf-course-road': {
+        about: 'Homes on Golf Course Road are mostly large, premium apartments with big living rooms, ducted AC and high expectations on finish. We plan the false ceiling around AC ducts and sprinklers, use branded materials named in your quote and keep the design clean and timeless.',
+        societies: [],
+        projects: [],
+      },
+      'golf-course-extension-road': {
+        about: 'Golf Course Extension Road has many newer high-rise societies, and a lot of owners here have just taken possession. That is the best time to do interiors: we plan the whole flat in one 3D design, so the kitchen, wardrobes, ceilings and living room are done in one go.',
+        societies: [],
+        projects: [],
+      },
+      'sohna-road': {
+        about: 'Sohna Road has a wide mix of societies, from established apartments to new towers. Whether you are refreshing an older flat or doing up a new one, we give you an itemised quote so you can decide what to do now and what can wait.',
+        societies: [],
+        projects: [],
+      },
+      'dwarka-expressway': {
+        about: 'Dwarka Expressway is one of the busiest new-possession areas in Gurugram, with many bare flats waiting for their first interiors. We help you go from bare flat to move-in ready: false ceiling, modular kitchen, wardrobes and lighting, planned together and installed by one team.',
+        societies: [],
+        projects: [],
+      },
+      'south-city': {
+        about: 'South City I and II are established neighbourhoods with many builder floors and independent homes. Older layouts here often need smarter storage and better lighting. We redesign room by room, so you can keep living at home while the work goes on.',
+        societies: [],
+        projects: [],
+      },
+      'palam-vihar': {
+        about: 'Palam Vihar has plotted houses and builder floors, many of them lived in for years. We usually help families here with a full refresh: a new modular kitchen, made-to-size wardrobes and a false ceiling with warm, modern lighting.',
+        societies: [],
+        projects: [],
+      },
+      'sector-56': {
+        about: 'Sector 56 has group housing societies and plotted homes close to Golf Course Road. Many flats here are 10 to 20 years old, so a new kitchen, wardrobes and ceiling make the biggest difference. We plan the work around your society rules.',
+        societies: [],
+        projects: [],
+      },
+      'sector-57': {
+        about: 'Sector 57 has a mix of apartments and builder floors near Golf Course Road and Sohna Road. We design interiors that make older layouts feel open and bright, with storage planned for how your family lives today.',
+        societies: [],
+        projects: [],
+      },
+      'new-gurgaon': {
+        about: 'New Gurgaon covers the newer sectors along NH-48 and the Dwarka Expressway side, where many families are moving into their first flat. We help you plan a complete home within budget, with a clear 3D design and an itemised quote before any work starts.',
+        societies: [],
+        projects: [],
+      },
+    },
+  },
+  {
     slug: 'ghaziabad',
     name: 'Ghaziabad',
     region: 'Uttar Pradesh',
     intro:
       'Our office is in Vaishali, Ghaziabad, so homes in Indirapuram, Vaishali, Vasundhara and Raj Nagar Extension are just a short drive for our designers and site team.',
     localities: ['Indirapuram', 'Vaishali', 'Vasundhara', 'Kaushambi', 'Raj Nagar Extension', 'Crossings Republik', 'Siddharth Vihar', 'Kavi Nagar', 'Govindpuram', 'Shastri Nagar'],
-    nearby: ['noida', 'delhi', 'greater-noida'],
+    nearby: ['noida', 'delhi', 'gurgaon'],
     projects: [],
     localityInfo: {
       'vaishali': {
@@ -154,7 +217,7 @@ export const localCities = [
     intro:
       'From compact flats to large apartments in Noida’s sectors, we design interiors that make the most of every wall and corner, with clear timelines for society work rules.',
     localities: ['Sector 50', 'Sector 62', 'Sector 75', 'Sector 76', 'Sector 78', 'Sector 93', 'Sector 128', 'Sector 137', 'Sector 143', 'Sector 150'],
-    nearby: ['greater-noida', 'ghaziabad', 'delhi'],
+    nearby: ['gurgaon', 'greater-noida', 'ghaziabad', 'delhi'],
     projects: [],
     localityInfo: {},
   },
@@ -176,18 +239,7 @@ export const localCities = [
     intro:
       'Builder floors, DDA flats or independent houses across Delhi: we plan interiors around older layouts, renovation needs and the way your family lives today.',
     localities: ['Dwarka', 'Rohini', 'Pitampura', 'Janakpuri', 'Laxmi Nagar', 'Mayur Vihar', 'Preet Vihar', 'Saket', 'Vasant Kunj', 'Greater Kailash'],
-    nearby: ['noida', 'ghaziabad', 'gurgaon'],
-    projects: [],
-    localityInfo: {},
-  },
-  {
-    slug: 'gurgaon',
-    name: 'Gurgaon',
-    region: 'Haryana',
-    intro:
-      'For apartments and builder floors across Gurgaon, we design modern interiors with premium finishes, planned in 3D before any work starts.',
-    localities: ['DLF Phase 1–5', 'Golf Course Road', 'Golf Course Extension Road', 'Sohna Road', 'Dwarka Expressway', 'South City', 'Palam Vihar', 'Sector 56', 'Sector 57', 'New Gurgaon'],
-    nearby: ['delhi', 'faridabad', 'noida'],
+    nearby: ['gurgaon', 'noida', 'ghaziabad'],
     projects: [],
     localityInfo: {},
   },
@@ -198,7 +250,7 @@ export const localCities = [
     intro:
       'From established sectors to new societies in Greater Faridabad, we design interiors that balance style, storage and budget for your family.',
     localities: ['Sector 15', 'Sector 21', 'Greater Faridabad (Neharpar)', 'Sector 81–89', 'NIT', 'Surajkund', 'Ballabgarh', 'Sector 37', 'Sector 46', 'Sector 9'],
-    nearby: ['delhi', 'gurgaon', 'noida'],
+    nearby: ['gurgaon', 'delhi', 'noida'],
     projects: [],
     localityInfo: {},
   },
@@ -212,6 +264,199 @@ export const localCities = [
   - projects: REAL work only (sector / society + what was done + photo).
 */
 export const serviceCityContent = {
+
+  // ── GURUGRAM (main focus) ──────────────────────────────────────
+  'false-ceiling/gurgaon': {
+    guide: {
+      tag: 'FALSE CEILING GUIDE FOR GURUGRAM HOMES',
+      title: 'Planning a false ceiling for your Gurugram home',
+      paragraphs: [
+        'Homes in Gurugram (Gurgaon) range from premium apartments on Golf Course Road and Golf Course Extension Road to new possessions on Dwarka Expressway, Sohna Road and New Gurgaon, plus builder floors in DLF Phases, South City and Palam Vihar. Each needs a different ceiling plan, so we start with a site visit, not a catalogue.',
+        'Many premium Gurugram apartments have ducted or VRV air conditioning, sprinklers and smoke detectors in the ceiling. We mark every duct, grille and sprinkler before framing, so the design fits around them and the AC service panels stay reachable. In builder floors with beams, we use peripheral designs that keep the centre of the room high.',
+        'For most Gurugram homes we suggest 12.5 mm branded gypsum board on rust-free GI framing, with cove, profile and spot lights planned together. POP works for curves and mouldings, PVC for balconies and wet areas, and wooden panels for a warm accent over the TV wall or dining table.',
+      ],
+      points: [
+        'Design planned around ducted / VRV AC and sprinklers',
+        'Cove, profile and spot lights planned with the ceiling',
+        '12.5 mm branded gypsum board on rust-free GI framing',
+        'Itemised quote per sq. ft., price locked at booking',
+        'Written 10-year anti-crack warranty',
+        'Installation in 7–10 working days for most homes',
+      ],
+    },
+    rates: {
+      tag: 'FALSE CEILING COST IN GURUGRAM',
+      title: 'False ceiling rates in Gurugram',
+      text: 'Rates are per sq. ft. of ceiling area and are the same across Delhi NCR. Your final, item-wise quote comes after the free site visit and 3D design, and the price is locked when you book.',
+      rows: [
+        { type: 'Gypsum false ceiling', rate: 'From ₹120/sqft', bestFor: 'Living rooms, bedrooms, full home' },
+        { type: 'POP false ceiling', rate: 'From ₹120/sqft', bestFor: 'Curves, mouldings, classic designs' },
+        { type: 'PVC panel ceiling', rate: 'From ₹200/sqft', bestFor: 'Balconies, bathrooms, damp areas' },
+        { type: 'Wooden ceiling', rate: 'From ₹210/sqft', bestFor: 'Accent over TV wall or dining' },
+        { type: 'Light points', rate: '₹450 per point', bestFor: 'Spot, cove and profile lights' },
+      ],
+      example: {
+        title: 'Example: living room in a Gurugram 3 BHK',
+        text: 'A 14 × 18 ft living room (252 sq. ft.) with a gypsum ceiling and cove lighting, plus 10 light points, works out to about ₹41,000. Plain single-level designs cost less; multi-level and wooden designs cost more.',
+      },
+      note: '*Indicative rates. The exact price depends on design, material, lighting and site conditions.',
+    },
+    ideas: {
+      tag: 'DESIGN IDEAS',
+      title: 'False ceiling ideas for Gurugram homes',
+      items: [
+        { title: 'Large living room', text: 'A layered gypsum ceiling with cove lighting, spot lights over the sofa and a chandelier point over the centre table. Ideal for the big living rooms in Golf Course Road apartments.', image: '' },
+        { title: 'Master bedroom', text: 'A soft cove or a wooden strip above the bed, dimmable lights and the AC grille hidden neatly inside the ceiling line.', image: '' },
+        { title: 'Dining area', text: 'A raised panel or wooden accent over the table, with a pendant light point planned in the ceiling.', image: '' },
+        { title: 'Builder floor with beams', text: 'A peripheral ceiling that hides the beams and wiring but keeps the centre high, so the room never feels low.', image: '' },
+        { title: 'Kitchen', text: 'Moisture-resistant gypsum or PVC with bright, even lighting over the counter and space kept for the chimney duct.', image: '' },
+        { title: 'Balcony & terrace', text: 'PVC or wooden-look panels that handle sun and rain, with warm lights for the evening.', image: '' },
+      ],
+    },
+    society: {
+      tag: 'WORKING IN GURUGRAM SOCIETIES',
+      title: 'We follow your society’s rules',
+      text: 'Most Gurugram societies have strict rules for interior work. We plan around them, so you never have to deal with the maintenance office or neighbours.',
+      points: [
+        'Work only in the society’s allowed hours',
+        'Material and lift booking done with the maintenance office',
+        'Floors and lift covered while material moves in',
+        'Debris cleared from site regularly, not left in corridors',
+        'RWA / maintenance paperwork arranged before work starts',
+      ],
+    },
+    projects: [],
+    faqs: [
+      {
+        q: 'How long does a false ceiling take in a Gurugram flat?',
+        a: 'Most 2, 3 and 4 BHK homes are done in 7–10 working days, depending on the number of rooms, the design and your society’s working hours. The timeline is written in your quote.',
+      },
+      {
+        q: 'Can the false ceiling be designed around ducted or VRV AC?',
+        a: 'Yes. We mark every duct, grille, sprinkler and service panel at the site visit and design the ceiling around them, so the AC can still be serviced easily.',
+      },
+      {
+        q: 'Gypsum or POP: which is better for a Gurugram apartment?',
+        a: 'For most homes we suggest gypsum: it is quicker to install, gives a smooth finish and, with proper framing and joint tape, does not crack. POP is better when you want curves or detailed mouldings.',
+      },
+      {
+        q: 'Do you cover Dwarka Expressway, Sohna Road and Golf Course Extension Road?',
+        a: 'Yes. We work across Gurugram, including DLF Phases, Golf Course Road, Golf Course Extension Road, Sohna Road, Dwarka Expressway, South City, Palam Vihar and New Gurgaon.',
+      },
+    ],
+  },
+
+  'interior-designers/gurgaon': {
+    guide: {
+      tag: 'HOME INTERIORS IN GURUGRAM',
+      title: 'Complete home interiors for Gurugram homes',
+      paragraphs: [
+        'Whether you have just taken possession of a flat on Dwarka Expressway or Golf Course Extension Road, or want to refresh a builder floor in DLF Phases or South City, we plan your whole home in one 3D design. Kitchen, wardrobes, false ceiling, TV unit, lighting and storage are designed together, so every room matches.',
+        'Gurugram homes often come with large living rooms, multiple balconies and ducted AC. We design around all of it: TV walls that hide wiring, ceilings planned around AC ducts, and storage in every room so the home stays clutter-free.',
+        'You get an itemised quote that names every material and brand, a written timeline and one point of contact from the first site visit to the final handover.',
+      ],
+      points: [
+        'Free site visit and 3D design before you decide',
+        'Itemised quote with every material and brand named',
+        'Kitchen, wardrobes, ceiling and lighting by one team',
+        'Written timeline and regular site updates',
+        'Work planned around your society rules',
+      ],
+    },
+    ideas: {
+      tag: 'WHAT WE DESIGN',
+      title: 'Room-by-room interiors in Gurugram',
+      items: [
+        { title: 'Living room', text: 'TV wall with closed storage, wall panelling, a layered false ceiling and a lighting plan for guests and movie nights.', image: '' },
+        { title: 'Modular kitchen', text: 'L, U, parallel or island kitchens with soft-close fittings and space planned for every appliance.', image: '' },
+        { title: 'Bedrooms', text: 'Full-height wardrobes, bed back panels, study corners and soft cove lighting for better sleep.', image: '' },
+        { title: 'Kids room', text: 'Bunk or study beds, safe rounded edges and storage that grows with your child.', image: '' },
+        { title: 'Dining & crockery unit', text: 'Glass-front crockery units, a bar or coffee corner and a pendant light over the table.', image: '' },
+        { title: 'Pooja unit & foyer', text: 'A compact mandir, shoe storage and an entrance console that welcomes guests.', image: '' },
+      ],
+    },
+    society: {
+      tag: 'WORKING IN GURUGRAM SOCIETIES',
+      title: 'We follow your society’s rules',
+      text: 'We plan material delivery, lift booking and working hours with your maintenance office, so your neighbours stay happy and work keeps moving.',
+      points: [
+        'Work only in the society’s allowed hours',
+        'Material and lift booking done with the maintenance office',
+        'Floors and lift covered while material moves in',
+        'Debris cleared from site regularly',
+      ],
+    },
+    projects: [],
+    faqs: [
+      {
+        q: 'How much does a full home interior cost in Gurugram?',
+        a: 'It depends on the size of your home and what you choose: kitchen, wardrobes, ceiling, TV unit, lighting and finishes. After a free site visit and 3D design, you get an itemised quote with the cost of every item.',
+      },
+      {
+        q: 'Do you do interiors for new possession flats on Dwarka Expressway?',
+        a: 'Yes. Many of our Gurugram enquiries are new possessions. We plan the whole flat in one 3D design so the work is done in one go.',
+      },
+      {
+        q: 'Can I do my home in stages?',
+        a: 'Yes. We can start with the kitchen and wardrobes and add the false ceiling, TV unit and other rooms later, all from one design so everything matches.',
+      },
+    ],
+  },
+
+  'modular-kitchen/gurgaon': {
+    guide: {
+      tag: 'MODULAR KITCHENS IN GURUGRAM',
+      title: 'A kitchen planned for how your family cooks',
+      paragraphs: [
+        'Kitchens in Gurugram apartments come in every shape: compact parallel kitchens in new towers, L and U-shaped kitchens in larger flats, and open kitchens that face the living room in premium apartments. We measure your kitchen first and then suggest the layout that gives you the most storage and counter space.',
+        'Every cabinet is planned around what you store: tall pantry units for dry rations, deep drawers for pots and pressure cookers, corner units that use every inch, and space and power points for chimney, hob, oven, microwave and dishwasher.',
+        'You choose the finish (laminate, acrylic or PU) and the countertop, and your quote names every material and fitting brand.',
+      ],
+      points: [
+        'L, U, parallel, straight and island layouts',
+        'Soft-close drawers and hinges',
+        'Appliance and power-point planning',
+        'Under-cabinet lighting over the counter',
+        'Free 3D design and itemised quote',
+      ],
+    },
+    projects: [],
+    faqs: [
+      {
+        q: 'Which kitchen layout suits a Gurugram apartment?',
+        a: 'L-shaped suits most medium kitchens, U-shaped gives the most storage, and parallel layouts work best in narrow kitchens. Open kitchens in premium apartments often get an island or breakfast counter. Our designer suggests the best one after measuring.',
+      },
+      {
+        q: 'Can you replace my old kitchen without breaking the platform?',
+        a: 'In many cases, yes. We check the existing platform, plumbing and electrical points at the site visit and tell you clearly what can stay and what should change.',
+      },
+    ],
+  },
+
+  'wardrobe/gurgaon': {
+    guide: {
+      tag: 'WARDROBES IN GURUGRAM',
+      title: 'Wardrobes made to your wall size',
+      paragraphs: [
+        'Bedrooms in Gurugram homes vary a lot, from compact rooms in new towers to large master bedrooms with walk-in space. We measure every wall and build sliding, hinged or walk-in wardrobes that fit exactly, including corners, beams and lofts.',
+        'Inside, we plan long and short hanging, drawers with dividers, shoe pull-outs, trouser racks and loft storage for bed linen and suitcases. Profile or sensor lights help you find things easily.',
+      ],
+      points: [
+        'Sliding, hinged and walk-in wardrobes',
+        'Inside planned around what you store',
+        'Laminate, acrylic, glass and fluted shutters',
+        'Soft-close fittings and inside lighting',
+        'Free 3D design and itemised quote',
+      ],
+    },
+    projects: [],
+    faqs: [
+      {
+        q: 'Sliding or hinged wardrobe for a Gurugram bedroom?',
+        a: 'Sliding wardrobes save space in compact rooms because the doors do not open outwards. Hinged wardrobes open fully and usually cost less. Our designer suggests the right one after seeing your room.',
+      },
+    ],
+  },
   'false-ceiling/noida': {
     guide: {
       tag: 'FALSE CEILING GUIDE FOR NOIDA HOMES',
@@ -307,7 +552,7 @@ export const localProcess = [
 export const areasPage = {
   title: 'Interior Designers Across Delhi NCR | Areas We Serve | Urbane Living',
   description:
-    'Urbane Living designs and installs home interiors, false ceilings, modular kitchens and wardrobes in Ghaziabad, Noida, Greater Noida, Delhi, Gurgaon and Faridabad.',
+    'Urbane Living designs and installs home interiors, false ceilings, modular kitchens and wardrobes in Gurugram (Gurgaon), Delhi, Noida, Greater Noida, Ghaziabad and Faridabad.',
   h1: 'Interior designers across',
   highlight: 'Delhi NCR',
   text: 'Pick your city to see what we do there, the areas we cover and how to get a free consultation.',

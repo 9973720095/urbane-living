@@ -5,7 +5,7 @@ import { highlights } from './common';
 // Page banners: use with <PageBanner {...banners.falseCeiling} primary={...} />
 export const banners = {
   falseCeiling: {
-    eyebrow: 'False Ceiling Experts · Delhi NCR',
+    eyebrow: 'False Ceiling Experts · Gurugram & Delhi NCR',
     title: 'Get Your False Ceiling done in',
     highlight: 'Just 7 Days*',
     // subtitle: 'Premium False Ceiling Designs Starting ₹120/sqft',
@@ -74,9 +74,9 @@ export const designFilters = {
 // Per-page SEO (title, description, canonical path, structured data)
 export const seo = {
   falseCeiling: {
-    title: 'False Ceiling Design & Installation in Delhi NCR | From ₹120/sqft | Urbane Living',
+    title: 'False Ceiling in Gurugram & Delhi NCR | From ₹120/sqft | Urbane Living',
     description:
-      'Gypsum, POP, PVC and wooden false ceilings installed in just 7 days in Delhi, Noida, Ghaziabad and Gurgaon. Starting ₹120/sqft with a 10-year anti-crack warranty. Use our instant cost estimator and get a free design.',
+      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. From ₹120/sqft with a 10-year anti-crack warranty. Try the cost estimator and get a free 3D design.',
     path: '/false-ceiling',
     image: photo('livingTvWall'),
     schema: [
@@ -86,7 +86,7 @@ export const seo = {
         name: 'False Ceiling Design & Installation',
         serviceType: 'False Ceiling Installation',
         provider: { '@type': 'HomeAndConstructionBusiness', name: 'Urbane Living', url: 'https://urbaneliving.in/' },
-        areaServed: ['Delhi', 'Noida', 'Ghaziabad', 'Gurgaon', 'Faridabad'],
+        areaServed: ['Gurugram', 'Delhi', 'Noida', 'Greater Noida', 'Ghaziabad', 'Faridabad'],
         offers: {
           '@type': 'AggregateOffer',
           priceCurrency: 'INR',
@@ -133,7 +133,7 @@ export const ceilingEdge = {
       { feature: 'Dedicated site supervisor', values: [['Yes', 'good'], ['No', 'bad'], ['Yes', 'good']] },
       { feature: 'Dust-free cleanup after work', values: [['Included', 'good'], ['Extra / not done', 'bad'], ['Included', 'good']] },
     ],
-    note: '*Typical timeline for up to 1,000 sq. ft. of ceiling after design approval. Comparison is based on common market practice in Delhi NCR.',
+    note: '*Typical timeline for up to 1,000 sq. ft. of ceiling after design approval. Comparison is based on common market practice in Gurugram and Delhi NCR.',
   },
   anatomy: {
     title: "What's Inside Your Ceiling",

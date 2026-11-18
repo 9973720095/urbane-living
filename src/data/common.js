@@ -82,7 +82,7 @@ export const countryCodes = [
 
 export const inquiryOptions = {
   // Cities we work in (lead forms); "Other" lets anyone outside these still send a request
-  serviceAreas: ['Gurgaon', 'Noida', 'Greater Noida', 'Delhi','Ghaziabad', 'Faridabad', 'Other'],
+  serviceAreas: ['Gurugram', 'Delhi', 'Noida', 'Greater Noida', 'Ghaziabad', 'Faridabad', 'Other'],
   states: ['Delhi', 'Haryana', 'UP'],
   propertyTypes: ['Residential', 'Commercial'],
 };
@@ -92,7 +92,7 @@ export const footer = {
   ctaText: 'Message us on WhatsApp or call directly for premium home design services.',
   columns: [
     { title: 'Company', links: [{ label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' }, { label: 'Blogs', to: '/blogs' }, { label: 'Vastu Score', to: '/vastu' }] },
-    { title: 'Services', links: [{ label: 'False Ceiling', to: '/false-ceiling' }, { label: 'Modular Kitchen', to: '/kitchen' }, { label: 'Wardrobe', to: '/wardrobe' }, { label: 'Bedroom Interiors', to: '/bedroom' }] },
+    { title: 'Services', links: [{ label: 'False Ceiling', to: '/false-ceiling' }, { label: 'Modular Kitchen', to: '/kitchen' }, { label: 'Wardrobe', to: '/wardrobe' }, { label: 'Bedroom Interiors', to: '/bedroom' }, { label: 'Interiors in Gurugram', to: '/interior-designers/gurgaon' }, { label: 'False Ceiling in Gurugram', to: '/false-ceiling/gurgaon' }] },
     { title: 'Legal', newTab: true, links: [{ label: 'Privacy Policy', to: '/privacy' }, { label: 'Terms & Conditions', to: '/terms' }, { label: 'Refund Policy', to: '/refund' }, { label: 'Disclaimer', to: '/disclaimer' }] },
   ],
 };

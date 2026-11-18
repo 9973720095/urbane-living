@@ -22,20 +22,92 @@ const images = {
 export const blogAuthor = 'Urbane Living Design Team';
 
 export const blogPosts = [
+
+  // 0 ── Gurugram (main focus) ─────────────────────────────────────
+  {
+    slug: 'home-interiors-gurugram-guide',
+    title: 'Home Interiors in Gurugram (2026): A Practical Guide for New Flats, Premium Apartments and Builder Floors',
+    seoTitle: 'Home Interiors in Gurugram 2026 | Cost, Timeline & Area Guide',
+    description:
+      'Planning interiors in Gurugram (Gurgaon)? What to plan for new flats on Dwarka Expressway and Golf Course Extension Road, premium apartments on Golf Course Road and builder floors in DLF Phases, with costs, timeline and society rules.',
+    category: 'Home Interiors',
+    image: photo('beigeLiving'),
+    imageAlt: photoAlt('beigeLiving'),
+    date: '2026-11-18',
+    readMin: 5,
+    content: `
+<p>Gurugram (Gurgaon) has three very different kinds of homes: <strong>new possession flats</strong> on Dwarka Expressway, Golf Course Extension Road, Sohna Road and New Gurgaon; <strong>premium apartments</strong> on Golf Course Road; and <strong>builder floors and independent homes</strong> in DLF Phases, South City and Palam Vihar. Each needs a different interior plan. This guide explains what to plan, what it costs and how long it takes.</p>
+
+<h2>1. New possession flats (Dwarka Expressway, Golf Course Extension Road, Sohna Road)</h2>
+<p>A new flat is the best time to do interiors: empty rooms, no shifting and one clean plan. Most owners start with the items they cannot live without and plan the rest in the same 3D design, so everything matches later.</p>
+<ul>
+  <li><strong>Must-do first:</strong> modular kitchen, wardrobes in every bedroom, and lights and fans.</li>
+  <li><strong>Do with it if budget allows:</strong> false ceiling with cove lighting in the living room and master bedroom, TV unit, shoe rack and pooja unit.</li>
+  <li><strong>Can wait:</strong> wall panelling, wallpaper, crockery unit and decor.</li>
+</ul>
+<p>Read our <a href="/blog/new-flat-interior-checklist-noida-ghaziabad">new flat interior checklist</a> for the right order of work.</p>
+
+<h2>2. Premium apartments (Golf Course Road)</h2>
+<p>Large living rooms, ducted or VRV AC, sprinklers and high-end finishes are common here. Two things matter most:</p>
+<ul>
+  <li><strong>Ceiling planned around AC ducts and sprinklers.</strong> Every duct, grille and service panel is marked before framing, so the AC can still be serviced. See our <a href="/false-ceiling/gurgaon">false ceiling service in Gurugram</a>.</li>
+  <li><strong>Materials named in the quote.</strong> Board thickness, framing, hardware and laminate brands should be written in your quote, not promised verbally.</li>
+</ul>
+
+<h2>3. Builder floors and older homes (DLF Phases, South City, Palam Vihar)</h2>
+<p>Older homes usually need a refresh rather than a full rebuild: a new <a href="/modular-kitchen/gurgaon">modular kitchen</a>, made-to-size <a href="/wardrobe/gurgaon">wardrobes</a>, better lighting and a peripheral false ceiling that hides beams without making rooms feel low. Work can be planned room by room, so the family can keep living at home.</p>
+
+<h2>What does it cost?</h2>
+<p>Costs depend on the size of the home and what you choose. As a guide, gypsum and POP false ceilings start at about <strong>₹120 per sq. ft.</strong>, PVC at about ₹200 and wooden at about ₹210, with light points at about ₹450 each. See the full breakdown in our <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide</a>. Kitchens and wardrobes are priced by size, material and fittings, so you get an itemised quote after the site visit.</p>
+
+<h2>How long does it take?</h2>
+<ul>
+  <li><strong>False ceiling:</strong> about 7–10 working days for most homes after design approval.</li>
+  <li><strong>Kitchen and wardrobes:</strong> made to size after the design is final; your quote includes a written timeline.</li>
+  <li><strong>Society rules:</strong> many Gurugram societies allow work only at fixed hours and need lift booking for material. Plan for it, or ask your designer to handle it.</li>
+</ul>
+
+<h2>Checklist before you sign</h2>
+<ul>
+  <li>Have you seen the full home in 3D, room by room?</li>
+  <li>Is every material and brand named in the quote?</li>
+  <li>Is the timeline written, with who supervises the site?</li>
+  <li>Is the warranty in writing?</li>
+  <li>Who handles society paperwork, lift booking and debris?</li>
+</ul>
+
+<h2>Get a free 3D design for your Gurugram home</h2>
+<p>We design and install home interiors across <a href="/interior-designers/gurgaon">Gurugram</a>, including <a href="/interior-designers/gurgaon/dwarka-expressway">Dwarka Expressway</a>, <a href="/interior-designers/gurgaon/golf-course-extension-road">Golf Course Extension Road</a>, <a href="/interior-designers/gurgaon/golf-course-road">Golf Course Road</a>, <a href="/interior-designers/gurgaon/sohna-road">Sohna Road</a> and <a href="/interior-designers/gurgaon/dlf-phase-1-5">DLF Phases</a>. <a href="/contact">Book a free site visit</a> or call 07965315325.</p>
+`,
+    faq: [
+      {
+        q: 'How much does a false ceiling cost in Gurugram?',
+        a: 'Gypsum and POP false ceilings start at about ₹120 per sq. ft., PVC at about ₹200 and wooden at about ₹210 per sq. ft. Cove and multi-level designs cost more, and each light point costs about ₹450.',
+      },
+      {
+        q: 'What should I do first in a new flat in Gurugram?',
+        a: 'Start with the modular kitchen, wardrobes and lights. If the budget allows, add the false ceiling in the living room and master bedroom at the same time, since it is easier before furniture comes in.',
+      },
+      {
+        q: 'Do you work on Dwarka Expressway and Golf Course Extension Road?',
+        a: 'Yes. We work across Gurugram, including Dwarka Expressway, Golf Course Road, Golf Course Extension Road, Sohna Road, DLF Phases, South City, Palam Vihar and New Gurgaon.',
+      },
+    ],
+  },
   // 1 ─────────────────────────────────────────────────────────────
   {
     slug: 'false-ceiling-cost-delhi-ncr',
     title: 'False Ceiling Cost in Delhi NCR (2026): Rates per Sq. Ft. with Real Room Examples',
     seoTitle: 'False Ceiling Cost in Delhi NCR 2026 | Rate per Sq. Ft. & Examples',
     description:
-      'How much does a false ceiling cost in Delhi, Noida, Ghaziabad and Gurgaon? Rates per sq. ft. for gypsum, POP, PVC and wooden ceilings, with worked examples for a bedroom, living room and full flat.',
+      'How much does a false ceiling cost in Gurugram, Delhi, Noida and Ghaziabad? Rates per sq. ft. for gypsum, POP, PVC and wooden ceilings, with worked examples for a bedroom, living room and full flat.',
     category: 'False Ceiling',
     image: images.ceiling,
     imageAlt: photoAlt('livingTvWall'),
     date: '2026-11-14',
     readMin: 4,
     content: `
-<p>A false ceiling is usually the first big item in a home interior quote, and also the one people understand least. Is ₹120 per sq. ft. the full price? Are lights extra? Why did one contractor quote ₹90 and another ₹180 for the same room? This guide answers those questions using the same rates we use for homes across <a href="/false-ceiling/delhi">Delhi</a>, <a href="/false-ceiling/noida">Noida</a>, <a href="/false-ceiling/ghaziabad">Ghaziabad</a> and <a href="/false-ceiling/gurgaon">Gurgaon</a>.</p>
+<p>A false ceiling is usually the first big item in a home interior quote, and also the one people understand least. Is ₹120 per sq. ft. the full price? Are lights extra? Why did one contractor quote ₹90 and another ₹180 for the same room? This guide answers those questions using the same rates we use for homes across <a href="/false-ceiling/delhi">Delhi</a>, <a href="/false-ceiling/noida">Noida</a>, <a href="/false-ceiling/ghaziabad">Ghaziabad</a> and <a href="/false-ceiling/gurgaon">Gurugram</a>.</p>
 
 <h2>False ceiling rate per sq. ft. in Delhi NCR (2026)</h2>
 <table>
@@ -178,7 +250,7 @@ export const blogPosts = [
 </ol>
 
 <h2>Our recommendation</h2>
-<p>For most flats in Noida, Ghaziabad, Gurgaon and Delhi, <strong>gypsum is the better default</strong>: faster, cleaner and more consistent. Use POP only where the design truly needs curves or detailed work. Many homes mix both: gypsum for the main ceiling and POP for one feature element.</p>
+<p>For most flats in Gurugram, Noida, Ghaziabad and Delhi, <strong>gypsum is the better default</strong>: faster, cleaner and more consistent. Use POP only where the design truly needs curves or detailed work. Many homes mix both: gypsum for the main ceiling and POP for one feature element.</p>
 <p>See finished designs and check your budget with the <a href="/false-ceiling">false ceiling cost estimator</a>, or read the full <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide for Delhi NCR</a>.</p>
 `,
     faq: [
@@ -271,7 +343,7 @@ export const blogPosts = [
 </ol>
 
 <h2>Planning a kitchen in Delhi NCR?</h2>
-<p>We design and install modular kitchens in <a href="/modular-kitchen/noida">Noida</a>, <a href="/modular-kitchen/ghaziabad">Ghaziabad</a>, <a href="/modular-kitchen/gurgaon">Gurgaon</a>, <a href="/modular-kitchen/delhi">Delhi</a> and nearby areas. See our <a href="/kitchen">modular kitchen designs</a> or <a href="/contact">book a free site visit</a> to get a 3D design and an itemised quote.</p>
+<p>We design and install modular kitchens in <a href="/modular-kitchen/noida">Noida</a>, <a href="/modular-kitchen/ghaziabad">Ghaziabad</a>, <a href="/modular-kitchen/gurgaon">Gurugram</a>, <a href="/modular-kitchen/delhi">Delhi</a> and nearby areas. See our <a href="/kitchen">modular kitchen designs</a> or <a href="/contact">book a free site visit</a> to get a 3D design and an itemised quote.</p>
 `,
     faq: [
       {
@@ -440,7 +512,7 @@ export const blogPosts = [
   <li>A dresser or study unit built into the side of the wardrobe</li>
 </ul>
 
-<p>See our <a href="/wardrobe">wardrobe designs</a> and <a href="/bedroom">bedroom interiors</a>, or get a custom wardrobe made in <a href="/wardrobe/noida">Noida</a>, <a href="/wardrobe/ghaziabad">Ghaziabad</a>, <a href="/wardrobe/gurgaon">Gurgaon</a> or <a href="/wardrobe/delhi">Delhi</a>. <a href="/contact">Book a free site visit</a> and we will measure the room and show you both options in 3D.</p>
+<p>See our <a href="/wardrobe">wardrobe designs</a> and <a href="/bedroom">bedroom interiors</a>, or get a custom wardrobe made in <a href="/wardrobe/noida">Noida</a>, <a href="/wardrobe/ghaziabad">Ghaziabad</a>, <a href="/wardrobe/gurgaon">Gurugram</a> or <a href="/wardrobe/delhi">Delhi</a>. <a href="/contact">Book a free site visit</a> and we will measure the room and show you both options in 3D.</p>
 `,
     faq: [
       {
