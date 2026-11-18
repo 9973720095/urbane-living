@@ -14,7 +14,7 @@ const images = {
   living: photo('livingTvWallWide'),
   kitchen: photo('kitchenL'),
   framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), // real site photo
-  wardrobe: photo('guestRoom'),
+  wardrobe: photo('wardrobeBedroom'),
   bedroom: photo('plumBedroom'),
   livingAlt: photo('livingArchway'),
 };
@@ -379,7 +379,7 @@ export const blogPosts = [
       'Sliding or hinged wardrobe? Compare space, cost and usability, learn the standard wardrobe sizes for Indian bedrooms and pick the right materials and finishes.',
     category: 'Wardrobe',
     image: images.wardrobe,
-    imageAlt: photoAlt('guestRoom'),
+    imageAlt: photoAlt('wardrobeBedroom'),
     date: '2026-11-06',
     readMin: 3,
     content: `

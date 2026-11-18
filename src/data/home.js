@@ -91,7 +91,7 @@ export const gallery = {
   subtitle: 'Living rooms, bedrooms, kitchens and bathrooms designed in 3D by our in-house team, so you see your home before work starts.',
   items: [
     { src: photo('livingSofa'), title: 'Living Room', alt: photoAlt('livingSofa') },
-    { src: photo('guestRoom'), title: 'Guest Room', alt: photoAlt('guestRoom') },
+    { src: photo('sageBedroom'), title: 'Bedroom', alt: photoAlt('sageBedroom') },
     { src: photo('kitchenL'), title: 'Modular Kitchen', alt: photoAlt('kitchenL') },
     { src: photo('openPlanLiving'), title: 'Living & Dining', alt: photoAlt('openPlanLiving') },
     { src: photo('kidsRoomPink'), title: 'Kids Bedroom', alt: photoAlt('kidsRoomPink') },

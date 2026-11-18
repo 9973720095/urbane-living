@@ -57,7 +57,7 @@ export const styleQuiz = {
       text: 'Light colours, hidden storage and nothing extra. A calm, airy home that is easy to keep clean.',
       palette: ['#F5F5F2', '#BFC3C7', '#D9C3A0', '#3C4043'],
       features: ['Flat ceiling with hidden lights', 'Handle-less wardrobes', 'Full-height storage', 'Light oak & white finishes'],
-      image: photo('livingSofa', 640),
+      image: photo('beigeLiving', 640),
     },
     classic: {
       name: 'Indian Contemporary',
