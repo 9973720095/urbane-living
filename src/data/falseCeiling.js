@@ -14,7 +14,7 @@ export const banners = {
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
-        // Hero (same design as the home page hero, with the lead form)
+    // Hero (same design as the home page hero, with the lead form)
     heroSubtitle: 'Gypsum, POP, PVC and wooden false ceilings with lights planned in, installed by our own team.',
     formBadge: 'Free Site Visit & 3D Design',
     formTitle: 'Get Your False Ceiling Quote',
@@ -86,7 +86,7 @@ export const estimator = {
   disclaimer: '*Estimate for planning only. The final, itemised quote comes after the free site visit and depends on site conditions and final measurements.',
 };
 
-// False ceiling design gallery filters (values must match the backend)
+// False ceiling design gallery filters (values must match room / style in media.js -> roomGalleries.falseCeiling)
 export const designFilters = {
   title: 'Explore Our Designs',
   rooms: [
