@@ -33,7 +33,7 @@ export const homeFaq = {
       items: [
         {
           q: 'How much does home interior design cost?',
-          a: 'It depends on the size of your home, the rooms you choose and the materials. After the site visit you get an itemised quote, room by room, so you know where every rupee goes. False ceilings start at ₹120 per sq. ft.',
+          a: 'It depends on the size of your home, the rooms you choose and the materials. After the site visit you get an itemised quote, room by room, so you know where every rupee goes.',
         },
         {
           q: 'Are there any hidden charges?',

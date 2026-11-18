@@ -18,7 +18,6 @@ const btnRed =
 const tag = 'mb-3 inline-block rounded-full bg-brand-red/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-red-dark';
 const h2 = 'm-0 text-[24px] font-semibold leading-tight text-brand-navy sm:text-[32px]';
 
-const falseCeiling = findLocalService('false-ceiling');
 const home = findLocalService('interior-designers');
 
 // FAQs from data only (no made-up numbers)
@@ -35,7 +34,7 @@ const buildFaqs = (loc, city) => [
   },
   {
     q: `How much do interiors cost in ${loc.name}?`,
-    a: `It depends on your home size, rooms and finishes. False ceilings start from ₹${falseCeiling.price.from}/sqft. For full interiors you get a clear, item-wise quote after the free site visit and 3D design.`,
+    a: 'It depends on your home size, rooms, materials and finishes. You get a clear, item-wise quote after the free site visit and 3D design, with no hidden charges.',
   },
   {
     q: 'Where is your office?',
@@ -170,7 +169,7 @@ export default function LocalityPage({ onOpenForm }) {
                     <span className="text-[14px] font-semibold text-brand-navy sm:text-base">{s.name}</span>
                     <span className="mt-1 text-xs leading-relaxed text-gray-500 sm:text-sm">{s.includes.slice(0, 3).map((i) => i.title).join(' · ')}</span>
                     <span className="mt-auto inline-flex items-center gap-1.5 pt-3 text-xs font-semibold text-brand-red sm:text-sm">
-                      {s.price?.label || 'Free 3D design'} <ArrowRightOutlined className="transition group-hover:translate-x-1" />
+                      Free 3D design <ArrowRightOutlined className="transition group-hover:translate-x-1" />
                     </span>
                   </span>
                 </Link>

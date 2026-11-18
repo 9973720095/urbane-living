@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import { Select, Pagination } from "antd";
-import CostEstimator from "../components/FalseCeiling/CostEstimator";
 import CeilingEdge from "../components/FalseCeiling/CeilingEdge";
 import CeilingTypes from "../components/FalseCeiling/CeilingTypes";
 import CeilingCities from "../components/FalseCeiling/CeilingCities";
@@ -18,7 +17,7 @@ import { localCities } from "../data/localSeo";
 const { Option } = Select;
 
 // /false-ceiling: every section reads its content from data files
-// (falseCeiling.js, ceilingGuide.js, localSeo.js), so text/prices change in one place.
+// (falseCeiling.js, ceilingGuide.js, localSeo.js), so text changes in one place.
 export default function FalseCeilingPage({ onOpenForm }) {
   // SEO: page schema + FAQ schema (same questions as on the page) + all cities we serve
   const pageSeo = useMemo(() => {
@@ -46,7 +45,6 @@ export default function FalseCeilingPage({ onOpenForm }) {
   const [designs, setDesigns] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({ category: "", style: "" });
-  const [budget, setBudget] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(8);
   const [hasAnyDesign, setHasAnyDesign] = useState(null); // null = still checking
@@ -83,19 +81,8 @@ export default function FalseCeilingPage({ onOpenForm }) {
     setCurrentPage(1);
   }, [filters]);
 
-  // Budget filter (price per sq. ft., ranges from siteData)
-  const selectedBudget = designFilters.budgets.find((b) => b.value === budget);
-  const visibleDesigns = designs.filter((item) => {
-    if (!selectedBudget || selectedBudget.min === undefined) return true;
-    const price = Number(item.price);
-    if (Number.isNaN(price)) return false;
-    return price >= selectedBudget.min && (selectedBudget.max === undefined || price <= selectedBudget.max);
-  });
-
-  const handleBudgetChange = (value) => {
-    setBudget(value);
-    setCurrentPage(1);
-  };
+  // No prices on the website: designs are filtered by room and style only
+  const visibleDesigns = designs;
 
   const indexOfLastItem = currentPage * pageSize;
   const currentItems = visibleDesigns.slice(indexOfLastItem - pageSize, indexOfLastItem);
@@ -117,11 +104,8 @@ export default function FalseCeilingPage({ onOpenForm }) {
         formName="False ceiling hero form"
       />
 
-      {/* 2. Types + "from" prices */}
+      {/* 2. Types of false ceiling */}
       <CeilingTypes onOpenForm={onOpenForm} />
-
-      {/* 3. Cost estimator */}
-      <CostEstimator onOpenForm={onOpenForm} />
 
       {/* 4. Design videos */}
       <div className="bg-white pb-10">
@@ -136,7 +120,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
               id="designs-title"
               eyebrow="DESIGN GALLERY"
               title={designFilters.title}
-              subtitle="Filter by room, budget and style. Tap any design to get its quote."
+              subtitle="Filter by room and style. Tap any design to get its quote."
             />
 
             {/* Filters */}
@@ -159,14 +143,6 @@ export default function FalseCeilingPage({ onOpenForm }) {
               >
                 {designFilters.styles.map((o) => <Option key={o.value} value={o.value}>{o.label}</Option>)}
               </Select>
-              <Select
-                value={budget}
-                aria-label="Budget"
-                className={`${selectClass} col-span-2 sm:col-span-1`}
-                onChange={handleBudgetChange}
-              >
-                {designFilters.budgets.map((o) => <Option key={o.value} value={o.value}>{o.label}</Option>)}
-              </Select>
             </div>
 
             {/* Cards */}
@@ -178,7 +154,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
               </div>
             ) : currentItems.length === 0 ? (
               <p className="m-0 rounded-2xl bg-white px-6 py-10 text-center text-gray-500 shadow-card">
-                No designs found for this filter. Try another room type, budget or style, or{' '}
+                No designs found for this filter. Try another room type or style, or{' '}
                 <button type="button" onClick={onOpenForm} className="cursor-pointer border-0 bg-transparent p-0 font-semibold text-brand-red underline">
                   ask our designer
                 </button>.
@@ -199,7 +175,6 @@ export default function FalseCeilingPage({ onOpenForm }) {
                       </div>
                       <div className="flex flex-1 flex-col p-3 sm:p-4">
                         <h3 className="m-0 line-clamp-2 text-[13.5px] font-semibold leading-snug text-brand-navy sm:text-[15px]">{item.title}</h3>
-                        {item.price && <p className="m-0 mb-3 mt-1 text-[13px] font-semibold text-brand-blue sm:text-sm">₹{item.price}/sqft</p>}
                         <button
                           type="button"
                           onClick={onOpenForm}

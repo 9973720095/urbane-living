@@ -16,7 +16,7 @@ import { contact } from '../data/siteData';
   <PageBanner
     title="Turn Your Home Luxury in"
     highlight="7 Days"
-    subtitle="Premium False Ceiling Designs Starting ₹95/sqft"
+    subtitle="Premium false ceiling designs, installed in 7 days"
     image="https://..."            // or video="https://...mp4"
     primary={{ label: 'Get Free Design', onClick: onOpenForm }}   // or { to: '/contact' } / { href: 'https://...' }
     whatsappMessage="Hi, I want a false ceiling quote"

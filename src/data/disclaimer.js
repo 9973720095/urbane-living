@@ -30,9 +30,9 @@ export const disclaimerPage = {
     },
     {
       id: 'prices-estimates',
-      title: 'Prices, estimates & calculators',
+      title: 'Costs and estimates',
       paragraphs: [
-        'Prices, price ranges, the cost estimator and the false ceiling calculator give an approximate idea only. The actual cost depends on your site measurements, design, materials, finishes and fittings, and is confirmed only in a written quote after a site visit.',
+        'Any cost information shared before the site visit gives an approximate idea only. The actual cost depends on your site measurements, design, materials, finishes and fittings, and is confirmed only in a written quote after a site visit.',
       ],
     },
     {

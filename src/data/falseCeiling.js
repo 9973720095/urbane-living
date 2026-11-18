@@ -1,4 +1,4 @@
-// False Ceiling page: banner, cost estimator, design filters, SEO, "Urbane Ceiling Standard".
+// False Ceiling page: banner, design filters, SEO, "Urbane Ceiling Standard". No prices are shown on the website.
 import { slot, slotAlt } from './media';
 import { highlights } from './common';
 
@@ -8,45 +8,17 @@ export const banners = {
     eyebrow: 'False Ceiling Experts · Gurugram & Delhi NCR',
     title: 'Get Your False Ceiling done in',
     highlight: 'Just 7 Days*',
-    // subtitle: 'Premium False Ceiling Designs Starting ₹120/sqft',
     image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
     imageAlt: slotAlt('falseCeiling.banner', 'livingTvWall'),
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
         // Hero (same design as the home page hero, with the lead form)
-    heroSubtitle: 'Gypsum, POP, PVC and wooden false ceilings from ₹120/sqft, with lights planned in.',
+    heroSubtitle: 'Gypsum, POP, PVC and wooden false ceilings with lights planned in, installed by our own team.',
     formBadge: 'Free Site Visit & 3D Design',
     formTitle: 'Get Your False Ceiling Quote',
     formSubtitle: 'Share your details, our ceiling expert will call you back.',
   },
-};
-
-// False ceiling cost estimator: rates and options (₹)
-export const estimator = {
-  tag: 'SMART PRICING ENGINE',
-  title: 'Instant Cost Estimator',
-  subtitle: 'Get a transparent, itemized quote for your interior ceiling project.',
-  defaultArea: 350,
-  minArea: 50,
-  maxArea: 5000,
-  sliderMax: 2500,
-  defaultMaterial: 'Premium Gypsum',
-  defaultLightPoints: 10,
-  lightRate: 450,
-  materials: [
-    { name: 'Standard POP', rate: 120 },
-    { name: 'Premium Gypsum', rate: 120 },
-    { name: 'PVC Panel', rate: 200 },
-    { name: 'Luxe Wooden', rate: 210 },
-  ],
-  designTiers: [
-    { label: 'Basic', sub: 'Single Level', value: 1.0 },
-    { label: 'Standard', sub: 'Cove Lights', value: 1.2 },
-    { label: 'Luxury', sub: 'Multi-Tier', value: 1.5 },
-  ],
-  promises: ['10 Year Anti-Crack Warranty', 'Installation in 7-10 Working Days'],
-  disclaimer: '*Actual costs may vary based on site conditions and final measurements.',
 };
 
 // False ceiling design gallery filters (values must match the backend)
@@ -56,13 +28,6 @@ export const designFilters = {
     { value: 'living', label: 'Living Room' },
     { value: 'bedroom', label: 'Bedroom' },
     { value: 'kitchen', label: 'Kitchen' },
-  ],
-    // Budget per sq. ft. (filters the cards by their price on this page)
-  budgets: [
-    { value: 'all', label: 'Any Budget' },
-    { value: 'basic', label: '₹120–₹150 /sqft', min: 120, max: 150 },
-    { value: 'premium', label: '₹151–₹210 /sqft', min: 151, max: 210 },
-    { value: 'luxury', label: '₹210+ /sqft', min: 211 },
   ],
   styles: [
     { value: 'modern', label: 'Modern' },
@@ -74,9 +39,9 @@ export const designFilters = {
 // Per-page SEO (title, description, canonical path, structured data)
 export const seo = {
   falseCeiling: {
-    title: 'False Ceiling in Gurugram & Delhi NCR | From ₹120/sqft | Urbane Living',
+    title: 'False Ceiling in Gurugram & Delhi NCR | Design & Installation | Urbane Living',
     description:
-      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. From ₹120/sqft with a 10-year anti-crack warranty. Try the cost estimator and get a free 3D design.',
+      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. 10-year anti-crack warranty, itemised quote and a free 3D design.',
     path: '/false-ceiling',
     image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
     schema: [
@@ -87,13 +52,6 @@ export const seo = {
         serviceType: 'False Ceiling Installation',
         provider: { '@type': 'HomeAndConstructionBusiness', name: 'Urbane Living', url: 'https://urbaneliving.in/' },
         areaServed: ['Gurugram', 'Delhi', 'Noida', 'Greater Noida', 'Ghaziabad', 'Faridabad'],
-        offers: {
-          '@type': 'AggregateOffer',
-          priceCurrency: 'INR',
-          lowPrice: '120',
-          highPrice: '210',
-          unitText: 'per sq. ft.',
-        },
       },
       {
         '@context': 'https://schema.org',
@@ -125,7 +83,7 @@ export const ceilingEdge = {
     title: 'How We Compare',
     columns: ['Urbane Living', 'Local Contractor', 'Big Design Firms'],
     rows: [
-      { feature: 'Price per sq. ft.', values: [['₹120 – ₹210', 'good'], ['Varies, often revised', 'bad'], ['Premium pricing', 'mid']] },
+      { feature: 'Quote', values: [['Itemised, locked at booking', 'good'], ['Verbal, often revised', 'bad'], ['Itemised', 'good']] },
       { feature: 'Installation time', values: [['7 days*', 'good'], ['No fixed date', 'bad'], ['30 – 45 days (full home)', 'mid']] },
       { feature: 'Written warranty', values: [['10 years, anti-crack', 'good'], ['Rarely given', 'bad'], ['Yes', 'good']] },
       { feature: 'Free 3D design before work', values: [['Yes', 'good'], ['No', 'bad'], ['Yes', 'good']] },

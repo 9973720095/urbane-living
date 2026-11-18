@@ -28,9 +28,7 @@ const buildFaqs = (service, city) => {
     },
     {
       q: `How much does ${service.name.toLowerCase()} cost in ${city.name}?`,
-      a: service.price
-        ? `False ceiling rates usually start from ₹${service.price.from}/sqft for basic designs and go to ₹${service.price.to}+/sqft for premium and luxury work, depending on material, design and lighting. You get an exact, item-wise quote after the site visit.`
-        : `The cost depends on your home size, materials and finishes. After a free site visit and 3D design, you get a clear, item-wise quote with no hidden charges.`,
+      a: `The cost depends on your home size, materials and finishes. After a free site visit and 3D design, you get a clear, item-wise quote with no hidden charges.`,
     },
     {
       q: 'Is the consultation and site visit free?',
@@ -76,9 +74,6 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
           telephone: contact.phoneDisplay,
           address: { '@type': 'PostalAddress', streetAddress: contact.address, addressCountry: 'IN' },
         },
-        ...(service.price && {
-          offers: { '@type': 'AggregateOffer', priceCurrency: 'INR', lowPrice: String(service.price.from), highPrice: String(service.price.to), unitText: `per ${service.price.unit}` },
-        }),
       },
       {
         '@context': 'https://schema.org',
@@ -132,7 +127,7 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
             <h1 className="m-0 mt-4 text-[28px] font-bold leading-tight sm:text-[42px]">{service.h1(city.name)}</h1>
             <p className="m-0 mt-4 text-[15px] leading-relaxed text-white/80 sm:text-base">{service.intro(city.name)}</p>
             <ul className="m-0 mt-5 flex list-none flex-wrap gap-x-5 gap-y-2 p-0 text-sm text-white/85">
-              {[service.price?.label, 'Free site visit', '3D design before work starts', 'One team, start to finish'].filter(Boolean).map((t) => (
+              {['Free site visit', '3D design before work starts', 'One team, start to finish'].filter(Boolean).map((t) => (
                 <li key={t} className="inline-flex items-center gap-1.5"><CheckCircleFilled className="text-emerald-400" /> {t}</li>
               ))}
             </ul>
@@ -188,46 +183,6 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
                 ))}
               </ul>
             )}
-          </div>
-        </section>
-      )}
-
-      {/* Rates table */}
-      {extra?.rates && (
-        <section className="px-4 py-12 sm:px-6 lg:py-16">
-          <div className="mx-auto max-w-[1000px]">
-            <div className="text-center">
-              <span className={tag}>{extra.rates.tag}</span>
-              <h2 className={h2}>{extra.rates.title}</h2>
-              <p className="m-0 mx-auto mt-3 max-w-[720px] text-[15px] leading-relaxed text-gray-600">{extra.rates.text}</p>
-            </div>
-            <div className="mt-8 overflow-x-auto rounded-2xl border border-solid border-gray-100 shadow-card">
-              <table className="w-full min-w-[560px] border-collapse text-left text-sm sm:text-[15px]">
-                <thead>
-                  <tr className="bg-brand-navy text-white">
-                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Type</th>
-                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Rate</th>
-                    <th scope="col" className="px-4 py-3 font-semibold sm:px-5">Best for</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {extra.rates.rows.map((r, i) => (
-                    <tr key={r.type} className={i % 2 ? 'bg-brand-soft' : 'bg-white'}>
-                      <th scope="row" className="px-4 py-3 font-semibold text-brand-navy sm:px-5">{r.type}</th>
-                      <td className="whitespace-nowrap px-4 py-3 font-semibold text-brand-red sm:px-5">{r.rate}</td>
-                      <td className="px-4 py-3 text-gray-600 sm:px-5">{r.bestFor}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            {extra.rates.example && (
-              <div className="mt-5 rounded-2xl border border-solid border-brand-red/20 bg-brand-red/5 p-5">
-                <span className="block font-semibold text-brand-navy">{extra.rates.example.title}</span>
-                <span className="mt-1 block text-sm leading-relaxed text-gray-600">{extra.rates.example.text}</span>
-              </div>
-            )}
-            {extra.rates.note && <p className="m-0 mt-3 text-xs text-gray-500">{extra.rates.note}</p>}
           </div>
         </section>
       )}

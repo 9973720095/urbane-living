@@ -33,13 +33,13 @@ export const localServices = [
     slug: 'false-ceiling',
     name: 'False Ceiling',
     h1: (c) => `False Ceiling Design & Installation in ${c}`,
-    title: (c) => `False Ceiling in ${c} | From ₹120/sqft | Urbane Living`,
+    title: (c) => `False Ceiling in ${c} | Design & Installation | Urbane Living`,
     description: (c) =>
-      `Gypsum, POP, PVC and wooden false ceilings in ${c} with cove and profile lighting. Rates from ₹120/sqft. Free design consultation and site visit.`,
+      `Gypsum, POP, PVC and wooden false ceilings in ${c} with cove and profile lighting. Lights planned in, our own installation team. Free design consultation and site visit.`,
     intro: (c) =>
       `We design and install gypsum, POP, PVC and wooden false ceilings across ${c}, with lighting planned together so the ceiling looks finished on day one.`,
     image: slot('city.false-ceiling.banner', 'livingTvWallWide', 1400, 'City pages (Noida, Gurugram...) › False Ceiling › Top banner'),
-    mainLink: { to: '/false-ceiling', label: 'Explore false ceiling designs & cost estimator' },
+    mainLink: { to: '/false-ceiling', label: 'Explore false ceiling designs' },
     includes: [
       { title: 'Gypsum ceiling', text: 'Smooth, crack-resistant finish for living rooms and bedrooms.' },
       { title: 'POP ceiling', text: 'Custom curves and mouldings for classic looks.' },
@@ -48,7 +48,6 @@ export const localServices = [
       { title: 'Designer ceilings', text: 'Layered, CNC and statement designs.' },
       { title: 'Repair & redo', text: 'Old ceiling replaced or redesigned.' },
     ],
-    price: { from: 120, to: 210, unit: 'sqft', label: 'From ₹120/sqft' },
     serviceType: 'False Ceiling Installation',
   },
   {
@@ -284,23 +283,6 @@ export const serviceCityContent = {
         'Installation in 7–10 working days for most homes',
       ],
     },
-    rates: {
-      tag: 'FALSE CEILING COST IN GURUGRAM',
-      title: 'False ceiling rates in Gurugram',
-      text: 'Rates are per sq. ft. of ceiling area and are the same across Delhi NCR. Your final, item-wise quote comes after the free site visit and 3D design, and the price is locked when you book.',
-      rows: [
-        { type: 'Gypsum false ceiling', rate: 'From ₹120/sqft', bestFor: 'Living rooms, bedrooms, full home' },
-        { type: 'POP false ceiling', rate: 'From ₹120/sqft', bestFor: 'Curves, mouldings, classic designs' },
-        { type: 'PVC panel ceiling', rate: 'From ₹200/sqft', bestFor: 'Balconies, bathrooms, damp areas' },
-        { type: 'Wooden ceiling', rate: 'From ₹210/sqft', bestFor: 'Accent over TV wall or dining' },
-        { type: 'Light points', rate: '₹450 per point', bestFor: 'Spot, cove and profile lights' },
-      ],
-      example: {
-        title: 'Example: living room in a Gurugram 3 BHK',
-        text: 'A 14 × 18 ft living room (252 sq. ft.) with a gypsum ceiling and cove lighting, plus 10 light points, works out to about ₹41,000. Plain single-level designs cost less; multi-level and wooden designs cost more.',
-      },
-      note: '*Indicative rates. The exact price depends on design, material, lighting and site conditions.',
-    },
     ideas: {
       tag: 'DESIGN IDEAS',
       title: 'False ceiling ideas for Gurugram homes',
@@ -474,23 +456,6 @@ export const serviceCityContent = {
         'Written 10-year anti-crack warranty',
         'Installation in 7–10 working days for most homes',
       ],
-    },
-    rates: {
-      tag: 'FALSE CEILING COST IN NOIDA',
-      title: 'False ceiling rates in Noida',
-      text: 'Rates are per sq. ft. of ceiling area. Your final, item-wise quote comes after the free site visit and 3D design, and the price is locked when you book.',
-      rows: [
-        { type: 'Gypsum false ceiling', rate: 'From ₹120/sqft', bestFor: 'Living rooms, bedrooms, full home' },
-        { type: 'POP false ceiling', rate: 'From ₹120/sqft', bestFor: 'Curves, mouldings, classic designs' },
-        { type: 'PVC panel ceiling', rate: 'From ₹200/sqft', bestFor: 'Balconies, bathrooms, damp areas' },
-        { type: 'Wooden ceiling', rate: 'From ₹210/sqft', bestFor: 'Accent over TV wall or dining' },
-        { type: 'Light points', rate: '₹450 per point', bestFor: 'Spot, cove and profile lights' },
-      ],
-      example: {
-        title: 'Example: living room in a Noida 3 BHK',
-        text: 'A 12 × 16 ft living room (192 sq. ft.) with a gypsum ceiling and cove lighting, plus 8 light points, works out to about ₹31,000. Plain single-level designs cost less; multi-level and wooden designs cost more.',
-      },
-      note: '*Indicative rates. The exact price depends on design, material, lighting and site conditions.',
     },
     ideas: {
       tag: 'DESIGN IDEAS',

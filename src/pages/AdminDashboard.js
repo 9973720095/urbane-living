@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 //... (All your existing imports)
-import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
+import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
 import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
@@ -204,9 +204,8 @@ const AdminDashboard = ({ onFinish }) => {
         scroll={{ x: 'max-content' }}
         pagination={{ pageSize: 8 }}
         columns={[
-          { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
+          { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} alt="" width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
           { title: 'Title', dataIndex: 'title', width: 150 },
-          { title: 'Price', dataIndex: 'price', render: (p) => `₹${p}`, width: 100 },
           {
             title: 'Action',
             render: (_, r) => (
@@ -261,11 +260,10 @@ const AdminDashboard = ({ onFinish }) => {
                     rowKey="_id"
                     scroll={{ x: 'max-content' }}
                     columns={[
-                        { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
+                        { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} alt="" width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
                         { title: 'Title', dataIndex: 'title', width: 150 },
                         { title: 'Category', dataIndex: 'category', render: (cat) => <Tag color="blue">{cat || 'N/A'}</Tag>, width: 120 },
-                        { title: 'Price', dataIndex: 'price', render: (p) => `₹${p}`, width: 100 },
-                        {
+                                      {
                           title: 'Action',
                           render: (_, r) => (
                             <Space>
@@ -335,7 +333,7 @@ const AdminDashboard = ({ onFinish }) => {
                 loading={loading}
                 scroll={{ x: 'max-content' }}
                 columns={[
-                  { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
+                  { title: 'Img', dataIndex: 'image', render: (img) => <img src={img} alt="" width="40" height="40" style={{ borderRadius: 4, objectFit: 'cover' }} />, width: 60 },
                   { title: 'Title', dataIndex: 'title', width: 200 },
                   { title: 'URL', dataIndex: 'slug', width: 180, render: (slug, r) => (
                     <a href={`/blog/${slug || r._id}`} target="_blank" rel="noopener noreferrer">/blog/{slug || r._id}</a>
@@ -369,7 +367,7 @@ const AdminDashboard = ({ onFinish }) => {
         <Form form={form} layout="vertical" onFinish={handleAddDesign}>
           <Form.Item label="Design Title" name="title" rules={[{ required: true }]}><Input placeholder="E.g. Luxury Bedroom" /></Form.Item>
           <Row gutter={16}>
-            <Col span={12}>
+            <Col span={24}>
               <Form.Item label="Category" name="category" rules={[{ required: true }]}>
                 <Select placeholder="Select Category">
                   <Option value="Bedroom">Bedroom</Option>
@@ -379,9 +377,6 @@ const AdminDashboard = ({ onFinish }) => {
                   <Option value="False Ceiling">False Ceiling</Option>
                 </Select>
               </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item label="Price" name="price" rules={[{ required: true }]}><InputNumber style={{ width: '100%' }} placeholder="₹ Amount" /></Form.Item>
             </Col>
           </Row>
           <Form.Item label="Image URL" name="image" rules={[{ required: true }]}><Input placeholder="Cloudinary or Unsplash link" /></Form.Item>
@@ -425,7 +420,7 @@ const AdminDashboard = ({ onFinish }) => {
             </Col>
           </Row>
           <Form.Item label="FAQ (optional)" name="faq" extra="One question per line:  Question? | Answer. Shown under the blog and sent to Google.">
-            <Input.TextArea rows={4} placeholder={'What is the false ceiling cost per sq. ft.? | It starts at ₹120 per sq. ft.\nHow long does it take? | About 7 working days.'} />
+            <Input.TextArea rows={4} placeholder={'Do you give a free site visit? | Yes, the site visit and 3D design are free.\nHow long does it take? | About 7 working days.'} />
           </Form.Item>
           {editingBlog?.source === 'sheet' && (
             <p style={{ color: '#b45309', margin: '0 0 8px' }}>This blog comes from the Google Sheet. Edit it in the sheet, or your changes here will be replaced at the next sync.</p>

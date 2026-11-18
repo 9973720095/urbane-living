@@ -1,13 +1,11 @@
-// False Ceiling page: extra SEO sections (types & prices, cities, FAQ).
-// Prices come from the estimator in falseCeiling.js, so they always match.
+// False Ceiling page: extra SEO sections (types, cities, FAQ). No prices are shown on the website.
 // Only write what is true for your work - customers and Google both read this.
 
 export const ceilingTypes = {
-  eyebrow: 'TYPES & PRICES',
+  eyebrow: 'TYPES OF FALSE CEILING',
   title: 'Which false ceiling is',
   highlight: 'right for your room?',
   subtitle: 'Every type has its place. Here is where each one works best, so you can choose with confidence.',
-  // material = name in estimator.materials (price is picked from there)
   items: [
     {
       material: 'Premium Gypsum',
@@ -35,7 +33,7 @@ export const ceilingTypes = {
       points: ['Warm, premium look', 'Pairs well with cove lights', 'Panels, slats or full wood'],
     },
   ],
-  note: 'Final price depends on your design, area and lighting. You get an itemised quote after a free site visit.',
+  note: 'Not sure which one suits your room? Our designer suggests the right type at the free site visit.',
 };
 
 export const ceilingCities = {
@@ -51,8 +49,8 @@ export const ceilingFaq = {
   highlight: 'before they start',
   items: [
     {
-      q: 'What is the false ceiling cost per sq. ft. in Delhi NCR?',
-      a: 'With Urbane Living, false ceilings start from ₹120 per sq. ft. Gypsum and POP start at ₹120, PVC at about ₹200 and wooden at about ₹210 per sq. ft. Lights, design levels and site conditions change the final price, so you get an itemised quote after a free site visit.',
+      q: 'How is the false ceiling cost worked out?',
+      a: 'It depends on the area, the material (gypsum, POP, PVC or wooden), the design (single level, cove or multi-level), the number of lights and the site. After a free site visit and 3D design, you get an itemised quote that is locked when you book.',
     },
     {
       q: 'How long does false ceiling work take?',
