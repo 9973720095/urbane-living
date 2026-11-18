@@ -58,7 +58,7 @@ export const blogPosts = [
 <p>Older homes usually need a refresh rather than a full rebuild: a new <a href="/modular-kitchen/gurgaon">modular kitchen</a>, made-to-size <a href="/wardrobe/gurgaon">wardrobes</a>, better lighting and a peripheral false ceiling that hides beams without making rooms feel low. Work can be planned room by room, so the family can keep living at home.</p>
 
 <h2>What does it cost?</h2>
-<p>Cost depends on the size of the home, the rooms you include and the materials you choose. False ceilings are priced per sq. ft. of ceiling area and change with material, design and the number of light points. Kitchens and wardrobes are priced by size, material and fittings. Read our <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide</a> to see what drives the price, then get an itemised quote after the free site visit and 3D design, locked when you book.</p>
+<p>Cost depends on the size of the home, the rooms you include and the materials you choose. False ceilings are priced per sq. ft. of ceiling area and change with material, design and the number of light points. Kitchens and wardrobes are priced by size, material and fittings. Read our <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide</a> to see what drives the price, or work out your own figure with the <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>. You then get an itemised quote after the free site visit and 3D design, locked when you book.</p>
 
 <h2>How long does it take?</h2>
 <ul>
@@ -76,8 +76,15 @@ export const blogPosts = [
   <li>Who handles society paperwork, lift booking and debris?</li>
 </ul>
 
+<h2>Our recent work in Gurugram</h2>
+<ul>
+  <li><strong>3 BHK at DLF Park Place, <a href="/interior-designers/gurgaon/golf-course-road">Golf Course Road</a>:</strong> false ceiling and wardrobes.</li>
+  <li><strong>Full home interior on <a href="/interior-designers/gurgaon/sohna-road">Sohna Road</a>:</strong> complete home, from 3D design to handover.</li>
+  <li><strong>Full home interior on <a href="/interior-designers/gurgaon/mg-road">MG Road</a>:</strong> complete home, from 3D design to handover.</li>
+</ul>
+
 <h2>Get a free 3D design for your Gurugram home</h2>
-<p>We design and install home interiors across <a href="/interior-designers/gurgaon">Gurugram</a>, including <a href="/interior-designers/gurgaon/dwarka-expressway">Dwarka Expressway</a>, <a href="/interior-designers/gurgaon/golf-course-extension-road">Golf Course Extension Road</a>, <a href="/interior-designers/gurgaon/golf-course-road">Golf Course Road</a>, <a href="/interior-designers/gurgaon/sohna-road">Sohna Road</a> and <a href="/interior-designers/gurgaon/dlf-phase-1-5">DLF Phases</a>. <a href="/contact">Book a free site visit</a> or call 07965315325.</p>
+<p>We design and install home interiors across <a href="/interior-designers/gurgaon">Gurugram</a>, including <a href="/interior-designers/gurgaon/dwarka-expressway">Dwarka Expressway</a>, <a href="/interior-designers/gurgaon/golf-course-extension-road">Golf Course Extension Road</a>, <a href="/interior-designers/gurgaon/golf-course-road">Golf Course Road</a>, <a href="/interior-designers/gurgaon/sohna-road">Sohna Road</a>, <a href="/interior-designers/gurgaon/mg-road">MG Road</a> and <a href="/interior-designers/gurgaon/dlf-phase-1-5">DLF Phases</a>. <a href="/contact">Book a free site visit</a> or call 07965315325.</p>
 `,
     faq: [
       {
@@ -90,7 +97,7 @@ export const blogPosts = [
       },
       {
         q: 'Do you work on Dwarka Expressway and Golf Course Extension Road?',
-        a: 'Yes. We work across Gurugram, including Dwarka Expressway, Golf Course Road, Golf Course Extension Road, Sohna Road, DLF Phases, South City, Palam Vihar and New Gurgaon.',
+        a: 'Yes. We work across Gurugram, including Dwarka Expressway, Golf Course Road, Golf Course Extension Road, Sohna Road, MG Road, DLF Phases, South City, Palam Vihar and New Gurgaon.',
       },
     ],
   },

@@ -340,7 +340,7 @@ export const serviceCityContent = {
       },
       {
         q: 'Do you cover Dwarka Expressway, Sohna Road and Golf Course Extension Road?',
-        a: 'Yes. We work across Gurugram, including DLF Phases, Golf Course Road, Golf Course Extension Road, Sohna Road, Dwarka Expressway, South City, Palam Vihar and New Gurgaon.',
+        a: 'Yes. We work across Gurugram, including DLF Phases, Golf Course Road, Golf Course Extension Road, Sohna Road, MG Road, Dwarka Expressway, South City, Palam Vihar and New Gurgaon.',
       },
     ],
   },
