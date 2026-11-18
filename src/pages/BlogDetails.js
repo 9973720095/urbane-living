@@ -5,9 +5,10 @@ import PageBanner from '../components/PageBanner';
 import useSeo from '../hooks/useSeo';
 import { siteUrl, brand, findBlogPost, blogAuthor } from '../data/siteData';
 import { fromStatic, mergePosts, fetchBlog, fetchBlogList } from '../utils/blogs';
+import { photo } from '../data/media';
 
-// Default Image if blog.image is empty
-const fallbackImage = "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop";
+// Our own photo, used when a blog has no image
+const fallbackImage = photo('livingTvWallWide', 1400);
 
 // YouTube / Vimeo / Google Drive / .mp4 link -> playable URL ('' if it is not a video link)
 const videoUrl = (link) => {

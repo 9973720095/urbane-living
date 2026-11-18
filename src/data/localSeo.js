@@ -39,7 +39,7 @@ export const localServices = [
     intro: (c) =>
       `We design and install gypsum, POP, PVC and wooden false ceilings across ${c}, with lighting planned together so the ceiling looks finished on day one.`,
     image: slot('city.false-ceiling.banner', 'livingTvWallWide', 1400, 'City pages (Noida, Gurugram...) › False Ceiling › Top banner'),
-    mainLink: { to: '/false-ceiling', label: 'Explore false ceiling designs' },
+    mainLink: { to: '/false-ceiling#cost-estimator', label: 'See designs & work out your cost' },
     includes: [
       { title: 'Gypsum ceiling', text: 'Smooth, crack-resistant finish for living rooms and bedrooms.' },
       { title: 'POP ceiling', text: 'Custom curves and mouldings for classic looks.' },
@@ -59,7 +59,7 @@ export const localServices = [
       `Modular kitchens in ${c}: L-shaped, U-shaped, parallel and island designs with smart storage and easy-clean finishes. Free 3D design and site visit.`,
     intro: (c) =>
       `Your kitchen in ${c} is planned around how your family cooks: the right storage for every utensil, finishes that clean easily and fittings that last.`,
-    image: slot('city.modular-kitchen.banner', 'greyKitchenL', 1400, 'City pages (Noida, Gurugram...) › Modular Kitchen › Top banner'),
+    image: slot('city.modular-kitchen.banner', 'lShapeKitchenFridge', 1400, 'City pages (Noida, Gurugram...) › Modular Kitchen › Top banner'),
     mainLink: { to: '/kitchen', label: 'See our modular kitchen designs' },
     includes: [
       { title: 'All layouts', text: 'L-shaped, U-shaped, parallel, straight and island.' },
@@ -81,7 +81,7 @@ export const localServices = [
       `Sliding, hinged and walk-in wardrobes in ${c}, made to your wall size with lofts, drawers and organisers. Free design consultation and site visit.`,
     intro: (c) =>
       `We build wardrobes in ${c} to your exact wall size, and plan the inside around what you actually store: clothes, shoes, bags and bed linen.`,
-    image: slot('city.wardrobe.banner', 'wardrobeBedroom', 1400, 'City pages (Noida, Gurugram...) › Wardrobe › Top banner'),
+    image: slot('city.wardrobe.banner', 'slidingWardrobeBedroom', 1400, 'City pages (Noida, Gurugram...) › Wardrobe › Top banner'),
     mainLink: { to: '/wardrobe', label: 'See our wardrobe designs' },
     includes: [
       { title: 'Sliding wardrobes', text: 'Space-saving doors for compact bedrooms.' },

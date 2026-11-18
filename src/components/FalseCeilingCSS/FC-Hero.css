@@ -1,7 +1,7 @@
 .fc-hero {
   height: 75vh;
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-              url('https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000') center/cover;
+              url('https://res.cloudinary.com/nzqefovs/image/upload/q_auto,f_auto,w_1400,c_limit/v1794306120/Enscape_2026-08-06-05-55-47_living_area__1.png') center/cover;
   display: flex;
   align-items: center;
   justify-content: center;

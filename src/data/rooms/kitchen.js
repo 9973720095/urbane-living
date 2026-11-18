@@ -14,8 +14,8 @@ export const kitchenPage = {
     title: 'A kitchen that makes',
     highlight: 'cooking easy',
     subtitle: 'Smart storage, easy-clean finishes and soft-close fittings, designed around how your family cooks and made to fit your space.',
-    image: slot('kitchen.banner', 'kitchenLOpen', 1400, 'Modular Kitchen page › Top banner'),
-    imageAlt: slotAlt('kitchen.banner', 'kitchenLOpen'),
+    image: slot('kitchen.banner', 'uShapeKitchen', 1400, 'Modular Kitchen page › Top banner'),
+    imageAlt: slotAlt('kitchen.banner', 'uShapeKitchen'),
     whatsappMessage: 'Hi Urbane Living, I want a free 3D design for my modular kitchen.',
     align: 'left',
     highlights,
@@ -84,6 +84,6 @@ export const kitchenPage = {
     description:
       'Modular kitchen design in Delhi, Noida, Ghaziabad and Gurgaon. Smart storage, soft-close fittings and easy-clean finishes with a free 3D design and itemised quote.',
     path: '/kitchen',
-    image: slot('kitchen.banner', 'kitchenLOpen', 1400, 'Modular Kitchen page › Top banner'),
+    image: slot('kitchen.banner', 'uShapeKitchen', 1400, 'Modular Kitchen page › Top banner'),
   },
 };

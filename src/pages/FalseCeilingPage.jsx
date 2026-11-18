@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
-import axios from "axios";
 import { Select, Pagination } from "antd";
 import CeilingEdge from "../components/FalseCeiling/CeilingEdge";
 import CeilingTypes from "../components/FalseCeiling/CeilingTypes";
+import CostEstimator from "../components/FalseCeiling/CostEstimator";
 import CeilingCities from "../components/FalseCeiling/CeilingCities";
 import CeilingFaq from "../components/FalseCeiling/CeilingFaq";
 import Hero from "../components/Hero";
@@ -10,7 +10,8 @@ import ProcessSection from "../components/ProcessSection";
 import SpacesGrid from "../components/SpacesGrid";
 import SectionHeading from "../components/SectionHeading";
 import useSeo from "../hooks/useSeo";
-import { API_BASE_URL, banners, designFilters, seo } from "../data/siteData";
+import { banners, designFilters, seo } from "../data/siteData";
+import { roomGallery } from "../data/media";
 import { ceilingFaq } from "../data/ceilingGuide";
 import { localCities } from "../data/localSeo";
 
@@ -41,20 +42,18 @@ export default function FalseCeilingPage({ onOpenForm }) {
   }, []);
   useSeo(pageSeo);
 
-  // STATES
-  const [designs, setDesigns] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // Our own false ceiling photos (Cloudinary, changeable from Admin -> Website Images)
+  const designs = useMemo(() => roomGallery('falseCeiling'), []);
   const [filters, setFilters] = useState({ category: "", style: "" });
   const [currentPage, setCurrentPage] = useState(1);
   const [pageSize, setPageSize] = useState(8);
-  const [hasAnyDesign, setHasAnyDesign] = useState(null); // null = still checking
+  const loading = false;
 
   // Responsive page size
   useEffect(() => {
     const updatePageSize = () => {
       const width = window.innerWidth;
-      if (width < 576) setPageSize(4);      // Mobile: 2 x 2 cards
-      else if (width < 992) setPageSize(4); // Tablet: 4 cards
+      if (width < 992) setPageSize(4);      // Mobile / tablet: 4 cards
       else setPageSize(8);                  // Desktop: 8 cards
     };
     updatePageSize();
@@ -62,27 +61,11 @@ export default function FalseCeilingPage({ onOpenForm }) {
     return () => window.removeEventListener('resize', updatePageSize);
   }, []);
 
-  useEffect(() => {
-    const fetchDesigns = async () => {
-      setLoading(true);
-      try {
-        const res = await axios.get(`${API_BASE_URL}/api/designs`, { params: filters });
-        const list = Array.isArray(res.data) ? res.data : [];
-        setDesigns(list);
-        if (!filters.category && !filters.style) setHasAnyDesign(list.length > 0);
-      } catch (err) {
-        console.log("Error fetching designs:", err);
-        if (!filters.category && !filters.style) setHasAnyDesign(false);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchDesigns();
-    setCurrentPage(1);
-  }, [filters]);
+  useEffect(() => setCurrentPage(1), [filters]);
 
-  // No prices on the website: designs are filtered by room and style only
-  const visibleDesigns = designs;
+  const visibleDesigns = designs.filter(
+    (d) => (!filters.category || d.category === filters.category) && (!filters.style || d.style === filters.style),
+  );
 
   const indexOfLastItem = currentPage * pageSize;
   const currentItems = visibleDesigns.slice(indexOfLastItem - pageSize, indexOfLastItem);
@@ -107,20 +90,23 @@ export default function FalseCeilingPage({ onOpenForm }) {
       {/* 2. Types of false ceiling */}
       <CeilingTypes onOpenForm={onOpenForm} />
 
+      {/* 3. Cost estimator (the customer works out their own estimate) */}
+      <CostEstimator onOpenForm={onOpenForm} />
+
       {/* 4. Design videos */}
       <div className="bg-white pb-10">
         <SpacesGrid onOpenForm={onOpenForm} />
       </div>
 
-      {/* 5. Designs from the admin panel (hidden when there are none yet) */}
-      {hasAnyDesign !== false && (
+      {/* 5. Design gallery: our own false ceiling photos */}
+      {designs.length > 0 && (
         <section aria-labelledby="designs-title" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-20">
           <div className="mx-auto max-w-[1200px]">
             <SectionHeading
               id="designs-title"
               eyebrow="DESIGN GALLERY"
               title={designFilters.title}
-              subtitle="Filter by room and style. Tap any design to get its quote."
+              subtitle="False ceiling designs by our team. Filter by room and style, then tap Get Quote."
             />
 
             {/* Filters */}
@@ -166,8 +152,8 @@ export default function FalseCeilingPage({ onOpenForm }) {
                     <article className="group flex h-full flex-col overflow-hidden rounded-2xl bg-white shadow-card transition hover:-translate-y-1 hover:shadow-card-hover">
                       <div className="aspect-[4/3] overflow-hidden">
                         <img
-                          src={item.image}
-                          alt={`${item.title} - false ceiling design by Urbane Living`}
+                          src={item.thumb || item.image}
+                          alt={item.alt || `${item.title} - false ceiling design by Urbane Living`}
                           loading="lazy"
                           decoding="async"
                           className="block h-full w-full object-cover transition duration-500 group-hover:scale-105"

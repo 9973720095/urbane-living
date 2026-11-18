@@ -5,6 +5,7 @@ import { Button, Card, Typography, message } from 'antd';
 import { GoogleOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import { isAdminEmail } from '../config/admins';
+import { photo } from '../data/media';
 
 const { Title, Text } = Typography;
 
@@ -57,7 +58,7 @@ const Login = () => {
         justifyContent: 'center',
         alignItems: 'center',
         background:
-          'url("https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=2000") no-repeat center center/cover',
+          `url("${photo('livingTvWall', 1400)}") no-repeat center center/cover`,
         position: 'relative',
         overflow: 'hidden'
       }}

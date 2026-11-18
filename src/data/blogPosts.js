@@ -133,6 +133,7 @@ export const blogPosts = [
 
 <h2>4. How to measure your ceiling area</h2>
 <p>For a flat ceiling, the area is simply length × width of the room. A 12 ft × 14 ft bedroom has 168 sq. ft. of ceiling. For cove and multi-level designs, contractors also count the vertical drops, so the billed area can be 10–20% higher than the floor area. Always ask for the measured area to be written on the quote.</p>
+<p>Once you know the area, put it into our <a href="/false-ceiling#cost-estimator">cost estimator</a> with your material, design and number of lights to see your own estimate.</p>
 
 <h2>Why quotes for the same room differ so much</h2>
 <ol>
@@ -168,7 +169,7 @@ export const blogPosts = [
 <blockquote>Tip: finish the false ceiling before modular furniture is fitted, and after electrical and AC piping work. This order avoids breaking a finished ceiling later.</blockquote>
 
 <h2>Get an exact quote</h2>
-<p>Every home is different, so the final cost is fixed only after measuring the site. We visit for free, show you designs in 3D and give an itemised quote per sq. ft. that is locked when you book, with no surprise "extra material" bills later. See finished work on our <a href="/false-ceiling">false ceiling page</a>, <a href="/contact">book a free site visit</a> or call our toll-free number 07965315325.</p>
+<p>Every home is different, so the final cost is fixed only after measuring the site. We visit for free, show you designs in 3D and give an itemised quote per sq. ft. that is locked when you book, with no surprise "extra material" bills later. Want a figure for your own rooms first? Use our <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>: pick the area, material, design and light points and it shows your estimate in seconds. Then <a href="/contact">book a free site visit</a> or call our toll-free number 07965315325.</p>
 `,
     faq: [
       {
@@ -244,7 +245,7 @@ export const blogPosts = [
 
 <h2>Our recommendation</h2>
 <p>For most flats in Gurugram, Noida, Ghaziabad and Delhi, <strong>gypsum is the better default</strong>: faster, cleaner and more consistent. Use POP only where the design truly needs curves or detailed work. Many homes mix both: gypsum for the main ceiling and POP for one feature element.</p>
-<p>See finished designs on our <a href="/false-ceiling">false ceiling page</a>, or read the <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide for Delhi NCR</a>.</p>
+<p>See finished designs and work out your cost with the <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>, or read the <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide for Delhi NCR</a>.</p>
 `,
     faq: [
       {

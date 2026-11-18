@@ -175,6 +175,71 @@ export const photos = {
     id: 'v1794982160/Enscape_2026-11-15-18-50-28_Enscape_scene_2.png',
     alt: 'Living room with a beige sectional sofa and wall moulding, opening into a grey modular kitchen',
   },
+  // Cloudinary root + folders "BEDROOMS" and "mr. aggarwal" (our renders, no other brand on them)
+  galleyKitchen: {
+    id: 'v1794306243/kiitchen.png',
+    alt: 'Parallel modular kitchen with white and wood cabinets, steel fridge, built-in microwave and black counter',
+  },
+  uShapeKitchen: {
+    id: 'v1794306120/Enscape_2026-08-06-05-55-47_kitchen_1.png',
+    alt: 'U-shaped modular kitchen with walnut base cabinets, white wall units, glass shutters and black sink',
+  },
+  lShapeKitchenFridge: {
+    id: 'v1794306121/Enscape_2026-08-06-05-55-47_kitchen_2.png',
+    alt: 'L-shaped modular kitchen with a tall fridge unit, lit wooden display shelves and glass wall cabinets',
+  },
+  diningOpenKitchen: {
+    id: 'v1794306121/dining_area_2.png',
+    alt: 'Dining area with tan chairs, cluster pendant light and false ceiling, opening into the kitchen',
+  },
+  blushMasterBedroom: {
+    id: 'v1794982143/IMG_20261112_174642.jpg.jpg',
+    alt: 'Master bedroom with a blush pink headboard, floral wall panels, cove-lit false ceiling and wardrobe',
+  },
+  sageWardrobeBedroom: {
+    id: 'v1794982146/Enscape_2026-11-16-12-53-25_MB_-1.png',
+    alt: 'Bedroom with sage green wall panels, a full-height sage wardrobe and profile lights in the false ceiling',
+  },
+  sageTvBedroom: {
+    id: 'v1794982145/Enscape_2026-11-16-12-53-25_MB-2.png',
+    alt: 'Bedroom with sage green panelled walls, wooden TV unit and profile-lit false ceiling',
+  },
+  greyTvBedroom: {
+    id: 'v1794982153/Enscape_2026-11-12-14-43-16_MB-2.png',
+    alt: 'White bedroom with a grey upholstered bed, framed wall panels, wardrobe and wooden TV unit',
+  },
+  slidingWardrobeBedroom: {
+    id: 'v1794982149/Enscape_2026-11-12-17-04-06_BEDROOM-1.1.png',
+    alt: 'Bedroom with a pink upholstered wall, white sliding wardrobe with a glass shutter and framed panels',
+  },
+  pinkPanelBedroom: {
+    id: 'v1794982150/Enscape_2026-11-12-17-04-06_BEDROOM_-1.png',
+    alt: 'Bedroom with a pink panelled headboard, wooden slat detail and a white full-height wardrobe',
+  },
+  beigeWardrobeBedroom: {
+    id: 'v1794982161/Enscape_2026-11-15-18-50-28_BEDROOM_-1.png',
+    alt: 'Beige bedroom with a grey headboard, full-height wardrobe with black glass shutters and cove ceiling',
+  },
+  beigeWardrobeFront: {
+    id: 'v1794982161/Enscape_2026-11-15-18-50-28_BEDROOM-1.1.png',
+    alt: 'Bedroom wardrobe wall with beige shutters, black glass doors and long black handles',
+  },
+  studyGuestRoom: {
+    id: 'v1794982158/Enscape_2026-11-15-18-50-28_Enscape_scene_5.png',
+    alt: 'Guest room with a wall-mounted study desk, daybed and carved white pooja unit',
+  },
+  coffeeStation: {
+    id: 'v1794982142/Warm_Minimalist_Coffee_Station_Interior.png',
+    alt: 'Coffee and crockery station with lit glass shelves and beige base cabinets',
+  },
+  livingProfileCeiling: {
+    id: 'v1794982157/Enscape_2026-11-15-18-50-28_Enscape_scene_7.png',
+    alt: 'Living room with a cove-lit false ceiling, wardrobe wall, crockery unit and wooden slat TV wall',
+  },
+  bathroomStoneVanity: {
+    id: 'v1794306116/Enscape_2026-08-11-18-07-53_Enscape_scene_6.png',
+    alt: 'Bathroom with grey stone tiles, a backlit wavy mirror, vessel basin and glass shower',
+  },
 };
 
 /*
@@ -184,8 +249,11 @@ export const photos = {
 */
 export const roomGalleries = {
   kitchen: [
+    ['uShapeKitchen', 'U-shaped kitchen with walnut and white cabinets', 'Modern'],
+    ['lShapeKitchenFridge', 'L-shaped kitchen with tall fridge unit', 'Modern'],
     ['kitchenLOpen', 'Open kitchen facing the living room', 'Modern'],
-    ['greyKitchenL', 'Grey kitchen with marble backsplash', 'Minimal'],
+    ['galleyKitchen', 'Parallel kitchen with built-in microwave', 'Modern'],
+    ['greyKitchenL', 'Grey L-shaped kitchen with marble backsplash', 'Minimal'],
     ['greyKitchen', 'Grey kitchen with tall fridge unit', 'Minimal'],
     ['greyKitchenSink', 'Compact kitchen with black glass cabinets', 'Minimal'],
     ['diningToKitchen', 'Kitchen opening from the dining area', 'Modern'],
@@ -193,25 +261,48 @@ export const roomGalleries = {
   ],
   bedroom: [
     ['plumBedroom', 'Plum-panelled master bedroom', 'Luxury'],
+    ['blushMasterBedroom', 'Blush pink master bedroom with cove ceiling', 'Luxury'],
+    ['sageWardrobeBedroom', 'Sage green bedroom with matching wardrobe', 'Modern'],
     ['sageBedroom', 'Sage green bedroom with TV unit', 'Modern'],
-    ['sageBedroomFront', 'Sage green panelled bed wall', 'Modern'],
     ['goldArtBedroom', 'Panelled bedroom with gold artwork', 'Luxury'],
+    ['pinkPanelBedroom', 'Pink panelled bedroom with white wardrobe', 'Modern'],
+    ['greyTvBedroom', 'White bedroom with wooden TV unit', 'Minimal'],
+    ['beigeWardrobeBedroom', 'Beige bedroom with black glass wardrobe', 'Minimal'],
     ['pinkBedroom', 'Blush pink bedroom', 'Modern'],
-    ['wardrobeBedroom', 'Warm modern bedroom with TV panel', 'Modern'],
+    ['compactBedroom', 'Compact bedroom with full-height wardrobe', 'Minimal'],
     ['kidsRoomJungle', 'Kids room with bunk bed', 'Kids'],
     ['kidsRoomPink', 'Pink kids bedroom with bunk bed', 'Kids'],
     ['guestRoom', 'Guest room with study and daybed', 'Minimal'],
-    ['compactBedroom', 'Compact bedroom with full-height wardrobe', 'Minimal'],
-    ['studyPrayerNook', 'Study corner with pooja unit', 'Modern'],
+    ['studyGuestRoom', 'Guest room with study desk and pooja unit', 'Modern'],
   ],
   wardrobe: [
+    ['beigeWardrobeFront', 'Beige wardrobe with black glass shutters', 'Modern'],
+    ['slidingWardrobeBedroom', 'White sliding wardrobe with glass shutter', 'Modern'],
+    ['sageWardrobeBedroom', 'Full-height sage green wardrobe', 'Modern'],
     ['wardrobeBedroom', 'Full-height white wardrobe', 'Modern'],
     ['compactBedroom', 'Floor-to-ceiling wardrobe in a compact bedroom', 'Minimal'],
     ['goldArtBedroom', 'White and wood wardrobe', 'Luxury'],
     ['pinkBedroom', 'Sliding wardrobe with framed panels', 'Modern'],
-    ['sageBedroom', 'Wardrobe with lit glass shelf', 'Modern'],
+    ['pinkPanelBedroom', 'White wardrobe beside a pink panelled wall', 'Minimal'],
     ['guestRoom', 'Tall wardrobe in the guest room', 'Minimal'],
     ['kidsRoomJungle', 'Kids wardrobe with handle-less shutters', 'Kids'],
+  ],
+  // False Ceiling page gallery: [key, title, style, room] (room + style power the filters on that page)
+  falseCeiling: [
+    ['livingTvWall', 'Layered ceiling with chandelier over the living room', 'luxury', 'living'],
+    ['livingTvWallWide', 'Cove-lit gypsum ceiling over a backlit TV wall', 'luxury', 'living'],
+    ['livingProfileCeiling', 'Peripheral ceiling with cove lights', 'modern', 'living'],
+    ['beigeLiving', 'Cove-lit ceiling in a beige living room', 'minimalist', 'living'],
+    ['livingSofa', 'Gypsum ceiling with chandelier over the sofa', 'modern', 'living'],
+    ['swingLounge', 'Wooden ceiling over a lounge corner', 'luxury', 'living'],
+    ['diningPendant', 'Recessed ceiling over the dining table', 'modern', 'living'],
+    ['diningOpenKitchen', 'Dining ceiling with cluster pendant light', 'modern', 'living'],
+    ['blushMasterBedroom', 'Cove-lit ceiling in a master bedroom', 'luxury', 'bedroom'],
+    ['plumBedroom', 'Bedroom ceiling with soft cove light', 'luxury', 'bedroom'],
+    ['sageWardrobeBedroom', 'Profile-light ceiling in a sage bedroom', 'modern', 'bedroom'],
+    ['beigeWardrobeBedroom', 'Simple peripheral ceiling in a beige bedroom', 'minimalist', 'bedroom'],
+    ['uShapeKitchen', 'Kitchen ceiling with recessed lights', 'modern', 'kitchen'],
+    ['greyKitchenL', 'Clean flat ceiling in a grey kitchen', 'minimalist', 'kitchen'],
   ],
   living: [
     ['livingTvWall', 'Living room with fluted TV wall', 'Luxury'],
@@ -221,13 +312,14 @@ export const roomGalleries = {
     ['livingArchway', 'Living room through a wooden archway', 'Modern'],
     ['openPlanLiving', 'Open-plan living and dining', 'Modern'],
     ['beigeLiving', 'Beige living room with slatted TV wall', 'Minimal'],
+    ['livingProfileCeiling', 'Living room with cove-lit false ceiling', 'Modern'],
     ['livingGlassPartition', 'Living room with fluted glass partition', 'Minimal'],
     ['compactLiving', 'Compact living room with L-shaped sofa', 'Minimal'],
     ['livingWithKitchen', 'Living room opening into the kitchen', 'Minimal'],
     ['swingLounge', 'Lounge corner with a hanging swing', 'Luxury'],
     ['diningPendant', 'Dining area with recessed ceiling', 'Modern'],
+    ['diningOpenKitchen', 'Dining area with cluster pendant light', 'Modern'],
     ['diningCrockery', 'Dining with wooden crockery unit', 'Modern'],
-    ['crockeryBar', 'Crockery and coffee unit', 'Modern'],
   ],
 };
 
@@ -280,19 +372,20 @@ export const imageSlots = () => {
 };
 
 // Room page galleries (built once, so every photo is listed in the admin page)
-const galleryNames = { kitchen: 'Modular Kitchen page', bedroom: 'Bedroom page', wardrobe: 'Wardrobe page', living: 'Living Hall page' };
+const galleryNames = { kitchen: 'Modular Kitchen page', bedroom: 'Bedroom page', wardrobe: 'Wardrobe page', living: 'Living Hall page', falseCeiling: 'False Ceiling page' };
 // built on first use (after the admin overrides are loaded in src/index.js)
 let builtGalleries = null;
 const buildGalleries = () => Object.fromEntries(
   Object.entries(roomGalleries).map(([category, list]) => [
     category,
-    list.map(([key, title, style], n) => {
+    list.map(([key, title, style, room], n) => {
       const id = `${category}.gallery.${n + 1}`;
       const label = `${galleryNames[category]} › Design gallery › Photo ${n + 1} (${title})`;
       return {
         _id: `own-${category}-${n + 1}`,
         title,
         style,
+        category: room || category,
         image: slot(id, key, 1400, label),
         thumb: slot(id, key, 720, label),
         alt: slotAlt(id, key),
@@ -301,7 +394,7 @@ const buildGalleries = () => Object.fromEntries(
   ]),
 );
 
-// Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style, alt }
+// Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style, category, alt }
 export const roomGallery = (category) => {
   if (!builtGalleries) builtGalleries = buildGalleries();
   return builtGalleries[category] || [];

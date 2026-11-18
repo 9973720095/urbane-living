@@ -1,4 +1,5 @@
-// False Ceiling page: banner, design filters, SEO, "Urbane Ceiling Standard". No prices are shown on the website.
+// False Ceiling page: banner, cost estimator, design filters, SEO, "Urbane Ceiling Standard".
+// Rates are never printed on the page: the customer sees only their own estimate, after pressing "Calculate".
 import { slot, slotAlt } from './media';
 import { highlights } from './common';
 
@@ -21,6 +22,70 @@ export const banners = {
   },
 };
 
+// False ceiling cost estimator. Rates (per sq. ft.) are used only for the calculation and are NOT shown on the page.
+// Photos are slots, so they can be changed from Admin -> Website Images.
+export const estimator = {
+  id: 'cost-estimator',
+  tag: 'FALSE CEILING COST ESTIMATOR',
+  title: 'Work Out Your',
+  highlight: 'False Ceiling Cost',
+  subtitle: 'Pick your room size, material, design and lights. Press Calculate to see your estimate, then get the exact quote after a free site visit.',
+  defaultArea: 270,
+  minArea: 50,
+  maxArea: 5000,
+  sliderMax: 2500,
+  defaultLightPoints: 10,
+  lightRate: 450,
+  roomPresets: [
+    { label: 'Bedroom', sub: '12 × 14 ft', area: 168, lights: 6 },
+    { label: 'Living room', sub: '15 × 18 ft', area: 270, lights: 10 },
+    { label: '2 BHK', sub: 'about 600 sq. ft.', area: 600, lights: 24 },
+    { label: '3 BHK', sub: 'about 900 sq. ft.', area: 900, lights: 40 },
+  ],
+  materials: [
+    {
+      key: 'gypsum', name: 'Gypsum', rate: 120, note: 'Smooth finish, most popular for flats',
+      image: slot('falseCeiling.estimator.gypsum', 'livingTvWallWide', 480, 'False Ceiling page › Cost estimator › Gypsum card'),
+      imageAlt: slotAlt('falseCeiling.estimator.gypsum', 'livingTvWallWide'),
+    },
+    {
+      key: 'pop', name: 'POP', rate: 120, note: 'Curves and detailed mouldings',
+      image: slot('falseCeiling.estimator.pop', 'plumBedroom', 480, 'False Ceiling page › Cost estimator › POP card'),
+      imageAlt: slotAlt('falseCeiling.estimator.pop', 'plumBedroom'),
+    },
+    {
+      key: 'pvc', name: 'PVC', rate: 200, note: 'Moisture-proof for bathrooms and balconies',
+      image: slot('falseCeiling.estimator.pvc', 'bathroomStoneVanity', 480, 'False Ceiling page › Cost estimator › PVC card'),
+      imageAlt: slotAlt('falseCeiling.estimator.pvc', 'bathroomStoneVanity'),
+    },
+    {
+      key: 'wooden', name: 'Wooden', rate: 210, note: 'Warm accent over TV wall or dining',
+      image: slot('falseCeiling.estimator.wooden', 'swingLounge', 480, 'False Ceiling page › Cost estimator › Wooden card'),
+      imageAlt: slotAlt('falseCeiling.estimator.wooden', 'swingLounge'),
+    },
+  ],
+  designTiers: [
+    {
+      key: 'basic', label: 'Simple', sub: 'Single level, flat', value: 1.0,
+      image: slot('falseCeiling.estimator.simple', 'beigeWardrobeBedroom', 480, 'False Ceiling page › Cost estimator › Simple design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.simple', 'beigeWardrobeBedroom'),
+    },
+    {
+      key: 'cove', label: 'Cove lights', sub: 'Peripheral with hidden LED', value: 1.2,
+      image: slot('falseCeiling.estimator.cove', 'blushMasterBedroom', 480, 'False Ceiling page › Cost estimator › Cove design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.cove', 'blushMasterBedroom'),
+    },
+    {
+      key: 'multi', label: 'Multi-level', sub: 'Layered or curved designer', value: 1.5,
+      image: slot('falseCeiling.estimator.multi', 'livingTvWall', 480, 'False Ceiling page › Cost estimator › Multi-level design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.multi', 'livingTvWall'),
+    },
+  ],
+  rangeSpread: 0.1, // estimate is shown as a range (±10%), never as a fixed price
+  promises: ['10-year anti-crack warranty', 'Ready in 7 days*', 'Price locked at booking'],
+  disclaimer: '*Estimate for planning only. The final, itemised quote comes after the free site visit and depends on site conditions and final measurements.',
+};
+
 // False ceiling design gallery filters (values must match the backend)
 export const designFilters = {
   title: 'Explore Our Designs',
@@ -41,7 +106,7 @@ export const seo = {
   falseCeiling: {
     title: 'False Ceiling in Gurugram & Delhi NCR | Design & Installation | Urbane Living',
     description:
-      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. 10-year anti-crack warranty, itemised quote and a free 3D design.',
+      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. Work out your cost with our estimator, get a free 3D design and a 10-year anti-crack warranty.',
     path: '/false-ceiling',
     image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
     schema: [
