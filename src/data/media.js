@@ -78,7 +78,7 @@ export const photos = {
     alt: 'Kids bedroom with a black bunk bed, study desk and soft pink walls',
   },
 
-  // Kitchens (note: kitchen_1 / kitchen_2 / kitchen_3 were re-uploaded with other renders, so they are not used)
+  // Kitchens (more kitchens further down)
   kitchenLOpen: {
     id: 'v1794306120/Enscape_2026-08-06-05-55-47_kitchen_3.png',
     alt: 'Open modular kitchen with handle-less cabinets, opening into the living room',
@@ -244,7 +244,7 @@ export const photos = {
 
 /*
   Design gallery on the room pages (/kitchen, /bedroom, /wardrobe, /living-hall).
-  These show together with the designs added from the admin panel / Google Sheet.
+  Only our own photos show here (admin / Google Sheet designs are off, see RoomPage showAdminDesigns).
   To add a photo: add it to `photos` above, then put its key (and a title) here.
 */
 export const roomGalleries = {
