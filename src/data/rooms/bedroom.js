@@ -1,5 +1,5 @@
 // Bedroom page (/bedroom). Layout: components/RoomPage.jsx
-import { photo, alt as photoAlt } from '../media';
+import { slot, slotAlt } from '../media';
 import { highlights } from '../common';
 
 // Bedroom page (/bedroom). Designs come from the database (admin "Bedroom" + sheet "bedroom").
@@ -15,8 +15,8 @@ export const bedroomPage = {
     title: 'Bedrooms designed for',
     highlight: 'better sleep',
     subtitle: 'Wardrobes, bed back panels, soft lighting and smart storage, planned in one 3D design around how you rest and live.',
-    image: photo('plumBedroom'),
-    imageAlt: photoAlt('plumBedroom'),
+    image: slot('bedroom.banner', 'plumBedroom', 1400, 'Bedroom page › Top banner'),
+    imageAlt: slotAlt('bedroom.banner', 'plumBedroom'),
     whatsappMessage: 'Hi Urbane Living, I want a free 3D design for my bedroom.',
     align: 'left',
     highlights,
@@ -84,6 +84,6 @@ export const bedroomPage = {
     description:
       'Modern bedroom interior design in Delhi, Noida, Ghaziabad and Gurgaon. Wardrobes, storage beds, back panels, false ceilings and lighting with a free 3D design and itemised quote.',
     path: '/bedroom',
-    image: photo('plumBedroom'),
+    image: slot('bedroom.banner', 'plumBedroom', 1400, 'Bedroom page › Top banner'),
   },
 };

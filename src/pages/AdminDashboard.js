@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //... (All your existing imports)
 import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, InputNumber, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
-import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined } from '@ant-design/icons';
+import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { isAdminEmail } from '../config/admins';
 import '../utils/adminApi'; // sends the admin login token to the backend
+import WebsiteImages from './admin/WebsiteImages'; // change any photo on the website, page / section wise
 
 const { Content, Sider, Header } = Layout;
 const { Option } = Select;
@@ -190,6 +191,7 @@ const AdminDashboard = ({ onFinish }) => {
       <Menu.Item key="Wardrobe" icon={<BorderInnerOutlined />}>Wardrobe</Menu.Item>
       <Menu.Item key="Leads" icon={<SolutionOutlined />}>Leads</Menu.Item>
       <Menu.Item key="Blogs" icon={<EditOutlined />}>Blogs</Menu.Item>
+      <Menu.Item key="Website Images" icon={<PictureOutlined />}>Website Images</Menu.Item>
       <Menu.Item key="Logout" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: '#ff4d4f' }}>Logout</Menu.Item>
     </Menu>
   );
@@ -285,6 +287,8 @@ const AdminDashboard = ({ onFinish }) => {
           {activeTab === 'Living Hall' && renderDesignTable(filteredDesigns('Living Hall'), 'Living Hall Designs')}
           {activeTab === 'Kitchen' && renderDesignTable(filteredDesigns('Kitchen'), 'Kitchen Designs')}
           {activeTab === 'Wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
+
+          {activeTab === 'Website Images' && <WebsiteImages apiBase={API_BASE_URL} />}
 
           {activeTab === 'Leads' && (
             <Card title="Customer Leads" styles={{ body: { padding: '8px' } }}>

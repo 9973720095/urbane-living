@@ -14,6 +14,7 @@ const wardrobeRoutes = require('./routes/wardrobeRoutes');
 const kitchenRoutes = require('./routes/kitchenRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const googleReviewsRoutes = require('./routes/googleReviewsRoutes'); // live Google reviews
+const siteImageRoutes = require('./routes/siteImageRoutes'); // Admin -> Website Images
 
 // Google Sheet sync
 const Blog = require('./models/Blog');
@@ -126,6 +127,7 @@ app.use('/api/wardrobe', wardrobeRoutes);
 app.use('/api/kitchen', kitchenRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/google-reviews', googleReviewsRoutes); // live Google reviews (needs GOOGLE_PLACES_API_KEY + GOOGLE_PLACE_ID)
+app.use('/api/site-images', siteImageRoutes); // photos changed from the admin panel (page / section wise)
 
 app.get('/', (req, res) => {
     res.send(`🚀 Urbane Living Backend is active [${currentEnv}]`);

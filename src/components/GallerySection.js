@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image } from 'antd';
 import { ExpandOutlined } from '@ant-design/icons';
-import { photo, alt as photoAlt } from '../data/media';
+import { slot, slotAlt } from '../data/media';
 
 // Our work gallery. Phones: 2 per row with a wide photo on top and at the end.
 // Desktop: big first photo + 5 smaller ones (3 columns). Tap any photo to open the full view.
@@ -15,7 +15,11 @@ const galleryData = [
   { key: 'greyKitchenL', title: 'L-shaped Modular Kitchen', category: 'Kitchen' },
   { key: 'diningPendant', title: 'Dining Area with Recessed Ceiling', category: 'Dining' },
   { key: 'bathroomBeige', title: 'Modern Beige Bathroom', category: 'Bathroom' },
-].map((item) => ({ ...item, src: photo(item.key), alt: photoAlt(item.key) }));
+].map((item, i) => {
+  const id = `home.gallery.${i + 1}`;
+  const label = `Home › Our Masterpieces › Photo ${i + 1}${i === 0 ? ' (big)' : ''}`;
+  return { ...item, src: slot(id, item.key, 1400, label), alt: slotAlt(id, item.key) };
+});
 
 // layout of each tile by position
 const tileClass = (i, total) => {

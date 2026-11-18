@@ -1,5 +1,5 @@
 // Contact page (/contact). Phone, WhatsApp, email and address come from common.js -> contact.
-import { photo, alt as photoAlt } from './media';
+import { slot, slotAlt } from './media';
 
 export const contactPage = {
   banner: {
@@ -7,8 +7,8 @@ export const contactPage = {
     title: "Let's design your",
     highlight: 'dream home',
     subtitle: 'Call, WhatsApp or send us your details. A designer will get back to you to plan a free site visit.',
-    image: photo('beigeLiving'),
-    imageAlt: photoAlt('beigeLiving'),
+    image: slot('contact.banner', 'beigeLiving', 1400, 'Contact page › Top banner'),
+    imageAlt: slotAlt('contact.banner', 'beigeLiving'),
     whatsappMessage: 'Hi Urbane Living, I want to discuss my home interior project.',
     height: 'sm',
     align: 'center',
@@ -43,6 +43,6 @@ export const contactPage = {
     description:
       'Contact Urbane Living for interior design and false ceiling work in Delhi, Noida, Ghaziabad, Gurgaon and Faridabad. Call, WhatsApp or request a free consultation.',
     path: '/contact',
-    image: photo('beigeLiving'),
+    image: slot('contact.banner', 'beigeLiving', 1400, 'Contact page › Top banner'),
   },
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { ConfigProvider } from 'antd';
-import App from './App';
+import { loadImageOverrides } from './utils/siteImages';
 import reportWebVitals from './reportWebVitals';
 
 // Poppins font + logo red for all antd components (buttons, menu, forms)
@@ -18,14 +18,18 @@ const theme = {
 // The app adds the live version itself, so the saved copy is removed first (no duplicates).
 document.querySelectorAll('script[data-prerendered]').forEach((s) => s.remove());
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <ConfigProvider theme={theme}>
-      <App />
-    </ConfigProvider>
-  </React.StrictMode>
-);
+// Admin photo changes are loaded first, then the app (its page data picks the photos when it loads)
+loadImageOverrides().then(() => {
+  const App = require('./App').default; // eslint-disable-line global-require
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+  root.render(
+    <React.StrictMode>
+      <ConfigProvider theme={theme}>
+        <App />
+      </ConfigProvider>
+    </React.StrictMode>
+  );
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

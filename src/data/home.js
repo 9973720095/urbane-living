@@ -1,6 +1,6 @@
 // Home page sections.
 import { cdn } from './config';
-import { photo, alt as photoAlt, videos } from './media';
+import { slot, slotAlt, videos } from './media';
 
 export const hero = {
   eyebrow: 'Interior & False Ceiling Experts · Delhi NCR',
@@ -90,12 +90,12 @@ export const gallery = {
   title: 'Our Masterpieces',
   subtitle: 'Living rooms, bedrooms, kitchens and bathrooms designed in 3D by our in-house team, so you see your home before work starts.',
   items: [
-    { src: photo('livingSofa'), title: 'Living Room', alt: photoAlt('livingSofa') },
-    { src: photo('sageBedroom'), title: 'Bedroom', alt: photoAlt('sageBedroom') },
-    { src: photo('greyKitchenL'), title: 'Modular Kitchen', alt: photoAlt('greyKitchenL') },
-    { src: photo('openPlanLiving'), title: 'Living & Dining', alt: photoAlt('openPlanLiving') },
-    { src: photo('kidsRoomPink'), title: 'Kids Bedroom', alt: photoAlt('kidsRoomPink') },
-    { src: photo('bathroomBeige'), title: 'Bathroom', alt: photoAlt('bathroomBeige') },
+    { src: slot('home.photos.1', 'livingSofa', 1400, 'Home › Homes our clients love › Photo 1'), title: 'Living Room', alt: slotAlt('home.photos.1', 'livingSofa') },
+    { src: slot('home.photos.2', 'sageBedroom', 1400, 'Home › Homes our clients love › Photo 2'), title: 'Bedroom', alt: slotAlt('home.photos.2', 'sageBedroom') },
+    { src: slot('home.photos.3', 'greyKitchenL', 1400, 'Home › Homes our clients love › Photo 3'), title: 'Modular Kitchen', alt: slotAlt('home.photos.3', 'greyKitchenL') },
+    { src: slot('home.photos.4', 'openPlanLiving', 1400, 'Home › Homes our clients love › Photo 4'), title: 'Living & Dining', alt: slotAlt('home.photos.4', 'openPlanLiving') },
+    { src: slot('home.photos.5', 'kidsRoomPink', 1400, 'Home › Homes our clients love › Photo 5'), title: 'Kids Bedroom', alt: slotAlt('home.photos.5', 'kidsRoomPink') },
+    { src: slot('home.photos.6', 'bathroomBeige', 1400, 'Home › Homes our clients love › Photo 6'), title: 'Bathroom', alt: slotAlt('home.photos.6', 'bathroomBeige') },
   ],
 };
 
@@ -141,7 +141,7 @@ export const process = {
       heading: 'Enjoy the new look',
       duration: 'Just 7* days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580360/enjoy-new-look-reel-9x16.mp4',
-      img: photo('swingLounge', 720),
+      img: slot('home.process.4', 'swingLounge', 720, 'Home › 7-day process › Step 4 photo'),
     },
   ],
   note: '*Typical timeline after design approval. Larger areas may take a little longer.',

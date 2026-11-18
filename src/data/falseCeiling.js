@@ -1,5 +1,5 @@
 // False Ceiling page: banner, cost estimator, design filters, SEO, "Urbane Ceiling Standard".
-import { photo, alt as photoAlt } from './media';
+import { slot, slotAlt } from './media';
 import { highlights } from './common';
 
 // Page banners: use with <PageBanner {...banners.falseCeiling} primary={...} />
@@ -9,8 +9,8 @@ export const banners = {
     title: 'Get Your False Ceiling done in',
     highlight: 'Just 7 Days*',
     // subtitle: 'Premium False Ceiling Designs Starting ₹120/sqft',
-    image: photo('livingTvWall'),
-    imageAlt: photoAlt('livingTvWall'),
+    image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
+    imageAlt: slotAlt('falseCeiling.banner', 'livingTvWall'),
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
@@ -78,7 +78,7 @@ export const seo = {
     description:
       'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. From ₹120/sqft with a 10-year anti-crack warranty. Try the cost estimator and get a free 3D design.',
     path: '/false-ceiling',
-    image: photo('livingTvWall'),
+    image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
     schema: [
       {
         '@context': 'https://schema.org',

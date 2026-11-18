@@ -1,5 +1,5 @@
 // About Us page (/about). Keep every promise here true: customers and Google read it.
-import { photo, alt as photoAlt } from './media';
+import { slot, slotAlt } from './media';
 
 export const aboutPage = {
   banner: {
@@ -7,8 +7,8 @@ export const aboutPage = {
     title: 'We design homes that',
     highlight: 'feel like you',
     subtitle: 'An interior and false ceiling team from Delhi NCR that designs, builds and installs your home, with one point of contact from the first visit to handover.',
-    image: photo('openPlanLiving'),
-    imageAlt: photoAlt('openPlanLiving'),
+    image: slot('about.banner', 'openPlanLiving', 1400, 'About page › Top banner'),
+    imageAlt: slotAlt('about.banner', 'openPlanLiving'),
     whatsappMessage: 'Hi Urbane Living, I would like to know more about your interior design services.',
     height: 'md',
     align: 'center',
@@ -26,8 +26,8 @@ export const aboutPage = {
       'Branded materials, named in your quote',
       '10-year anti-crack warranty on our false ceilings',
     ],
-    image: photo('livingArchway'),
-    imageAlt: photoAlt('livingArchway'),
+    image: slot('about.story', 'livingArchway', 1000, 'About page › Our Story photo'),
+    imageAlt: slotAlt('about.story', 'livingArchway'),
   },
   values: {
     title: 'What we stand for',
@@ -57,6 +57,6 @@ export const aboutPage = {
     description:
       'Urbane Living is an interior design and false ceiling company in Delhi NCR. Free 3D design, itemised quotes, branded materials and one team from design to installation.',
     path: '/about',
-    image: photo('openPlanLiving'),
+    image: slot('about.banner', 'openPlanLiving', 1400, 'About page › Top banner'),
   },
 };

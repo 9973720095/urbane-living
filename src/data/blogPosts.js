@@ -5,18 +5,18 @@
 // To add a post: copy one object, give it a new unique slug (small letters and hyphens),
 // write the content in HTML, then add the URL to public/sitemap.xml.
 import { cdn } from './config';
-import { photo, alt as photoAlt } from './media';
+import { slot, slotAlt } from './media';
 
 const img = (file) => `${cdn}/image/upload/q_auto,f_auto,w_1400/${file}`;
 
 const images = {
-  ceiling: photo('livingTvWall'),
-  living: photo('livingTvWallWide'),
-  kitchen: photo('greyKitchenL'),
+  ceiling: slot('blog.ceiling', 'livingTvWall', 1400, 'Blog › Cover photo › False ceiling cost'),
+  living: slot('blog.living', 'livingTvWallWide', 1400, 'Blog › Cover photo › (spare)'),
+  kitchen: slot('blog.kitchen', 'greyKitchenL', 1400, 'Blog › Cover photo › Modular kitchen guide'),
   framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), // real site photo
-  wardrobe: photo('wardrobeBedroom'),
-  bedroom: photo('plumBedroom'),
-  livingAlt: photo('livingArchway'),
+  wardrobe: slot('blog.wardrobe', 'wardrobeBedroom', 1400, 'Blog › Cover photo › Sliding vs hinged wardrobe'),
+  bedroom: slot('blog.bedroom', 'plumBedroom', 1400, 'Blog › Cover photo › Vastu tips'),
+  livingAlt: slot('blog.livingAlt', 'livingArchway', 1400, 'Blog › Cover photo › New flat checklist'),
 };
 
 export const blogAuthor = 'Urbane Living Design Team';
@@ -31,8 +31,8 @@ export const blogPosts = [
     description:
       'Planning interiors in Gurugram (Gurgaon)? What to plan for new flats on Dwarka Expressway and Golf Course Extension Road, premium apartments on Golf Course Road and builder floors in DLF Phases, with costs, timeline and society rules.',
     category: 'Home Interiors',
-    image: photo('beigeLiving'),
-    imageAlt: photoAlt('beigeLiving'),
+    image: slot('blog.gurugram', 'beigeLiving', 1400, 'Blog › Cover photo › Home interiors in Gurugram'),
+    imageAlt: slotAlt('blog.gurugram', 'beigeLiving'),
     date: '2026-11-18',
     readMin: 5,
     content: `
@@ -103,7 +103,7 @@ export const blogPosts = [
       'How much does a false ceiling cost in Gurugram, Delhi, Noida and Ghaziabad? Rates per sq. ft. for gypsum, POP, PVC and wooden ceilings, with worked examples for a bedroom, living room and full flat.',
     category: 'False Ceiling',
     image: images.ceiling,
-    imageAlt: photoAlt('livingTvWall'),
+    imageAlt: slotAlt('blog.ceiling', 'livingTvWall'),
     date: '2026-11-14',
     readMin: 4,
     content: `
@@ -278,7 +278,7 @@ export const blogPosts = [
       'L-shape, U-shape, parallel or straight? A practical modular kitchen guide for Indian cooking: layouts, standard sizes, carcass and shutter materials, and the mistakes to avoid.',
     category: 'Modular Kitchen',
     image: images.kitchen,
-    imageAlt: photoAlt('greyKitchenL'),
+    imageAlt: slotAlt('blog.kitchen', 'greyKitchenL'),
     date: '2026-11-10',
     readMin: 4,
     content: `
@@ -370,7 +370,7 @@ export const blogPosts = [
       'Just got possession of your flat? A step-by-step interior checklist for new flats in Noida, Greater Noida West and Ghaziabad: what to check, the right order of work, budget split and society rules.',
     category: 'Home Interiors',
     image: images.livingAlt,
-    imageAlt: photoAlt('livingArchway'),
+    imageAlt: slotAlt('blog.livingAlt', 'livingArchway'),
     date: '2026-11-08',
     readMin: 3,
     content: `
@@ -451,7 +451,7 @@ export const blogPosts = [
       'Sliding or hinged wardrobe? Compare space, cost and usability, learn the standard wardrobe sizes for Indian bedrooms and pick the right materials and finishes.',
     category: 'Wardrobe',
     image: images.wardrobe,
-    imageAlt: photoAlt('wardrobeBedroom'),
+    imageAlt: slotAlt('blog.wardrobe', 'wardrobeBedroom'),
     date: '2026-11-06',
     readMin: 3,
     content: `
@@ -539,7 +539,7 @@ export const blogPosts = [
       'Simple Vastu tips for flats: the traditional directions for the entrance, kitchen, bedroom, pooja room and toilets, plus practical fixes that need no demolition.',
     category: 'Vastu',
     image: images.bedroom,
-    imageAlt: photoAlt('plumBedroom'),
+    imageAlt: slotAlt('blog.bedroom', 'plumBedroom'),
     date: '2026-11-04',
     readMin: 3,
     content: `

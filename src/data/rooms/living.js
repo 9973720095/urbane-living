@@ -1,5 +1,5 @@
 // Living Hall page (/living-hall). Layout: components/RoomPage.jsx
-import { photo, alt as photoAlt } from '../media';
+import { slot, slotAlt } from '../media';
 import { highlights } from '../common';
 
 // Living Hall page (/living-hall). Designs come from the database (admin "Living Hall" + sheet "living").
@@ -15,8 +15,8 @@ export const livingPage = {
     title: 'Living rooms your guests',
     highlight: 'never forget',
     subtitle: 'TV units, designer ceilings, wall panels and lighting, planned together in one 3D design and installed by one team.',
-    image: photo('livingTvWallWide'),
-    imageAlt: photoAlt('livingTvWallWide'),
+    image: slot('living.banner', 'livingTvWallWide', 1400, 'Living Hall page › Top banner'),
+    imageAlt: slotAlt('living.banner', 'livingTvWallWide'),
     whatsappMessage: 'Hi Urbane Living, I want a free 3D design for my living room.',
     align: 'left',
     highlights,
@@ -84,6 +84,6 @@ export const livingPage = {
     description:
       'Modern living room interior design in Delhi, Noida, Ghaziabad and Gurgaon. TV units, false ceilings, wall panelling and lighting with a free 3D design and itemised quote.',
     path: '/living-hall',
-    image: photo('livingTvWallWide'),
+    image: slot('living.banner', 'livingTvWallWide', 1400, 'Living Hall page › Top banner'),
   },
 };

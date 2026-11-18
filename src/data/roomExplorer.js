@@ -1,7 +1,7 @@
 // Home page "Room Explorer": tap the glowing points on each room photo.
 // x / y = where the point sits on the photo, in % from the left / top edge.
 // To find a spot: open the site on localhost, hold Alt and click the photo; the console prints x / y.
-import { photo, alt as photoAlt } from './media';
+import { slot, slotAlt } from './media';
 
 export const roomExplorer = {
   tag: 'Room Explorer',
@@ -13,8 +13,8 @@ export const roomExplorer = {
       id: 'living',
       name: 'Living Room',
       link: '/living-hall',
-      image: photo('livingTvWall'),
-      imageAlt: photoAlt('livingTvWall'),
+      image: slot('home.explorer.living', 'livingTvWall', 1400, 'Home › Room Explorer › Living Room tab (glowing points stay where they are)'),
+      imageAlt: slotAlt('home.explorer.living', 'livingTvWall'),
       intro: 'A warm, welcoming space for family time and guests.',
       spots: [
         { x: 40, y: 5, title: 'Cove-lit false ceiling', text: 'Layered gypsum ceiling with hidden LED strips for soft, glare-free light.' },
@@ -28,8 +28,8 @@ export const roomExplorer = {
       id: 'bedroom',
       name: 'Bedroom',
       link: '/bedroom',
-      image: photo('plumBedroom'),
-      imageAlt: photoAlt('plumBedroom'),
+      image: slot('home.explorer.bedroom', 'plumBedroom', 1400, 'Home › Room Explorer › Bedroom tab (glowing points stay where they are)'),
+      imageAlt: slotAlt('home.explorer.bedroom', 'plumBedroom'),
       intro: 'Calm, cosy and planned for better sleep.',
       spots: [
         { x: 50, y: 25, title: 'Bed back wall', text: 'Arched panel with hidden cove light behind the bed, framed by plum fluted panels.' },
@@ -42,8 +42,8 @@ export const roomExplorer = {
       id: 'kitchen',
       name: 'Kitchen',
       link: '/kitchen',
-      image: photo('kitchenLOpen'),
-      imageAlt: photoAlt('kitchenLOpen'),
+      image: slot('home.explorer.kitchen', 'kitchenLOpen', 1400, 'Home › Room Explorer › Kitchen tab (glowing points stay where they are)'),
+      imageAlt: slotAlt('home.explorer.kitchen', 'kitchenLOpen'),
       intro: 'Smart storage and easy-clean finishes for daily cooking.',
       spots: [
         { x: 50, y: 15, title: 'Wall cabinets', text: 'Glossy, handle-less upper cabinets with soft-close shutters.' },
@@ -56,8 +56,8 @@ export const roomExplorer = {
       id: 'kids',
       name: 'Kids Room',
       link: '/bedroom',
-      image: photo('kidsRoomJungle'),
-      imageAlt: photoAlt('kidsRoomJungle'),
+      image: slot('home.explorer.kids', 'kidsRoomJungle', 1400, 'Home › Room Explorer › Kids Room tab (glowing points stay where they are)'),
+      imageAlt: slotAlt('home.explorer.kids', 'kidsRoomJungle'),
       intro: 'Fun, safe and full of storage, made to grow with your child.',
       spots: [
         { x: 62, y: 50, title: 'Bunk bed', text: 'Bunk bed with a safe ladder and rails, saving floor space for play.' },
@@ -70,8 +70,8 @@ export const roomExplorer = {
       id: 'ceiling',
       name: 'False Ceiling',
       link: '/false-ceiling',
-      image: photo('diningPendant'),
-      imageAlt: photoAlt('diningPendant'),
+      image: slot('home.explorer.ceiling', 'diningPendant', 1400, 'Home › Room Explorer › False Ceiling tab (glowing points stay where they are)'),
+      imageAlt: slotAlt('home.explorer.ceiling', 'diningPendant'),
       intro: 'Designer ceilings with a 10-year anti-crack warranty.',
       spots: [
         { x: 55, y: 4, title: 'Recessed ceiling', text: 'Raised ceiling over the dining table with a hidden LED cove.' },

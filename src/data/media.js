@@ -5,6 +5,9 @@
   photo('livingTvWall')        -> full width (1400 px), for big banners
   photo('livingTvWall', 640)   -> smaller copy for cards and thumbnails (faster site)
   alt('livingTvWall')          -> description for Google + screen readers
+
+  Admin -> Website Images: every photo on the site sits in a named "slot" (slot / slotAlt below).
+  The admin panel can put a different Cloudinary photo in any slot, page by page, section by section.
 */
 const BASE = 'https://res.cloudinary.com/nzqefovs';
 
@@ -228,17 +231,6 @@ export const roomGalleries = {
   ],
 };
 
-// Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style }
-export const roomGallery = (category) =>
-  (roomGalleries[category] || []).map(([key, title, style]) => ({
-    _id: `own-${category}-${key}`,
-    title,
-    style,
-    image: photo(key),
-    thumb: photo(key, 720),
-    alt: alt(key),
-  }));
-
 // Our own site video: false ceiling being installed
 export const videos = {
   ceilingInstall:
@@ -249,3 +241,68 @@ export const photo = (key, width = 1400) =>
   `${BASE}/image/upload/q_auto,f_auto,w_${width},c_limit/${photos[key].id}`;
 
 export const alt = (key) => `${photos[key].alt} by Urbane Living`;
+
+/* ───────────── Slots (changed from Admin -> Website Images) ─────────────
+   slot('bedroom.banner', 'plumBedroom', 1400, 'Bedroom page › Top banner')
+   -> the admin's photo for 'bedroom.banner' if one is set, else our default photo.
+   Overrides are loaded in src/index.js before the app starts (see loadImageOverrides). */
+const overrides = {};
+const registry = new Map();
+
+export const setImageOverrides = (map) => {
+  if (map && typeof map === 'object') Object.assign(overrides, map);
+};
+
+// Cloudinary photo at the size it is shown (keeps the site fast)
+export const sizeCloudinary = (url, width) =>
+  /\/image\/upload\/v\d+\//.test(url)
+    ? url.replace('/image/upload/', `/image/upload/q_auto,f_auto,w_${width},c_limit/`)
+    : url;
+
+export const slot = (id, defaultKey, width = 1400, label = id) => {
+  if (!registry.has(id)) registry.set(id, { id, defaultKey, width, label });
+  const o = overrides[id];
+  return o && o.url ? sizeCloudinary(o.url, width) : photo(defaultKey, width);
+};
+
+export const slotAlt = (id, defaultKey) => {
+  const o = overrides[id];
+  return o && o.url && o.alt ? `${o.alt} by Urbane Living` : alt(defaultKey);
+};
+
+// Every slot on the website, for the admin page: [{ id, defaultKey, width, label, page, section, current }]
+export const imageSlots = () => {
+  roomGallery('kitchen'); // make sure the gallery slots are listed too
+  return [...registry.values()].map((r) => {
+    const [page, ...rest] = r.label.split(' › ');
+    return { ...r, page, section: rest.join(' › '), default: photo(r.defaultKey, 640), current: overrides[r.id] || null };
+  });
+};
+
+// Room page galleries (built once, so every photo is listed in the admin page)
+const galleryNames = { kitchen: 'Modular Kitchen page', bedroom: 'Bedroom page', wardrobe: 'Wardrobe page', living: 'Living Hall page' };
+// built on first use (after the admin overrides are loaded in src/index.js)
+let builtGalleries = null;
+const buildGalleries = () => Object.fromEntries(
+  Object.entries(roomGalleries).map(([category, list]) => [
+    category,
+    list.map(([key, title, style], n) => {
+      const id = `${category}.gallery.${n + 1}`;
+      const label = `${galleryNames[category]} › Design gallery › Photo ${n + 1} (${title})`;
+      return {
+        _id: `own-${category}-${n + 1}`,
+        title,
+        style,
+        image: slot(id, key, 1400, label),
+        thumb: slot(id, key, 720, label),
+        alt: slotAlt(id, key),
+      };
+    }),
+  ]),
+);
+
+// Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style, alt }
+export const roomGallery = (category) => {
+  if (!builtGalleries) builtGalleries = buildGalleries();
+  return builtGalleries[category] || [];
+};
