@@ -92,7 +92,7 @@ export const gallery = {
   items: [
     { src: photo('livingSofa'), title: 'Living Room', alt: photoAlt('livingSofa') },
     { src: photo('sageBedroom'), title: 'Bedroom', alt: photoAlt('sageBedroom') },
-    { src: photo('kitchenL'), title: 'Modular Kitchen', alt: photoAlt('kitchenL') },
+    { src: photo('greyKitchenL'), title: 'Modular Kitchen', alt: photoAlt('greyKitchenL') },
     { src: photo('openPlanLiving'), title: 'Living & Dining', alt: photoAlt('openPlanLiving') },
     { src: photo('kidsRoomPink'), title: 'Kids Bedroom', alt: photoAlt('kidsRoomPink') },
     { src: photo('bathroomBeige'), title: 'Bathroom', alt: photoAlt('bathroomBeige') },

@@ -28,6 +28,7 @@ import SectionHeading from './SectionHeading';
 import useSeo from '../hooks/useSeo';
 import { API_BASE_URL, siteUrl, contact } from '../data/siteData';
 import { localCities, localServices } from '../data/localSeo';
+import { roomGallery } from '../data/media';
 
 const PAGE = 9; // designs shown before "Load more"
 
@@ -123,7 +124,8 @@ const RoomPage = ({ page, onOpenForm }) => {
           .flatMap((r) => r.value.data)
           .filter((d) => d && d.image && !seen.has(d._id) && seen.add(d._id))
           .sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
-        setDesigns(merged);
+        // our own design photos (data/media.js) come after the admin / sheet designs
+        setDesigns([...merged, ...roomGallery(category)]);
       })
       .finally(() => setLoading(false));
   }, [api, category]);
@@ -238,8 +240,8 @@ const RoomPage = ({ page, onOpenForm }) => {
                       <article className="group relative overflow-hidden rounded-2xl bg-brand-navy shadow-card">
                         <button type="button" onClick={() => setViewer(i)} aria-label={`View ${d.title} larger`} className="block w-full cursor-zoom-in border-0 bg-transparent p-0">
                           <img
-                            src={d.image}
-                            alt={`${d.title} - ${altSuffix} by Urbane Living`}
+                            src={d.thumb || d.image}
+                            alt={d.alt || `${d.title} - ${altSuffix} by Urbane Living`}
                             loading="lazy"
                             decoding="async"
                             className="block aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"

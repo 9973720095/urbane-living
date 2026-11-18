@@ -12,7 +12,7 @@ const galleryData = [
   { key: 'livingTvWall', title: 'Living Room with Fluted TV Wall', category: 'Living Room' },
   { key: 'plumBedroom', title: 'Plum-Panelled Master Bedroom', category: 'Bedroom' },
   { key: 'kidsRoomJungle', title: 'Kids Room with Bunk Bed', category: 'Kids Room' },
-  { key: 'kitchenIsland', title: 'Island Modular Kitchen', category: 'Kitchen' },
+  { key: 'greyKitchenL', title: 'L-shaped Modular Kitchen', category: 'Kitchen' },
   { key: 'diningPendant', title: 'Dining Area with Recessed Ceiling', category: 'Dining' },
   { key: 'bathroomBeige', title: 'Modern Beige Bathroom', category: 'Bathroom' },
 ].map((item) => ({ ...item, src: photo(item.key), alt: photoAlt(item.key) }));

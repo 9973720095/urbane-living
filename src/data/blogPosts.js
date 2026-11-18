@@ -12,7 +12,7 @@ const img = (file) => `${cdn}/image/upload/q_auto,f_auto,w_1400/${file}`;
 const images = {
   ceiling: photo('livingTvWall'),
   living: photo('livingTvWallWide'),
-  kitchen: photo('kitchenL'),
+  kitchen: photo('greyKitchenL'),
   framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), // real site photo
   wardrobe: photo('wardrobeBedroom'),
   bedroom: photo('plumBedroom'),
@@ -278,7 +278,7 @@ export const blogPosts = [
       'L-shape, U-shape, parallel or straight? A practical modular kitchen guide for Indian cooking: layouts, standard sizes, carcass and shutter materials, and the mistakes to avoid.',
     category: 'Modular Kitchen',
     image: images.kitchen,
-    imageAlt: photoAlt('kitchenL'),
+    imageAlt: photoAlt('greyKitchenL'),
     date: '2026-11-10',
     readMin: 4,
     content: `

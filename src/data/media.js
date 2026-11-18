@@ -75,19 +75,7 @@ export const photos = {
     alt: 'Kids bedroom with a black bunk bed, study desk and soft pink walls',
   },
 
-  // Kitchens
-  kitchenIsland: {
-    id: 'v1794306244/kitchen_1.png',
-    alt: 'Modular kitchen with an island counter, pendant lights and a wooden archway entrance',
-  },
-  kitchenL: {
-    id: 'v1794306112/kitchen_2.png',
-    alt: 'L-shaped modular kitchen with wooden base units, glossy wall cabinets and a lit glass display unit',
-  },
-  kitchenLAlt: {
-    id: 'v1794306113/kitchen_3.png',
-    alt: 'L-shaped modular kitchen with a hob, chimney, wooden drawers and grey stone counter',
-  },
+  // Kitchens (note: kitchen_1 / kitchen_2 / kitchen_3 were re-uploaded with other renders, so they are not used)
   kitchenLOpen: {
     id: 'v1794306120/Enscape_2026-08-06-05-55-47_kitchen_3.png',
     alt: 'Open modular kitchen with handle-less cabinets, opening into the living room',
@@ -151,7 +139,105 @@ export const photos = {
     id: 'v1794982146/Warm_Wooden-Shutter_Prayer_Nook.png',
     alt: 'Study corner with a wall desk, floating shelves, window seat and a carved wooden pooja unit',
   },
+  // Cloudinary folder "BEDROOMS/New folder" (our renders, no other brand on them)
+  greyKitchen: {
+    id: 'v1794982163/Enscape_2026-11-15-18-39-26.png',
+    alt: 'Modular kitchen with grey handle-less cabinets, black granite counter, hob and tall fridge unit',
+  },
+  greyKitchenL: {
+    id: 'v1794982159/Enscape_2026-11-15-18-50-28_Enscape_scene_3.png',
+    alt: 'L-shaped modular kitchen with grey cabinets, glass wall units, marble backsplash and black sink',
+  },
+  greyKitchenSink: {
+    id: 'v1794982159/Enscape_2026-11-15-18-50-28_Enscape_scene_4.png',
+    alt: 'Compact modular kitchen with black glass wall cabinets, under-cabinet lights and black granite counter',
+  },
+  crockeryBar: {
+    id: 'v1794982158/Enscape_2026-11-15-18-50-28_Enscape_scene_6.png',
+    alt: 'Crockery and coffee unit with lit glass shelves next to an open kitchen and glass partition',
+  },
+  compactBedroom: {
+    id: 'v1794982162/Enscape_2026-11-15-18-47-23_BEDROOM_-1.png',
+    alt: 'Compact bedroom with a grey upholstered headboard, framed panels and a full-height wardrobe',
+  },
+  livingGlassPartition: {
+    id: 'v1794982163/Enscape_2026-11-15-18-35-31.png',
+    alt: 'Living room with fluted glass partition, beige sofa, wall moulding and cove-lit ceiling',
+  },
+  compactLiving: {
+    id: 'v1794982160/Enscape_2026-11-15-18-50-28_Enscape_scene_1.png',
+    alt: 'Compact living room with a beige L-shaped sofa, round centre table, TV wall and wall moulding',
+  },
+  livingWithKitchen: {
+    id: 'v1794982160/Enscape_2026-11-15-18-50-28_Enscape_scene_2.png',
+    alt: 'Living room with a beige sectional sofa and wall moulding, opening into a grey modular kitchen',
+  },
 };
+
+/*
+  Design gallery on the room pages (/kitchen, /bedroom, /wardrobe, /living-hall).
+  These show together with the designs added from the admin panel / Google Sheet.
+  To add a photo: add it to `photos` above, then put its key (and a title) here.
+*/
+export const roomGalleries = {
+  kitchen: [
+    ['kitchenLOpen', 'Open kitchen facing the living room', 'Modern'],
+    ['greyKitchenL', 'Grey kitchen with marble backsplash', 'Minimal'],
+    ['greyKitchen', 'Grey kitchen with tall fridge unit', 'Minimal'],
+    ['greyKitchenSink', 'Compact kitchen with black glass cabinets', 'Minimal'],
+    ['diningToKitchen', 'Kitchen opening from the dining area', 'Modern'],
+    ['crockeryUnit', 'Lit crockery unit with microwave space', 'Modern'],
+  ],
+  bedroom: [
+    ['plumBedroom', 'Plum-panelled master bedroom', 'Luxury'],
+    ['sageBedroom', 'Sage green bedroom with TV unit', 'Modern'],
+    ['sageBedroomFront', 'Sage green panelled bed wall', 'Modern'],
+    ['goldArtBedroom', 'Panelled bedroom with gold artwork', 'Luxury'],
+    ['pinkBedroom', 'Blush pink bedroom', 'Modern'],
+    ['wardrobeBedroom', 'Warm modern bedroom with TV panel', 'Modern'],
+    ['kidsRoomJungle', 'Kids room with bunk bed', 'Kids'],
+    ['kidsRoomPink', 'Pink kids bedroom with bunk bed', 'Kids'],
+    ['guestRoom', 'Guest room with study and daybed', 'Minimal'],
+    ['compactBedroom', 'Compact bedroom with full-height wardrobe', 'Minimal'],
+    ['studyPrayerNook', 'Study corner with pooja unit', 'Modern'],
+  ],
+  wardrobe: [
+    ['wardrobeBedroom', 'Full-height white wardrobe', 'Modern'],
+    ['compactBedroom', 'Floor-to-ceiling wardrobe in a compact bedroom', 'Minimal'],
+    ['goldArtBedroom', 'White and wood wardrobe', 'Luxury'],
+    ['pinkBedroom', 'Sliding wardrobe with framed panels', 'Modern'],
+    ['sageBedroom', 'Wardrobe with lit glass shelf', 'Modern'],
+    ['guestRoom', 'Tall wardrobe in the guest room', 'Minimal'],
+    ['kidsRoomJungle', 'Kids wardrobe with handle-less shutters', 'Kids'],
+  ],
+  living: [
+    ['livingTvWall', 'Living room with fluted TV wall', 'Luxury'],
+    ['livingTvWallWide', 'Backlit TV wall with display units', 'Luxury'],
+    ['livingSofa', 'Beige sectional with slatted partition', 'Modern'],
+    ['livingSofaAlt', 'Bright living room with L-shaped sofa', 'Modern'],
+    ['livingArchway', 'Living room through a wooden archway', 'Modern'],
+    ['openPlanLiving', 'Open-plan living and dining', 'Modern'],
+    ['beigeLiving', 'Beige living room with slatted TV wall', 'Minimal'],
+    ['livingGlassPartition', 'Living room with fluted glass partition', 'Minimal'],
+    ['compactLiving', 'Compact living room with L-shaped sofa', 'Minimal'],
+    ['livingWithKitchen', 'Living room opening into the kitchen', 'Minimal'],
+    ['swingLounge', 'Lounge corner with a hanging swing', 'Luxury'],
+    ['diningPendant', 'Dining area with recessed ceiling', 'Modern'],
+    ['diningCrockery', 'Dining with wooden crockery unit', 'Modern'],
+    ['crockeryBar', 'Crockery and coffee unit', 'Modern'],
+  ],
+};
+
+// Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style }
+export const roomGallery = (category) =>
+  (roomGalleries[category] || []).map(([key, title, style]) => ({
+    _id: `own-${category}-${key}`,
+    title,
+    style,
+    image: photo(key),
+    thumb: photo(key, 720),
+    alt: alt(key),
+  }));
 
 // Our own site video: false ceiling being installed
 export const videos = {

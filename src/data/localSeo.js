@@ -60,7 +60,7 @@ export const localServices = [
       `Modular kitchens in ${c}: L-shaped, U-shaped, parallel and island designs with smart storage and easy-clean finishes. Free 3D design and site visit.`,
     intro: (c) =>
       `Your kitchen in ${c} is planned around how your family cooks: the right storage for every utensil, finishes that clean easily and fittings that last.`,
-    image: photo('kitchenL'),
+    image: photo('greyKitchenL'),
     mainLink: { to: '/kitchen', label: 'See our modular kitchen designs' },
     includes: [
       { title: 'All layouts', text: 'L-shaped, U-shaped, parallel, straight and island.' },
