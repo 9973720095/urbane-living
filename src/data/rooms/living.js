@@ -2,7 +2,6 @@
 import { slot, slotAlt } from '../media';
 import { highlights } from '../common';
 
-// Living Hall page (/living-hall). Designs come from the database (admin "Living Hall" + sheet "living").
 export const livingPage = {
   api: '/api/living',
   category: 'living',

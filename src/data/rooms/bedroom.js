@@ -2,7 +2,6 @@
 import { slot, slotAlt } from '../media';
 import { highlights } from '../common';
 
-// Bedroom page (/bedroom). Designs come from the database (admin "Bedroom" + sheet "bedroom").
 export const bedroomPage = {
   api: '/api/bedroom',
   category: 'bedroom',
