@@ -1,13 +1,14 @@
 import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { MailOutlined, PhoneFilled, WhatsAppOutlined, CheckCircleFilled, ArrowRightOutlined } from '@ant-design/icons';
+import { MailOutlined, PhoneFilled, WhatsAppOutlined, CheckCircleFilled, ArrowRightOutlined, SafetyCertificateFilled, BankOutlined } from '@ant-design/icons';
 import useSeo from '../hooks/useSeo';
-import { brand, contact, siteUrl } from '../data/siteData';
+import { brand, contact, siteUrl, legalTeam } from '../data/siteData';
 
 /*
   Shared layout for Privacy Policy, Terms & Conditions and other legal pages.
   <LegalPage page={termsPage} icon={<BookOutlined />} />
   page: { title, intro, updated, email, lead, highlights, sections[{ id, title, text, paragraphs, points, note, link }], contactTitle, contactText, seo }
+  Every legal page also shows the "Legal notice" bar and the "Legal team & jurisdiction" card (data: common.js -> legalTeam).
 */
 export default function LegalPage({ page, icon }) {
   const { title, intro, updated, email, lead, highlights, sections, contactTitle, contactText, seo } = page;
@@ -66,6 +67,23 @@ export default function LegalPage({ page, icon }) {
           </ol>
         </nav>
 
+        {/* Legal notice (latest update, jurisdiction, legal team) */}
+        <aside
+          aria-label="Legal notice"
+          className="mb-6 flex flex-col gap-3 rounded-2xl border border-solid border-brand-red/20 bg-white p-4 shadow-card sm:flex-row sm:items-center sm:gap-4 sm:p-5"
+        >
+          <span className="inline-flex w-fit shrink-0 items-center gap-1.5 rounded-full bg-brand-red px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-white" aria-hidden="true" /> Legal notice
+          </span>
+          <p className="m-0 flex-1 text-[14px] leading-relaxed text-gray-600 sm:text-[15px]">
+            <strong className="font-semibold text-brand-navy">Updated {legalTeam.updated}:</strong> {legalTeam.notice}{' '}
+            Contact our Legal Team before the pre-litigation stage.
+          </p>
+          <a href="#legal-team" className="inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-brand-red no-underline hover:underline">
+            Legal Team <ArrowRightOutlined />
+          </a>
+        </aside>
+
         {/* Key points */}
         {highlights?.length > 0 && (
           <ul className="m-0 mb-6 grid list-none grid-cols-1 gap-4 p-0 sm:grid-cols-3">
@@ -95,8 +113,13 @@ export default function LegalPage({ page, icon }) {
                   </li>
                 ))}
                 <li>
+                  <a href="#legal-team" className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 no-underline transition hover:bg-brand-soft hover:text-brand-red">
+                    {sections.length + 1}. Legal team & jurisdiction
+                  </a>
+                </li>
+                <li>
                   <a href="#contact-us" className="block rounded-lg px-2 py-1.5 text-sm text-gray-600 no-underline transition hover:bg-brand-soft hover:text-brand-red">
-                    {sections.length + 1}. {contactTitle}
+                    {sections.length + 2}. {contactTitle}
                   </a>
                 </li>
               </ol>
@@ -135,10 +158,51 @@ export default function LegalPage({ page, icon }) {
               </section>
             ))}
 
+            {/* Legal team & jurisdiction */}
+            <section id="legal-team" aria-labelledby="legal-team-title" className="mt-12 scroll-mt-24 border-0 border-t border-solid border-gray-100 pt-10">
+              <h2 id="legal-team-title" className="m-0 text-xl font-semibold text-brand-navy sm:text-[22px]">
+                <span className="text-brand-red">{sections.length + 1}.</span> Legal team & jurisdiction
+              </h2>
+              <p className="m-0 mt-3 text-[15px] leading-relaxed text-gray-600">
+                <strong className="font-semibold text-brand-navy">Jurisdiction: {legalTeam.jurisdiction} only.</strong> {legalTeam.notice} {legalTeam.text}
+              </p>
+              <div className="mt-5 overflow-hidden rounded-2xl border border-solid border-brand-navy/10">
+                <div className="flex items-center gap-3 bg-brand-navy px-5 py-4 text-white">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10 text-xl text-brand-gold">
+                    <SafetyCertificateFilled />
+                  </span>
+                  <span className="min-w-0">
+                    <span className="block text-[11px] font-semibold uppercase tracking-wider text-white/60">Our Legal Team</span>
+                    <span className="block text-[17px] font-semibold">{legalTeam.advocate.name}</span>
+                    <span className="block text-sm text-white/75">{legalTeam.advocate.firm}</span>
+                  </span>
+                </div>
+                <address className="grid grid-cols-1 gap-3 bg-brand-soft p-4 not-italic sm:grid-cols-3">
+                  <a href={legalTeam.advocate.phoneHref} className="flex items-center gap-3 rounded-xl bg-white p-3 text-brand-navy no-underline transition hover:shadow-card">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-red/10 text-brand-red"><PhoneFilled /></span>
+                    <span className="min-w-0">
+                      <span className="block text-xs text-gray-500">Mobile</span>
+                      <span className="block text-sm font-semibold">{legalTeam.advocate.phoneDisplay}</span>
+                    </span>
+                  </a>
+                  <a href={`mailto:${legalTeam.advocate.email}`} className="flex items-center gap-3 rounded-xl bg-white p-3 text-brand-navy no-underline transition hover:shadow-card sm:col-span-2">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-blue/10 text-brand-blue"><MailOutlined /></span>
+                    <span className="min-w-0">
+                      <span className="block text-xs text-gray-500">Email</span>
+                      <span className="block break-all text-sm font-semibold">{legalTeam.advocate.email}</span>
+                    </span>
+                  </a>
+                </address>
+                <p className="m-0 flex items-center gap-2 border-0 border-t border-solid border-brand-navy/10 bg-white px-5 py-3 text-[13px] text-gray-500">
+                  <BankOutlined className="text-brand-navy" /> Courts at Delhi and Ghaziabad only · Updated {legalTeam.updated}
+                </p>
+              </div>
+            </section>
+
             {/* Contact */}
             <section id="contact-us" aria-labelledby="contact-us-title" className="mt-12 scroll-mt-24 border-0 border-t border-solid border-gray-100 pt-10">
               <h2 id="contact-us-title" className="m-0 text-xl font-semibold text-brand-navy sm:text-[22px]">
-                <span className="text-brand-red">{sections.length + 1}.</span> {contactTitle}
+                <span className="text-brand-red">{sections.length + 2}.</span> {contactTitle}
               </h2>
               <p className="m-0 mt-3 text-[15px] text-gray-600">{contactText}</p>
               <address className="mt-5 grid grid-cols-1 gap-3 not-italic sm:grid-cols-3">

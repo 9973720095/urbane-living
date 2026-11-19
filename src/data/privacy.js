@@ -4,7 +4,7 @@
 export const privacyPage = {
   title: 'Privacy Policy',
   intro: 'At Urbane Living, your privacy matters to us. This policy explains what information we collect when you visit urbaneliving.in or use our services, how we use it and how we keep it safe.',
-  updated: '26 October 2026',
+  updated: '19 November 2026',
   email: 'sales1@urbaneliving.in', // privacy questions go here; phone comes from common.js -> contact
   lead: 'This policy applies to urbaneliving.in and to the services Urbane Living provides. By using our website, you agree to this policy.',
   sections: [

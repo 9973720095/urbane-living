@@ -4,7 +4,7 @@
 export const refundPage = {
   title: 'Refund & Cancellation Policy',
   intro: 'We want you to be happy with your home. This policy explains how cancellations, refunds and replacements work for our interior design and false ceiling projects.',
-  updated: '26 October 2026',
+  updated: '19 November 2026',
   email: 'sales1@urbaneliving.in', // refund questions go here; phone comes from common.js -> contact
   lead: 'Most of our work is custom-made to your measurements and design, so refunds depend on how far your project has progressed. If your approved quote or agreement says something different, the quote or agreement applies.',
   highlights: [

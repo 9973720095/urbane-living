@@ -18,6 +18,22 @@ export const contact = {
   address: 'G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad',
 };
 
+// Legal team + jurisdiction: shown on every legal page (Terms, Privacy, Refund, Disclaimer) via components/LegalPage.jsx.
+// Change `updated` whenever any of this changes.
+export const legalTeam = {
+  updated: '19 November 2026',
+  jurisdiction: 'Delhi & Ghaziabad',
+  notice: 'All legal matters are subject to the jurisdiction of the courts at Delhi and Ghaziabad only.',
+  text: 'Before any matter reaches the pre-litigation stage, please feel free to contact our Legal Team. Most concerns can be settled by talking first.',
+  advocate: {
+    name: 'Niranjan Pandey',
+    firm: 'Advocates & Solicitors, New Delhi',
+    phoneDisplay: '+91 99714 96395',
+    phoneHref: 'tel:+919971496395',
+    email: 'niranjanpandeyrashtravadi@gmail.com',
+  },
+};
+
 export const socials = [
   { name: 'Facebook', href: 'https://www.facebook.com/urbaneliving.in', hover: 'hover:bg-[#1877f2]' },
   { name: 'YouTube', href: 'https://www.youtube.com/@urbaneliving-ncr', hover: 'hover:bg-[#ff0000]' },

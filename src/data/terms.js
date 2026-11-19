@@ -4,7 +4,7 @@
 export const termsPage = {
   title: 'Terms & Conditions',
   intro: 'Please read these terms carefully before using our website or booking our interior design and false ceiling services.',
-  updated: '26 October 2026',
+  updated: '19 November 2026',
   email: 'sales1@urbaneliving.in', // questions about these terms; phone comes from common.js -> contact
   lead: 'These terms apply to urbaneliving.in and to all services provided by Urbane Living. By using our website or booking our services, you agree to these terms. For each project, the quote and agreement you approve also apply, and they take priority if anything differs.',
   highlights: [
@@ -114,9 +114,11 @@ export const termsPage = {
     },
     {
       id: 'governing-law',
-      title: 'Governing law',
+      title: 'Governing law & jurisdiction',
       paragraphs: [
-        'These terms are governed by the laws of India. We will always try to resolve any concern by talking with you first. If a dispute cannot be resolved, it will be handled by the courts of Ghaziabad, Uttar Pradesh.',
+        'These terms are governed by the laws of India. We will always try to resolve any concern by talking with you first.',
+        'Jurisdiction for any legal issue is Delhi and Ghaziabad only: any dispute that cannot be resolved by talking will be handled only by the courts at Delhi and Ghaziabad (Uttar Pradesh).',
+        'Before the pre-litigation stage, please feel free to contact our Legal Team: Niranjan Pandey (Advocates & Solicitors, New Delhi), mobile +91 99714 96395, email niranjanpandeyrashtravadi@gmail.com.',
       ],
     },
     {
