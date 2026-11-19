@@ -4,7 +4,7 @@
 // - to (optional): makes the item a link
 // Only write what is true. Add / remove items freely; the strip adjusts itself.
 export const topBar = {
-  phone: { label: '07965315325', href: 'tel:07965315325' },
+  phone: { label: '1800-123-6407', href: 'tel:18001236407' }, // toll-free number shown in the red button
   speed: 45, // seconds for one full loop (bigger = slower)
   items: [
     { icon: 'consult', tag: 'Free', text: 'Design consultation & site visit', to: '/contact' },

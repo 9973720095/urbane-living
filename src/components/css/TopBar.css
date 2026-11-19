@@ -167,16 +167,17 @@
   height: 30px;
   padding: 0 14px 0 4px;
   border-radius: 100px;
-  background: #E40B12;
+  /* same colour and shadow as the navbar "GET FREE QUOTE" button (Navbar.css -> .book-btn) */
+  background: var(--brand-red, #E40B12);
   color: #ffffff !important;
   text-decoration: none;
   overflow: hidden;
-  box-shadow: 0 4px 14px rgba(228, 11, 18, 0.35);
+  box-shadow: 0 4px 12px rgba(228, 11, 18, 0.22);
   transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .ul-tb-call:hover {
-  background: #C2090F;
+  background: var(--brand-red-dark, #C2090F);
   transform: translateY(-1px);
 }
 
@@ -208,7 +209,7 @@
   height: 22px;
   border-radius: 50%;
   background: #ffffff;
-  color: #E40B12;
+  color: var(--brand-red, #E40B12);
   font-size: 11px;
 }
 
