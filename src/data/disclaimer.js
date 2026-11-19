@@ -3,7 +3,7 @@
 export const disclaimerPage = {
   title: 'Disclaimer',
   intro: 'Please read this disclaimer to understand how the information, designs and prices on our website should be used.',
-  updated: '19 November 2026',
+  updated: '26 October 2026',
   email: 'sales1@urbaneliving.in', // questions about this page; phone comes from common.js -> contact
   lead: 'The content on urbaneliving.in is shared by Urbane Living for general information and design inspiration. By using this website, you accept this disclaimer.',
   highlights: [

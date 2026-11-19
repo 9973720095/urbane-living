@@ -4,7 +4,7 @@
 export const termsPage = {
   title: 'Terms & Conditions',
   intro: 'Please read these terms carefully before using our website or booking our interior design and false ceiling services.',
-  updated: '19 November 2026',
+  updated: '26 October 2026',
   email: 'sales1@urbaneliving.in', // questions about these terms; phone comes from common.js -> contact
   lead: 'These terms apply to urbaneliving.in and to all services provided by Urbane Living. By using our website or booking our services, you agree to these terms. For each project, the quote and agreement you approve also apply, and they take priority if anything differs.',
   highlights: [
