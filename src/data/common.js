@@ -10,11 +10,11 @@ export const brand = {
 };
 
 export const contact = {
-  phoneDisplay: '07965315325',
+  phoneDisplay: '079-6531-5325',
   phoneHref: 'tel:07965315325', // local number: dial with +91
   whatsappHref: 'https://wa.me/919105052454',
   whatsappText: 'Hi Urbane Living, I want a free design consultation for my home.',
-  email: 'urbanelivingofficial@gmail.com',
+  email: 'sales1@urbaneliving.in',
   address: 'G-12 Express Green Plaza, Sector-1, Vaishali, Ghaziabad',
 };
 
@@ -24,11 +24,11 @@ export const legalTeam = {
   updated: '19 November 2026',
   jurisdiction: 'Delhi & Ghaziabad',
   notice: 'All legal matters are subject to the jurisdiction of the courts at Delhi and Ghaziabad only.',
-  text: 'Before any matter reaches the pre-litigation stage, please feel free to contact our Legal Team. Most concerns can be settled by talking first.',
+  text: 'For any legal issues, please feel free to contact our Legal Team before the pre-litigation stage.',
   advocate: {
     name: 'Niranjan Pandey',
     firm: 'Advocates & Solicitors, New Delhi',
-    phoneDisplay: '+91 99714 96395',
+    phoneDisplay: '+91 997 149 6395',
     phoneHref: 'tel:+919971496395',
     email: 'niranjanpandeyrashtravadi@gmail.com',
   },

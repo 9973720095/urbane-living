@@ -67,6 +67,7 @@ import RoomExplorer from './components/RoomExplorer';
 import VastuBanner from './components/VastuBanner';
 import VastuPage from './pages/VastuPage';
 import VastuAnalyzer from './pages/VastuAnalyzer';
+import WorkInProgress from './components/WorkInProgress';
 
 // Admin + estimate pages pull in Firebase, Quill editor etc. (~1 MB).
 // Load them only when someone opens those pages, so normal visitors get a much lighter site.
@@ -178,6 +179,7 @@ function App() {
 
       <GallerySection />
       <BeforeAfter />
+      <WorkInProgress />
       <RoomExplorer onOpenForm={handleOpen} />
       <VastuBanner />
       <StyleQuiz onOpenForm={handleOpen} />
