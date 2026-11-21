@@ -2,43 +2,43 @@ import React, { useEffect, useRef } from 'react';
 
 // Home page: "Work In Progress Sites" (real on-site videos from our Cloudinary).
 // Use a DIFFERENT real video for each site, and only real locations.
+// Videos are vertical (9:16). Desktop/tablet: 3 in one row. Phones: swipe sideways.
 const WIP_VIDEOS = [
   {
     id: 1,
-    title: '3BHK False Ceiling & Lighting',
+    title: 'Glass Fitting & Sealing',
+    text: 'Glass panels lifted with suction cups, set into the frame and sealed with silicone.',
     location: 'Sector 65, Gurugram',
     status: 'In Progress',
-    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/f_auto,q_auto/v1792578997/video_20260922_194112_1.mp4',
+    posterAt: 9, // second of the video used as the still frame
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795259598/urbanelivingfactory5_logo_mute.mp4',
   },
   {
     id: 2,
-    title: 'Modular Kitchen & Wardrobe Work',
+    title: 'Wardrobe with Profile Lights',
+    text: 'Full-height wardrobe with LED profile lights, open shelves and a pull-out trouser rack.',
     location: 'Dwarka, New Delhi',
-    status: 'In Progress',
-    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/f_auto,q_auto/v1792578997/video_20260922_194112_1.mp4',
+    status: 'Finishing Stage',
+    posterAt: 4.5,
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795260996/urbane_work_in_progress_v5_1.mp4',
   },
   {
     id: 3,
-    title: 'Living Room Wall Paneling',
+    title: 'Modular Kitchen Installation',
+    text: 'Sink unit, drawers and soft-close hardware being fitted into the kitchen cabinets.',
     location: 'Sector 150, Noida',
-    status: 'Finishing Stage',
-    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/f_auto,q_auto/v1792578997/video_20260922_194112_1.mp4',
-  },
-  {
-    id: 4,
-    title: 'Full Home Interior Execution',
-    location: 'Indirapuram, Ghaziabad',
     status: 'In Progress',
-    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/f_auto,q_auto/v1792578997/video_20260922_194112_1.mp4',
+    posterAt: 10,
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795262433/urbaneliving_work_in_progress_noface.mp4',
   },
 ];
 
-// Small still frame shown before the video starts (keeps the page fast)
-const posterOf = (url) =>
-  url.replace('/video/upload/f_auto,q_auto/', '/video/upload/so_1,w_480,q_auto,f_jpg/').replace(/\.[^/.]+$/, '.jpg');
+// Cloudinary: lighter video file, and a small still frame shown before the video starts
+const videoSrc = (url) => url.replace('/video/upload/', '/video/upload/q_auto/');
+const posterOf = (url, at = 1) => url.replace('/video/upload/', `/video/upload/so_${at},w_480,q_auto,f_jpg/`).replace(/\.[^/.]+$/, '.jpg');
 
-// Plays only while on screen, so the home page does not download 4 videos at once
-function SiteVideo({ src, label }) {
+// Plays only while on screen, so the home page does not download every video at once
+function SiteVideo({ src, posterAt, label }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -63,8 +63,8 @@ function SiteVideo({ src, label }) {
   return (
     <video
       ref={ref}
-      src={src}
-      poster={posterOf(src)}
+      src={videoSrc(src)}
+      poster={posterOf(src, posterAt)}
       muted
       loop
       playsInline
@@ -88,21 +88,21 @@ export default function WorkInProgress() {
             Work In Progress Sites
           </h2>
           <p className="mx-auto max-w-xl text-sm text-slate-500 md:text-base">
-            Watch real on-site execution and craftsmanship happening right now across our active projects.
+            Real videos from our active sites: glass fitting, wardrobes and modular kitchens, made and installed by our own team.
           </p>
         </div>
 
-        {/* 4-Column Video Grid (Mobile: 1, Tablet: 2, Desktop: 4) */}
-        <ul className="m-0 grid list-none grid-cols-1 gap-5 p-0 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Phones: swipe sideways. Tablet + desktop: all 3 in one row */}
+        <ul className="-mx-5 m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-auto sm:grid sm:max-w-[1040px] sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
           {WIP_VIDEOS.map((item) => (
             <li
               key={item.id}
-              className="overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md transition-transform duration-300 hover:-translate-y-1.5"
+              className="w-[72%] shrink-0 snap-center overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md transition-transform duration-300 hover:-translate-y-1.5 sm:w-auto"
             >
-              {/* Video Wrapper */}
-              <div className="relative aspect-[9/14] w-full bg-slate-900">
-                <SiteVideo src={item.videoUrl} label={`${item.title}, ${item.location} – site video by Urbane Living`} />
-                <span className="absolute left-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+              {/* Video Wrapper (9:16, same shape as the videos, so nothing is cut off) */}
+              <div className="relative aspect-[9/16] w-full bg-slate-900">
+                <SiteVideo src={item.videoUrl} posterAt={item.posterAt} label={`${item.title}, ${item.location} – site video by Urbane Living`} />
+                <span className="absolute right-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
                   {item.status}
                 </span>
               </div>
@@ -110,7 +110,8 @@ export default function WorkInProgress() {
               {/* Card Details */}
               <div className="p-4">
                 <h3 className="m-0 mb-1 text-[15px] font-semibold text-slate-900">{item.title}</h3>
-                <p className="m-0 text-xs text-slate-500">{item.location}</p>
+                <p className="m-0 text-[13px] leading-snug text-slate-600">{item.text}</p>
+                <p className="m-0 mt-2 text-xs font-medium text-slate-500">📍 {item.location}</p>
               </div>
             </li>
           ))}
