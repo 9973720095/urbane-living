@@ -11,12 +11,15 @@ import { sizeCloudinary } from '../data/media';
   src/data/pageSections.js (so the admin can pick them). Shows nothing when no section is added there.
 */
 
+// Phones: always 2 in a row (1 when the admin chose 1). Bigger screens: the admin's choice.
 const GRID = {
   1: 'grid-cols-1',
-  2: 'grid-cols-1 sm:grid-cols-2',
-  3: 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3',
-  4: 'grid-cols-2 lg:grid-cols-4',
+  2: 'grid-cols-2',
+  3: 'grid-cols-2 sm:grid-cols-3',
+  4: 'grid-cols-2 md:grid-cols-4',
 };
+// Odd number of items: the last one takes the whole row on phones (3 items = 2 + 1 wide; 4 items = 2 + 2)
+const LAST_WIDE = { 2: 'col-span-2 sm:col-span-1', 3: 'col-span-2 sm:col-span-1', 4: 'col-span-2 md:col-span-1' };
 const RATIO = { '4/3': 'aspect-[4/3]', '16/9': 'aspect-video', '1/1': 'aspect-square', '9/16': 'aspect-[9/16]' };
 const BG = { white: 'bg-white', soft: 'bg-brand-soft', navy: 'bg-brand-navy' };
 
@@ -27,7 +30,7 @@ const isInternal = (url = '') => url.startsWith('/');
 const videoSrc = (url) => url.replace('/video/upload/', '/video/upload/q_auto/');
 const posterOf = (url) => url.replace('/video/upload/', '/video/upload/so_1,w_640,q_auto,f_jpg/').replace(/\.[^/.]+$/, '.jpg');
 
-function LazyVideo({ src, label }) {
+function LazyVideo({ src, label, className = '' }) {
   const ref = useRef(null);
   useEffect(() => {
     const video = ref.current;
@@ -51,7 +54,7 @@ function LazyVideo({ src, label }) {
       playsInline
       preload="none"
       aria-label={label}
-      className="block h-full w-full object-cover"
+      className={`block h-full w-full object-cover ${className}`}
     />
   );
 }
@@ -78,33 +81,37 @@ function Section({ s }) {
         )}
 
         {items.length > 0 && (
-          <ul className={`m-0 grid list-none gap-4 p-0 sm:gap-6 ${cols}`}>
+          <ul className={`m-0 grid list-none gap-3 p-0 sm:gap-6 ${cols}`}>
             {items.map((it, i) => {
               const hasText = it.title || it.text || (it.linkUrl && it.linkLabel);
+              const wide = items.length % 2 === 1 && i === items.length - 1 && LAST_WIDE[s.columns];
+              // a tall (9:16) photo / video stretched over the whole phone width would be huge: show it 4:5
+              const shape = wide && s.ratio === '9/16' ? 'aspect-[4/5] sm:aspect-[9/16]' : ratio;
+              const fit = wide && s.ratio === '9/16' ? 'object-top sm:object-center' : '';
               return (
                 // eslint-disable-next-line react/no-array-index-key
-                <li key={i} className={`flex flex-col overflow-hidden rounded-2xl ${dark ? 'bg-white/5' : 'bg-white shadow-card'}`}>
+                <li key={i} className={`flex flex-col overflow-hidden rounded-2xl ${wide || ''} ${dark ? 'bg-white/5' : 'bg-white shadow-card'}`}>
                   {it.media && (
-                    <div className={`${ratio} w-full overflow-hidden bg-slate-200`}>
+                    <div className={`${shape} w-full overflow-hidden bg-slate-200`}>
                       {isVideo(it.media) ? (
-                        <LazyVideo src={it.media} label={it.alt || it.title || ''} />
+                        <LazyVideo src={it.media} label={it.alt || it.title || ''} className={fit} />
                       ) : (
                         <img
                           src={sizeCloudinary(it.media, s.columns === 1 ? 1400 : 720)}
                           alt={it.alt || ''}
                           loading="lazy"
                           decoding="async"
-                          className="block h-full w-full object-cover"
+                          className={`block h-full w-full object-cover ${fit}`}
                         />
                       )}
                     </div>
                   )}
                   {hasText && (
-                    <div className="flex flex-1 flex-col p-4 sm:p-5">
-                      {it.title && <h3 className={`m-0 text-[16px] font-semibold sm:text-[17px] ${dark ? 'text-white' : 'text-brand-navy'}`}>{it.title}</h3>}
-                      {it.text && <p className={`m-0 mt-1.5 whitespace-pre-line text-[14px] leading-relaxed ${dark ? 'text-white/75' : 'text-gray-600'}`}>{it.text}</p>}
+                    <div className="flex flex-1 flex-col p-3 sm:p-5">
+                      {it.title && <h3 className={`m-0 text-[14px] font-semibold leading-snug sm:text-[17px] ${dark ? 'text-white' : 'text-brand-navy'}`}>{it.title}</h3>}
+                      {it.text && <p className={`m-0 mt-1 whitespace-pre-line text-[12.5px] leading-relaxed sm:mt-1.5 sm:text-[14px] ${dark ? 'text-white/75' : 'text-gray-600'}`}>{it.text}</p>}
                       {it.linkUrl && it.linkLabel && (
-                        <SmartLink to={it.linkUrl} className="mt-auto inline-flex items-center gap-1.5 pt-3 text-sm font-semibold text-brand-red no-underline hover:underline">
+                        <SmartLink to={it.linkUrl} className="mt-auto inline-flex items-center gap-1.5 pt-3 text-[13px] font-semibold sm:text-sm text-brand-red no-underline hover:underline">
                           {it.linkLabel} <ArrowRightOutlined />
                         </SmartLink>
                       )}

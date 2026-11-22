@@ -3,7 +3,8 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 // Home page: "Work In Progress Sites" (real on-site videos from our Cloudinary).
 // Use a DIFFERENT real video for each site, and only real locations (leave location '' if unsure).
-// Videos are vertical (9:16). Desktop: 4 in one row, arrows for the rest. Tablet: 3. Phones: swipe.
+// Videos are vertical (9:16). Desktop: 4 in one row, arrows for the rest. Tablet: 3.
+// Phones: 2 in a row; with an odd number of videos the last one takes the whole row.
 const WIP_VIDEOS = [
   {
     id: 1,
@@ -57,7 +58,7 @@ const videoSrc = (url) => url.replace('/video/upload/', '/video/upload/q_auto/')
 const posterOf = (url, at = 1) => url.replace('/video/upload/', `/video/upload/so_${at},w_480,q_auto,f_jpg/`).replace(/\.[^/.]+$/, '.jpg');
 
 // Plays only while on screen, so the home page does not download every video at once
-function SiteVideo({ src, posterAt, label }) {
+function SiteVideo({ src, posterAt, label, className = '' }) {
   const ref = useRef(null);
 
   useEffect(() => {
@@ -89,7 +90,7 @@ function SiteVideo({ src, posterAt, label }) {
       playsInline
       preload="none"
       aria-label={label}
-      className="block h-full w-full object-cover"
+      className={`block h-full w-full object-cover ${className}`}
     />
   );
 }
@@ -142,37 +143,42 @@ export default function WorkInProgress() {
             <LeftOutlined />
           </button>
 
-          {/* One row: phones swipe (1.4 cards), tablet 3, desktop 4 visible */}
+          {/* Phones: 2 in a row (odd last one = full row). Tablet 3 and desktop 4 in one sliding row */}
           <ul
             ref={trackRef}
             onScroll={updateEdges}
-            className="-mx-5 m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:gap-5 sm:px-0 [&::-webkit-scrollbar]:hidden"
+            className="m-0 grid list-none grid-cols-2 gap-3 p-0 sm:flex sm:snap-x sm:snap-mandatory sm:gap-5 sm:overflow-x-auto sm:pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
-            {WIP_VIDEOS.map((item) => (
-              <li
-                key={item.id}
-                className="w-[72%] shrink-0 snap-start overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md sm:w-[calc((100%-40px)/3)] lg:w-[calc((100%-60px)/4)]"
-              >
-                {/* Video Wrapper (9:16, same shape as the videos, so nothing is cut off) */}
-                <div className="relative aspect-[9/16] w-full bg-slate-900">
-                  <SiteVideo
-                    src={item.videoUrl}
-                    posterAt={item.posterAt}
-                    label={`${item.title}${item.location ? `, ${item.location}` : ''} – site video by Urbane Living`}
-                  />
-                  <span className="absolute right-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-                    {item.status}
-                  </span>
-                </div>
+            {WIP_VIDEOS.map((item, i) => {
+              // odd number of videos: the last one takes the whole row on phones (shown 4:5, top kept)
+              const wide = WIP_VIDEOS.length % 2 === 1 && i === WIP_VIDEOS.length - 1;
+              return (
+                <li
+                  key={item.id}
+                  className={`overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md sm:w-[calc((100%-40px)/3)] sm:shrink-0 sm:snap-start lg:w-[calc((100%-60px)/4)] ${wide ? 'col-span-2' : ''}`}
+                >
+                  {/* Video Wrapper (9:16, same shape as the videos, so nothing is cut off) */}
+                  <div className={`relative w-full bg-slate-900 ${wide ? 'aspect-[4/5] sm:aspect-[9/16]' : 'aspect-[9/16]'}`}>
+                    <SiteVideo
+                      src={item.videoUrl}
+                      posterAt={item.posterAt}
+                      className={wide ? 'object-top sm:object-center' : ''}
+                      label={`${item.title}${item.location ? `, ${item.location}` : ''} – site video by Urbane Living`}
+                    />
+                    <span className="absolute bottom-2 left-2 rounded-md bg-slate-900/80 px-2 py-0.5 text-[10px] font-semibold text-white backdrop-blur-sm sm:bottom-auto sm:left-auto sm:right-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-[11px]">
+                      {item.status}
+                    </span>
+                  </div>
 
-                {/* Card Details */}
-                <div className="p-4">
-                  <h3 className="m-0 mb-1 text-[15px] font-semibold text-slate-900">{item.title}</h3>
-                  <p className="m-0 text-[13px] leading-snug text-slate-600">{item.text}</p>
-                  {item.location && <p className="m-0 mt-2 text-xs font-medium text-slate-500">📍 {item.location}</p>}
-                </div>
-              </li>
-            ))}
+                  {/* Card Details */}
+                  <div className="p-3 sm:p-4">
+                    <h3 className="m-0 mb-1 text-[13.5px] font-semibold leading-snug text-slate-900 sm:text-[15px]">{item.title}</h3>
+                    <p className="m-0 text-[12px] leading-snug text-slate-600 sm:text-[13px]">{item.text}</p>
+                    {item.location && <p className="m-0 mt-2 text-[11px] font-medium text-slate-500 sm:text-xs">📍 {item.location}</p>}
+                  </div>
+                </li>
+              );
+            })}
           </ul>
 
           <button type="button" aria-label="Next videos" onClick={() => slide(1)} disabled={edge.end} className={`${arrowClass} -right-3 lg:-right-5`}>
