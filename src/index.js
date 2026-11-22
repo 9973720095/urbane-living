@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import { ConfigProvider } from 'antd';
 import { loadImageOverrides } from './utils/siteImages';
+import { loadPageSections } from './utils/pageSections';
 import reportWebVitals from './reportWebVitals';
 
 // Poppins font + logo red for all antd components (buttons, menu, forms)
@@ -18,8 +19,9 @@ const theme = {
 // The app adds the live version itself, so the saved copy is removed first (no duplicates).
 document.querySelectorAll('script[data-prerendered]').forEach((s) => s.remove());
 
-// Admin photo changes are loaded first, then the app (its page data picks the photos when it loads)
-loadImageOverrides().then(() => {
+// Admin photo changes + admin page sections are loaded first, then the app
+// (its page data picks the photos when it loads)
+Promise.all([loadImageOverrides(), loadPageSections()]).then(() => {
   const App = require('./App').default; // eslint-disable-line global-require
   const root = ReactDOM.createRoot(document.getElementById('root'));
   root.render(

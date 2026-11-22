@@ -1,8 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 // Home page: "Work In Progress Sites" (real on-site videos from our Cloudinary).
-// Use a DIFFERENT real video for each site, and only real locations.
-// Videos are vertical (9:16). Desktop/tablet: 3 in one row. Phones: swipe sideways.
+// Use a DIFFERENT real video for each site, and only real locations (leave location '' if unsure).
+// Videos are vertical (9:16). Desktop: 4 in one row, arrows for the rest. Tablet: 3. Phones: swipe.
 const WIP_VIDEOS = [
   {
     id: 1,
@@ -30,6 +31,24 @@ const WIP_VIDEOS = [
     status: 'In Progress',
     posterAt: 10,
     videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795262433/urbaneliving_work_in_progress_noface.mp4',
+  },
+  {
+    id: 4,
+    title: 'False Ceiling with Cove Lighting',
+    text: 'Gypsum ceiling with blue cove LED lights and AC grilles, in a showroom with glass display shelves.',
+    location: '',
+    status: 'Finishing Stage',
+    posterAt: 24,
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795333886/urbaneliving_working_combined.mp4',
+  },
+  {
+    id: 5,
+    title: 'New Project: Carpentry Work',
+    text: 'Cabinet frames assembled on site while the wall units and false ceiling come together.',
+    location: '',
+    status: 'In Progress',
+    posterAt: 28.5,
+    videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795333907/urbane_working_new_project_logo_mute.mp4',
   },
 ];
 
@@ -75,7 +94,33 @@ function SiteVideo({ src, posterAt, label }) {
   );
 }
 
+const arrowClass =
+  'absolute top-[38%] z-[2] hidden h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-solid border-slate-200 bg-white text-brand-navy shadow-md transition hover:bg-brand-navy hover:text-white disabled:pointer-events-none disabled:opacity-0 sm:flex';
+
 export default function WorkInProgress() {
+  const trackRef = useRef(null);
+  const [edge, setEdge] = useState({ start: true, end: false });
+
+  const updateEdges = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setEdge({ start: el.scrollLeft <= 4, end: el.scrollLeft + el.clientWidth >= el.scrollWidth - 4 });
+  }, []);
+
+  useEffect(() => {
+    updateEdges();
+    window.addEventListener('resize', updateEdges);
+    return () => window.removeEventListener('resize', updateEdges);
+  }, [updateEdges]);
+
+  // move by one card
+  const slide = (dir) => {
+    const el = trackRef.current;
+    const card = el?.querySelector('li');
+    if (!el || !card) return;
+    el.scrollBy({ left: dir * (card.offsetWidth + 20), behavior: 'smooth' });
+  };
+
   return (
     <section className="bg-slate-50 px-5 py-16" aria-labelledby="wip-title">
       <div className="mx-auto max-w-7xl">
@@ -88,34 +133,52 @@ export default function WorkInProgress() {
             Work In Progress Sites
           </h2>
           <p className="mx-auto max-w-xl text-sm text-slate-500 md:text-base">
-            Real videos from our active sites: glass fitting, wardrobes and modular kitchens, made and installed by our own team.
+            Real videos from our active sites: false ceilings, glass fitting, wardrobes, kitchens and carpentry, made and installed by our own team.
           </p>
         </div>
 
-        {/* Phones: swipe sideways. Tablet + desktop: all 3 in one row */}
-        <ul className="-mx-5 m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-auto sm:grid sm:max-w-[1040px] sm:grid-cols-3 sm:gap-5 sm:overflow-visible sm:px-0 sm:pb-0 [&::-webkit-scrollbar]:hidden">
-          {WIP_VIDEOS.map((item) => (
-            <li
-              key={item.id}
-              className="w-[72%] shrink-0 snap-center overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md transition-transform duration-300 hover:-translate-y-1.5 sm:w-auto"
-            >
-              {/* Video Wrapper (9:16, same shape as the videos, so nothing is cut off) */}
-              <div className="relative aspect-[9/16] w-full bg-slate-900">
-                <SiteVideo src={item.videoUrl} posterAt={item.posterAt} label={`${item.title}, ${item.location} – site video by Urbane Living`} />
-                <span className="absolute right-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
-                  {item.status}
-                </span>
-              </div>
+        <div className="relative">
+          <button type="button" aria-label="Previous videos" onClick={() => slide(-1)} disabled={edge.start} className={`${arrowClass} -left-3 lg:-left-5`}>
+            <LeftOutlined />
+          </button>
 
-              {/* Card Details */}
-              <div className="p-4">
-                <h3 className="m-0 mb-1 text-[15px] font-semibold text-slate-900">{item.title}</h3>
-                <p className="m-0 text-[13px] leading-snug text-slate-600">{item.text}</p>
-                <p className="m-0 mt-2 text-xs font-medium text-slate-500">📍 {item.location}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+          {/* One row: phones swipe (1.4 cards), tablet 3, desktop 4 visible */}
+          <ul
+            ref={trackRef}
+            onScroll={updateEdges}
+            className="-mx-5 m-0 flex list-none snap-x snap-mandatory gap-4 overflow-x-auto px-5 pb-2 [scrollbar-width:none] sm:mx-0 sm:gap-5 sm:px-0 [&::-webkit-scrollbar]:hidden"
+          >
+            {WIP_VIDEOS.map((item) => (
+              <li
+                key={item.id}
+                className="w-[72%] shrink-0 snap-start overflow-hidden rounded-2xl border border-solid border-slate-200 bg-white shadow-md sm:w-[calc((100%-40px)/3)] lg:w-[calc((100%-60px)/4)]"
+              >
+                {/* Video Wrapper (9:16, same shape as the videos, so nothing is cut off) */}
+                <div className="relative aspect-[9/16] w-full bg-slate-900">
+                  <SiteVideo
+                    src={item.videoUrl}
+                    posterAt={item.posterAt}
+                    label={`${item.title}${item.location ? `, ${item.location}` : ''} – site video by Urbane Living`}
+                  />
+                  <span className="absolute right-3 top-3 rounded-md bg-slate-900/80 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+                    {item.status}
+                  </span>
+                </div>
+
+                {/* Card Details */}
+                <div className="p-4">
+                  <h3 className="m-0 mb-1 text-[15px] font-semibold text-slate-900">{item.title}</h3>
+                  <p className="m-0 text-[13px] leading-snug text-slate-600">{item.text}</p>
+                  {item.location && <p className="m-0 mt-2 text-xs font-medium text-slate-500">📍 {item.location}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <button type="button" aria-label="Next videos" onClick={() => slide(1)} disabled={edge.end} className={`${arrowClass} -right-3 lg:-right-5`}>
+            <RightOutlined />
+          </button>
+        </div>
       </div>
     </section>
   );

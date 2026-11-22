@@ -14,6 +14,7 @@ import { banners, designFilters, seo } from "../data/siteData";
 import { roomGallery } from "../data/media";
 import { ceilingFaq } from "../data/ceilingGuide";
 import { localCities } from "../data/localSeo";
+import CustomSections from "../components/CustomSections";
 
 const { Option } = Select;
 
@@ -86,11 +87,17 @@ export default function FalseCeilingPage({ onOpenForm }) {
         formName="False ceiling hero form"
       />
 
+      <CustomSections page="false-ceiling" at="after-hero" />
+
       {/* 2. Types of false ceiling */}
       <CeilingTypes onOpenForm={onOpenForm} />
 
+      <CustomSections page="false-ceiling" at="after-types" />
+
       {/* 3. Cost estimator (the customer works out their own estimate) */}
       <CostEstimator onOpenForm={onOpenForm} />
+
+      <CustomSections page="false-ceiling" at="after-estimator" />
 
       {/* 4. Design videos */}
       <div className="bg-white pb-10">
@@ -184,8 +191,12 @@ export default function FalseCeilingPage({ onOpenForm }) {
         </section>
       )}
 
+      <CustomSections page="false-ceiling" at="after-gallery" />
+
       {/* 6. Why Urbane Living (promises, comparison, anatomy) */}
       <CeilingEdge onOpenForm={onOpenForm} />
+
+      <CustomSections page="false-ceiling" at="after-edge" />
 
       {/* 7. 7-day process */}
       <ProcessSection />
@@ -193,8 +204,12 @@ export default function FalseCeilingPage({ onOpenForm }) {
       {/* 8. City pages (local SEO) */}
       <CeilingCities />
 
+      <CustomSections page="false-ceiling" at="before-faq" />
+
       {/* 9. FAQ */}
       <CeilingFaq />
+
+      <CustomSections page="false-ceiling" at="end" />
     </div>
   );
 }

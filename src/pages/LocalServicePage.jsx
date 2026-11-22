@@ -12,6 +12,7 @@ import useSeo from '../hooks/useSeo';
 import NotFoundPage from './NotFoundPage';
 import { brand, contact, siteUrl } from '../data/siteData';
 import { localServices, localCities, localProcess, findLocalService, findLocalCity, findServiceCityContent } from '../data/localSeo';
+import CustomSections from '../components/CustomSections';
 
 const btnRed =
   'inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white no-underline shadow-cta transition hover:bg-brand-red-dark';
@@ -163,6 +164,8 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
         </div>
       </section>
 
+      <CustomSections page="city" at="after-intro" />
+
       {/* Guide: deeper city + service content */}
       {extra?.guide && (
         <section className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
@@ -287,6 +290,8 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
         </div>
       </section>
 
+      <CustomSections page="city" at="before-faq" />
+
       {/* FAQ */}
       <section className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto max-w-[860px]">
@@ -345,6 +350,8 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
           </nav>
         </div>
       </section>
+
+      <CustomSections page="city" at="end" />
 
       {/* CTA */}
       <section className="px-4 pb-14 sm:px-6">

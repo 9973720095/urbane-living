@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //... (All your existing imports)
 import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
-import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined } from '@ant-design/icons';
+import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined, AppstoreAddOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
 import { useNavigate } from 'react-router-dom';
@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import { isAdminEmail } from '../config/admins';
 import '../utils/adminApi'; // sends the admin login token to the backend
 import WebsiteImages from './admin/WebsiteImages'; // change any photo on the website, page / section wise
+import PageSections from './admin/PageSections'; // add new sections to any page, at any position
 
 const { Content, Sider, Header } = Layout;
 const { Option } = Select;
@@ -192,6 +193,7 @@ const AdminDashboard = ({ onFinish }) => {
       <Menu.Item key="Leads" icon={<SolutionOutlined />}>Leads</Menu.Item>
       <Menu.Item key="Blogs" icon={<EditOutlined />}>Blogs</Menu.Item>
       <Menu.Item key="Website Images" icon={<PictureOutlined />}>Website Images</Menu.Item>
+      <Menu.Item key="Page Sections" icon={<AppstoreAddOutlined />}>Page Sections</Menu.Item>
       <Menu.Item key="Logout" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: '#ff4d4f' }}>Logout</Menu.Item>
     </Menu>
   );
@@ -287,6 +289,7 @@ const AdminDashboard = ({ onFinish }) => {
           {activeTab === 'Wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
 
           {activeTab === 'Website Images' && <WebsiteImages apiBase={API_BASE_URL} />}
+          {activeTab === 'Page Sections' && <PageSections apiBase={API_BASE_URL} />}
 
           {activeTab === 'Leads' && (
             <Card title="Customer Leads" styles={{ body: { padding: '8px' } }}>

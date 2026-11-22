@@ -29,6 +29,7 @@ import useSeo from '../hooks/useSeo';
 import { API_BASE_URL, siteUrl, contact } from '../data/siteData';
 import { localCities, localServices } from '../data/localSeo';
 import { roomGallery } from '../data/media';
+import CustomSections from './CustomSections';
 
 const PAGE = 9; // designs shown before "Load more"
 
@@ -206,6 +207,8 @@ const RoomPage = ({ page, onOpenForm }) => {
         </ol>
       </nav>
 
+      <CustomSections page={category} at="after-hero" />
+
       {/* 2. Design gallery (from the database) - hidden until designs are added */}
       {(loading || designs.length > 0) && (
         <section aria-labelledby="living-gallery" className="px-4 py-12 sm:px-6 lg:py-20">
@@ -285,6 +288,8 @@ const RoomPage = ({ page, onOpenForm }) => {
         </section>
       )}
 
+      <CustomSections page={category} at="after-gallery" />
+
       {/* 3. What we design */}
       <section aria-labelledby="living-elements" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
@@ -312,6 +317,8 @@ const RoomPage = ({ page, onOpenForm }) => {
         </div>
       </section>
 
+      <CustomSections page={category} at="after-elements" />
+
       {/* 4. Ideas by size */}
       <section aria-labelledby="living-sizes" className="px-4 py-12 sm:px-6 lg:py-20">
         <div className="mx-auto max-w-[1200px]">
@@ -334,6 +341,8 @@ const RoomPage = ({ page, onOpenForm }) => {
           </ul>
         </div>
       </section>
+
+      <CustomSections page={category} at="after-sizes" />
 
       {/* 5. Process */}
       <section aria-labelledby="living-steps" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-20">
@@ -387,6 +396,8 @@ const RoomPage = ({ page, onOpenForm }) => {
           </div>
         </section>
       )}
+
+      <CustomSections page={category} at="before-faq" />
 
       {/* 7. FAQ */}
       <section aria-labelledby="living-faq" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-20">
@@ -445,6 +456,8 @@ const RoomPage = ({ page, onOpenForm }) => {
           </div>
         </div>
       </section>
+
+      <CustomSections page={category} at="end" />
 
       {viewer >= 0 && visible[viewer] && (
         <Lightbox

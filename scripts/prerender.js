@@ -27,6 +27,7 @@ const SITEMAP = path.join(__dirname, '..', 'public', 'sitemap.xml');
 const SITE = 'https://urbaneliving.in';
 const BLOG_SITEMAP_API = 'https://urbane-living.onrender.com/api/blogs/sitemap.xml';
 const SITE_IMAGES_API = 'https://urbane-living.onrender.com/api/site-images'; // Admin -> Website Images
+const PAGE_SECTIONS_API = 'https://urbane-living.onrender.com/api/page-sections'; // Admin -> Page Sections
 const PORT = 45678;
 const PARALLEL = 3;
 
@@ -83,11 +84,13 @@ const startServer = (shellHtml) =>
   });
 
 // ---------- 3. Render one page ----------
-const renderPage = async (browser, route, siteImages) => {
+const renderPage = async (browser, route, siteImages, pageSections) => {
   const page = await browser.newPage();
   try {
     // photos changed in Admin -> Website Images (src/utils/siteImages.js bakes them into the page)
     await page.evaluateOnNewDocument((map) => { window.__SITE_IMAGES__ = map; }, siteImages);
+    // sections added in Admin -> Page Sections (src/utils/pageSections.js bakes them into the page)
+    await page.evaluateOnNewDocument((list) => { window.__PAGE_SECTIONS__ = list; }, pageSections);
     await page.setViewport({ width: 1366, height: 900 });
     await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36 UrbanePrerender');
     await page.setRequestInterception(true);
@@ -199,6 +202,15 @@ const outFile = (route) => (route === '/' ? path.join(BUILD, 'index.html') : pat
   }
   log('Photos changed in Admin -> Website Images:', Object.keys(siteImages).length);
 
+  let pageSections = [];
+  try {
+    const list = JSON.parse((await fetchText(PAGE_SECTIONS_API)) || '[]');
+    pageSections = Array.isArray(list) ? list : [];
+  } catch (e) {
+    pageSections = [];
+  }
+  log('Sections added in Admin -> Page Sections:', pageSections.length);
+
   const server = await startServer(shellHtml);
   const browser = await puppeteer.launch({
     headless: true,
@@ -218,7 +230,7 @@ const outFile = (route) => (route === '/' ? path.join(BUILD, 'index.html') : pat
       const route = list[next];
       next += 1;
       try {
-        const r = await renderPage(browser, route, siteImages);
+        const r = await renderPage(browser, route, siteImages, pageSections);
         const expected = `${SITE}${route === '/' ? '/' : route}`;
         if (!r.title) throw new Error('no title');
         if (!r.h1 || r.noindex) throw new Error(r.noindex ? 'page is noindex / not found' : 'no H1 rendered');

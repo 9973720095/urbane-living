@@ -17,6 +17,7 @@ import SolutionsGrid from '../components/SolutionsGrid';
 import ClientReviews from '../components/ClientReviews';
 import useSeo from '../hooks/useSeo';
 import { aboutPage, brand, contact, socials, siteUrl } from '../data/siteData';
+import CustomSections from '../components/CustomSections';
 
 const { banner, story, values, steps, visit, seo } = aboutPage;
 
@@ -77,6 +78,8 @@ export default function AboutUsPage({ onOpenForm }) {
         </ol>
       </nav>
 
+      <CustomSections page="about" at="after-hero" />
+
       {/* 2. Our story */}
       <section aria-labelledby="about-story" className="px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
@@ -116,6 +119,8 @@ export default function AboutUsPage({ onOpenForm }) {
           </div>
         </div>
       </section>
+
+      <CustomSections page="about" at="after-story" />
 
       {/* 3. Values */}
       <section aria-labelledby="about-values" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
@@ -157,6 +162,8 @@ export default function AboutUsPage({ onOpenForm }) {
       {/* 6. Real client reviews (Google Sheet "Reviews" tab) */}
       <ClientReviews />
 
+      <CustomSections page="about" at="after-reviews" />
+
       {/* 7. Visit / contact */}
       <section aria-labelledby="about-visit" className="px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-6 rounded-3xl bg-brand-soft p-6 sm:p-10 lg:grid-cols-2 lg:items-center">
@@ -193,6 +200,8 @@ export default function AboutUsPage({ onOpenForm }) {
           </address>
         </div>
       </section>
+
+      <CustomSections page="about" at="end" />
     </div>
   );
 }

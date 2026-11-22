@@ -14,6 +14,7 @@ import PageBanner from '../components/PageBanner';
 import useSeo from '../hooks/useSeo';
 import { trackLead } from '../utils/metaPixel';
 import { API_BASE_URL, contactPage, contact, brand, inquiryOptions, socials, siteUrl } from '../data/siteData';
+import CustomSections from '../components/CustomSections';
 
 const { banner, form, cards, areas, map, seo } = contactPage;
 
@@ -229,6 +230,8 @@ export default function ContactPage() {
         </div>
       </section>
 
+      <CustomSections page="contact" at="after-form" />
+
       {/* 3. Areas + office map */}
       <section aria-labelledby="contact-areas" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-16">
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center lg:gap-10">
@@ -260,6 +263,8 @@ export default function ContactPage() {
           </div>
         </div>
       </section>
+
+      <CustomSections page="contact" at="end" />
     </div>
   );
 }

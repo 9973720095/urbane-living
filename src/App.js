@@ -68,6 +68,7 @@ import VastuBanner from './components/VastuBanner';
 import VastuPage from './pages/VastuPage';
 import VastuAnalyzer from './pages/VastuAnalyzer';
 import WorkInProgress from './components/WorkInProgress';
+import CustomSections from './components/CustomSections';
 
 // Admin + estimate pages pull in Firebase, Quill editor etc. (~1 MB).
 // Load them only when someone opens those pages, so normal visitors get a much lighter site.
@@ -174,24 +175,35 @@ function App() {
     <>
       <Hero onOpenForm={handleOpen} />
       <PromiseStrip />
+      <CustomSections page="home" at="after-hero" />
 
       <BrandStory onOpenForm={handleOpen} />
+      <CustomSections page="home" at="after-brand-story" />
 
       <GallerySection />
+      <CustomSections page="home" at="after-gallery" />
       <BeforeAfter />
+      <CustomSections page="home" at="after-before-after" />
       <WorkInProgress />
+      <CustomSections page="home" at="after-work-in-progress" />
       <RoomExplorer onOpenForm={handleOpen} />
+      <CustomSections page="home" at="after-room-explorer" />
       <VastuBanner />
       <StyleQuiz onOpenForm={handleOpen} />
+      <CustomSections page="home" at="after-style-quiz" />
       <MarketOfferings onOpenForm={handleOpen} />
 
       <BlendSection onOpenForm={handleOpen} />
       {/* <ProcessSection /> */}
       {/* <PageBanner /> */}
       <ClientStories onOpenForm={handleOpen} />
+      <CustomSections page="home" at="after-client-stories" />
       <GoogleReviews onOpenForm={handleOpen} />
+      <CustomSections page="home" at="after-google-reviews" />
       <SolutionsGrid onOpenForm={handleOpen} />
+      <CustomSections page="home" at="before-faq" />
       <FaqSection />
+      <CustomSections page="home" at="end" />
     </>
   );
 
