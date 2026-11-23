@@ -14,6 +14,9 @@ const theme = {
     fontFamily: "'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",
     colorPrimary: '#E40B12',
     colorLink: '#4167B3',
+    // plain links get a little darker on hover (not the pale default)
+    colorLinkHover: '#2F4F8F',
+    colorLinkActive: '#2F4F8F',
   },
 };
 

@@ -226,3 +226,47 @@ code {
 .ul-mail-card__btn--red:hover { background: #c2090f; border-color: #c2090f; color: #fff; }
 @keyframes ul-mail-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
 @media (prefers-reduced-motion: reduce) { .ul-mail-card { animation: none; } }
+
+/* Links keep their own text colour on hover.
+   antd colours every <a> on hover (light blue, from colorLinkHover), which beat Tailwind's text-* classes:
+   white text on a green/red button turned pale blue. A link that sets a hover colour itself (hover:text-...) is left alone.
+   Add a line here if a new text-* colour is used on a link. */
+a.text-amber-400:not([class*="hover:text-"]):hover, a.text-amber-400:not([class*="hover:text-"]):active { color: theme(colors.amber.400); }
+a.text-amber-500:not([class*="hover:text-"]):hover, a.text-amber-500:not([class*="hover:text-"]):active { color: theme(colors.amber.500); }
+a.text-amber-600:not([class*="hover:text-"]):hover, a.text-amber-600:not([class*="hover:text-"]):active { color: theme(colors.amber.600); }
+a.text-brand-blue:not([class*="hover:text-"]):hover, a.text-brand-blue:not([class*="hover:text-"]):active { color: theme(colors.brand.blue); }
+a.text-brand-gold:not([class*="hover:text-"]):hover, a.text-brand-gold:not([class*="hover:text-"]):active { color: theme(colors.brand.gold); }
+a.text-brand-gold\/40:not([class*="hover:text-"]):hover, a.text-brand-gold\/40:not([class*="hover:text-"]):active { color: theme(colors.brand.gold / 40%); }
+a.text-brand-ink:not([class*="hover:text-"]):hover, a.text-brand-ink:not([class*="hover:text-"]):active { color: theme(colors.brand.ink); }
+a.text-brand-ink\/80:not([class*="hover:text-"]):hover, a.text-brand-ink\/80:not([class*="hover:text-"]):active { color: theme(colors.brand.ink / 80%); }
+a.text-brand-navy:not([class*="hover:text-"]):hover, a.text-brand-navy:not([class*="hover:text-"]):active { color: theme(colors.brand.navy); }
+a.text-brand-navy\/70:not([class*="hover:text-"]):hover, a.text-brand-navy\/70:not([class*="hover:text-"]):active { color: theme(colors.brand.navy / 70%); }
+a.text-brand-red:not([class*="hover:text-"]):hover, a.text-brand-red:not([class*="hover:text-"]):active { color: theme(colors.brand.red); }
+a.text-brand-red-dark:not([class*="hover:text-"]):hover, a.text-brand-red-dark:not([class*="hover:text-"]):active { color: theme(colors.brand.red-dark); }
+a.text-brand-red\/15:not([class*="hover:text-"]):hover, a.text-brand-red\/15:not([class*="hover:text-"]):active { color: theme(colors.brand.red / 15%); }
+a.text-brand-red\/40:not([class*="hover:text-"]):hover, a.text-brand-red\/40:not([class*="hover:text-"]):active { color: theme(colors.brand.red / 40%); }
+a.text-emerald-400:not([class*="hover:text-"]):hover, a.text-emerald-400:not([class*="hover:text-"]):active { color: theme(colors.emerald.400); }
+a.text-emerald-500:not([class*="hover:text-"]):hover, a.text-emerald-500:not([class*="hover:text-"]):active { color: theme(colors.emerald.500); }
+a.text-emerald-600:not([class*="hover:text-"]):hover, a.text-emerald-600:not([class*="hover:text-"]):active { color: theme(colors.emerald.600); }
+a.text-gray-200:not([class*="hover:text-"]):hover, a.text-gray-200:not([class*="hover:text-"]):active { color: theme(colors.gray.200); }
+a.text-gray-300:not([class*="hover:text-"]):hover, a.text-gray-300:not([class*="hover:text-"]):active { color: theme(colors.gray.300); }
+a.text-gray-400:not([class*="hover:text-"]):hover, a.text-gray-400:not([class*="hover:text-"]):active { color: theme(colors.gray.400); }
+a.text-gray-500:not([class*="hover:text-"]):hover, a.text-gray-500:not([class*="hover:text-"]):active { color: theme(colors.gray.500); }
+a.text-gray-600:not([class*="hover:text-"]):hover, a.text-gray-600:not([class*="hover:text-"]):active { color: theme(colors.gray.600); }
+a.text-gray-700:not([class*="hover:text-"]):hover, a.text-gray-700:not([class*="hover:text-"]):active { color: theme(colors.gray.700); }
+a.text-red-300:not([class*="hover:text-"]):hover, a.text-red-300:not([class*="hover:text-"]):active { color: theme(colors.red.300); }
+a.text-red-400:not([class*="hover:text-"]):hover, a.text-red-400:not([class*="hover:text-"]):active { color: theme(colors.red.400); }
+a.text-slate-400:not([class*="hover:text-"]):hover, a.text-slate-400:not([class*="hover:text-"]):active { color: theme(colors.slate.400); }
+a.text-slate-500:not([class*="hover:text-"]):hover, a.text-slate-500:not([class*="hover:text-"]):active { color: theme(colors.slate.500); }
+a.text-slate-600:not([class*="hover:text-"]):hover, a.text-slate-600:not([class*="hover:text-"]):active { color: theme(colors.slate.600); }
+a.text-slate-900:not([class*="hover:text-"]):hover, a.text-slate-900:not([class*="hover:text-"]):active { color: theme(colors.slate.900); }
+a.text-white:not([class*="hover:text-"]):hover, a.text-white:not([class*="hover:text-"]):active { color: theme(colors.white); }
+a.text-white\/45:not([class*="hover:text-"]):hover, a.text-white\/45:not([class*="hover:text-"]):active { color: theme(colors.white / 45%); }
+a.text-white\/50:not([class*="hover:text-"]):hover, a.text-white\/50:not([class*="hover:text-"]):active { color: theme(colors.white / 50%); }
+a.text-white\/60:not([class*="hover:text-"]):hover, a.text-white\/60:not([class*="hover:text-"]):active { color: theme(colors.white / 60%); }
+a.text-white\/65:not([class*="hover:text-"]):hover, a.text-white\/65:not([class*="hover:text-"]):active { color: theme(colors.white / 65%); }
+a.text-white\/70:not([class*="hover:text-"]):hover, a.text-white\/70:not([class*="hover:text-"]):active { color: theme(colors.white / 70%); }
+a.text-white\/75:not([class*="hover:text-"]):hover, a.text-white\/75:not([class*="hover:text-"]):active { color: theme(colors.white / 75%); }
+a.text-white\/80:not([class*="hover:text-"]):hover, a.text-white\/80:not([class*="hover:text-"]):active { color: theme(colors.white / 80%); }
+a.text-white\/85:not([class*="hover:text-"]):hover, a.text-white\/85:not([class*="hover:text-"]):active { color: theme(colors.white / 85%); }
+a.text-white\/90:not([class*="hover:text-"]):hover, a.text-white\/90:not([class*="hover:text-"]):active { color: theme(colors.white / 90%); }
