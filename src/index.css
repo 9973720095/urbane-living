@@ -155,3 +155,32 @@ code {
   -webkit-mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 56px), transparent);
   mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 56px), transparent);
 }
+
+/* Small arrow on the right of a sideways list while more items wait (added by src/utils/swipeHints.js) */
+.ul-swipe-arrow {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 9999px;
+  background: #fff;
+  color: #1f2a44;
+  box-shadow: 0 4px 12px rgba(31, 42, 68, 0.18);
+  cursor: pointer;
+  transform: translateY(-50%);
+  animation: ul-swipe-nudge 1.6s ease-in-out infinite;
+}
+.ul-swipe-arrow.is-on { display: flex; }
+.ul-swipe-arrow:hover { background: #e40b12; border-color: #e40b12; color: #fff; }
+@media (min-width: 640px) { .ul-swipe-arrow--phone.is-on { display: none; } }
+@keyframes ul-swipe-nudge {
+  0%, 100% { transform: translate(0, -50%); }
+  50% { transform: translate(3px, -50%); }
+}
+@media (prefers-reduced-motion: reduce) { .ul-swipe-arrow { animation: none; } }
