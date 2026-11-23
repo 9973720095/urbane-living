@@ -36,10 +36,11 @@ const emptySection = (page) => ({
   items: [{}],
 });
 
-export default function PageSections({ apiBase }) {
+// page = a page key (e.g. 'home'): show and add sections of that page only (used inside the page's own admin tab)
+export default function PageSections({ apiBase, page: fixedPage }) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('');
+  const [filter, setFilter] = useState(fixedPage || '');
   const [editing, setEditing] = useState(null); // null = closed, {} = new, {...} = existing
   const [saving, setSaving] = useState(false);
   const [form] = Form.useForm();
@@ -172,7 +173,7 @@ export default function PageSections({ apiBase }) {
         type="info"
         showIcon
         style={{ marginBottom: 16 }}
-        message="Add a new section to any page."
+        message={fixedPage ? `Extra sections on the ${findSectionPage(fixedPage)?.label || fixedPage}` : 'Add a new section to any page.'}
         description={
           <span>
             Choose the page and where the section goes, then add rows of items (photo or video, alt text, title, text, link).
@@ -182,12 +183,14 @@ export default function PageSections({ apiBase }) {
       />
 
       <Space wrap style={{ marginBottom: 16 }}>
-        <Select
-          value={filter}
-          onChange={setFilter}
-          style={{ minWidth: 240 }}
-          options={[{ value: '', label: 'All pages' }, ...sectionPages.map((p) => ({ value: p.key, label: p.label }))]}
-        />
+        {!fixedPage && (
+          <Select
+            value={filter}
+            onChange={setFilter}
+            style={{ minWidth: 240 }}
+            options={[{ value: '', label: 'All pages' }, ...sectionPages.map((p) => ({ value: p.key, label: p.label }))]}
+          />
+        )}
         <Button type="primary" icon={<PlusOutlined />} onClick={() => openEditor(null)}>Add section</Button>
         <Button icon={<ReloadOutlined />} onClick={load}>Refresh</Button>
       </Space>

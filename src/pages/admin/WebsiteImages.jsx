@@ -26,7 +26,8 @@ const FIELD_LABEL = { style: 'Style (filter)', room: 'Room (filter)', category: 
 const thumb = (url) => sizeCloudinary(url, 480);
 const newKey = (gid) => `${gid}.x-${Date.now().toString(36)}${Math.random().toString(36).slice(2, 6)}`;
 
-export default function WebsiteImages({ apiBase, onOpenSections }) {
+// pages = image page labels (e.g. ['Bedroom page']): show only these pages (used inside the page's own admin tab)
+export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPages }) {
   const [current, setCurrent] = useState({}); // { photoId: { url, alt, title, hidden, order, extra, collection, style, room, category } }
   const [loading, setLoading] = useState(true);
   const [page, setPage] = useState('');
@@ -63,8 +64,8 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
         const g = galleryById[o.collection];
         rows.push({ id, page: g.page, section: g.section, collection: g.id, item: o.title || 'Added photo', o, extra: true, defaultOrder: 1000 + n, changed: true, default: thumb(o.url) });
       });
-    return rows;
-  }, [slots, current, galleryById]);
+    return onlyPages ? rows.filter((r) => onlyPages.includes(r.page)) : rows;
+  }, [slots, current, galleryById, onlyPages]);
 
   const pages = useMemo(() => [...new Set(photos.map((p) => p.page))], [photos]);
   const activePage = page || pages[0];
@@ -78,7 +79,7 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
     return `${p.page} ${p.section} ${p.item} ${p.id} ${p.o.title || ''} ${p.defaultTitle || ''}`.toLowerCase().includes(q);
   };
   // when searching / filtering: all pages; else the chosen page
-  const visible = photos.filter((p) => (search || filter !== 'All' ? true : p.page === activePage)).filter(matches);
+  const visible = photos.filter((p) => (onlyPages || search || filter !== 'All' ? true : p.page === activePage)).filter(matches);
 
   // group by page › section
   const groups = useMemo(() => {
@@ -90,19 +91,22 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
     });
     // galleries with nothing visible yet (so "Add photo" is always reachable on its page)
     if (!search && filter === 'All') {
-      galleries.filter((g) => g.page === activePage).forEach((g) => {
+      galleries.filter((g) => (onlyPages ? onlyPages.includes(g.page) : g.page === activePage)).forEach((g) => {
         const k = `${g.page} › ${g.section}`;
         if (!map.has(k)) map.set(k, { key: k, page: g.page, section: g.section, collection: g.id, items: [] });
       });
     }
-    const list = [...map.values()];
+    // page by page; on each page the top banner first, then the sections in website order
+    const pageIndex = (pg) => pages.indexOf(pg);
+    const list = [...map.values()].sort((a, b) => (pageIndex(a.page) - pageIndex(b.page))
+      || ((/banner/i.test(b.section) ? 1 : 0) - (/banner/i.test(a.section) ? 1 : 0)));
     list.forEach((grp) => {
       if (grp.collection) {
         grp.items.sort((a, b) => (a.o.order ?? a.defaultOrder) - (b.o.order ?? b.defaultOrder));
       }
     });
     return list;
-  }, [visible, galleries, activePage, search, filter]);
+  }, [visible, galleries, activePage, search, filter, onlyPages, pages]);
 
   const load = () => {
     setLoading(true);
@@ -334,14 +338,14 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
         type="info"
         showIcon
         style={{ marginBottom: 16 }}
-        message="Every photo on the website, page by page and section by section."
+        message={onlyPages ? `${onlyPages.join(' + ')}: every photo, section by section.` : 'Every photo on the website, page by page and section by section.'}
         description={
           <span>
             <b>Edit</b> = change the photo, its title and its description for Google. In galleries you can also <b>Hide</b> a photo,
             change its <b>position</b> and <b>Add photo</b>. Use only our own photos: no other company&apos;s logo or name.
             Visitors see changes on their next visit; Google after the next website build.
             {onOpenSections && (
-              <> Need a whole new section on a page? <Button type="link" size="small" style={{ padding: 0 }} icon={<AppstoreAddOutlined />} onClick={onOpenSections}>Page Sections</Button></>
+              <> Need a whole new section{onlyPages ? ' on this page' : ' on a page'}? <Button type="link" size="small" style={{ padding: 0 }} icon={<AppstoreAddOutlined />} onClick={onOpenSections}>Page Sections</Button></>
             )}
           </span>
         }
@@ -355,6 +359,7 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
       </Space>
 
       <Space wrap style={{ marginBottom: 16, width: '100%' }}>
+        {!onlyPages && (
         <Select
           value={activePage}
           onChange={(v) => { setPage(v); setSearch(''); setFilter('All'); }}
@@ -363,10 +368,11 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
           disabled={!!search || filter !== 'All'}
           options={pages.map((pg) => ({ value: pg, label: `${pg} (${pageCount(pg)})` }))}
         />
+        )}
         <Input
           allowClear
           prefix={<SearchOutlined />}
-          placeholder="Search all pages: kitchen, banner, gallery…"
+          placeholder={onlyPages ? 'Search photos on this page…' : 'Search all pages: kitchen, banner, gallery…'}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={{ width: 300 }}
@@ -378,7 +384,7 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
       {loading ? (
         <div style={{ textAlign: 'center', padding: 40 }}><Spin /></div>
       ) : groups.length === 0 ? (
-        <Empty description="No photos match." />
+        <Empty description={onlyPages && !search && filter === 'All' ? 'This page has no photos to manage (only videos / text). Use Extra sections to add photos.' : 'No photos match.'} />
       ) : (
         groups.map((grp) => (
           <Card
@@ -387,7 +393,7 @@ export default function WebsiteImages({ apiBase, onOpenSections }) {
             style={{ marginBottom: 16 }}
             title={
               <Space wrap>
-                {(search || filter !== 'All') && <Tag color="blue">{grp.page}</Tag>}
+                {(search || filter !== 'All' || (onlyPages && onlyPages.length > 1)) && <Tag color="blue">{grp.page}</Tag>}
                 <span>{grp.section}</span>
                 <Badge count={grp.items.length} showZero color="#1F2A44" />
                 {grp.collection && <Tag color="purple">Gallery</Tag>}

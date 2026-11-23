@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //... (All your existing imports)
 import { Layout, Menu, Card, Row, Col, Statistic, Table, Button, Modal, Form, Input, Select, message, Popconfirm, Drawer, Space, Tag } from 'antd';
-import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined, AppstoreAddOutlined } from '@ant-design/icons';
+import { DashboardOutlined, PlusOutlined, LogoutOutlined, SolutionOutlined, MenuOutlined, EditOutlined, HomeOutlined, CoffeeOutlined, LayoutOutlined, BorderInnerOutlined, PictureOutlined, AppstoreAddOutlined, GlobalOutlined, BulbOutlined, InfoCircleOutlined, PhoneOutlined, ToolOutlined, ReadOutlined, EnvironmentOutlined, FormOutlined } from '@ant-design/icons';
 import { auth } from '../firebase';
 import { signOut, onAuthStateChanged } from 'firebase/auth'; // Added onAuthStateChanged
 import { useNavigate } from 'react-router-dom';
@@ -12,8 +12,24 @@ import { isAdminEmail } from '../config/admins';
 import '../utils/adminApi'; // sends the admin login token to the backend
 import WebsiteImages from './admin/WebsiteImages'; // change any photo on the website, page / section wise
 import PageSections from './admin/PageSections'; // add new sections to any page, at any position
+import PageTab, { ADMIN_PAGES, findAdminPage } from './admin/PageTab'; // one tab per website page (photos + sections + designs)
 
 const { Content, Sider, Header } = Layout;
+
+const PAGE_ICONS = {
+  'page:home': <HomeOutlined />,
+  'page:false-ceiling': <BulbOutlined />,
+  Bedroom: <HomeOutlined />,
+  'Living Hall': <LayoutOutlined />,
+  Kitchen: <CoffeeOutlined />,
+  Wardrobe: <BorderInnerOutlined />,
+  'page:about': <InfoCircleOutlined />,
+  'page:contact': <PhoneOutlined />,
+  'page:factory': <ToolOutlined />,
+  'page:blog': <ReadOutlined />,
+  'page:city': <EnvironmentOutlined />,
+  'page:popup': <FormOutlined />,
+};
 const { Option } = Select;
 
 const AdminDashboard = ({ onFinish }) => {
@@ -186,14 +202,18 @@ const AdminDashboard = ({ onFinish }) => {
       onClick={(e) => { setActiveTab(e.key); setDrawerVisible(false); }}
     >
       <Menu.Item key="Dashboard" icon={<DashboardOutlined />}>Dashboard</Menu.Item>
-      <Menu.Item key="Bedroom" icon={<HomeOutlined />}>Bedroom</Menu.Item>
-      <Menu.Item key="Living Hall" icon={<LayoutOutlined />}>Living Hall</Menu.Item>
-      <Menu.Item key="Kitchen" icon={<CoffeeOutlined />}>Kitchen</Menu.Item>
-      <Menu.Item key="Wardrobe" icon={<BorderInnerOutlined />}>Wardrobe</Menu.Item>
       <Menu.Item key="Leads" icon={<SolutionOutlined />}>Leads</Menu.Item>
       <Menu.Item key="Blogs" icon={<EditOutlined />}>Blogs</Menu.Item>
-      <Menu.Item key="Website Images" icon={<PictureOutlined />}>Website Images</Menu.Item>
-      <Menu.Item key="Page Sections" icon={<AppstoreAddOutlined />}>Page Sections</Menu.Item>
+      {/* one tab per website page: its photos, extra sections and app designs (admin/PageTab.jsx) */}
+      <Menu.ItemGroup key="pages" title={<span style={{ color: 'rgba(255,255,255,.45)', fontSize: 11, letterSpacing: '.12em' }}>WEBSITE PAGES</span>}>
+        {ADMIN_PAGES.map((p) => (
+          <Menu.Item key={p.key} icon={PAGE_ICONS[p.key] || <GlobalOutlined />}>{p.label}</Menu.Item>
+        ))}
+      </Menu.ItemGroup>
+      <Menu.ItemGroup key="all" title={<span style={{ color: 'rgba(255,255,255,.45)', fontSize: 11, letterSpacing: '.12em' }}>ALL PAGES</span>}>
+        <Menu.Item key="Website Images" icon={<PictureOutlined />}>All Photos (search)</Menu.Item>
+        <Menu.Item key="Page Sections" icon={<AppstoreAddOutlined />}>All Sections</Menu.Item>
+      </Menu.ItemGroup>
       <Menu.Item key="Logout" icon={<LogoutOutlined />} onClick={handleLogout} style={{ color: '#ff4d4f' }}>Logout</Menu.Item>
     </Menu>
   );
@@ -240,7 +260,7 @@ const AdminDashboard = ({ onFinish }) => {
         <Header style={{ background: '#fff', padding: '0 15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, boxShadow: '0 2px 8px #f0f1f2' }}>
             <div style={{ display: 'flex', alignItems: 'center' }}>
                 <Button type="text" icon={<MenuOutlined />} onClick={() => setDrawerVisible(true)} className="mobile-menu-btn" style={{ marginRight: 8 }} />
-                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>{activeTab}</h3>
+                <h3 style={{ margin: 0, fontSize: '16px', fontWeight: '600' }}>{findAdminPage(activeTab) ? `${findAdminPage(activeTab).label} page` : activeTab === 'Website Images' ? 'All Photos' : activeTab === 'Page Sections' ? 'All Sections' : activeTab}</h3>
             </div>
             <Space>
                 {['Dashboard', 'Bedroom', 'Living Hall', 'Kitchen', 'Wardrobe'].includes(activeTab) &&
@@ -283,10 +303,18 @@ const AdminDashboard = ({ onFinish }) => {
             </>
           )}
 
-          {activeTab === 'Bedroom' && renderDesignTable(filteredDesigns('Bedroom'), 'Bedroom Designs')}
-          {activeTab === 'Living Hall' && renderDesignTable(filteredDesigns('Living Hall'), 'Living Hall Designs')}
-          {activeTab === 'Kitchen' && renderDesignTable(filteredDesigns('Kitchen'), 'Kitchen Designs')}
-          {activeTab === 'Wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
+          {/* website page tabs: Photos | Extra sections | App designs (room pages) */}
+          {findAdminPage(activeTab) && (
+            <PageTab
+              key={activeTab}
+              page={findAdminPage(activeTab)}
+              apiBase={API_BASE_URL}
+              onOpenAllPhotos={() => setActiveTab('Website Images')}
+              designsTable={findAdminPage(activeTab).designs
+                ? renderDesignTable(filteredDesigns(findAdminPage(activeTab).designs), `${findAdminPage(activeTab).label} Designs (app)`)
+                : null}
+            />
+          )}
 
           {activeTab === 'Website Images' && <WebsiteImages apiBase={API_BASE_URL} onOpenSections={() => setActiveTab('Page Sections')} />}
           {activeTab === 'Page Sections' && <PageSections apiBase={API_BASE_URL} />}

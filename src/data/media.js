@@ -445,12 +445,13 @@ export const imageSlots = () => {
   return [...registry.values()].map((r) => {
     const [page, ...rest] = r.label.split(' › ');
     const gid = [...galleries.keys()].find((g) => r.id.startsWith(`${g}.`));
-    const section = gid ? galleries.get(gid).label.split(' › ').slice(1).join(' › ') : rest.join(' › ');
+    // 'Page › Section › Photo': photos of one section sit together in the admin page
+    const section = gid ? galleries.get(gid).label.split(' › ').slice(1).join(' › ') : rest[0] || '';
     return {
       ...r,
       page,
       section,
-      item: gid ? rest.slice(section.split(' › ').length).join(' › ') : '',
+      item: gid ? rest.slice(section.split(' › ').length).join(' › ') : rest.slice(1).join(' › '),
       collection: gid || '',
       default: photo(r.defaultKey, 640),
       defaultAlt: r.defaultAlt || (photos[r.defaultKey] ? photos[r.defaultKey].alt : ''),
