@@ -277,7 +277,7 @@ export default function FactoryPage({ onOpenForm }) {
               href={`${contact.whatsappHref}?text=${encodeURIComponent(banner.whatsappMessage)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#15803D] px-8 text-sm font-semibold text-white no-underline transition hover:bg-[#166534]"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-8 text-sm font-semibold text-white no-underline transition hover:bg-[#1EBE5D]"
             >
               <WhatsAppOutlined /> WhatsApp Us
             </a>

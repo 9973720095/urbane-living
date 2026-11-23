@@ -147,7 +147,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-  background: #15803D;
+  background: #25D366; /* official WhatsApp green */
   color: #ffffff !important;
   font-size: 15px;
   text-decoration: none;
@@ -155,7 +155,7 @@
 }
 
 .ul-tb-wa:hover {
-  background: #166534;
+  background: #1EBE5D;
   transform: translateY(-1px);
 }
 

@@ -145,7 +145,7 @@ export default function LocalityPage({ onOpenForm }) {
             </ul>
             <div className="mt-7 grid grid-cols-1 gap-3 sm:flex">
               <button type="button" onClick={openForm} className={btnRed}>Book Free Consultation <ArrowRightOutlined /></button>
-              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#15803D] px-7 text-[15px] font-semibold text-white no-underline transition hover:bg-[#166534]">
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-7 text-[15px] font-semibold text-white no-underline transition hover:bg-[#1EBE5D]">
                 <WhatsAppOutlined /> WhatsApp us
               </a>
             </div>

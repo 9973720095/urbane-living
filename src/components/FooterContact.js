@@ -105,7 +105,7 @@ const FooterContact = () => (
           <a href={footer.phone.href} className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-red px-5 text-sm font-semibold text-white no-underline transition hover:bg-brand-red-dark sm:text-[15px]">
             <PhoneFilled /> Call now
           </a>
-          <a href={footer.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#15803D] px-5 text-sm font-semibold text-white no-underline transition hover:bg-[#166534] sm:text-[15px]">
+          <a href={footer.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-sm font-semibold text-white no-underline transition hover:bg-[#1EBE5D] sm:text-[15px]">
             <WhatsAppLogo size={18} /> WhatsApp
           </a>
         </div>

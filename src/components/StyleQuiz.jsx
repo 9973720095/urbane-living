@@ -125,7 +125,7 @@ const StyleQuiz = ({ onOpenForm }) => {
                     href={whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 text-sm font-semibold text-white no-underline transition hover:brightness-95"
+                    className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 text-sm font-semibold text-white no-underline transition hover:bg-[#1EBE5D]"
                   >
                     <WhatsAppOutlined /> Share on WhatsApp
                   </a>
