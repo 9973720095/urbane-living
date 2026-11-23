@@ -141,3 +141,17 @@ code {
     padding-bottom: 16px !important;
   }
 }
+
+/* Sideways lists: fade the edge where more items wait (set by src/utils/swipeHints.js) */
+[data-swipe='right'] {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(to right, #000 calc(100% - 56px), transparent);
+}
+[data-swipe='left'] {
+  -webkit-mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent);
+  mask-image: linear-gradient(to left, #000 calc(100% - 40px), transparent);
+}
+[data-swipe='both'] {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 56px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 40px, #000 calc(100% - 56px), transparent);
+}

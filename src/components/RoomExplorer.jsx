@@ -222,29 +222,31 @@ export default function RoomExplorer({ onOpenForm }) {
               <h3 className="m-0 text-2xl font-semibold">{r.name} interiors</h3>
               <p className="m-0 mt-1.5 text-sm text-white/65">{r.intro}</p>
 
-              <ol className="m-0 mt-5 flex list-none flex-col gap-2 p-0">
+              {/* phones + tablets: 2 in a row (an odd last one takes the whole row); desktop: one list */}
+              <ol className="m-0 mt-5 grid list-none grid-cols-2 gap-2 p-0 lg:flex lg:flex-col">
                 {r.spots.map((s, i) => {
                   const active = ri === roomIdx && i === spotIdx;
+                  const wide = r.spots.length % 2 === 1 && i === r.spots.length - 1;
                   return (
-                    <li key={s.title}>
+                    <li key={s.title} className={wide ? 'col-span-2' : ''}>
                       <button
                         type="button"
                         onClick={() => pickSpot(i)}
                         aria-expanded={active}
-                        className={`flex w-full cursor-pointer items-start gap-3 rounded-2xl border border-solid p-3 text-left transition ${
-                          active ? 'border-brand-red/60 bg-brand-red/10' : 'border-transparent bg-transparent hover:bg-white/5'
+                        className={`flex h-full w-full cursor-pointer items-start gap-2.5 rounded-2xl border border-solid p-3 text-left transition lg:gap-3 ${
+                          active ? 'border-brand-red/60 bg-brand-red/10' : 'border-white/10 bg-white/[0.03] hover:bg-white/5 lg:border-transparent lg:bg-transparent'
                         }`}
                       >
                         <span
-                          className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                          className={`mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[11px] font-bold lg:h-7 lg:w-7 lg:text-xs ${
                             active ? 'bg-brand-red text-white' : 'bg-white/10 text-white/70'
                           }`}
                         >
                           {i + 1}
                         </span>
                         <span className="min-w-0">
-                          <span className="block text-[15px] font-semibold text-white">{s.title}</span>
-                          <span className="block text-sm leading-relaxed text-white/65">{s.text}</span>
+                          <span className="block text-[13.5px] font-semibold leading-snug text-white lg:text-[15px]">{s.title}</span>
+                          <span className="mt-0.5 block text-[12px] leading-snug text-white/65 lg:text-sm lg:leading-relaxed">{s.text}</span>
                         </span>
                       </button>
                     </li>
