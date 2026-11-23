@@ -5,6 +5,7 @@ import { ConfigProvider } from 'antd';
 import { loadImageOverrides } from './utils/siteImages';
 import { loadPageSections } from './utils/pageSections';
 import { startSwipeHints } from './utils/swipeHints';
+import { startMailHelper } from './utils/mailHelper';
 import reportWebVitals from './reportWebVitals';
 
 // Poppins font + logo red for all antd components (buttons, menu, forms)
@@ -33,6 +34,7 @@ Promise.all([loadImageOverrides(), loadPageSections()]).then(() => {
     </React.StrictMode>
   );
   startSwipeHints(); // fade + small peek on sideways lists, so visitors know there is more
+  startMailHelper(); // email links: copy the address + Gmail / Outlook buttons when no mail app opens
 });
 
 // If you want to start measuring performance in your app, pass a function

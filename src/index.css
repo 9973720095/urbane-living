@@ -184,3 +184,45 @@ code {
   50% { transform: translate(3px, -50%); }
 }
 @media (prefers-reduced-motion: reduce) { .ul-swipe-arrow { animation: none; } }
+
+/* Card shown after clicking an email link (src/utils/mailHelper.js) */
+.ul-mail-card {
+  position: fixed;
+  z-index: 2147483000;
+  left: 50%;
+  bottom: 24px;
+  width: min(360px, calc(100vw - 24px));
+  transform: translateX(-50%);
+  padding: 14px 16px 16px;
+  border-radius: 18px;
+  background: #fff;
+  color: #1f2a44;
+  box-shadow: 0 18px 48px -12px rgba(31, 42, 68, 0.45);
+  border-top: 4px solid #e40b12;
+  font-size: 14px;
+  animation: ul-mail-in 0.25s ease-out;
+}
+@media (max-width: 1023px) { .ul-mail-card { bottom: 88px; } } /* above the phone bottom menu */
+.ul-mail-card__top { display: flex; align-items: center; gap: 12px; }
+.ul-mail-card__icon {
+  display: flex; flex-shrink: 0; align-items: center; justify-content: center;
+  width: 38px; height: 38px; border-radius: 12px; background: rgba(228, 11, 18, 0.1); color: #e40b12; font-size: 18px;
+}
+.ul-mail-card__text { display: flex; min-width: 0; flex: 1; flex-direction: column; line-height: 1.35; }
+.ul-mail-card__text strong { font-size: 14px; font-weight: 600; }
+.ul-mail-card__addr { overflow: hidden; color: #4167b3; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.ul-mail-card__close {
+  flex-shrink: 0; width: 30px; height: 30px; margin: 0; padding: 0; border: 0; border-radius: 9999px;
+  background: #f1f5f9; color: #64748b; font-size: 18px; line-height: 1; cursor: pointer;
+}
+.ul-mail-card__hint { margin: 12px 0 8px; color: #64748b; font-size: 12.5px; }
+.ul-mail-card__btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ul-mail-card__btn {
+  display: flex; align-items: center; justify-content: center; height: 40px; border-radius: 9999px;
+  border: 1px solid #e2e8f0; background: #fff; color: #1f2a44; font-weight: 600; text-decoration: none;
+}
+.ul-mail-card__btn:hover { border-color: #1f2a44; color: #1f2a44; }
+.ul-mail-card__btn--red { border-color: #e40b12; background: #e40b12; color: #fff; }
+.ul-mail-card__btn--red:hover { background: #c2090f; border-color: #c2090f; color: #fff; }
+@keyframes ul-mail-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (prefers-reduced-motion: reduce) { .ul-mail-card { animation: none; } }
