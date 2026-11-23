@@ -12,6 +12,11 @@
 const BASE = 'https://res.cloudinary.com/nzqefovs';
 
 export const photos = {
+  // False Ceiling page banner (cove-lit ceiling, our Cloudinary account diosq0s7w, so a full url)
+  ceilingHeroLiving: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png',
+    alt: 'Homeowner walking into her living room with a cove-lit false ceiling, recessed spot lights and beige sofas',
+  },
   // Living rooms
   livingTvWall: {
     id: 'v1794306120/Enscape_2026-08-06-05-55-47_living_area__1.png',
@@ -248,19 +253,19 @@ export const photos = {
   To add a photo: add it to `photos` above, then put its key (and a title) here.
 */
 export const roomGalleries = {
+  // Each page shows only its own room, and no photo twice. The page's top banner photo is not repeated here.
+  // Near-copies of one render (livingTvWall/livingTvWallWide, livingSofa/livingSofaAlt, compactBedroom/beigeWardrobeBedroom,
+  // bathroomBeige/bathroomBeigeAlt, crockeryUnit/coffeeStation) count as the same photo
   kitchen: [
-    ['uShapeKitchen', 'U-shaped kitchen with walnut and white cabinets', 'Modern'],
     ['lShapeKitchenFridge', 'L-shaped kitchen with tall fridge unit', 'Modern'],
     ['kitchenLOpen', 'Open kitchen facing the living room', 'Modern'],
     ['galleyKitchen', 'Parallel kitchen with built-in microwave', 'Modern'],
     ['greyKitchenL', 'Grey L-shaped kitchen with marble backsplash', 'Minimal'],
     ['greyKitchen', 'Grey kitchen with tall fridge unit', 'Minimal'],
     ['greyKitchenSink', 'Compact kitchen with black glass cabinets', 'Minimal'],
-    ['diningToKitchen', 'Kitchen opening from the dining area', 'Modern'],
-    ['crockeryUnit', 'Lit crockery unit with microwave space', 'Modern'],
+    ['crockeryBar', 'Kitchen with lit crockery and coffee unit', 'Modern'],
   ],
   bedroom: [
-    ['plumBedroom', 'Plum-panelled master bedroom', 'Luxury'],
     ['blushMasterBedroom', 'Blush pink master bedroom with cove ceiling', 'Luxury'],
     ['sageWardrobeBedroom', 'Sage green bedroom with matching wardrobe', 'Modern'],
     ['sageBedroom', 'Sage green bedroom with TV unit', 'Modern'],
@@ -269,18 +274,16 @@ export const roomGalleries = {
     ['greyTvBedroom', 'White bedroom with wooden TV unit', 'Minimal'],
     ['beigeWardrobeBedroom', 'Beige bedroom with black glass wardrobe', 'Minimal'],
     ['pinkBedroom', 'Blush pink bedroom', 'Modern'],
-    ['compactBedroom', 'Compact bedroom with full-height wardrobe', 'Minimal'],
+    ['sageBedroomFront', 'Sage green bed wall with landscape art', 'Modern'],
     ['kidsRoomJungle', 'Kids room with bunk bed', 'Kids'],
     ['kidsRoomPink', 'Pink kids bedroom with bunk bed', 'Kids'],
     ['guestRoom', 'Guest room with study and daybed', 'Minimal'],
     ['studyGuestRoom', 'Guest room with study desk and pooja unit', 'Modern'],
   ],
   wardrobe: [
-    ['beigeWardrobeFront', 'Beige wardrobe with black glass shutters', 'Modern'],
     ['slidingWardrobeBedroom', 'White sliding wardrobe with glass shutter', 'Modern'],
     ['sageWardrobeBedroom', 'Full-height sage green wardrobe', 'Modern'],
     ['wardrobeBedroom', 'Full-height white wardrobe', 'Modern'],
-    ['compactBedroom', 'Floor-to-ceiling wardrobe in a compact bedroom', 'Minimal'],
     ['goldArtBedroom', 'White and wood wardrobe', 'Luxury'],
     ['pinkBedroom', 'Sliding wardrobe with framed panels', 'Modern'],
     ['pinkPanelBedroom', 'White wardrobe beside a pink panelled wall', 'Minimal'],
@@ -290,11 +293,11 @@ export const roomGalleries = {
   // False Ceiling page gallery: [key, title, style, room] (room + style power the filters on that page)
   falseCeiling: [
     ['livingTvWall', 'Layered ceiling with chandelier over the living room', 'luxury', 'living'],
-    ['livingTvWallWide', 'Cove-lit gypsum ceiling over a backlit TV wall', 'luxury', 'living'],
+    ['livingGlassPartition', 'Cove-lit peripheral ceiling over the sofa', 'modern', 'living'],
     ['livingProfileCeiling', 'Peripheral ceiling with cove lights', 'modern', 'living'],
     ['beigeLiving', 'Cove-lit ceiling in a beige living room', 'minimalist', 'living'],
-    ['livingSofa', 'Gypsum ceiling with chandelier over the sofa', 'modern', 'living'],
-    ['swingLounge', 'Wooden ceiling over a lounge corner', 'luxury', 'living'],
+    ['openPlanLiving', 'Ceiling with track lights over open-plan living', 'modern', 'living'],
+    ['livingWithKitchen', 'Cove ceiling over a living room and open kitchen', 'minimalist', 'living'],
     ['diningPendant', 'Recessed ceiling over the dining table', 'modern', 'living'],
     ['diningOpenKitchen', 'Dining ceiling with cluster pendant light', 'modern', 'living'],
     ['blushMasterBedroom', 'Cove-lit ceiling in a master bedroom', 'luxury', 'bedroom'],
@@ -305,21 +308,17 @@ export const roomGalleries = {
     ['greyKitchenL', 'Clean flat ceiling in a grey kitchen', 'minimalist', 'kitchen'],
   ],
   living: [
-    ['livingTvWall', 'Living room with fluted TV wall', 'Luxury'],
-    ['livingTvWallWide', 'Backlit TV wall with display units', 'Luxury'],
     ['livingSofa', 'Beige sectional with slatted partition', 'Modern'],
-    ['livingSofaAlt', 'Bright living room with L-shaped sofa', 'Modern'],
     ['livingArchway', 'Living room through a wooden archway', 'Modern'],
-    ['openPlanLiving', 'Open-plan living and dining', 'Modern'],
+    ['openPlanLiving', 'Open-plan living with sage crockery unit', 'Modern'],
     ['beigeLiving', 'Beige living room with slatted TV wall', 'Minimal'],
     ['livingProfileCeiling', 'Living room with cove-lit false ceiling', 'Modern'],
     ['livingGlassPartition', 'Living room with fluted glass partition', 'Minimal'],
     ['compactLiving', 'Compact living room with L-shaped sofa', 'Minimal'],
     ['livingWithKitchen', 'Living room opening into the kitchen', 'Minimal'],
     ['swingLounge', 'Lounge corner with a hanging swing', 'Luxury'],
-    ['diningPendant', 'Dining area with recessed ceiling', 'Modern'],
-    ['diningOpenKitchen', 'Dining area with cluster pendant light', 'Modern'],
-    ['diningCrockery', 'Dining with wooden crockery unit', 'Modern'],
+    ['swingLoungeAlt', 'Living area with swing and aquarium wall', 'Luxury'],
+    ['diningPendant', 'Living-dining with globe pendant light', 'Modern'],
   ],
 };
 
@@ -329,8 +328,10 @@ export const videos = {
     'https://res.cloudinary.com/diosq0s7w/video/upload/q_auto,f_auto/v1778846966/AQOWluTfI93wZli3y8AblN3fSmqfTw4HQIb1xU_J9xyKMECYX8e02fW7RiHP80HDEeD2kCjj02xHN81LkiO7YHHE7xK-nsxhZNxIo1k_lsqepn.mp4',
 };
 
-export const photo = (key, width = 1400) =>
-  `${BASE}/image/upload/q_auto,f_auto,w_${width},c_limit/${photos[key].id}`;
+// eslint-disable-next-line no-use-before-define
+export const photo = (key, width = 1400) => (photos[key].url
+  ? sizeCloudinary(photos[key].url, width)
+  : `${BASE}/image/upload/q_auto,f_auto,w_${width},c_limit/${photos[key].id}`);
 
 export const alt = (key) => `${photos[key].alt} by Urbane Living`;
 

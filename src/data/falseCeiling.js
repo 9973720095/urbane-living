@@ -9,8 +9,9 @@ export const banners = {
     eyebrow: 'False Ceiling Experts · Gurugram & Delhi NCR',
     title: 'Get Your False Ceiling done in',
     highlight: 'Just 7 Days*',
-    image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
-    imageAlt: slotAlt('falseCeiling.banner', 'livingTvWall'),
+    image: slot('falseCeiling.banner', 'ceilingHeroLiving', 1400, 'False Ceiling page › Top banner'),
+    imageAlt: slotAlt('falseCeiling.banner', 'ceilingHeroLiving'),
+    imagePosition: 'center top', // keep the ceiling in view when the photo is cropped
     whatsappMessage: 'Hi Urbane Living, I want a free false ceiling design quote.',
     align: 'right',
     highlights,
@@ -45,13 +46,13 @@ export const estimator = {
   materials: [
     {
       key: 'gypsum', name: 'Gypsum', rate: 120, note: 'Smooth finish, most popular for flats',
-      image: slot('falseCeiling.estimator.gypsum', 'livingTvWallWide', 480, 'False Ceiling page › Cost estimator › Gypsum card'),
-      imageAlt: slotAlt('falseCeiling.estimator.gypsum', 'livingTvWallWide'),
+      image: slot('falseCeiling.estimator.gypsum', 'compactLiving', 480, 'False Ceiling page › Cost estimator › Gypsum card'),
+      imageAlt: slotAlt('falseCeiling.estimator.gypsum', 'compactLiving'),
     },
     {
       key: 'pop', name: 'POP', rate: 120, note: 'Curves and detailed mouldings',
-      image: slot('falseCeiling.estimator.pop', 'plumBedroom', 480, 'False Ceiling page › Cost estimator › POP card'),
-      imageAlt: slotAlt('falseCeiling.estimator.pop', 'plumBedroom'),
+      image: slot('falseCeiling.estimator.pop', 'sageBedroomFront', 480, 'False Ceiling page › Cost estimator › POP card'),
+      imageAlt: slotAlt('falseCeiling.estimator.pop', 'sageBedroomFront'),
     },
     {
       key: 'pvc', name: 'PVC', rate: 200, note: 'Moisture-proof for bathrooms and balconies',
@@ -67,18 +68,18 @@ export const estimator = {
   designTiers: [
     {
       key: 'basic', label: 'Simple', sub: 'Single level, flat', value: 1.0,
-      image: slot('falseCeiling.estimator.simple', 'beigeWardrobeBedroom', 480, 'False Ceiling page › Cost estimator › Simple design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.simple', 'beigeWardrobeBedroom'),
+      image: slot('falseCeiling.estimator.simple', 'greyTvBedroom', 480, 'False Ceiling page › Cost estimator › Simple design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.simple', 'greyTvBedroom'),
     },
     {
       key: 'cove', label: 'Cove lights', sub: 'Peripheral with hidden LED', value: 1.2,
-      image: slot('falseCeiling.estimator.cove', 'blushMasterBedroom', 480, 'False Ceiling page › Cost estimator › Cove design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.cove', 'blushMasterBedroom'),
+      image: slot('falseCeiling.estimator.cove', 'pinkBedroom', 480, 'False Ceiling page › Cost estimator › Cove design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.cove', 'pinkBedroom'),
     },
     {
       key: 'multi', label: 'Multi-level', sub: 'Layered or curved designer', value: 1.5,
-      image: slot('falseCeiling.estimator.multi', 'livingTvWall', 480, 'False Ceiling page › Cost estimator › Multi-level design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.multi', 'livingTvWall'),
+      image: slot('falseCeiling.estimator.multi', 'livingSofaAlt', 480, 'False Ceiling page › Cost estimator › Multi-level design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.multi', 'livingSofaAlt'),
     },
   ],
   rangeSpread: 0.1, // estimate is shown as a range (±10%), never as a fixed price
@@ -108,7 +109,7 @@ export const seo = {
     description:
       'Work out your false ceiling price per sq. ft. with material (gypsum, POP, PVC or wooden), design and lights with our free cost estimator. Installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad, with a 10-year anti-crack warranty.',
     path: '/false-ceiling',
-    image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
+    image: slot('falseCeiling.banner', 'ceilingHeroLiving', 1400, 'False Ceiling page › Top banner'),
     schema: [
       {
         '@context': 'https://schema.org',

@@ -130,7 +130,7 @@ function StoryPlayer({ items, label }) {
                   className={`group flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-solid p-2.5 pr-4 text-left transition ${on ? 'border-brand-red/25 bg-red-50/60 shadow-sm' : 'border-transparent bg-transparent hover:bg-slate-50'}`}
                 >
                   <span className="relative h-[72px] w-[48px] shrink-0 overflow-hidden rounded-xl bg-slate-200">
-                    <img src={posterOf(it.videoUrl, it.posterAt, 160)} alt="" loading="lazy" className="h-full w-full object-cover" />
+                    <img src={posterOf(it.videoUrl, (it.posterAt || 1) + 2, 160)} alt="" loading="lazy" className="h-full w-full object-cover" />
                     {on && (
                       <span className="absolute inset-0 flex items-center justify-center bg-black/35 text-[11px] text-white" aria-hidden="true">▶</span>
                     )}

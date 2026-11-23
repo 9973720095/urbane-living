@@ -8,13 +8,14 @@ import { slot, slotAlt } from '../data/media';
 // Our own design photos (data/media.js). Small copy in the tile, full size in the preview.
 const sized = (src, w) => src.replace('w_1400,', `w_${w},`);
 
+// Photos here are NOT used anywhere else on the home page (Room Explorer, Style Quiz etc. have their own)
 const galleryData = [
-  { key: 'livingTvWall', title: 'Living Room with Fluted TV Wall', category: 'Living Room' },
-  { key: 'plumBedroom', title: 'Plum-Panelled Master Bedroom', category: 'Bedroom' },
-  { key: 'kidsRoomJungle', title: 'Kids Room with Bunk Bed', category: 'Kids Room' },
-  { key: 'greyKitchenL', title: 'L-shaped Modular Kitchen', category: 'Kitchen' },
-  { key: 'diningPendant', title: 'Dining Area with Recessed Ceiling', category: 'Dining' },
-  { key: 'bathroomBeige', title: 'Modern Beige Bathroom', category: 'Bathroom' },
+  { key: 'livingGlassPartition', title: 'Living Room with Fluted Glass Partition', category: 'Living Room' },
+  { key: 'blushMasterBedroom', title: 'Blush Pink Master Bedroom', category: 'Bedroom' },
+  { key: 'studyPrayerNook', title: 'Study Corner with Pooja Unit', category: 'Study' },
+  { key: 'uShapeKitchen', title: 'U-shaped Modular Kitchen', category: 'Kitchen' },
+  { key: 'diningCrockery', title: 'Dining Area with Crockery Unit', category: 'Dining' },
+  { key: 'guestBathroom', title: 'Guest Bathroom with Backlit Mirror', category: 'Bathroom' },
 ].map((item, i) => {
   const id = `home.gallery.${i + 1}`;
   const label = `Home › Our Masterpieces › Photo ${i + 1}${i === 0 ? ' (big)' : ''}`;

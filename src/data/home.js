@@ -141,7 +141,7 @@ export const process = {
       heading: 'Enjoy the new look',
       duration: 'Just 7* days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580360/enjoy-new-look-reel-9x16.mp4',
-      img: slot('home.process.4', 'swingLounge', 720, 'Home › 7-day process › Step 4 photo'),
+      img: slot('home.process.4', 'sageTvBedroom', 720, 'Home › 7-day process › Step 4 photo'),
     },
   ],
   note: '*Typical timeline after design approval. Larger areas may take a little longer.',

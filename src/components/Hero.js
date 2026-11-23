@@ -66,7 +66,7 @@ const useIsMobile = () => {
 // Background: the poster image shows first (fast, with alt text for Google),
 // then the video fades in on top once the page has loaded.
 // People who chose "reduce motion" or "data saver" keep the still image (no video download).
-const HeroMedia = ({ media, mediaMobile, mediaAlt, poster, posterMobile }) => {
+const HeroMedia = ({ media, mediaMobile, mediaAlt, poster, posterMobile, mediaPosition }) => {
   const isMobile = useIsMobile();
   const videoRef = useRef(null);
   const [startVideo, setStartVideo] = useState(false);
@@ -110,6 +110,7 @@ const HeroMedia = ({ media, mediaMobile, mediaAlt, poster, posterMobile }) => {
           src={posterDesktop}
           alt={mediaAlt}
           className="hero-bg-video hero-poster"
+          style={mediaPosition ? { objectPosition: mediaPosition } : undefined}
           fetchpriority="high"
           decoding="async"
         />
@@ -237,6 +238,7 @@ const Hero = (props) => {
           mediaAlt={h.mediaAlt}
           poster={h.poster}
           posterMobile={h.posterMobile}
+          mediaPosition={props.media ? h.mediaPosition : undefined}
         />
 
         <div className="hero-overlay"></div>

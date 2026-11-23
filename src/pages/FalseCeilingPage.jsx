@@ -81,6 +81,7 @@ export default function FalseCeilingPage({ onOpenForm }) {
         subTitle={banners.falseCeiling.heroSubtitle}
         media={banners.falseCeiling.image}
         mediaAlt={banners.falseCeiling.imageAlt}
+        mediaPosition={banners.falseCeiling.imagePosition}
         formTitle={banners.falseCeiling.formTitle}
         formSubtitle={banners.falseCeiling.formSubtitle}
         formBadge={banners.falseCeiling.formBadge}
