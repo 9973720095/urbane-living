@@ -1,6 +1,6 @@
 // Home page sections.
 import { cdn } from './config';
-import { slot, slotAlt, videos } from './media';
+import { slot, slotAlt, gallery as photoList, videos } from './media';
 
 export const hero = {
   eyebrow: 'Interior & False Ceiling Experts · Delhi NCR',
@@ -68,8 +68,11 @@ export const beforeAfter = {
   title: 'Transforming homes',
   highlight: 'with love',
   subtitle: 'Drag the slider to see a real space before and after our work.',
-  before: `${cdn}/image/upload/q_auto,f_auto,w_1100/v1786447286/UrbaneBefore_img_qemvxm.png`,
-  after: `${cdn}/image/upload/q_auto,f_auto,w_1100/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png`,
+  // photos are slots: Admin -> Website Images -> Home -> Before & After
+  before: slot('home.beforeAfter.before', `${cdn}/image/upload/v1786447286/UrbaneBefore_img_qemvxm.png`, 1100, 'Home › Before & After › Before photo', { alt: 'Dining area before the interior work' }),
+  beforeAlt: slotAlt('home.beforeAfter.before', '', 'Dining area before the interior work'),
+  after: slot('home.beforeAfter.after', `${cdn}/image/upload/v1786447179/Enscape_2026-08-06-05-55-47_dining_area_2_aiwq2x.png`, 1100, 'Home › Before & After › After photo', { alt: 'Dining area after interior design by Urbane Living' }),
+  afterAlt: slotAlt('home.beforeAfter.after', '', 'Dining area after interior design by Urbane Living'),
 };
 
 // tone: which brand color the icon uses
@@ -86,17 +89,17 @@ export const offerings = {
   ],
 };
 
+// Project photos next to the Google reviews on the home page (components/GoogleReviews.jsx shows the first 5).
+// Admin -> Website Images -> Home -> Google reviews: change, hide, re-order or add photos.
 export const gallery = {
-  title: 'Our Masterpieces',
-  subtitle: 'Living rooms, bedrooms, kitchens and bathrooms designed in 3D by our in-house team, so you see your home before work starts.',
-  items: [
-    { src: slot('home.photos.1', 'livingSofa', 1400, 'Home › Homes our clients love › Photo 1'), title: 'Living Room', alt: slotAlt('home.photos.1', 'livingSofa') },
-    { src: slot('home.photos.2', 'sageBedroom', 1400, 'Home › Homes our clients love › Photo 2'), title: 'Bedroom', alt: slotAlt('home.photos.2', 'sageBedroom') },
-    { src: slot('home.photos.3', 'greyKitchenL', 1400, 'Home › Homes our clients love › Photo 3'), title: 'Modular Kitchen', alt: slotAlt('home.photos.3', 'greyKitchenL') },
-    { src: slot('home.photos.4', 'openPlanLiving', 1400, 'Home › Homes our clients love › Photo 4'), title: 'Living & Dining', alt: slotAlt('home.photos.4', 'openPlanLiving') },
-    { src: slot('home.photos.5', 'kidsRoomPink', 1400, 'Home › Homes our clients love › Photo 5'), title: 'Kids Bedroom', alt: slotAlt('home.photos.5', 'kidsRoomPink') },
-    { src: slot('home.photos.6', 'bathroomBeige', 1400, 'Home › Homes our clients love › Photo 6'), title: 'Bathroom', alt: slotAlt('home.photos.6', 'bathroomBeige') },
-  ],
+  items: photoList('home.photos', 'Home › Google reviews › Project photos', [
+    { key: 'livingSofa', title: 'Living Room' },
+    { key: 'sageBedroom', title: 'Bedroom' },
+    { key: 'greyKitchenL', title: 'Modular Kitchen' },
+    { key: 'openPlanLiving', title: 'Living & Dining' },
+    { key: 'kidsRoomPink', title: 'Kids Bedroom' },
+    { key: 'bathroomBeige', title: 'Bathroom' },
+  ], { fields: [] }).map((x) => ({ src: x.src(1400), title: x.title, alt: x.alt })),
 };
 
 export const blend = {
@@ -109,7 +112,7 @@ export const blend = {
   video: videos.ceilingInstall, // our team installing a false ceiling
 };
 
-// Home page "7 days" process. Vertical (9:16) reels; img is the still shown before the video loads.
+// False Ceiling page "7 days" process (components/ProcessSection.js). Vertical (9:16) reels; img is the still shown before the video loads.
 export const process = {
   title: 'Gypsum False Ceiling done in',
   highlight: 'just 7* Days',
@@ -120,28 +123,28 @@ export const process = {
       heading: 'Framing & Channels',
       duration: '2 days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792579434/framing-channels-reel-9x16.mp4',
-      img: `${cdn}/image/upload/q_auto/f_auto/v1777092660/WhatsApp_Image_2026-04-24_at_15.40.28_1_xucjet.jpg`,
+      img: slot('falseCeiling.process.1', `${cdn}/image/upload/v1777092660/WhatsApp_Image_2026-04-24_at_15.40.28_1_xucjet.jpg`, 720, 'False Ceiling page › 7-day process › Step 1 still (Framing & Channels)', { alt: 'Framing & Channels: false ceiling work in progress' }),
     },
     {
       stage: '02',
       heading: 'Board Installation',
       duration: '2 days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792579952/board-installation-reel-9x16.mp4',
-      img: `${cdn}/image/upload/q_auto/f_auto/v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg`,
+      img: slot('falseCeiling.process.2', `${cdn}/image/upload/v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg`, 720, 'False Ceiling page › 7-day process › Step 2 still (Board Installation)', { alt: 'Board Installation: false ceiling work in progress' }),
     },
     {
       stage: '03',
       heading: 'Finishing',
       duration: '3 days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580151/finishing-reel-9x16.mp4',
-      img: `${cdn}/image/upload/q_auto/f_auto/v1777092389/WhatsApp_Image_2026-04-24_at_15.43.20_l17xdz.jpg`,
+      img: slot('falseCeiling.process.3', `${cdn}/image/upload/v1777092389/WhatsApp_Image_2026-04-24_at_15.43.20_l17xdz.jpg`, 720, 'False Ceiling page › 7-day process › Step 3 still (Finishing)', { alt: 'Finishing: false ceiling work in progress' }),
     },
     {
       stage: '04',
       heading: 'Enjoy the new look',
       duration: 'Just 7* days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580360/enjoy-new-look-reel-9x16.mp4',
-      img: slot('home.process.4', 'sageTvBedroom', 720, 'Home › 7-day process › Step 4 photo'),
+      img: slot('falseCeiling.process.4', 'sageTvBedroom', 720, 'False Ceiling page › 7-day process › Step 4 still (Enjoy the new look)'),
     },
   ],
   note: '*Typical timeline after design approval. Larger areas may take a little longer.',

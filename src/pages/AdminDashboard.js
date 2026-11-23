@@ -288,7 +288,7 @@ const AdminDashboard = ({ onFinish }) => {
           {activeTab === 'Kitchen' && renderDesignTable(filteredDesigns('Kitchen'), 'Kitchen Designs')}
           {activeTab === 'Wardrobe' && renderDesignTable(filteredDesigns('Wardrobe'), 'Wardrobe Designs')}
 
-          {activeTab === 'Website Images' && <WebsiteImages apiBase={API_BASE_URL} />}
+          {activeTab === 'Website Images' && <WebsiteImages apiBase={API_BASE_URL} onOpenSections={() => setActiveTab('Page Sections')} />}
           {activeTab === 'Page Sections' && <PageSections apiBase={API_BASE_URL} />}
 
           {activeTab === 'Leads' && (

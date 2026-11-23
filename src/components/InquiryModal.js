@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Form, Input, Button, Select, Switch, message } from 'antd';
 import { CloseOutlined, ArrowRightOutlined } from '@ant-design/icons';
 import { inquiryOptions } from '../data/siteData';
+import { slot, slotAlt } from '../data/media';
 import { trackLead } from '../utils/metaPixel';
 import './css/InquiryModal.css';
 
@@ -11,7 +12,10 @@ const API_BASE_URL = window.location.hostname === 'localhost'
   : 'https://urbane-living.onrender.com';
 
 // Top banner photo (our own living-room shoot, first frame of the hero video)
-const BANNER_IMG = 'https://res.cloudinary.com/nzqefovs/video/upload/so_0,q_auto,f_auto,w_800,h_340,c_fill/v1794816175/living-room-hero-4k.jpg';
+// Top photo of the form popup (Admin -> Website Images -> Popup form)
+const BANNER_DEFAULT = 'https://res.cloudinary.com/nzqefovs/video/upload/so_0,q_auto,f_auto,w_800,h_340,c_fill/v1794816175/living-room-hero-4k.jpg';
+const BANNER_IMG = slot('popup.banner', BANNER_DEFAULT, 800, 'Popup form › Top photo', { alt: 'Living room designed by Urbane Living' });
+const BANNER_ALT = slotAlt('popup.banner', '', 'Living room designed by Urbane Living');
 
 const toOptions = (list) => list.map((v) => ({ value: v, label: v }));
 
@@ -84,7 +88,7 @@ const InquiryModal = ({ isOpen, onClose }) => {
 
         {/* Top banner: photo + headline */}
         <div className="ul-lead-banner">
-          <img src={BANNER_IMG} alt="Living room designed by Urbane Living" width="400" height="170" />
+          <img src={BANNER_IMG} alt={BANNER_ALT} style={{ objectFit: 'cover' }} width="400" height="170" />
           <div className="ul-lead-banner-text">
             <p className="ul-lead-banner-title">Dream home on your mind?</p>
             <p className="ul-lead-banner-sub">Urbane Living designers plan it with you, free of cost.</p>

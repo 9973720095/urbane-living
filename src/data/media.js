@@ -328,22 +328,39 @@ export const videos = {
     'https://res.cloudinary.com/diosq0s7w/video/upload/q_auto,f_auto/v1778846966/AQOWluTfI93wZli3y8AblN3fSmqfTw4HQIb1xU_J9xyKMECYX8e02fW7RiHP80HDEeD2kCjj02xHN81LkiO7YHHE7xK-nsxhZNxIo1k_lsqepn.mp4',
 };
 
+const isUrl = (v) => typeof v === 'string' && /^https:\/\//.test(v);
+
+// A photo by its key in `photos` above, or a full Cloudinary link, at the width it is shown
 // eslint-disable-next-line no-use-before-define
-export const photo = (key, width = 1400) => (photos[key].url
-  ? sizeCloudinary(photos[key].url, width)
-  : `${BASE}/image/upload/q_auto,f_auto,w_${width},c_limit/${photos[key].id}`);
+export const photo = (key, width = 1400) => {
+  if (isUrl(key)) return sizeCloudinary(key, width); // eslint-disable-line no-use-before-define
+  return photos[key].url
+    ? sizeCloudinary(photos[key].url, width) // eslint-disable-line no-use-before-define
+    : `${BASE}/image/upload/q_auto,f_auto,w_${width},c_limit/${photos[key].id}`;
+};
 
-export const alt = (key) => `${photos[key].alt} by Urbane Living`;
+export const alt = (key) => (photos[key] ? `${photos[key].alt} by Urbane Living` : '');
 
-/* ───────────── Slots (changed from Admin -> Website Images) ─────────────
+/* ───────────── Slots and galleries (managed from Admin -> Website Images) ─────────────
    slot('bedroom.banner', 'plumBedroom', 1400, 'Bedroom page › Top banner')
    -> the admin's photo for 'bedroom.banner' if one is set, else our default photo.
-   Overrides are loaded in src/index.js before the app starts (see loadImageOverrides). */
+   The default can be a key of `photos` or a full Cloudinary link (then pass its alt text too).
+   gallery('kitchen.gallery', 'Modular Kitchen page › Design gallery', items)
+   -> a list the admin can change: edit photo / title / alt, hide a photo, change the order, add new photos.
+   Admin changes are loaded in src/index.js before the app starts (see utils/siteImages.js).
+   Label format: 'Page › Section' (› Item). The admin page groups photos by page and section. */
 const overrides = {};
-const registry = new Map();
+const registry = new Map(); // every single photo (slot) used on the website
+const galleries = new Map(); // every list of photos the admin can add to
 
 export const setImageOverrides = (map) => {
   if (map && typeof map === 'object') Object.assign(overrides, map);
+};
+export const getImageOverrides = () => overrides;
+// admin page: replace all changes at once (so a removed change is gone too)
+export const replaceImageOverrides = (map) => {
+  Object.keys(overrides).forEach((k) => { delete overrides[k]; });
+  setImageOverrides(map);
 };
 
 // Cloudinary photo at the size it is shown (keeps the site fast)
@@ -352,47 +369,138 @@ export const sizeCloudinary = (url, width) =>
     ? url.replace('/image/upload/', `/image/upload/q_auto,f_auto,w_${width},c_limit/`)
     : url;
 
-export const slot = (id, defaultKey, width = 1400, label = id) => {
-  if (!registry.has(id)) registry.set(id, { id, defaultKey, width, label });
+const register = (id, info) => {
+  const prev = registry.get(id);
+  registry.set(id, { ...(prev || {}), id, ...info });
+};
+
+// opts: { alt, title } = default alt text / title when the default is a full link (or a caption is shown)
+export const slot = (id, defaultKey, width = 1400, label = id, opts = {}) => {
+  if (!registry.has(id) || opts.alt || opts.title) register(id, { defaultKey, width, label, defaultAlt: opts.alt, defaultTitle: opts.title });
   const o = overrides[id];
   return o && o.url ? sizeCloudinary(o.url, width) : photo(defaultKey, width);
 };
 
-export const slotAlt = (id, defaultKey) => {
+export const slotAlt = (id, defaultKey, defaultAlt = '') => {
   const o = overrides[id];
-  return o && o.url && o.alt ? `${o.alt} by Urbane Living` : alt(defaultKey);
+  if (o && o.alt) return `${o.alt} by Urbane Living`;
+  return alt(defaultKey) || defaultAlt;
 };
 
-// Every slot on the website, for the admin page: [{ id, defaultKey, width, label, page, section, current }]
+export const slotTitle = (id, defaultTitle = '') => {
+  const o = overrides[id];
+  return (o && o.title) || defaultTitle;
+};
+
+/* A list of photos the admin can manage.
+   items: [{ key | url, id?, title?, alt?, style?, room?, category? }]
+   fields: extra fields the admin can set for this list, e.g. ['style'] or ['style', 'room'] or ['category']
+   Returns [{ id, key, title, alt, style, room, category, extra, src(width) }] in the admin's order. */
+export const gallery = (gid, label, items, { fields = [], options = {}, width = 1400 } = {}) => {
+  galleries.set(gid, { id: gid, label, fields, options });
+  const list = items.map((d, n) => {
+    const id = `${gid}.${d.id || d.key || n + 1}`;
+    const def = d.key || d.url;
+    slot(id, def, width, `${label} › ${d.title || `Photo ${n + 1}`}`, { alt: d.alt, title: d.title });
+    const o = overrides[id] || {};
+    return {
+      id,
+      default: def,
+      title: o.title || d.title || '',
+      alt: slotAlt(id, def, d.alt ? `${d.alt}` : ''),
+      style: o.style || d.style || '',
+      room: o.room || d.room || '',
+      category: o.category || d.category || '',
+      hidden: !!o.hidden,
+      order: Number.isFinite(o.order) ? o.order : (n + 1) * 10,
+      extra: false,
+      url: o.url || '',
+    };
+  });
+  // photos the admin added to this list
+  Object.entries(overrides)
+    .filter(([, o]) => o && o.extra && o.collection === gid && o.url)
+    .forEach(([id, o], n) => list.push({
+      id,
+      default: o.url,
+      title: o.title || '',
+      alt: o.alt ? `${o.alt} by Urbane Living` : '',
+      style: o.style || '',
+      room: o.room || '',
+      category: o.category || '',
+      hidden: !!o.hidden,
+      order: Number.isFinite(o.order) ? o.order : 1000 + n,
+      extra: true,
+      url: o.url,
+    }));
+  return list
+    .filter((x) => !x.hidden)
+    .sort((a, b) => a.order - b.order)
+    .map((x) => ({ ...x, src: (w = width) => (x.url ? sizeCloudinary(x.url, w) : photo(x.default, w)) }));
+};
+
+// For the admin page: every single photo slot [{ id, label, page, section, item, default, defaultAlt, collection, ... }]
 export const imageSlots = () => {
-  roomGallery('kitchen'); // make sure the gallery slots are listed too
+  roomGallery('kitchen'); // make sure the room gallery slots are listed too
   return [...registry.values()].map((r) => {
     const [page, ...rest] = r.label.split(' › ');
-    return { ...r, page, section: rest.join(' › '), default: photo(r.defaultKey, 640), current: overrides[r.id] || null };
+    const gid = [...galleries.keys()].find((g) => r.id.startsWith(`${g}.`));
+    const section = gid ? galleries.get(gid).label.split(' › ').slice(1).join(' › ') : rest.join(' › ');
+    return {
+      ...r,
+      page,
+      section,
+      item: gid ? rest.slice(section.split(' › ').length).join(' › ') : '',
+      collection: gid || '',
+      default: photo(r.defaultKey, 640),
+      defaultAlt: r.defaultAlt || (photos[r.defaultKey] ? photos[r.defaultKey].alt : ''),
+      current: overrides[r.id] || null,
+    };
   });
 };
 
-// Room page galleries (built once, so every photo is listed in the admin page)
+// For the admin page: every list the admin can add photos to [{ id, label, page, section, fields, options }]
+export const imageGalleries = () => {
+  roomGallery('kitchen');
+  return [...galleries.values()].map((g) => {
+    const [page, ...rest] = g.label.split(' › ');
+    return { ...g, page, section: rest.join(' › ') };
+  });
+};
+
+// Room page galleries (built once, after the admin changes are loaded in src/index.js)
 const galleryNames = { kitchen: 'Modular Kitchen page', bedroom: 'Bedroom page', wardrobe: 'Wardrobe page', living: 'Living Hall page', falseCeiling: 'False Ceiling page' };
-// built on first use (after the admin overrides are loaded in src/index.js)
+export const galleryOptions = {
+  style: ['Modern', 'Luxury', 'Minimal', 'Kids'],
+  falseCeilingStyle: ['modern', 'luxury', 'minimalist'],
+  room: ['living', 'bedroom', 'kitchen'],
+};
 let builtGalleries = null;
 const buildGalleries = () => Object.fromEntries(
-  Object.entries(roomGalleries).map(([category, list]) => [
-    category,
-    list.map(([key, title, style, room], n) => {
-      const id = `${category}.gallery.${n + 1}`;
-      const label = `${galleryNames[category]} › Design gallery › Photo ${n + 1} (${title})`;
-      return {
-        _id: `own-${category}-${n + 1}`,
-        title,
-        style,
-        category: room || category,
-        image: slot(id, key, 1400, label),
-        thumb: slot(id, key, 720, label),
-        alt: slotAlt(id, key),
-      };
-    }),
-  ]),
+  Object.entries(roomGalleries).map(([category, list]) => {
+    const fc = category === 'falseCeiling';
+    const items = gallery(
+      `${category}.gallery`,
+      `${galleryNames[category]} › Design gallery`,
+      list.map(([key, title, style, room]) => ({ key, title, style, room })),
+      {
+        fields: fc ? ['style', 'room'] : ['style'],
+        options: fc ? { style: galleryOptions.falseCeilingStyle, room: galleryOptions.room } : { style: galleryOptions.style },
+      },
+    );
+    return [
+      category,
+      items.map((x) => ({
+        _id: `own-${x.id}`,
+        title: x.title,
+        style: x.style,
+        category: x.room || category,
+        image: x.src(1400),
+        thumb: x.src(720),
+        alt: x.alt,
+      })),
+    ];
+  }),
 );
 
 // Gallery items in the same shape as the admin designs: { _id, title, image, thumb, style, category, alt }

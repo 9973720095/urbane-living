@@ -15,7 +15,7 @@ import { slot } from '../data/media';
 import { localServices, localProcess, localityPage, findLocalCity, findLocality, findLocalService, slugify } from '../data/localSeo';
 
 // hero background of every locality page (different from the service cards below it)
-const heroImage = () => slot('city.locality.hero', 'livingGlassPartition', 1400, 'Locality pages (Sohna Road, Sector 62...) › Top banner background');
+const HERO_IMAGE = slot('city.locality.hero', 'livingGlassPartition', 1400, 'Locality pages (Sohna Road, Sector 62...) › Top banner background');
 
 const btnRed =
   'inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white no-underline shadow-cta transition hover:bg-brand-red-dark';
@@ -119,7 +119,7 @@ export default function LocalityPage({ onOpenForm }) {
     <div className="bg-white">
       {/* Hero */}
       <section className="relative overflow-hidden bg-brand-navy px-4 pb-12 pt-8 text-white sm:px-6 lg:pb-16 lg:pt-12">
-        <img src={heroImage()} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-25" />
+        <img src={HERO_IMAGE} alt="" aria-hidden="true" className="absolute inset-0 h-full w-full object-cover opacity-25" />
         <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-r from-brand-navy via-brand-navy/90 to-brand-navy/60" />
         <div className="relative mx-auto max-w-[1200px]">
           <nav aria-label="Breadcrumb" className="text-xs text-white/60 sm:text-sm">

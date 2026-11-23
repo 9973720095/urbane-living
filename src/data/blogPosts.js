@@ -11,9 +11,8 @@ const img = (file) => `${cdn}/image/upload/q_auto,f_auto,w_1400/${file}`;
 
 const images = {
   ceiling: slot('blog.ceiling', 'livingTvWall', 1400, 'Blog › Cover photo › False ceiling cost'),
-  living: slot('blog.living', 'livingTvWallWide', 1400, 'Blog › Cover photo › (spare)'),
   kitchen: slot('blog.kitchen', 'greyKitchenL', 1400, 'Blog › Cover photo › Modular kitchen guide'),
-  framing: img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), // real site photo
+  framing: slot('blog.framing', img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), 1400, 'Blog › Cover photo › Ceiling framing (real site photo)', { alt: 'False ceiling metal framing being fixed at a real Urbane Living site' }), // real site photo
   wardrobe: slot('blog.wardrobe', 'wardrobeBedroom', 1400, 'Blog › Cover photo › Sliding vs hinged wardrobe'),
   bedroom: slot('blog.bedroom', 'plumBedroom', 1400, 'Blog › Cover photo › Vastu tips'),
   livingAlt: slot('blog.livingAlt', 'livingArchway', 1400, 'Blog › Cover photo › New flat checklist'),

@@ -1,5 +1,9 @@
 // Blog page: banner, SEO and client reviews text.
 import { cdn } from './config';
+import { slot, slotAlt } from './media';
+
+const BLOG_BANNER = `${cdn}/image/upload/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg`;
+const BLOG_BANNER_ALT = 'Modern interior design ideas by Urbane Living';
 
 // Blog page: banner, SEO and client reviews section text
 export const blogPage = {
@@ -8,8 +12,8 @@ export const blogPage = {
     title: 'Our',
     highlight: 'Blog',
     subtitle: 'Upgrade your home with modern renovation ideas and expert tips.',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg`,
-    imageAlt: 'Modern interior design ideas by Urbane Living',
+    image: slot('blogPage.banner', BLOG_BANNER, 1400, 'Blog page › Top banner', { alt: BLOG_BANNER_ALT }),
+    imageAlt: slotAlt('blogPage.banner', '', BLOG_BANNER_ALT),
     primary: { label: 'Explore False Ceiling', to: '/false-ceiling' },
     whatsappMessage: 'Hi Urbane Living, I read your blog and want a free design consultation.',
     height: 'md',
@@ -21,7 +25,7 @@ export const blogPage = {
     description:
       'Read expert interior design ideas, false ceiling designs, costs and home renovation tips for Delhi NCR homes from the Urbane Living team.',
     path: '/blogs',
-    image: `${cdn}/image/upload/q_auto/f_auto/v1778246216/blog-banner-1-urbane-living_d7ru3y.jpg`,
+    image: slot('blogPage.banner', BLOG_BANNER, 1400, 'Blog page › Top banner'),
   },
   reviews: {
     tag: 'Client Reviews',

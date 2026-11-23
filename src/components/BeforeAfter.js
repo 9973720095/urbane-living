@@ -77,7 +77,7 @@ const BeforeAfter = () => {
           <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 1 }}>
             <img
               src={beforeAfter.after}
-              alt="Dining area after interior design by Urbane Living"
+              alt={beforeAfter.afterAlt}
               loading="lazy"
               decoding="async"
               draggable="false"
@@ -98,7 +98,7 @@ const BeforeAfter = () => {
           }}>
             <img
               src={beforeAfter.before}
-              alt="Dining area before the interior work"
+              alt={beforeAfter.beforeAlt}
               loading="lazy"
               decoding="async"
               draggable="false"
