@@ -3,8 +3,9 @@ import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 /*
   App-style row of vertical (9:16) videos, used by Work In Progress (home) and the Factory page.
-  - Phones: swipe sideways, 2 cards + a peek of the next, title on the video, dots below.
-  - Tablet: 3 in view. Desktop: `desktop` in view (3 or 4), arrows when there are more.
+  - Phones (below 768px): swipe sideways, 2 cards + a peek of the next, title on the video, dots below.
+  - Tablet & desktop: "story player": one video in a phone frame with story bars on top (moves to the
+    next video by itself when one ends), and a playlist on the right to pick any video.
   - Always muted; a video plays only while it is on screen (saves data, keeps the page fast).
   items: [{ id, title, text, location, status, videoUrl, posterAt }]
 */
@@ -14,7 +15,7 @@ const videoSrc = (url) => url.replace('/video/upload/', '/video/upload/q_auto/')
 export const posterOf = (url, at = 1, width = 480) =>
   url.replace('/video/upload/', `/video/upload/so_${at},w_${width},q_auto,f_jpg/`).replace(/\.[^/.]+$/, '.jpg');
 
-function ReelVideo({ src, posterAt, label }) {
+function ReelVideo({ src, posterAt, label, loop = true, posterWidth, onTime, onEnded }) {
   const ref = useRef(null);
   useEffect(() => {
     const video = ref.current;
@@ -36,15 +37,123 @@ function ReelVideo({ src, posterAt, label }) {
     <video
       ref={ref}
       src={videoSrc(src)}
-      poster={posterOf(src, posterAt)}
+      poster={posterOf(src, posterAt, posterWidth)}
       muted
-      loop
+      loop={loop}
+      onTimeUpdate={onTime ? (e) => onTime(e.currentTarget.duration ? e.currentTarget.currentTime / e.currentTarget.duration : 0) : undefined}
+      onEnded={onEnded}
       playsInline
       disablePictureInPicture
       preload="none"
       aria-label={label}
       className="absolute inset-0 block h-full w-full object-cover"
     />
+  );
+}
+
+// Tablet & desktop: one video in a phone frame + playlist
+function StoryPlayer({ items, label }) {
+  const [active, setActive] = useState(0);
+  const [progress, setProgress] = useState(0);
+  const item = items[active];
+  const go = (i) => {
+    setProgress(0);
+    setActive((i + items.length) % items.length);
+  };
+  const pad = (n) => String(n).padStart(2, '0');
+
+  return (
+    <div className="hidden items-center gap-8 rounded-[28px] bg-white p-5 shadow-card ring-1 ring-slate-200/70 md:grid md:grid-cols-[260px_minmax(0,1fr)] lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-12 lg:p-8">
+      {/* phone frame */}
+      <div className="relative rounded-[30px] bg-brand-navy p-2 pt-[22px] shadow-[0_24px_50px_-20px_rgba(31,42,68,0.55)]">
+  {/* story bars, in the frame above the video (so the logo stays clear) */}
+      <div className="absolute inset-x-5 top-[9px] z-[1] flex gap-1" aria-hidden="true">
+        {items.map((it, i) => (
+          <span key={it.id} className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/25">
+            <span
+              className="block h-full rounded-full bg-white"
+              style={{ width: i < active ? '100%' : i === active ? `${Math.round(progress * 100)}%` : '0%' }}
+            />
+          </span>
+        ))}
+      </div>
+        <div className="relative aspect-[9/16] w-full overflow-hidden rounded-[23px] bg-slate-900">
+          <ReelVideo
+            key={item.id}
+            src={item.videoUrl}
+            posterAt={item.posterAt}
+            posterWidth={600}
+            loop={items.length < 2}
+            onTime={setProgress}
+            onEnded={() => go(active + 1)}
+            label={`${item.title}${item.location ? `, ${item.location}` : ''} – video by Urbane Living`}
+          />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent px-4 pb-4 pt-16">
+            {item.status && (
+              <span className="mb-1.5 inline-block rounded-full bg-brand-red px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-white">
+                {item.status}
+              </span>
+            )}
+            <p className="m-0 text-[15px] font-semibold leading-snug text-white">{item.title}</p>
+            {item.location && <p className="m-0 mt-0.5 truncate text-xs text-white/80">📍 {item.location}</p>}
+          </div>
+          {/* tap left / right half = previous / next, like stories */}
+          <button type="button" aria-label="Previous video" onClick={() => go(active - 1)} className="absolute inset-y-0 left-0 z-[2] w-1/3 cursor-pointer border-0 bg-transparent p-0" />
+          <button type="button" aria-label="Next video" onClick={() => go(active + 1)} className="absolute inset-y-0 right-0 z-[2] w-1/3 cursor-pointer border-0 bg-transparent p-0" />
+        </div>
+      </div>
+
+      {/* playlist */}
+      <div className="min-w-0">
+        <div className="mb-4 flex items-center justify-between gap-3">
+          <p className="m-0 text-[13px] font-semibold uppercase tracking-[0.14em] text-slate-400">
+            <span className="text-brand-red">{pad(active + 1)}</span> / {pad(items.length)}
+          </p>
+          <div className="flex gap-2">
+            <button type="button" aria-label="Previous video" onClick={() => go(active - 1)} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-solid border-slate-200 bg-white text-brand-navy transition hover:bg-brand-navy hover:text-white">
+              <LeftOutlined />
+            </button>
+            <button type="button" aria-label="Next video" onClick={() => go(active + 1)} className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-0 bg-brand-red text-white transition hover:bg-brand-red-dark">
+              <RightOutlined />
+            </button>
+          </div>
+        </div>
+        <ol aria-label={label} className="m-0 flex list-none flex-col gap-2 p-0">
+          {items.map((it, i) => {
+            const on = i === active;
+            return (
+              <li key={it.id}>
+                <button
+                  type="button"
+                  onClick={() => go(i)}
+                  aria-current={on ? 'true' : undefined}
+                  className={`group flex w-full cursor-pointer items-center gap-4 rounded-2xl border border-solid p-2.5 pr-4 text-left transition ${on ? 'border-brand-red/25 bg-red-50/60 shadow-sm' : 'border-transparent bg-transparent hover:bg-slate-50'}`}
+                >
+                  <span className="relative h-[72px] w-[48px] shrink-0 overflow-hidden rounded-xl bg-slate-200">
+                    <img src={posterOf(it.videoUrl, it.posterAt, 160)} alt="" loading="lazy" className="h-full w-full object-cover" />
+                    {on && (
+                      <span className="absolute inset-0 flex items-center justify-center bg-black/35 text-[11px] text-white" aria-hidden="true">▶</span>
+                    )}
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className={`block text-[15px] font-semibold leading-snug ${on ? 'text-brand-red' : 'text-brand-navy'}`}>{it.title}</span>
+                    {it.text && <span className="mt-0.5 line-clamp-2 block text-[13px] leading-relaxed text-slate-500">{it.text}</span>}
+                    {(it.location || it.status) && (
+                      <span className="mt-1 block truncate text-[12px] text-slate-400">
+                        {it.location ? `📍 ${it.location}` : ''}{it.location && it.status ? ' · ' : ''}{it.status}
+                      </span>
+                    )}
+                  </span>
+                  <span className={`hidden h-8 w-8 shrink-0 items-center justify-center rounded-full text-[11px] font-bold lg:flex ${on ? 'bg-brand-red text-white' : 'bg-slate-100 text-slate-400 group-hover:bg-slate-200'}`}>
+                    {pad(i + 1)}
+                  </span>
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </div>
   );
 }
 
@@ -88,7 +197,9 @@ export default function VideoReels({ items, desktop = 4, label = 'Videos' }) {
   };
 
   return (
-    <div className="relative">
+    <>
+    <StoryPlayer items={items} label={label} />
+    <div className="relative md:hidden">
       <button type="button" aria-label="Previous videos" onClick={() => slide(-1)} disabled={edge.start} className={`${arrowClass} -left-3 lg:-left-5`}>
         <LeftOutlined />
       </button>
@@ -144,5 +255,6 @@ export default function VideoReels({ items, desktop = 4, label = 'Videos' }) {
         <RightOutlined />
       </button>
     </div>
+    </>
   );
 }
