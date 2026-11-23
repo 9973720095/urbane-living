@@ -11,7 +11,7 @@ export const sectionPages = [
       ['after-brand-story', 'After "Our Story"'],
       ['after-gallery', 'After "Our Masterpieces" gallery'],
       ['after-before-after', 'After Before / After'],
-      ['after-work-in-progress', 'After Work In Progress'],
+      ['after-work-in-progress', 'After Work In Progress + Our Factory'],
       ['after-room-explorer', 'After Room Explorer'],
       ['after-style-quiz', 'After Style Quiz'],
       ['after-client-stories', 'After Client Stories'],
@@ -65,6 +65,17 @@ export const sectionPages = [
     label: 'Contact page',
     positions: [
       ['after-form', 'After the enquiry form'],
+      ['end', 'End of the page'],
+    ],
+  },
+  {
+    key: 'factory',
+    label: 'Our Factory page',
+    positions: [
+      ['after-hero', 'After the top banner'],
+      ['after-process', 'After "From your 3D design to your home"'],
+      ['after-machines', 'After the machines'],
+      ['before-faq', 'Before FAQ'],
       ['end', 'End of the page'],
     ],
   },

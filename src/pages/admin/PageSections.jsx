@@ -13,7 +13,7 @@ import { savePageSections } from '../../utils/pageSections';
 
 const PAGE_URL = {
   home: '/', 'false-ceiling': '/false-ceiling', kitchen: '/kitchen', bedroom: '/bedroom', wardrobe: '/wardrobe',
-  living: '/living-hall', about: '/about', contact: '/contact', city: '/false-ceiling/gurgaon',
+  living: '/living-hall', about: '/about', contact: '/contact', factory: '/factory', city: '/false-ceiling/gurgaon',
 };
 const RATIOS = [
   ['4/3', 'Normal (4:3)'],

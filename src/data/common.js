@@ -71,6 +71,7 @@ export const mobileNav = {
     { label: 'False Ceiling', to: '/false-ceiling' },
     { label: 'Areas We Serve', to: '/interior-designers' },
     { label: 'Blog', to: '/blogs' },
+    { label: 'Our Factory', to: '/factory' },
     { label: 'About Us', to: '/about' },
     { label: 'Contact', to: '/contact' },
   ],
@@ -107,7 +108,7 @@ export const footer = {
   ctaTitle: 'Want quick assistance? Just give us a call!',
   ctaText: 'Message us on WhatsApp or call directly for premium home design services.',
   columns: [
-    { title: 'Company', links: [{ label: 'About Us', to: '/about' }, { label: 'Contact', to: '/contact' }, { label: 'Blogs', to: '/blogs' }, { label: 'Vastu Score', to: '/vastu' }] },
+    { title: 'Company', links: [{ label: 'About Us', to: '/about' }, { label: 'Our Factory', to: '/factory' }, { label: 'Contact', to: '/contact' }, { label: 'Blogs', to: '/blogs' }, { label: 'Vastu Score', to: '/vastu' }] },
     { title: 'Services', links: [{ label: 'False Ceiling', to: '/false-ceiling' }, { label: 'Modular Kitchen', to: '/kitchen' }, { label: 'Wardrobe', to: '/wardrobe' }, { label: 'Bedroom Interiors', to: '/bedroom' }, { label: 'Interiors in Gurugram', to: '/interior-designers/gurgaon' }, { label: 'False Ceiling in Gurugram', to: '/false-ceiling/gurgaon' }] },
     { title: 'Legal', newTab: true, links: [{ label: 'Privacy Policy', to: '/privacy' }, { label: 'Terms & Conditions', to: '/terms' }, { label: 'Refund Policy', to: '/refund' }, { label: 'Disclaimer', to: '/disclaimer' }] },
   ],

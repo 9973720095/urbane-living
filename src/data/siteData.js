@@ -39,3 +39,4 @@ export * from './rooms/living';
 export * from './rooms/bedroom';
 export * from './rooms/kitchen';
 export * from './rooms/wardrobe';
+export * from './factory';

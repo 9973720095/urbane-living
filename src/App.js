@@ -69,6 +69,8 @@ import VastuPage from './pages/VastuPage';
 import VastuAnalyzer from './pages/VastuAnalyzer';
 import WorkInProgress from './components/WorkInProgress';
 import CustomSections from './components/CustomSections';
+import FactorySection from './components/FactorySection';
+import FactoryPage from './pages/FactoryPage';
 
 // Admin + estimate pages pull in Firebase, Quill editor etc. (~1 MB).
 // Load them only when someone opens those pages, so normal visitors get a much lighter site.
@@ -185,6 +187,7 @@ function App() {
       <BeforeAfter />
       <CustomSections page="home" at="after-before-after" />
       <WorkInProgress />
+      <FactorySection />
       <CustomSections page="home" at="after-work-in-progress" />
       <RoomExplorer onOpenForm={handleOpen} />
       <CustomSections page="home" at="after-room-explorer" />
@@ -292,6 +295,7 @@ function App() {
           <Route path="/refund" element={<RefundPolicyPage />} />
           <Route path="/disclaimer" element={<DisclaimerPage />} />
           <Route path="/vastu" element={<VastuPage />} />
+          <Route path="/factory" element={<FactoryPage onOpenForm={handleOpen} />} />
           <Route path="/vastu/analyze" element={<VastuAnalyzer />} />
 
           <Route
