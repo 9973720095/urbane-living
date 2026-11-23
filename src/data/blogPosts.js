@@ -27,7 +27,7 @@ export const blogPosts = [
   {
     slug: 'home-interiors-gurugram-guide',
     title: 'Home Interiors in Gurugram (2026): A Practical Guide for New Flats, Premium Apartments and Builder Floors',
-    seoTitle: 'Home Interiors in Gurugram 2026 | Cost, Timeline & Area Guide',
+    seoTitle: 'Home Interiors in Gurugram (Gurgaon) 2026 | Cost, Timeline & Area Guide',
     description:
       'Planning interiors in Gurugram (Gurgaon)? What to plan for new flats on Dwarka Expressway and Golf Course Extension Road, premium apartments on Golf Course Road and builder floors in DLF Phases, with costs, timeline and society rules.',
     category: 'Home Interiors',
@@ -104,17 +104,20 @@ export const blogPosts = [
   // 1 ─────────────────────────────────────────────────────────────
   {
     slug: 'false-ceiling-cost-delhi-ncr',
-    title: 'False Ceiling Cost in Delhi NCR: What Decides the Price (and How to Compare Quotes)',
-    seoTitle: 'False Ceiling Cost Guide for Gurugram & Delhi NCR | What Decides the Price',
+    title: 'False Ceiling Price per Sq Ft with Material: What Decides the Cost (and How to Compare Quotes)',
+    seoTitle: 'False Ceiling Price per Sq Ft with Material | Calculate Your Cost',
     description:
-      'What decides the cost of a false ceiling in Gurugram, Delhi, Noida and Ghaziabad? Material, design, lights and finishing explained, how to measure your ceiling and how to compare quotes.',
+      'False ceiling price per sq ft with material in Gurugram (Gurgaon), Delhi, Noida and Ghaziabad: how gypsum, POP, PVC and wood, the design and light points change the rate, plus a free estimator to calculate your cost.',
     category: 'False Ceiling',
     image: images.ceiling,
     imageAlt: slotAlt('blog.ceiling', 'livingTvWall'),
-    date: '2026-11-18',
+    date: '2026-11-23',
     readMin: 5,
     content: `
 <p>A false ceiling is usually the first big item in a home interior quote, and also the one people understand least. Is the per sq. ft. rate the full price? Are lights extra? Why do two contractors quote very different figures for the same room? This guide explains what really decides the cost, so you can read any quote with confidence, whether your home is in <a href="/false-ceiling/gurgaon">Gurugram</a>, <a href="/false-ceiling/delhi">Delhi</a>, <a href="/false-ceiling/noida">Noida</a> or <a href="/false-ceiling/ghaziabad">Ghaziabad</a>.</p>
+
+<h2>False ceiling price per sq ft with material: how it is worked out</h2>
+<p>The price per sq. ft. in a false ceiling quote covers the board or panel <strong>with material</strong> (gypsum, POP, PVC or wood), the metal framing, labour and finishing for one square foot of ceiling. Light points are usually counted separately. So two quotes with a different "rate" may not include the same things. The sections below explain each part, and our <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a> lets you calculate the price for your own room in seconds.</p>
 
 <h2>1. Material: the base of every quote</h2>
 <table>
@@ -179,6 +182,10 @@ export const blogPosts = [
 <p>Every home is different, so the final cost is fixed only after measuring the site. We visit for free, show you designs in 3D and give an itemised quote per sq. ft. that is locked when you book, with no surprise "extra material" bills later. Want a figure for your own rooms first? Use our <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>: pick the area, material, design and light points and it shows your estimate in seconds. Then <a href="/contact">book a free site visit</a> or call our toll-free number 07965315325.</p>
 `,
     faq: [
+      {
+        q: 'What is the false ceiling price per sq ft with material?',
+        a: 'It depends on the material (gypsum, POP, PVC or wood), the design (flat, cove or multi-level) and what the rate includes: framing, labour, finishing and light points. Use our free false ceiling cost estimator to calculate the price for your room, then get an exact, itemised quote after a free site visit.',
+      },
       {
         q: 'What decides the false ceiling cost in Delhi NCR?',
         a: 'Four things: the ceiling area in sq. ft., the material (gypsum, POP, PVC or wood), the design (flat, cove or multi-level) and the number of light points. Finishing and warranty also change the final figure.',

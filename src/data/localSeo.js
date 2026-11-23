@@ -105,6 +105,7 @@ export const localCities = [
     // Main focus city. Slug stays 'gurgaon' so the old URLs (already on Google) keep working.
     slug: 'gurgaon',
     name: 'Gurugram',
+    seoName: 'Gurugram (Gurgaon)', // used in Google titles: many people still search "gurgaon"
     region: 'Haryana',
     intro:
       'Gurugram (Gurgaon) is our main focus in Delhi NCR. From premium apartments on Golf Course Road to new possessions on Dwarka Expressway and Sohna Road, we plan every site visit in advance and give you one designer and one site supervisor from 3D design to handover.',

@@ -104,9 +104,9 @@ export const designFilters = {
 // Per-page SEO (title, description, canonical path, structured data)
 export const seo = {
   falseCeiling: {
-    title: 'False Ceiling in Gurugram & Delhi NCR | Design & Installation | Urbane Living',
+    title: 'False Ceiling Design & Price per Sq Ft | Gurugram (Gurgaon) & Delhi NCR',
     description:
-      'Gypsum, POP, PVC and wooden false ceilings installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad. Work out your cost with our estimator, get a free 3D design and a 10-year anti-crack warranty.',
+      'Work out your false ceiling price per sq. ft. with material (gypsum, POP, PVC or wooden), design and lights with our free cost estimator. Installed in 7 days* in Gurugram (Gurgaon), Delhi, Noida, Ghaziabad and Faridabad, with a 10-year anti-crack warranty.',
     path: '/false-ceiling',
     image: slot('falseCeiling.banner', 'livingTvWall', 1400, 'False Ceiling page › Top banner'),
     schema: [

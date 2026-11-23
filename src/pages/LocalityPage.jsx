@@ -96,8 +96,8 @@ export default function LocalityPage({ onOpenForm }) {
   useSeo(
     city && loc
       ? {
-          title: localityPage.title(loc.name, city.name),
-          description: localityPage.description(loc.name, city.name),
+          title: localityPage.title(loc.name, city.seoName || city.name),
+          description: localityPage.description(loc.name, city.seoName || city.name),
           path,
           image: home.image,
           schema,

@@ -49,8 +49,8 @@ export const ceilingFaq = {
   highlight: 'before they start',
   items: [
     {
-      q: 'How is the false ceiling cost worked out?',
-      a: 'It depends on the area, the material (gypsum, POP, PVC or wooden), the design (single level, cove or multi-level), the number of lights and the site. After a free site visit and 3D design, you get an itemised quote that is locked when you book.',
+      q: 'What is the false ceiling price per sq ft with material?',
+      a: 'The price per sq. ft. depends on the material (gypsum, POP, PVC or wooden), the design (single level, cove or multi-level), the number of lights and the site. Use the free cost estimator on this page to calculate the price for your room in seconds. After a free site visit and 3D design, you get an itemised quote that is locked when you book.',
     },
     {
       q: 'How long does false ceiling work take?',

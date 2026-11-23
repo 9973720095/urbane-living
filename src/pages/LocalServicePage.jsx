@@ -95,7 +95,7 @@ export default function LocalServicePage({ serviceSlug, onOpenForm }) {
 
   useSeo(
     service && city
-      ? { title: service.title(city.name), description: service.description(city.name), path, image: service.image, schema }
+      ? { title: service.title(city.seoName || city.name), description: service.description(city.seoName || city.name), path, image: service.image, schema }
       : { path: '/404', noindex: true }
   );
 
