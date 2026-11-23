@@ -128,3 +128,16 @@ code {
     text-wrap: balance;
   }
 }
+
+/* Home page on phones: the same calm gap between every section (app-like rhythm).
+   Each section gets 28px above and below its content = 56px between two sections. */
+@media (max-width: 639px) {
+  .home-blend > * {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+  .home-blend > *:first-child {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+}
