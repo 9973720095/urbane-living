@@ -216,11 +216,12 @@ export default function ContactPage() {
                   </p>
                 )}
 
-                <div className="flex flex-col gap-3 sm:col-span-2 sm:flex-row">
-                  <button type="submit" disabled={status === 'sending'} className="inline-flex h-12 flex-1 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white shadow-cta transition hover:bg-brand-red-dark disabled:cursor-wait disabled:opacity-70">
+                {/* two equal buttons side by side (stacked on phones) */}
+                <div className="grid grid-cols-1 gap-3 sm:col-span-2 sm:grid-cols-2">
+                  <button type="submit" disabled={status === 'sending'} className="inline-flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-5 text-[15px] font-semibold text-white shadow-cta transition hover:bg-brand-red-dark disabled:cursor-wait disabled:opacity-70">
                     {status === 'sending' ? <><LoadingOutlined /> Sending…</> : <>{form.button} <ArrowRightOutlined /></>}
                   </button>
-                  <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-[#25D366] px-6 text-[15px] font-semibold text-white no-underline transition hover:brightness-95">
+                  <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full bg-[#25D366] px-5 text-[15px] font-semibold text-white no-underline shadow-[0_10px_24px_rgba(37,211,102,0.35)] transition hover:bg-[#1EBE5D]">
                     <WhatsAppOutlined /> WhatsApp instead
                   </a>
                 </div>

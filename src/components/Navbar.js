@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Layout, Button, Menu, Drawer } from 'antd';
 import { MenuOutlined, CloseOutlined, PhoneFilled } from '@ant-design/icons';
 import { Link, useLocation } from 'react-router-dom';
-import { contact } from '../data/siteData';
+import { topBar } from '../data/topBar';
 import './Navbar.css';
 
 const { Header } = Layout;
@@ -78,11 +78,12 @@ const Navbar = ({ onOpenForm }) => {
       <div className="nav-right">
         <Button type="primary" className="book-btn hide-mobile" onClick={onOpenForm}>GET FREE QUOTE</Button>
         {/* phones: toll-free call button (quote + menu live in the bottom app bar) */}
-        <a href={contact.phoneHref} className="nav-call-mobile">
+        {/* same toll-free number as the top bar button (data/topBar.js) */}
+        <a href={topBar.phone.href} className="nav-call-mobile" aria-label={`Call toll free ${topBar.phone.label}`}>
           <span className="nav-call-ring" aria-hidden="true"><PhoneFilled /></span>
           <span className="nav-call-text">
             <span className="nav-call-small">Toll free</span>
-            <span className="nav-call-number">{contact.phoneDisplay}</span>
+            <span className="nav-call-number">{topBar.phone.label}</span>
           </span>
         </a>
         {/* tablets: small quote button next to the menu icon */}
