@@ -1,7 +1,35 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRightOutlined, CheckCircleFilled } from '@ant-design/icons';
 import { factoryHome } from '../data/siteData';
+
+// Muted factory video, plays only while on screen
+function FactoryVideo({ src, poster, label }) {
+  const ref = useRef(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return undefined;
+    v.muted = true;
+    if (!('IntersectionObserver' in window)) return undefined;
+    const io = new IntersectionObserver(([e]) => (e.isIntersecting ? v.play().catch(() => {}) : v.pause()), { threshold: 0.3 });
+    io.observe(v);
+    return () => io.disconnect();
+  }, []);
+  return (
+    <video
+      ref={ref}
+      src={src.replace('/video/upload/', '/video/upload/q_auto/')}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      disablePictureInPicture
+      preload="none"
+      aria-label={label}
+      className="absolute inset-0 block h-full w-full object-cover"
+    />
+  );
+}
 
 // Home page: "Our Factory" section. The whole card and the button open /factory (content: data/factory.js)
 export default function FactorySection() {
@@ -12,14 +40,9 @@ export default function FactorySection() {
         to={f.button.to}
         className="group mx-auto grid max-w-[1200px] grid-cols-1 overflow-hidden rounded-3xl bg-brand-navy text-white no-underline shadow-card transition hover:shadow-card-hover lg:grid-cols-2"
       >
-        <div className="relative aspect-[16/10] overflow-hidden lg:aspect-auto">
-          <img
-            src={f.image}
-            alt={f.imageAlt}
-            loading="lazy"
-            decoding="async"
-            className="block h-full w-full object-cover transition duration-700 group-hover:scale-105"
-          />
+        <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/10] lg:aspect-auto lg:min-h-[460px]">
+          <FactoryVideo src={f.video} poster={f.poster} label={f.videoLabel} />
+          <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">▶ From our factory</span>
         </div>
         <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
           <span className="mb-3 inline-block w-fit rounded-full bg-white/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-gold">{f.tag}</span>

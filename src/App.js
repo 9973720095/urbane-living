@@ -176,6 +176,8 @@ function App() {
   const HomePage = () => (
     <>
       <Hero onOpenForm={handleOpen} />
+      {/* everything below the hero: calmer, smaller text on phones (index.css -> .home-blend) */}
+      <div className="home-blend">
       <PromiseStrip />
       <CustomSections page="home" at="after-hero" />
 
@@ -207,6 +209,7 @@ function App() {
       <CustomSections page="home" at="before-faq" />
       <FaqSection />
       <CustomSections page="home" at="end" />
+      </div>
     </>
   );
 

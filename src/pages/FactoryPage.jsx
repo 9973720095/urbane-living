@@ -18,11 +18,12 @@ import {
 } from '@ant-design/icons';
 import PageBanner from '../components/PageBanner';
 import CustomSections from '../components/CustomSections';
+import VideoReels from '../components/VideoReels';
 import useSeo from '../hooks/useSeo';
-import { factoryPage, brand, contact, siteUrl } from '../data/siteData';
+import { factoryPage, factoryVideos, brand, contact, siteUrl } from '../data/siteData';
 
 // /factory: our factory (content: data/factory.js)
-const { banner, intro, process, products, machines, materials, quality, compare, faqs, cta, seo } = factoryPage;
+const { banner, intro, videos, process, products, machines, materials, quality, compare, faqs, cta, seo } = factoryPage;
 
 const productIcons = {
   kitchen: <AppstoreOutlined />,
@@ -58,6 +59,15 @@ export default function FactoryPage({ onOpenForm }) {
         { '@type': 'ListItem', position: 2, name: 'Our Factory', item: `${siteUrl}${seo.path}` },
       ],
     },
+    ...factoryVideos.map((v) => ({
+      '@context': 'https://schema.org',
+      '@type': 'VideoObject',
+      name: `${v.title} | ${brand.name} factory`,
+      description: v.text,
+      thumbnailUrl: v.videoUrl.replace('/video/upload/', `/video/upload/so_${v.posterAt},w_720,q_auto,f_jpg/`).replace(/\.[^/.]+$/, '.jpg'),
+      contentUrl: v.videoUrl,
+      uploadDate: '2026-11-23',
+    })),
     {
       '@context': 'https://schema.org',
       '@type': 'FAQPage',
@@ -90,6 +100,18 @@ export default function FactoryPage({ onOpenForm }) {
           {intro.paragraphs.map((p) => (
             <p key={p} className="m-0 mt-4 text-[15px] leading-relaxed text-gray-600 sm:text-base">{p}</p>
           ))}
+        </div>
+      </section>
+
+      {/* Factory videos (muted, play while on screen) */}
+      <section aria-labelledby="factory-videos" className="bg-white px-4 pb-12 sm:px-6 lg:pb-20">
+        <div className="mx-auto max-w-[1100px]">
+          <div className="mb-7 text-center sm:mb-10">
+            <span className={tag}>{videos.tag}</span>
+            <h2 id="factory-videos" className={h2}>{videos.title}</h2>
+            <p className="m-0 mx-auto mt-3 max-w-[620px] text-[15px] text-gray-500 sm:text-base">{videos.subtitle}</p>
+          </div>
+          <VideoReels items={factoryVideos} desktop={3} label="Factory videos" />
         </div>
       </section>
 

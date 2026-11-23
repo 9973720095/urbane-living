@@ -101,3 +101,30 @@
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+/* Home page on phones: smaller, balanced text below the hero (top bar, navbar and hero keep their sizes).
+   App.js wraps every section after the hero in <div className="home-blend">.
+   Only the BIG text is made smaller; text that is already small stays as it is. */
+@media (max-width: 639px) {
+  .home-blend h2 {
+    font-size: 22px !important;
+    line-height: 1.28 !important;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+  .home-blend p.text-\[15px\] {
+    font-size: 13.5px !important;
+    line-height: 1.6 !important;
+    text-wrap: pretty;
+  }
+  .home-blend p.text-lg,
+  .home-blend p.text-\[18px\],
+  .home-blend legend.text-\[17px\] {
+    font-size: 15px !important;
+  }
+  .home-blend h3.text-2xl,
+  .home-blend h3.text-\[18px\] {
+    font-size: 17px !important;
+    text-wrap: balance;
+  }
+}
