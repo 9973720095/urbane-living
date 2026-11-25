@@ -11,9 +11,9 @@ const img = (file) => `${cdn}/image/upload/q_auto,f_auto,w_1400/${file}`;
 
 const images = {
   ceiling: slot('blog.ceiling', 'livingTvWall', 1400, 'Blog › Cover photo › False ceiling cost'),
-  kitchen: slot('blog.kitchen', 'greyKitchenL', 1400, 'Blog › Cover photo › Modular kitchen guide'),
+  kitchen: slot('blog.kitchen', 'galleyKitchen', 1400, 'Blog › Cover photo › Modular kitchen guide'),
   framing: slot('blog.framing', img('v1777092280/WhatsApp_Image_2026-04-24_at_15.43.19_1_jg1oxj.jpg'), 1400, 'Blog › Cover photo › Ceiling framing (real site photo)', { alt: 'False ceiling metal framing being fixed at a real Urbane Living site' }), // real site photo
-  wardrobe: slot('blog.wardrobe', 'wardrobeBedroom', 1400, 'Blog › Cover photo › Sliding vs hinged wardrobe'),
+  wardrobe: slot('blog.wardrobe', 'guestRoom', 1400, 'Blog › Cover photo › Sliding vs hinged wardrobe'),
   bedroom: slot('blog.bedroom', 'plumBedroom', 1400, 'Blog › Cover photo › Vastu tips'),
   livingAlt: slot('blog.livingAlt', 'livingArchway', 1400, 'Blog › Cover photo › New flat checklist'),
 };
@@ -30,8 +30,8 @@ export const blogPosts = [
     description:
       'Planning interiors in Gurugram (Gurgaon)? What to plan for new flats on Dwarka Expressway and Golf Course Extension Road, premium apartments on Golf Course Road and builder floors in DLF Phases, with costs, timeline and society rules.',
     category: 'Home Interiors',
-    image: slot('blog.gurugram', 'beigeLiving', 1400, 'Blog › Cover photo › Home interiors in Gurugram'),
-    imageAlt: slotAlt('blog.gurugram', 'beigeLiving'),
+    image: slot('blog.gurugram', 'livingRoundCeiling', 1400, 'Blog › Cover photo › Home interiors in Gurugram'),
+    imageAlt: slotAlt('blog.gurugram', 'livingRoundCeiling'),
     date: '2026-11-18',
     readMin: 5,
     content: `
@@ -285,7 +285,7 @@ export const blogPosts = [
       'L-shape, U-shape, parallel or straight? A practical modular kitchen guide for Indian cooking: layouts, standard sizes, carcass and shutter materials, and the mistakes to avoid.',
     category: 'Modular Kitchen',
     image: images.kitchen,
-    imageAlt: slotAlt('blog.kitchen', 'greyKitchenL'),
+    imageAlt: slotAlt('blog.kitchen', 'galleyKitchen'),
     date: '2026-11-10',
     readMin: 4,
     content: `
@@ -458,7 +458,7 @@ export const blogPosts = [
       'Sliding or hinged wardrobe? Compare space, cost and usability, learn the standard wardrobe sizes for Indian bedrooms and pick the right materials and finishes.',
     category: 'Wardrobe',
     image: images.wardrobe,
-    imageAlt: slotAlt('blog.wardrobe', 'wardrobeBedroom'),
+    imageAlt: slotAlt('blog.wardrobe', 'guestRoom'),
     date: '2026-11-06',
     readMin: 3,
     content: `

@@ -17,6 +17,32 @@ export const photos = {
     url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583839/ChatGPT_Image_May_12_2026_03_21_15_PM_eftzu7.png',
     alt: 'Homeowner walking into her living room with a cove-lit false ceiling, recessed spot lights and beige sofas',
   },
+  // Our own renders in Cloudinary account diosq0s7w (full links). Used while the "BEDROOMS" renders are
+  // being uploaded again (they were deleted from nzqefovs on 25 Nov 2026).
+  livingFlowerCeiling: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583856/hf_20260512_054108_38408685-f67f-4515-a822-985d83019979_y6nnq9.png',
+    alt: 'Living room with a flower-shaped false ceiling panel, cove lights, TV unit and L-shaped sofa',
+  },
+  masterBedroomRound: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583838/ChatGPT_Image_May_12_2026_03_16_05_PM_pnlauy.png',
+    alt: 'Master bedroom with a round cove-lit false ceiling, sitting area and dresser',
+  },
+  kidsBedroomBlue: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778585454/ChatGPT_Image_May_12_2026_04_30_35_PM_ptqgea.png',
+    alt: 'Kids bedroom with blue walls, a sun-shaped ceiling light, study table and wardrobe',
+  },
+  livingCoveCeiling: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583842/ChatGPT_Image_May_12_2026_03_38_54_PM_v8bjr3.png',
+    alt: 'Living room with a layered cove-lit false ceiling, wall panels and TV unit',
+  },
+  livingRoundCeiling: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583842/ChatGPT_Image_May_12_2026_03_35_05_PM_tolwlu.png',
+    alt: 'Living room with a round layered false ceiling, beige sofas and TV wall',
+  },
+  parentsBedroom: {
+    url: 'https://res.cloudinary.com/diosq0s7w/image/upload/v1778583833/ChatGPT_Image_May_12_2026_02_40_56_PM_zkd6ex.png',
+    alt: 'Parents bedroom with wooden ceiling panels, lit bed wall, TV unit and sofa',
+  },
   // Living rooms
   livingTvWall: {
     id: 'v1794306120/Enscape_2026-08-06-05-55-47_living_area__1.png',
@@ -255,70 +281,50 @@ export const photos = {
 export const roomGalleries = {
   // Each page shows only its own room, and no photo twice. The page's top banner photo is not repeated here.
   // Near-copies of one render (livingTvWall/livingTvWallWide, livingSofa/livingSofaAlt, compactBedroom/beigeWardrobeBedroom,
-  // bathroomBeige/bathroomBeigeAlt, crockeryUnit/coffeeStation) count as the same photo
+  // bathroomBeige/bathroomBeigeAlt, crockeryUnit/coffeeStation) count as the same photo.
+  // TEMPORARY (25 Nov 2026): the "BEDROOMS" renders were deleted from Cloudinary, so the lists below use the photos
+  // that still exist. When they are uploaded again (same names), put back the lists from git commit 50f44ea.
   kitchen: [
     ['lShapeKitchenFridge', 'L-shaped kitchen with tall fridge unit', 'Modern'],
     ['kitchenLOpen', 'Open kitchen facing the living room', 'Modern'],
     ['galleyKitchen', 'Parallel kitchen with built-in microwave', 'Modern'],
-    ['greyKitchenL', 'Grey L-shaped kitchen with marble backsplash', 'Minimal'],
-    ['greyKitchen', 'Grey kitchen with tall fridge unit', 'Minimal'],
-    ['greyKitchenSink', 'Compact kitchen with black glass cabinets', 'Minimal'],
-    ['crockeryBar', 'Kitchen with lit crockery and coffee unit', 'Modern'],
+    ['diningToKitchen', 'Kitchen opening from the dining area', 'Minimal'],
   ],
   bedroom: [
-    ['blushMasterBedroom', 'Blush pink master bedroom with cove ceiling', 'Luxury'],
-    ['sageWardrobeBedroom', 'Sage green bedroom with matching wardrobe', 'Modern'],
-    ['sageBedroom', 'Sage green bedroom with TV unit', 'Modern'],
-    ['goldArtBedroom', 'Panelled bedroom with gold artwork', 'Luxury'],
-    ['pinkPanelBedroom', 'Pink panelled bedroom with white wardrobe', 'Modern'],
-    ['greyTvBedroom', 'White bedroom with wooden TV unit', 'Minimal'],
-    ['beigeWardrobeBedroom', 'Beige bedroom with black glass wardrobe', 'Minimal'],
-    ['pinkBedroom', 'Blush pink bedroom', 'Modern'],
-    ['sageBedroomFront', 'Sage green bed wall with landscape art', 'Modern'],
+    ['masterBedroomRound', 'Master bedroom with round cove ceiling', 'Luxury'],
+    ['parentsBedroom', 'Parents bedroom with wooden ceiling panels', 'Luxury'],
+    ['kidsBedroomBlue', 'Blue kids bedroom with study table', 'Kids'],
     ['kidsRoomJungle', 'Kids room with bunk bed', 'Kids'],
-    ['kidsRoomPink', 'Pink kids bedroom with bunk bed', 'Kids'],
     ['guestRoom', 'Guest room with study and daybed', 'Minimal'],
-    ['studyGuestRoom', 'Guest room with study desk and pooja unit', 'Modern'],
   ],
   wardrobe: [
-    ['slidingWardrobeBedroom', 'White sliding wardrobe with glass shutter', 'Modern'],
-    ['sageWardrobeBedroom', 'Full-height sage green wardrobe', 'Modern'],
-    ['wardrobeBedroom', 'Full-height white wardrobe', 'Modern'],
-    ['goldArtBedroom', 'White and wood wardrobe', 'Luxury'],
-    ['pinkBedroom', 'Sliding wardrobe with framed panels', 'Modern'],
-    ['pinkPanelBedroom', 'White wardrobe beside a pink panelled wall', 'Minimal'],
-    ['guestRoom', 'Tall wardrobe in the guest room', 'Minimal'],
     ['kidsRoomJungle', 'Kids wardrobe with handle-less shutters', 'Kids'],
+    ['kidsBedroomBlue', 'Blue kids wardrobe beside the study table', 'Kids'],
   ],
   // False Ceiling page gallery: [key, title, style, room] (room + style power the filters on that page)
   falseCeiling: [
-    ['livingTvWall', 'Layered ceiling with chandelier over the living room', 'luxury', 'living'],
-    ['livingGlassPartition', 'Cove-lit peripheral ceiling over the sofa', 'modern', 'living'],
-    ['livingProfileCeiling', 'Peripheral ceiling with cove lights', 'modern', 'living'],
-    ['beigeLiving', 'Cove-lit ceiling in a beige living room', 'minimalist', 'living'],
+    ['livingFlowerCeiling', 'Flower-shaped ceiling panel with cove lights', 'luxury', 'living'],
+    ['livingRoundCeiling', 'Round layered ceiling over the living room', 'minimalist', 'living'],
     ['openPlanLiving', 'Ceiling with track lights over open-plan living', 'modern', 'living'],
-    ['livingWithKitchen', 'Cove ceiling over a living room and open kitchen', 'minimalist', 'living'],
     ['diningPendant', 'Recessed ceiling over the dining table', 'modern', 'living'],
     ['diningOpenKitchen', 'Dining ceiling with cluster pendant light', 'modern', 'living'],
-    ['blushMasterBedroom', 'Cove-lit ceiling in a master bedroom', 'luxury', 'bedroom'],
+    ['masterBedroomRound', 'Round cove-lit ceiling in a master bedroom', 'luxury', 'bedroom'],
     ['plumBedroom', 'Bedroom ceiling with soft cove light', 'luxury', 'bedroom'],
-    ['sageWardrobeBedroom', 'Profile-light ceiling in a sage bedroom', 'modern', 'bedroom'],
-    ['beigeWardrobeBedroom', 'Simple peripheral ceiling in a beige bedroom', 'minimalist', 'bedroom'],
+    ['parentsBedroom', 'Wooden ceiling panels in a parents bedroom', 'modern', 'bedroom'],
+    ['kidsBedroomBlue', 'Sun-shaped ceiling light in a kids bedroom', 'modern', 'bedroom'],
     ['uShapeKitchen', 'Kitchen ceiling with recessed lights', 'modern', 'kitchen'],
-    ['greyKitchenL', 'Clean flat ceiling in a grey kitchen', 'minimalist', 'kitchen'],
+    ['kitchenLOpen', 'Clean flat ceiling in an open kitchen', 'minimalist', 'kitchen'],
   ],
   living: [
     ['livingSofa', 'Beige sectional with slatted partition', 'Modern'],
     ['livingArchway', 'Living room through a wooden archway', 'Modern'],
+    ['livingFlowerCeiling', 'Living room with flower-shaped ceiling', 'Luxury'],
+    ['livingRoundCeiling', 'Living room with round layered ceiling', 'Modern'],
+    ['livingCoveCeiling', 'Living room with layered cove ceiling', 'Luxury'],
     ['openPlanLiving', 'Open-plan living with sage crockery unit', 'Modern'],
-    ['beigeLiving', 'Beige living room with slatted TV wall', 'Minimal'],
-    ['livingProfileCeiling', 'Living room with cove-lit false ceiling', 'Modern'],
-    ['livingGlassPartition', 'Living room with fluted glass partition', 'Minimal'],
-    ['compactLiving', 'Compact living room with L-shaped sofa', 'Minimal'],
-    ['livingWithKitchen', 'Living room opening into the kitchen', 'Minimal'],
     ['swingLounge', 'Lounge corner with a hanging swing', 'Luxury'],
     ['swingLoungeAlt', 'Living area with swing and aquarium wall', 'Luxury'],
-    ['diningPendant', 'Living-dining with globe pendant light', 'Modern'],
+    ['diningPendant', 'Living-dining with globe pendant light', 'Minimal'],
   ],
 };
 

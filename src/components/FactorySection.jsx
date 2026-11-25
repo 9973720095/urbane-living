@@ -41,8 +41,14 @@ export default function FactorySection() {
         className="group mx-auto grid max-w-[1200px] grid-cols-1 overflow-hidden rounded-3xl bg-brand-navy text-white no-underline shadow-card transition hover:shadow-card-hover lg:grid-cols-2"
       >
         <div className="relative aspect-[4/3] overflow-hidden sm:aspect-[16/10] lg:aspect-auto lg:min-h-[460px]">
-          <FactoryVideo src={f.video} poster={f.poster} label={f.videoLabel} />
-          <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">▶ From our factory</span>
+          {f.video ? (
+            <>
+              <FactoryVideo src={f.video} poster={f.poster} label={f.videoLabel} />
+              <span className="absolute left-3 top-3 rounded-full bg-black/55 px-2.5 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">▶ From our factory</span>
+            </>
+          ) : (
+            <img src={f.poster} alt={f.videoLabel} loading="lazy" className="absolute inset-0 block h-full w-full object-cover" />
+          )}
         </div>
         <div className="flex flex-col justify-center p-6 sm:p-10 lg:p-12">
           <span className="mb-3 inline-block w-fit rounded-full bg-white/10 px-3.5 py-1 text-[11px] font-semibold tracking-[0.16em] text-brand-gold">{f.tag}</span>

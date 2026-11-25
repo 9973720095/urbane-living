@@ -103,7 +103,8 @@ export default function FactoryPage({ onOpenForm }) {
         </div>
       </section>
 
-      {/* Factory videos (muted, play while on screen) */}
+      {/* Factory videos (muted, play while on screen); hidden while there are none */}
+      {factoryVideos.length > 0 && (
       <section aria-labelledby="factory-videos" className="bg-white px-4 pb-12 sm:px-6 lg:pb-20">
         <div className="mx-auto max-w-[1100px]">
           <div className="mb-7 text-center sm:mb-10">
@@ -114,6 +115,7 @@ export default function FactoryPage({ onOpenForm }) {
           <VideoReels items={factoryVideos} desktop={3} label="Factory videos" />
         </div>
       </section>
+      )}
 
       {/* 3. Process */}
       <section aria-labelledby="factory-process" className="bg-brand-soft px-4 py-12 sm:px-6 lg:py-20">

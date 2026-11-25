@@ -1,10 +1,15 @@
 // Our Factory: home page section + /factory page. Layout: components/FactorySection.jsx, pages/FactoryPage.jsx
 // Keep every line TRUE. If a machine, material or step is not in our factory, delete that line.
+import { photo } from './media';
+
 // Videos: real factory videos from our Cloudinary (muted, play only while on screen).
 
 const CLD = 'https://res.cloudinary.com/nzqefovs/video/upload';
+// TEMPORARY (25 Nov 2026): the 3 factory videos were deleted from Cloudinary. While false, the video parts are hidden
+// (home factory card shows a kitchen photo, the factory page shows no video). Upload them again (same names), then set true.
+export const FACTORY_VIDEOS_ONLINE = true; // videos uploaded again on 25 Nov 2026
 // Factory videos (vertical 9:16). posterAt = second of the video used as the still frame.
-export const factoryVideos = [
+const allFactoryVideos = [
   {
     id: 'cnc-cutting',
     title: 'CNC panel cutting',
@@ -30,6 +35,7 @@ export const factoryVideos = [
     videoUrl: `${CLD}/v1795345318/urbanelivingfactory_logo_mute.mp4`,
   },
 ];
+export const factoryVideos = FACTORY_VIDEOS_ONLINE ? allFactoryVideos : [];
 const poster = (v, width = 1000) =>
   v.videoUrl.replace('/video/upload/', `/video/upload/so_${v.posterAt},w_${width},q_auto,f_jpg/`).replace(/\.[^/.]+$/, '.jpg');
 
@@ -46,9 +52,9 @@ export const factoryHome = {
     'Less dust and noise at your home',
   ],
   button: { label: 'See Our Factory', to: '/factory' },
-  video: factoryVideos[0].videoUrl,
-  poster: poster(factoryVideos[0], 900),
-  videoLabel: 'CNC panel cutting in the Urbane Living factory',
+  video: FACTORY_VIDEOS_ONLINE ? allFactoryVideos[0].videoUrl : '',
+  poster: FACTORY_VIDEOS_ONLINE ? poster(allFactoryVideos[0], 900) : photo('lShapeKitchenFridge', 900),
+  videoLabel: FACTORY_VIDEOS_ONLINE ? 'CNC panel cutting in the Urbane Living factory' : 'L-shaped modular kitchen designed by Urbane Living',
 };
 
 export const factoryPage = {
@@ -58,8 +64,8 @@ export const factoryPage = {
     highlight: 'fitted by our own team',
     subtitle: 'Modular kitchens, wardrobes and furniture for your full home interior, made on machines to your exact site measurements and installed by the same team.',
     // CNC router video plays behind the banner text (muted); the still frame shows first
-    video: factoryVideos[1].videoUrl.replace('/video/upload/', '/video/upload/q_auto/'),
-    image: poster(factoryVideos[1], 1400),
+    video: FACTORY_VIDEOS_ONLINE ? allFactoryVideos[1].videoUrl.replace('/video/upload/', '/video/upload/q_auto/') : undefined,
+    image: FACTORY_VIDEOS_ONLINE ? poster(allFactoryVideos[1], 1400) : undefined,
     imageAlt: 'CNC router cutting a panel in the Urbane Living factory',
     whatsappMessage: 'Hi Urbane Living, I want to know more about your factory-made modular interiors.',
     height: 'md',
@@ -185,6 +191,6 @@ export const factoryPage = {
     description:
       'Modular kitchens, wardrobes and furniture for full home interiors, machine-cut, edge-banded and finished in the Urbane Living factory, then installed by our own team in Gurugram and Delhi NCR.',
     path: '/factory',
-    image: poster(factoryVideos[1], 1200),
+    image: FACTORY_VIDEOS_ONLINE ? poster(allFactoryVideos[1], 1200) : photo('uShapeKitchen', 1200),
   },
 };

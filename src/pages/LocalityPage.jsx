@@ -15,7 +15,7 @@ import { slot } from '../data/media';
 import { localServices, localProcess, localityPage, findLocalCity, findLocality, findLocalService, slugify } from '../data/localSeo';
 
 // hero background of every locality page (different from the service cards below it)
-const HERO_IMAGE = slot('city.locality.hero', 'livingGlassPartition', 1400, 'Locality pages (Sohna Road, Sector 62...) › Top banner background');
+const HERO_IMAGE = slot('city.locality.hero', 'livingFlowerCeiling', 1400, 'Locality pages (Sohna Road, Sector 62...) › Top banner background');
 
 const btnRed =
   'inline-flex h-12 cursor-pointer items-center justify-center gap-2 rounded-full border-0 bg-brand-red px-7 text-[15px] font-semibold text-white no-underline shadow-cta transition hover:bg-brand-red-dark';

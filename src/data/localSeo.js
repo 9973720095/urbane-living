@@ -79,7 +79,7 @@ export const localServices = [
       `Sliding, hinged and walk-in wardrobes in ${c}, made to your wall size with lofts, drawers and organisers. Free design consultation and site visit.`,
     intro: (c) =>
       `We build wardrobes in ${c} to your exact wall size, and plan the inside around what you actually store: clothes, shoes, bags and bed linen.`,
-    image: slot('city.wardrobe.banner', 'slidingWardrobeBedroom', 1400, 'City pages (Noida, Gurugram...) › Wardrobe › Top banner'),
+    image: slot('city.wardrobe.banner', 'guestRoom', 1400, 'City pages (Noida, Gurugram...) › Wardrobe › Top banner'),
     mainLink: { to: '/wardrobe', label: 'See our wardrobe designs' },
     includes: [
       { title: 'Sliding wardrobes', text: 'Space-saving doors for compact bedrooms.' },

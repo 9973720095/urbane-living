@@ -4,7 +4,50 @@ import VideoReels from './VideoReels';
 // Home page: "Work In Progress Sites" (real on-site videos from our Cloudinary).
 // Use a DIFFERENT real video for each site, and only real locations (leave location '' if unsure).
 // Layout (phones: swipe like reels, desktop: 4 in a row + arrows) is in components/VideoReels.jsx.
-const WIP_VIDEOS = [
+// TEMPORARY (25 Nov 2026): the 5 site videos below were deleted from Cloudinary. Until they are uploaded again
+// (same names), the section shows our false ceiling site reels. Then set SITE_VIDEOS_ONLINE = true.
+const SITE_VIDEOS_ONLINE = false;
+const R = 'https://res.cloudinary.com/nzqefovs/video/upload';
+const SITE_REELS = [
+  {
+    id: 'framing',
+    title: 'False Ceiling: Framing & Channels',
+    text: 'Metal channels and the ceiling frame being fixed and levelled, with AC and light points marked first.',
+    location: '',
+    status: 'In Progress',
+    posterAt: 2,
+    videoUrl: `${R}/v1792579434/framing-channels-reel-9x16.mp4`,
+  },
+  {
+    id: 'boards',
+    title: 'Gypsum Board Installation',
+    text: 'Gypsum boards screwed to the frame, with the cove and light cut-outs shaped on site.',
+    location: '',
+    status: 'In Progress',
+    posterAt: 2,
+    videoUrl: `${R}/v1792579952/board-installation-reel-9x16.mp4`,
+  },
+  {
+    id: 'finishing',
+    title: 'Jointing, Putty & Paint',
+    text: 'Joints taped and filled, the ceiling puttied and painted for a smooth, crack-free finish.',
+    location: '',
+    status: 'Finishing Stage',
+    posterAt: 2,
+    videoUrl: `${R}/v1792580151/finishing-reel-9x16.mp4`,
+  },
+  {
+    id: 'done',
+    title: 'Lights On: The Finished Ceiling',
+    text: 'Cove and spot lights switched on in the finished false ceiling, ready for the family.',
+    location: '',
+    status: 'Completed',
+    posterAt: 2,
+    videoUrl: `${R}/v1792580360/enjoy-new-look-reel-9x16.mp4`,
+  },
+];
+
+const SITE_VIDEOS = [
   {
     id: 1,
     title: 'Glass Fitting & Sealing',
@@ -51,6 +94,7 @@ const WIP_VIDEOS = [
     videoUrl: 'https://res.cloudinary.com/nzqefovs/video/upload/v1795333907/urbane_working_new_project_logo_mute.mp4',
   },
 ];
+const WIP_VIDEOS = SITE_VIDEOS_ONLINE ? SITE_VIDEOS : SITE_REELS;
 
 export default function WorkInProgress() {
   return (

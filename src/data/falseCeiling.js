@@ -46,13 +46,13 @@ export const estimator = {
   materials: [
     {
       key: 'gypsum', name: 'Gypsum', rate: 120, note: 'Smooth finish, most popular for flats',
-      image: slot('falseCeiling.estimator.gypsum', 'compactLiving', 480, 'False Ceiling page › Cost estimator › Gypsum card'),
-      imageAlt: slotAlt('falseCeiling.estimator.gypsum', 'compactLiving'),
+      image: slot('falseCeiling.estimator.gypsum', 'livingSofa', 480, 'False Ceiling page › Cost estimator › Gypsum card'),
+      imageAlt: slotAlt('falseCeiling.estimator.gypsum', 'livingSofa'),
     },
     {
       key: 'pop', name: 'POP', rate: 120, note: 'Curves and detailed mouldings',
-      image: slot('falseCeiling.estimator.pop', 'sageBedroomFront', 480, 'False Ceiling page › Cost estimator › POP card'),
-      imageAlt: slotAlt('falseCeiling.estimator.pop', 'sageBedroomFront'),
+      image: slot('falseCeiling.estimator.pop', 'diningCrockery', 480, 'False Ceiling page › Cost estimator › POP card'),
+      imageAlt: slotAlt('falseCeiling.estimator.pop', 'diningCrockery'),
     },
     {
       key: 'pvc', name: 'PVC', rate: 200, note: 'Moisture-proof for bathrooms and balconies',
@@ -68,18 +68,18 @@ export const estimator = {
   designTiers: [
     {
       key: 'basic', label: 'Simple', sub: 'Single level, flat', value: 1.0,
-      image: slot('falseCeiling.estimator.simple', 'greyTvBedroom', 480, 'False Ceiling page › Cost estimator › Simple design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.simple', 'greyTvBedroom'),
+      image: slot('falseCeiling.estimator.simple', 'guestRoom', 480, 'False Ceiling page › Cost estimator › Simple design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.simple', 'guestRoom'),
     },
     {
       key: 'cove', label: 'Cove lights', sub: 'Peripheral with hidden LED', value: 1.2,
-      image: slot('falseCeiling.estimator.cove', 'pinkBedroom', 480, 'False Ceiling page › Cost estimator › Cove design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.cove', 'pinkBedroom'),
+      image: slot('falseCeiling.estimator.cove', 'livingCoveCeiling', 480, 'False Ceiling page › Cost estimator › Cove design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.cove', 'livingCoveCeiling'),
     },
     {
       key: 'multi', label: 'Multi-level', sub: 'Layered or curved designer', value: 1.5,
-      image: slot('falseCeiling.estimator.multi', 'livingSofaAlt', 480, 'False Ceiling page › Cost estimator › Multi-level design card'),
-      imageAlt: slotAlt('falseCeiling.estimator.multi', 'livingSofaAlt'),
+      image: slot('falseCeiling.estimator.multi', 'livingTvWall', 480, 'False Ceiling page › Cost estimator › Multi-level design card'),
+      imageAlt: slotAlt('falseCeiling.estimator.multi', 'livingTvWall'),
     },
   ],
   rangeSpread: 0.1, // estimate is shown as a range (±10%), never as a fixed price

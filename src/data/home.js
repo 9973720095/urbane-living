@@ -94,10 +94,9 @@ export const offerings = {
 export const gallery = {
   items: photoList('home.photos', 'Home › Google reviews › Project photos', [
     { key: 'livingSofa', title: 'Living Room' },
-    { key: 'sageBedroom', title: 'Bedroom' },
-    { key: 'greyKitchenL', title: 'Modular Kitchen' },
+    { key: 'parentsBedroom', title: 'Bedroom' },
+    { key: 'galleyKitchen', title: 'Modular Kitchen' },
     { key: 'openPlanLiving', title: 'Living & Dining' },
-    { key: 'kidsRoomPink', title: 'Kids Bedroom' },
     { key: 'bathroomBeige', title: 'Bathroom' },
   ], { fields: [] }).map((x) => ({ src: x.src(1400), title: x.title, alt: x.alt })),
 };
@@ -144,7 +143,7 @@ export const process = {
       heading: 'Enjoy the new look',
       duration: 'Just 7* days',
       video: 'https://res.cloudinary.com/nzqefovs/video/upload/v1792580360/enjoy-new-look-reel-9x16.mp4',
-      img: slot('falseCeiling.process.4', 'sageTvBedroom', 720, 'False Ceiling page › 7-day process › Step 4 still (Enjoy the new look)'),
+      img: slot('falseCeiling.process.4', 'livingArchway', 720, 'False Ceiling page › 7-day process › Step 4 still (Enjoy the new look)'),
     },
   ],
   note: '*Typical timeline after design approval. Larger areas may take a little longer.',
