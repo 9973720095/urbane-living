@@ -44,12 +44,31 @@ export const roomForPage = (page = '', section = '') => {
   return 'All';
 };
 
+// why the full list could not be loaded -> short reason + what to do
+const whyText = (w) => {
+  const st = w?.status;
+  if (st === 404) return 'the new backend is not live yet';
+  if (st === 503) return 'CLOUDINARY_URL is not set on Render';
+  if (st === 502) return 'Cloudinary refused the key';
+  if (st === 401 || st === 403) return 'admin login was not accepted';
+  return 'the backend did not answer';
+};
+const whyFix = (w) => {
+  const st = w?.status;
+  if (st === 404) return 'Render → backend service → Manual Deploy → “Deploy latest commit”, wait till it is “Live”, then press Try again.';
+  if (st === 503) return 'Render → backend service → Environment → add CLOUDINARY_URL (Cloudinary → Settings → API Keys → “API environment variable”, it starts with cloudinary://) → Save, Rebuild and Deploy.';
+  if (st === 502) return 'Copy the CLOUDINARY_URL again from Cloudinary (account nzqefovs, the full line starting with cloudinary://), paste it in Render → Environment, save and redeploy.';
+  if (st === 401 || st === 403) return 'Log out of the admin panel, log in again, then press Try again.';
+  return 'The backend may be waking up (Render free plan takes up to 1 minute). Wait a moment, then press Try again.';
+};
+
 // photos are loaded once per admin visit
 let cached = null;
 
 export default function CloudinaryPicker({ apiBase, value, onChange, defaultRoom = 'All' }) {
   const [photos, setPhotos] = useState(cached ? cached.photos : null);
   const [source, setSource] = useState(cached ? cached.source : '');
+  const [why, setWhy] = useState(cached ? cached.why : null); // why the full list could not be loaded
   const [room, setRoom] = useState(defaultRoom);
   const [folder, setFolder] = useState('');
   const [q, setQ] = useState('');
@@ -60,11 +79,12 @@ export default function CloudinaryPicker({ apiBase, value, onChange, defaultRoom
     setPhotos(null);
     axios
       .get(`${apiBase}/api/cloudinary/images`, { params: refresh ? { refresh: 1 } : {} })
-      .then((r) => ({ photos: r.data.photos || [], source: 'all' }))
-      .catch(() => fetch(TAG_LIST_URL)
+      .then((r) => ({ photos: r.data.photos || [], source: 'all', why: null }))
+      .catch((err) => fetch(TAG_LIST_URL)
         .then((r) => r.json())
         .then((d) => ({
           source: 'tagged',
+          why: { status: err.response?.status || 0, text: err.response?.data?.error || err.message || '' },
           photos: (d.resources || []).map((x) => ({
             url: `https://res.cloudinary.com/${CLOUD}/image/upload/v${x.version}/${x.public_id}.${x.format}`,
             name: x.public_id.split('/').pop(),
@@ -75,14 +95,15 @@ export default function CloudinaryPicker({ apiBase, value, onChange, defaultRoom
             height: x.height,
           })),
         }))
-        .catch(() => ({ photos: [], source: 'tagged' })))
+        .catch(() => ({ photos: [], source: 'tagged', why: { status: err.response?.status || 0, text: err.message || '' } })))
       .then((res) => {
         const list = res.photos
           .filter((x) => ['png', 'jpg', 'jpeg', 'webp', undefined].includes(x.format) || /\.(png|jpe?g|webp)$/i.test(x.url))
           .map((x) => ({ ...x, rooms: roomsOf(x) }));
-        cached = { photos: list, source: res.source };
+        cached = { photos: list, source: res.source, why: res.why };
         setPhotos(list);
         setSource(res.source);
+        setWhy(res.why);
       });
   };
   useEffect(() => { if (!cached) load(false); }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -109,8 +130,16 @@ export default function CloudinaryPicker({ apiBase, value, onChange, defaultRoom
           type="warning"
           showIcon
           style={{ marginBottom: 10 }}
-          message="Only photos tagged “website” are shown."
-          description="To see EVERY photo of our Cloudinary here, add CLOUDINARY_URL (Cloudinary → Settings → API Keys → “API environment variable”) in Render → Environment, then redeploy the backend."
+          message={`Only photos tagged “website” are shown. Reason: ${whyText(why)}`}
+          description={
+            <span>
+              {whyFix(why)}{' '}
+              <Button size="small" type="link" style={{ padding: 0 }} onClick={() => { cached = null; load(true); }}>Try again</Button>
+              <span style={{ display: 'block', fontSize: 11, color: '#999', marginTop: 4 }}>
+                Server answer: {why?.status || 'no answer'} {why?.text ? `· ${String(why.text).slice(0, 160)}` : ''}
+              </span>
+            </span>
+          }
         />
       )}
       <Space wrap style={{ marginBottom: 8 }}>
