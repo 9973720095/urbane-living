@@ -14,13 +14,9 @@ import {
 } from '@ant-design/icons';
 import { imageGalleries, imageSlots, replaceImageOverrides, sizeCloudinary } from '../../data/media';
 import { saveImageOverrides } from '../../utils/siteImages';
+import CloudinaryPicker, { roomForPage } from './CloudinaryPicker';
 
-const CLOUD = 'nzqefovs';
-const LIBRARY_URL = `https://res.cloudinary.com/${CLOUD}/image/list/website.json`;
 const ALLOWED = /^https:\/\/res\.cloudinary\.com\/(nzqefovs|diosq0s7w)\/image\/upload\//;
-// Folders whose renders carry another company's logo: hidden unless "Show all folders" is on
-const HIDDEN_FOLDERS = ['4bhk project', 'yati', 'kitchen', 'samples', 'UrbaneLiving_Images'];
-const isHiddenFolder = (folder = '') => HIDDEN_FOLDERS.some((f) => folder === f || folder.startsWith(`${f}/`));
 const FIELD_LABEL = { style: 'Style (filter)', room: 'Room (filter)', category: 'Category tag' };
 
 const thumb = (url) => sizeCloudinary(url, 480);
@@ -36,9 +32,6 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
   const [editing, setEditing] = useState(null); // { mode: 'edit' | 'add', photo, gallery }
   const [form, setForm] = useState({});
   const [saving, setSaving] = useState(false);
-  const [library, setLibrary] = useState(null);
-  const [libSearch, setLibSearch] = useState('');
-  const [showAll, setShowAll] = useState(false);
 
   const slots = useMemo(() => imageSlots(), []);
   const galleries = useMemo(() => imageGalleries(), []);
@@ -118,28 +111,6 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
   };
   useEffect(load, [apiBase]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Our Cloudinary photos tagged "website" (loaded when the editor opens the first time)
-  useEffect(() => {
-    if (!editing || library) return;
-    fetch(LIBRARY_URL)
-      .then((r) => r.json())
-      .then((d) =>
-        setLibrary(
-          (d.resources || [])
-            .filter((x) => ['png', 'jpg', 'jpeg', 'webp'].includes(x.format))
-            .map((x) => ({
-              url: `https://res.cloudinary.com/${CLOUD}/image/upload/v${x.version}/${x.public_id}.${x.format}`,
-              name: x.public_id,
-              folder: x.asset_folder || '',
-            })),
-        ),
-      )
-      .catch(() => setLibrary([]));
-  }, [editing, library]);
-
-  const libraryShown = (library || [])
-    .filter((x) => showAll || !isHiddenFolder(x.folder))
-    .filter((x) => !libSearch || `${x.name} ${x.folder}`.toLowerCase().includes(libSearch.toLowerCase()));
 
   // Keep this browser's copy up to date, so the admin sees the change on the website straight away
   const applyLocally = (next) => {
@@ -161,7 +132,6 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
       room: o.room || '',
       category: o.category || '',
     });
-    setLibSearch('');
   };
 
   const openAdd = (gid) => {
@@ -169,7 +139,6 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
     const count = photos.filter((p) => p.collection === gid).length;
     setEditing({ mode: 'add', photo: null, gallery: g });
     setForm({ url: '', alt: '', title: '', hidden: false, order: (count + 1) * 10, style: '', room: '', category: '' });
-    setLibSearch('');
   };
 
   const put = async (key, body) => {
@@ -426,46 +395,12 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
                   key: 'library',
                   label: 'Choose from our Cloudinary',
                   children: (
-                    <>
-                      <Space wrap style={{ marginBottom: 12 }}>
-                        <Input
-                          allowClear
-                          prefix={<SearchOutlined />}
-                          placeholder="Search by name or folder (e.g. kitchen, bedroom, mr. aggarwal)"
-                          value={libSearch}
-                          onChange={(e) => setLibSearch(e.target.value)}
-                          style={{ width: 360 }}
-                        />
-                        <Space>
-                          <Switch size="small" checked={showAll} onChange={setShowAll} />
-                          <span style={{ fontSize: 12 }}>Show all folders (some have another company&apos;s logo)</span>
-                        </Space>
-                      </Space>
-                      {library === null ? (
-                        <div style={{ textAlign: 'center', padding: 30 }}><Spin /></div>
-                      ) : libraryShown.length === 0 ? (
-                        <Empty description='No photos. In Cloudinary, add the tag "website" to the photos you want to use here.' />
-                      ) : (
-                        <div style={{ maxHeight: 360, overflowY: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))', gap: 10 }}>
-                          {libraryShown.map((x) => {
-                            const active = form.url === x.url;
-                            return (
-                              <button
-                                key={x.url}
-                                type="button"
-                                onClick={() => setForm((f) => ({ ...f, url: x.url }))}
-                                title={`${x.folder ? `${x.folder} / ` : ''}${x.name}`}
-                                style={{ position: 'relative', padding: 0, border: active ? '3px solid #E40B12' : '1px solid #e5e7eb', borderRadius: 8, overflow: 'hidden', cursor: 'pointer', background: '#f5f5f5' }}
-                              >
-                                <img src={sizeCloudinary(x.url, 300)} alt={x.name} loading="lazy" style={{ display: 'block', width: '100%', aspectRatio: '4 / 3', objectFit: 'cover' }} />
-                                <span style={{ display: 'block', padding: '4px 6px', fontSize: 10, textAlign: 'left', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{x.folder || '—'}</span>
-                                {active && <CheckCircleFilled style={{ position: 'absolute', top: 6, right: 6, color: '#E40B12', fontSize: 20, background: '#fff', borderRadius: '50%' }} />}
-                              </button>
-                            );
-                          })}
-                        </div>
-                      )}
-                    </>
+                    <CloudinaryPicker
+                      apiBase={apiBase}
+                      value={form.url}
+                      onChange={(url) => setForm((f) => ({ ...f, url }))}
+                      defaultRoom={roomForPage(editing.photo?.page || g?.page, editing.photo?.section || g?.section)}
+                    />
                   ),
                 },
                 {
@@ -488,7 +423,7 @@ export default function WebsiteImages({ apiBase, onOpenSections, pages: onlyPage
                 <img
                   src={form.url ? sizeCloudinary(form.url, 480) : editing.photo?.default}
                   alt="Preview"
-                  style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'cover', borderRadius: 8, background: '#f5f5f5', display: 'block' }}
+                  style={{ width: '100%', aspectRatio: '4 / 3', objectFit: 'contain', borderRadius: 8, background: '#f1f3f7', display: 'block' }}
                 />
                 {editing.mode === 'edit' && !editing.photo.extra && form.url && (
                   <Button size="small" type="link" style={{ padding: 0, marginTop: 6 }} onClick={() => setForm((f) => ({ ...f, url: '' }))}>
