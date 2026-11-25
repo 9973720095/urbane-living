@@ -11,9 +11,9 @@ const sized = (src, w) => src.replace('w_1400,', `w_${w},`);
 // Photos here are NOT used anywhere else on the home page (Room Explorer, Style Quiz etc. have their own).
 // Admin -> Website Images -> Home -> Our Masterpieces: change, hide, re-order or add photos (title + category too).
 const galleryData = photoList('home.gallery', 'Home › Our Masterpieces', [
-  { key: 'livingFlowerCeiling', title: 'Living Room with Flower-shaped Ceiling', category: 'Living Room' },
-  { key: 'masterBedroomRound', title: 'Master Bedroom with Round Cove Ceiling', category: 'Bedroom' },
-  { key: 'kidsBedroomBlue', title: 'Blue Kids Bedroom with Study Table', category: 'Kids Room' },
+  { key: 'openPlanLiving', title: 'Open-plan Living & Dining with Sage Crockery Unit', category: 'Living Room' },
+  { key: 'guestRoom', title: 'Guest Room with Study Desk & Daybed', category: 'Bedroom' },
+  { key: 'swingLoungeAlt', title: 'Lounge with Hanging Swing & Aquarium Wall', category: 'Living Room' },
   { key: 'uShapeKitchen', title: 'U-shaped Modular Kitchen', category: 'Kitchen' },
   { key: 'diningCrockery', title: 'Dining Area with Crockery Unit', category: 'Dining' },
   { key: 'guestBathroom', title: 'Guest Bathroom with Backlit Mirror', category: 'Bathroom' },

@@ -96,7 +96,7 @@ export const gallery = {
     { key: 'livingSofa', title: 'Living Room' },
     { key: 'parentsBedroom', title: 'Bedroom' },
     { key: 'galleyKitchen', title: 'Modular Kitchen' },
-    { key: 'openPlanLiving', title: 'Living & Dining' },
+    { key: 'diningOpenKitchen', title: 'Dining & Kitchen' },
     { key: 'bathroomBeige', title: 'Bathroom' },
   ], { fields: [] }).map((x) => ({ src: x.src(1400), title: x.title, alt: x.alt })),
 };
