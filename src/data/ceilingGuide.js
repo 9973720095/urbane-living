@@ -53,6 +53,10 @@ export const ceilingFaq = {
       a: 'The price per sq. ft. depends on the material (gypsum, POP, PVC or wooden), the design (single level, cove or multi-level), the number of lights and the site. Use the free cost estimator on this page to calculate the price for your room in seconds. After a free site visit and 3D design, you get an itemised quote that is locked when you book.',
     },
     {
+      q: 'Is a fall ceiling the same as a false ceiling?',
+      a: 'Yes. "Fall ceiling" is another name many people use for a false ceiling: a second ceiling hung below the main slab in gypsum, POP, PVC or wood, to hide wiring and pipes and to add lights. The cost estimator on this page works for it the same way.',
+    },
+    {
       q: 'How long does false ceiling work take?',
       a: 'A typical false ceiling of up to about 1,000 sq. ft. is ready in around 7 days after the design is approved: framing, board fixing, then jointing, putty and paint. Larger areas take a little longer, and the timeline is written in your quote.',
     },

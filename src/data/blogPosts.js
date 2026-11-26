@@ -104,16 +104,19 @@ export const blogPosts = [
   {
     slug: 'false-ceiling-cost-delhi-ncr',
     title: 'False Ceiling Price per Sq Ft with Material: What Decides the Cost (and How to Compare Quotes)',
-    seoTitle: 'False Ceiling Price per Sq Ft with Material | Calculate Your Cost',
+    seoTitle: 'False Ceiling Price per Sq Ft with Material | Free Calculator',
     description:
-      'False ceiling price per sq ft with material in Gurugram (Gurgaon), Delhi, Noida and Ghaziabad: how gypsum, POP, PVC and wood, the design and light points change the rate, plus a free estimator to calculate your cost.',
+      'Work out your false ceiling (fall ceiling) price per sq ft with material in 30 seconds: pick gypsum, POP, PVC or wooden, the design and lights in our free calculator. Gurugram, Delhi, Noida, Ghaziabad.',
     category: 'False Ceiling',
     image: images.ceiling,
     imageAlt: slotAlt('blog.ceiling', 'livingTvWall'),
     date: '2026-11-23',
-    readMin: 5,
+    updated: '2026-11-26',
+    readMin: 6,
     content: `
 <p>A false ceiling is usually the first big item in a home interior quote, and also the one people understand least. Is the per sq. ft. rate the full price? Are lights extra? Why do two contractors quote very different figures for the same room? This guide explains what really decides the cost, so you can read any quote with confidence, whether your home is in <a href="/false-ceiling/gurgaon">Gurugram</a>, <a href="/false-ceiling/delhi">Delhi</a>, <a href="/false-ceiling/noida">Noida</a> or <a href="/false-ceiling/ghaziabad">Ghaziabad</a>.</p>
+
+<blockquote><strong>Want your own figure first?</strong> Open the <a href="/false-ceiling#cost-estimator">free false ceiling cost calculator</a>, pick the room size, material, design and lights, and see your estimate in about 30 seconds. No sign-up needed to calculate.</blockquote>
 
 <h2>False ceiling price per sq ft with material: how it is worked out</h2>
 <p>The price per sq. ft. in a false ceiling quote covers the board or panel <strong>with material</strong> (gypsum, POP, PVC or wood), the metal framing, labour and finishing for one square foot of ceiling. Light points are usually counted separately. So two quotes with a different "rate" may not include the same things. The sections below explain each part, and our <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a> lets you calculate the price for your own room in seconds.</p>
@@ -129,6 +132,19 @@ export const blogPosts = [
   </tbody>
 </table>
 <p>Gypsum and POP are the most common choices for flats in Delhi NCR. PVC and wood are usually used in smaller areas: PVC where there is moisture, wood as a warm accent over the TV wall or dining table.</p>
+
+<h2>POP false ceiling price per sq ft: what is included</h2>
+<p>POP (Plaster of Paris) is mixed with water at site and shaped on a metal frame, so its rate per sq. ft. is close to gypsum but has <strong>more labour and drying time</strong> in it. When you compare POP quotes, check that the rate includes:</p>
+<ul>
+  <li>The metal frame (galvanised channels, not wooden battens)</li>
+  <li>POP work, curing time and smooth finishing for curves and mouldings</li>
+  <li>Putty, primer and paint, and cleaning of the wet work afterwards</li>
+  <li>Light cut-outs, and whether wiring and fittings are extra</li>
+</ul>
+<p>POP is best for curved, round or dome designs and detailed mouldings. For straight lines and cove lighting, gypsum is usually faster and cleaner. Read <a href="/blog/pop-vs-gypsum-false-ceiling">POP vs gypsum false ceiling</a> for the full comparison, and select <strong>POP</strong> in the <a href="/false-ceiling#cost-estimator">cost calculator</a> to see your own estimate.</p>
+
+<h2>"Fall ceiling" price: same thing, different name</h2>
+<p>Many people search for a <strong>fall ceiling</strong> price or "fall ceiling rate per square feet". It is the same as a false ceiling: a second ceiling hung below the main slab to hide wiring and pipes and to add lights. Everything in this guide applies to it.</p>
 
 <h2>2. Design: flat, cove or multi-level</h2>
 <ul>
@@ -186,6 +202,18 @@ export const blogPosts = [
         a: 'It depends on the material (gypsum, POP, PVC or wood), the design (flat, cove or multi-level) and what the rate includes: framing, labour, finishing and light points. Use our free false ceiling cost estimator to calculate the price for your room, then get an exact, itemised quote after a free site visit.',
       },
       {
+        q: 'What is the POP false ceiling price per sq ft?',
+        a: 'POP costs about the same per sq. ft. as gypsum, with more labour and drying time for curves and mouldings. The rate changes with the design, the frame, finishing and lights. Select POP in our free cost calculator to see the estimate for your room, then get an exact itemised quote after a free site visit.',
+      },
+      {
+        q: 'Is a fall ceiling the same as a false ceiling?',
+        a: 'Yes. "Fall ceiling" is another name many people use for a false ceiling: a second ceiling hung below the main slab, usually in gypsum, POP, PVC or wood, to hide wiring and pipes and to add lights.',
+      },
+      {
+        q: 'How do I calculate my false ceiling cost?',
+        a: 'Measure the room (length × width = area in sq. ft.), then enter the area, material, design and number of lights in our free false ceiling cost calculator. It shows your estimate in seconds. The final rate is fixed after a free site visit.',
+      },
+      {
         q: 'What decides the false ceiling cost in Delhi NCR?',
         a: 'Four things: the ceiling area in sq. ft., the material (gypsum, POP, PVC or wood), the design (flat, cove or multi-level) and the number of light points. Finishing and warranty also change the final figure.',
       },
@@ -204,14 +232,15 @@ export const blogPosts = [
   {
     slug: 'pop-vs-gypsum-false-ceiling',
     title: 'POP vs Gypsum False Ceiling: Which Is Better for Your Home?',
-    seoTitle: 'POP vs Gypsum False Ceiling: Cost, Life & Which Is Better',
+    seoTitle: 'POP Ceiling vs Gypsum Ceiling: Which Is Better? (2026 Comparison)',
     description:
-      'POP or gypsum false ceiling? Compare cost, finish, installation time, mess, cracks and life span, and find out which one suits each room of a Delhi NCR home.',
+      'POP ceiling vs gypsum ceiling: compare cost, finish, time, mess, cracks and life, room by room. See which false ceiling is better for your bedroom, living room, kitchen and bathroom.',
     category: 'False Ceiling',
     image: images.framing,
     imageAlt: 'Gypsum false ceiling frame with galvanised steel channels at an Urbane Living site',
     date: '2026-11-12',
-    readMin: 3,
+    updated: '2026-11-26',
+    readMin: 5,
     content: `
 <p>Gypsum and POP (Plaster of Paris) are the two most common false ceiling materials in Indian homes. Both are made from gypsum and both give a smooth white finish, so they look almost the same once painted. The difference is in how they are made and installed, and that affects cost, time, mess and cracks.</p>
 
@@ -228,6 +257,30 @@ export const blogPosts = [
     <tr><td>Cracks</td><td>Low, if joints are taped properly</td><td>More likely if the mix or curing is poor</td></tr>
   </tbody>
 </table>
+
+<h2>Which is better for each room?</h2>
+<table>
+  <thead><tr><th>Room</th><th>Better choice</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Living room</td><td>Gypsum (POP for one curved feature)</td><td>Clean lines and cove lighting; POP only if you want a round or curved centre</td></tr>
+    <tr><td>Bedroom</td><td>Gypsum</td><td>Fast, dust-light work and an even finish for soft cove light</td></tr>
+    <tr><td>Kids room</td><td>Gypsum, or POP for playful shapes</td><td>POP if the design has stars, clouds or curves</td></tr>
+    <tr><td>Dining area</td><td>Gypsum or POP</td><td>Both work; POP suits a round panel over a round table</td></tr>
+    <tr><td>Kitchen</td><td>Moisture-resistant gypsum or PVC</td><td>Steam and heat; keep space for the chimney duct</td></tr>
+    <tr><td>Bathroom & balcony</td><td>PVC or moisture-resistant gypsum</td><td>Standard gypsum and POP do not like constant moisture</td></tr>
+  </tbody>
+</table>
+
+<h2>Life, cracks and repair</h2>
+<ul>
+  <li><strong>Life:</strong> both can last 15–20 years or more on a galvanised steel frame with proper finishing.</li>
+  <li><strong>Cracks:</strong> gypsum cracks less when joints are taped; POP cracks if the mix or curing is rushed.</li>
+  <li><strong>Repair:</strong> a gypsum board section can be cut out and replaced; POP repairs need skilled hands to match the finish.</li>
+  <li><strong>Water leak:</strong> neither likes water. Fix any slab seepage first, whichever you choose.</li>
+</ul>
+
+<h2>How to tell if a ceiling is POP or gypsum</h2>
+<p>Look at a light cut-out or the edge of an AC grille: gypsum shows a thin board (about 12 mm) with paper on both sides; POP looks like solid white plaster without layers. Tapping also helps: gypsum sounds hollow and even, POP sounds dull and solid in patches.</p>
 
 <h2>When gypsum is the better choice</h2>
 <ul>
@@ -258,7 +311,7 @@ export const blogPosts = [
 
 <h2>Our recommendation</h2>
 <p>For most flats in Gurugram, Noida, Ghaziabad and Delhi, <strong>gypsum is the better default</strong>: faster, cleaner and more consistent. Use POP only where the design truly needs curves or detailed work. Many homes mix both: gypsum for the main ceiling and POP for one feature element.</p>
-<p>See finished designs and work out your cost with the <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>, or read the <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling cost guide for Delhi NCR</a>.</p>
+<p>See finished designs and work out your cost with the <a href="/false-ceiling#cost-estimator">false ceiling cost estimator</a>, or read the <a href="/blog/false-ceiling-cost-delhi-ncr">false ceiling price per sq ft guide</a>. We install both in <a href="/false-ceiling/gurgaon">Gurugram</a>, <a href="/false-ceiling/delhi">Delhi</a>, <a href="/false-ceiling/noida">Noida</a> and <a href="/false-ceiling/ghaziabad">Ghaziabad</a>.</p>
 `,
     faq: [
       {
@@ -268,6 +321,18 @@ export const blogPosts = [
       {
         q: 'Which lasts longer, POP or gypsum?',
         a: 'Both can last 15–20 years or more when installed properly on a galvanised steel frame. Gypsum gives a more consistent result because the boards are factory-made.',
+      },
+      {
+        q: 'Is POP ceiling better than gypsum ceiling?',
+        a: 'For most flats, gypsum is better: faster, cleaner and more even. POP is better only for curved, round or dome designs and detailed mouldings. Many homes use gypsum for the main ceiling and POP for one feature.',
+      },
+      {
+        q: 'Does POP ceiling crack more than gypsum?',
+        a: 'POP is more likely to crack if the mix or curing is poor. Gypsum cracks less when every joint is taped and filled. With either, a galvanised steel frame and a shadow gap at the walls prevent most cracks.',
+      },
+      {
+        q: 'Which false ceiling is best for a bedroom?',
+        a: 'Gypsum, usually with a simple cove for soft, indirect light. It is quick to install and gives an even finish.',
       },
       {
         q: 'Can gypsum false ceiling be used in a bathroom?',
@@ -453,14 +518,15 @@ export const blogPosts = [
   {
     slug: 'sliding-vs-hinged-wardrobe',
     title: 'Sliding vs Hinged Wardrobe: Sizes, Materials and Which One Suits Your Bedroom',
-    seoTitle: 'Sliding vs Hinged Wardrobe | Sizes, Materials & Design Tips',
+    seoTitle: 'Sliding vs Hinged Wardrobe: Which Is Better? Space, Cost & Sizes',
     description:
-      'Sliding or hinged wardrobe? Compare space, cost and usability, learn the standard wardrobe sizes for Indian bedrooms and pick the right materials and finishes.',
+      'Sliding vs hinged wardrobe: which is better for your bedroom? Compare space, cost, access and upkeep room by room, with standard sizes, hardware tips and common mistakes.',
     category: 'Wardrobe',
     image: images.wardrobe,
     imageAlt: slotAlt('blog.wardrobe', 'guestRoom'),
     date: '2026-11-06',
-    readMin: 3,
+    updated: '2026-11-26',
+    readMin: 5,
     content: `
 <p>A wardrobe is the largest piece of furniture in most bedrooms, so the choice between sliding and hinged doors changes how the whole room feels and works. Here is a simple way to decide.</p>
 
@@ -490,6 +556,27 @@ export const blogPosts = [
   <li>The budget is tighter.</li>
   <li>The room has enough space in front of the wardrobe.</li>
   <li>You want internal accessories like trouser pull-outs across the full width.</li>
+</ul>
+
+<h2>Which is better for each room?</h2>
+<table>
+  <thead><tr><th>Room</th><th>Better choice</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Small bedroom (bed near the wardrobe)</td><td>Sliding</td><td>No door swing, so the bed can sit closer</td></tr>
+    <tr><td>Master bedroom (8 ft+ wall)</td><td>Sliding or hinged</td><td>Sliding for large mirror or glass panels; hinged to see everything at once</td></tr>
+    <tr><td>Kids room</td><td>Hinged</td><td>Simple, safe and easy for children to open; lower doors are easy to reach</td></tr>
+    <tr><td>Guest room</td><td>Hinged</td><td>Used less often, lower cost, simple upkeep</td></tr>
+    <tr><td>Walk-in or dressing area</td><td>Open shelves or hinged</td><td>No track needed when there is space to walk in</td></tr>
+  </tbody>
+</table>
+
+<h2>Common mistakes to avoid</h2>
+<ul>
+  <li><strong>Sliding doors on a short wall:</strong> two panels on a 4–5 ft wall leave half the wardrobe always blocked.</li>
+  <li><strong>Saving on the track:</strong> a cheap sliding track jams and sags within a year. Ask for the brand in writing.</li>
+  <li><strong>Hinged doors that are too wide:</strong> doors wider than about 600 mm tend to sag.</li>
+  <li><strong>No loft:</strong> taking the wardrobe up to the ceiling gives space for suitcases and bedding.</li>
+  <li><strong>Forgetting the AC and switchboard:</strong> plan the wardrobe around them before it is made.</li>
 </ul>
 
 <h2>Standard wardrobe sizes for Indian bedrooms</h2>
@@ -525,6 +612,18 @@ export const blogPosts = [
       {
         q: 'Which is better, a sliding or hinged wardrobe?',
         a: 'Sliding wardrobes are better for small rooms because doors do not swing out, and they look sleek. Hinged wardrobes cost less, show the whole storage at once and are simpler to maintain.',
+      },
+      {
+        q: 'Is a sliding wardrobe worth it?',
+        a: 'Yes, when the room is tight or the wall is long (8 ft or more) and you want a sleek look. Choose a good-quality track and soft-close mechanism; that is what keeps a sliding wardrobe smooth for years.',
+      },
+      {
+        q: 'Do sliding wardrobes get stuck?',
+        a: 'Cheap tracks and dust can make doors jam. A branded aluminium track, correct alignment and a quick clean of the bottom track every few months prevent it.',
+      },
+      {
+        q: 'How much space is needed in front of a hinged wardrobe?',
+        a: 'About 2 ft (600 mm) clear in front, so the doors can open fully. If you have less, choose sliding doors.',
       },
       {
         q: 'What is the standard depth of a wardrobe?',

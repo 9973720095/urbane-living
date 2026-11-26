@@ -216,6 +216,11 @@ const BlogDetails = () => {
               <CalendarOutlined className="text-brand-red" /> {formatDate(blog.createdAt)}
             </time>
           )}
+          {blog.updatedAt && blog.createdAt && String(blog.updatedAt).slice(0, 10) !== String(blog.createdAt).slice(0, 10) && (
+            <span className="inline-flex items-center gap-2">
+              Updated <time dateTime={blog.updatedAt}>{formatDate(blog.updatedAt)}</time>
+            </span>
+          )}
           {readMin > 0 && (
             <span className="inline-flex items-center gap-2"><ClockCircleOutlined className="text-brand-red" /> {readMin} min read</span>
           )}

@@ -207,7 +207,7 @@ export const localCities = [
         projects: [],
       },
       'kaushambi': {
-        about: 'Kaushambi sits right on the Delhi border, and many homes here are older apartments that families have lived in for years. Our job is usually to make them feel new without a messy, months-long renovation: a fresh modular kitchen, smarter wardrobes and a false ceiling with warm lighting. We plan the work room by room so you can keep living at home.',
+        about: 'Kaushambi sits right on the Delhi border, and many homes here are older apartments that families have lived in for years. Our job is usually to make them feel new without a messy, months-long renovation: a fresh modular kitchen, smarter wardrobes and a false ceiling with warm lighting. We plan the work room by room so you can keep living at home. Our office is next door in Sector-1, Vaishali (Express Green Plaza), so a designer can reach your Kaushambi home quickly for a free measurement.',
         societies: [],
         projects: [],
       },
